@@ -12,16 +12,13 @@ namespace app\api\validate;
 class ServiceValidate extends BaseValidate
 {
     protected $rule = [
+        'c_id' => 'require|isPositiveInteger',
         'name' => 'require',
-        'phone' => 'require',
-        'province' => 'require',
-        'city' => 'require',
         'arena' => 'require',
-        'address' => 'require',
-        'time_begin' => 'require',
-        'time_end' => 'require',
-        'money' => 'require|isPositiveInteger',
-        'type' => 'require|in:1,2',
+        'price' => 'require',
+        'unit' => 'require',
+        'cover' => 'require',
+        'extend' => 'require|in:1,2',
         'imgs' => 'require'
     ];
 

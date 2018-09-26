@@ -26,6 +26,7 @@ Route::post('api/:version/demand/save', 'api/:version.Demand/save');
 
 Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
+Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
 

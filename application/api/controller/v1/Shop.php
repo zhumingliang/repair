@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\ShopT;
 use app\api\service\ShopService;
+use app\api\validate\ServiceValidate;
 use app\api\validate\ShopValidate;
 use  app\api\service\Token as TokenService;
 use app\lib\enum\CommonEnum;
@@ -71,7 +72,6 @@ class Shop extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/shop/handel  7-商铺申请审核
      * @apiGroup  CMS
@@ -110,10 +110,57 @@ class Shop extends BaseController
 
     }
 
-
-    public function shopService()
+    /**
+     * @api {POST} /api/v1/demand/save  8-商家新增服务
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序商家新增服务
+     * @apiExample {post}  请求样例:
+     * {
+     * "c_id": 1,
+     * "name": "修电脑",
+     * "area": "天河区",
+     * "price": 500,
+     * "unit": "次",
+     * "cover": "kdkmaskdmls;,ls;,",
+     * "des": "什么电脑都会修",
+     * "extend": 1,
+     * "imgs": "1,2,3",
+     * }
+     * @apiParam (返回参数说明) {int} c_id 类别id
+     * @apiParam (返回参数说明) {String} name 服务名称
+     * @apiParam (返回参数说明) {String} des 服务描述
+     * @apiParam (返回参数说明) {String} area 区
+     * @apiParam (返回参数说明) {int} price 价格
+     * @apiParam (返回参数说明) {String} unit 单位
+     * @apiParam (返回参数说明) {String} cover 封面图 base64
+     * @apiParam (返回参数说明) {int} extend 是否推广：1 | 推广；2 | 不推广
+     * @apiParam (返回参数说明) {String} imgs 图片id，多个用逗号隔开
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function addService()
     {
+        (new ServiceValidate())->goCheck();
+        $params = $this->request->param();
+        $shop_id = TokenService::getCurrentTokenVar('shop_id');
+        $params['shop_id'] = $shop_id;
+        ShopService::addService($params);
+        return json(new SuccessMessage());
 
+
+    }
+
+
+    public function checkBalance()
+    {
 
     }
 
