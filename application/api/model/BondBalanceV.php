@@ -11,7 +11,7 @@ namespace app\api\model;
 
 use think\Model;
 
-class BalanceV extends Model
+class BondBalanceV extends Model
 {
 
 }

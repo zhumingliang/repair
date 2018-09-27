@@ -68,4 +68,47 @@ function base64toImg($base64)
     } catch (Exception $e) {
         throw $e;
     }
+
+
+    /**
+     * 日期加上指定天数
+     * @param $count
+     * @param $time_old
+     * @return false|string
+     */
+    function addDay($count, $time_old)
+    {
+        $time_new = date('Y-m-d', strtotime('+' . $count . ' day',
+            strtotime($time_old)));
+        return $time_new;
+
+    }
+
+    /**
+     * 日期减去指定天数
+     * @param $count
+     * @param $time_old
+     * @return false|string
+     */
+    function reduceDay($count, $time_old)
+    {
+        $time_new = date('Y-m-d', strtotime('-' . $count . ' day',
+            strtotime($time_old)));
+        return $time_new;
+
+    }
+
+    /**
+     * 生成订单号
+     * @return string
+     */
+    function makeOrderNo()
+    {
+        $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
+        $orderSn =
+            $yCode[intval(date('Y')) - 2017] . strtoupper(dechex(date('m'))) . date(
+                'd') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf(
+                '%02d', rand(0, 99));
+        return $orderSn;
+    }
 }

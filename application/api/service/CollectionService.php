@@ -8,7 +8,7 @@
 
 namespace app\api\service;
 
-use app\api\model\CollectionServiceT;
+use app\api\model\CollectionServicesT;
 use app\api\model\CollectionShopT;
 use app\api\service\Token as TokenService;
 use app\lib\enum\CommonEnum;
@@ -16,6 +16,10 @@ use app\lib\exception\CollectionException;
 
 class CollectionService
 {
+    const COLLECTION_HOUSE = 1;
+    const COLLECTION_REPAIR = 2;
+
+
     /**
      * 新增收藏
      * @param $id
@@ -33,10 +37,10 @@ class CollectionService
             'state' => CommonEnum::STATE_IS_OK
         ];
         $save_id = 0;
-        if ($type === 1) {
+        if ($type === self::COLLECTION_HOUSE) {
             //收藏服务
-            $save_id = CollectionServiceT::create($data);
-        } else if ($type == 2) {
+            $save_id = CollectionServicesT::create($data);
+        } else if ($type == self::COLLECTION_REPAIR) {
             //收藏店铺
             $save_id = CollectionShopT::create($data);
         }
@@ -56,11 +60,11 @@ class CollectionService
     public static function handel($id, $type)
     {
         $save_id = 0;
-        if ($type === 1) {
+        if ($type === self::COLLECTION_HOUSE) {
             //收藏服务
-            $save_id = CollectionServiceT::update(['state' => CommonEnum::STATE_IS_FAIL],
+            $save_id = CollectionServicesT::update(['state' => CommonEnum::STATE_IS_FAIL],
                 ['id' => $id]);
-        } else if ($type == 2) {
+        } else if ($type == self::COLLECTION_REPAIR) {
             //收藏店铺
             $save_id = CollectionShopT::update(['state' => CommonEnum::STATE_IS_FAIL],
                 ['id' => $id]);
@@ -68,11 +72,32 @@ class CollectionService
         if (!$save_id) {
             throw  new  CollectionException(
                 ['code' => 401,
-                'msg' => '收藏操作失败',
-                'errorCode' => 80002
-            ]);
+                    'msg' => '收藏操作失败',
+                    'errorCode' => 80002
+                ]);
 
         }
+    }
+
+    /**
+     * 获取手残列表
+     * @param $type
+     * @param $page
+     * @param $size
+     * @return array|\think\Paginator
+     */
+    public static function getList($type, $page, $size)
+    {
+        $obj = [];
+        if ($type == self::COLLECTION_REPAIR) {
+            $obj = CollectionShopT::getList($page, $size);
+        } else if ($type == self::COLLECTION_HOUSE) {
+            $obj = CollectionServicesT::getList($page, $size);
+
+        }
+
+        return $obj;
+
     }
 
 }

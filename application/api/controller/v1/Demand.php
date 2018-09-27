@@ -56,7 +56,6 @@ class Demand extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     *
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      * @throws \app\lib\exception\TokenException

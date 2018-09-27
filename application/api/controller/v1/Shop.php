@@ -158,9 +158,33 @@ class Shop extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/bond/check  9-检测商铺保证是否充足
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  商家发布服务/接单 时检测保证金是否充足
+     * @apiExample {get}
+     * 请求样例: http://mengant.cn/api/v1/bond/check?money=100
+     * @apiParam (返回参数说明) {int} money 价格：新增服务时为服务价格；接单时为订单金额
+     * @apiSuccessExample {json} 返回样例:
+     * {"need": 0}
+     * @apiSuccess (返回参数说明) {int} need 需要补交保证金金额
+     *
+     * @param $money
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
 
-    public function checkBalance()
+    public function checkBalanceForBond($money)
     {
+        $res = ShopService::checkBalance($money);
+        if ($res['res']) {
+            return json(['need' => 0]);
+        } else {
+            return json(['need' => $res['money']]);
+        }
+
 
     }
 

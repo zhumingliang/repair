@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/9/23
- * Time: 上午12:33
+ * Date: 2018/9/27
+ * Time: 下午11:53
  */
 
 namespace app\api\model;
@@ -11,8 +11,7 @@ namespace app\api\model;
 
 use think\Model;
 
-class CollectionServiceT extends Model
+class RedT extends Model
 {
-
 
 }

@@ -9,7 +9,7 @@
 namespace app\api\service;
 
 
-use app\api\model\BalanceV;
+use app\api\model\BondBalanceV;
 use app\api\model\ServiceExtendT;
 use app\api\model\ServicesImgT;
 use app\api\model\ServicesT;
@@ -201,9 +201,9 @@ class ShopService
      * @throws Exception
      * @throws \app\lib\exception\TokenException
      */
-    private static function checkBalance($money)
+    public static function checkBalance($money)
     {
-        $balance = BalanceV::where('u_id', Token::getCurrentUid())
+        $balance = BondBalanceV::where('u_id', Token::getCurrentUid())
             ->sum('money');
         $need = $money <= 1000 ? 500 : $money / 2;
         if ($balance >= $need) {
@@ -213,7 +213,7 @@ class ShopService
         } else {
             return [
                 'res' => false,
-                'money' => $need->balance
+                'money' => $need - $balance
             ];
         }
 
