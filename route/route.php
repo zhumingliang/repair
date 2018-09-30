@@ -13,7 +13,8 @@ Route::get('think', function () {
     return 'hello,ThinkPHP5!';
 });
 
-Route::get('hello/:name', 'index/hello');
+Route::rule('/', 'index'); // 首页访问路由
+
 Route::get('api/:version/index', 'api/:version.Index/index');
 
 //Route::get('api/:version/token/userInfo', 'api/:version.Token/userInfo');
@@ -37,4 +38,13 @@ Route::get('api/:version/collection/list', 'api/:version.Collection/getList');
 
 
 Route::get('api/:version/red/list', 'api/:version.Red/getList');
+Route::get('api/:version/red/strategy', 'api/:version.Red/getStrategyList');
+Route::post('api/:version/strategy/save', 'api/:version.Red/saveStrategy');
+Route::post('api/:version/strategy/update', 'api/:version.Red/updateStrategy');
+Route::post('api/:version/strategy/delete', 'api/:version.Red/deleteStrategy');
+
+
+Route::post('api/:version/banner/save', 'api/:version.Banner/save');
+Route::post('api/:version/banner/handel', 'api/:version.Banner/handel');
+Route::post('api/:version/banner/update', 'api/:version.Banner/update');
 

@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\RedStrategyT;
 use app\api\model\RedT;
 use app\api\model\UserRedT;
 use app\lib\enum\CommonEnum;
@@ -85,6 +86,21 @@ class RedService
                 'errorCode' => 90002]);
 
         }
+
+    }
+
+    /**
+     * 首页获取红包攻略列表
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getStrategyList()
+    {
+        return RedStrategyT::where('state', '=', CommonEnum::STATE_IS_OK)
+            ->field('id,des')
+            ->select();
 
     }
 
