@@ -20,7 +20,7 @@ class Message extends BaseController
 {
 
     /**
-     * @api {POST} /api/v1/message/save  9-用户给平台留言
+     * @api {POST} /api/v1/message/save  23-用户给平台留言
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序用户给平台留言提供意见

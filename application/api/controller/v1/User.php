@@ -55,7 +55,7 @@ class User extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/user/update  8-用户信息编辑
+     * @api {POST} /api/v1/user/update  19-用户信息编辑
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序用户编辑自己的信息,修改了的字段才传入。
