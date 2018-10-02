@@ -143,6 +143,7 @@ class Banner extends BaseController
      * @apiParam (请求参数说明) {int}  city 用户地理位置-市
      * @apiParam (请求参数说明) {int}  area 用户地理位置-区
      * @apiParam (请求参数说明) {int}  category  轮播图类别：3 | 家政；4 维修
+     * @apiSuccessExample {json} 返回样例:
      * [{"id":3,"title":"3号轮播图","des":"我是3号轮播图！","url":"http:\/\/repair.com\/static\/imgs\/35626BD6-0641-FBF3-8076-F50A3278BD35.jpg"},{"id":2,"title":"2号轮播图","des":"我是2号轮播图！","url":"http:\/\/repair.com\/static\/imgs\/B524F6BF-4A5A-2BC0-25C6-7D417F7210FF.jpg"},{"id":1,"title":"一号轮播图","des":"我是一号轮播图！","url":"http:\/\/repair.com\/static\/imgs\/7CDCF0B5-A028-297D-C8A9-D10B97B8ADD6.jpg"}]
      *
      * @apiSuccess (返回参数说明) {int} id 轮播图id
@@ -212,14 +213,12 @@ class Banner extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/banner/handel  18-CMS获取指定banner信息
+     * @api {GET} /api/v1/banner  18-CMS获取指定banner信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  CMS获取指定banner信息:首页轮博徒/家政/维修
-     * @apiExample {POST}  请求样例:
-     * {
-     * "id": 1,
-     * }
+     * @apiDescription  CMS获取指定分类信息
+     * http://mengant.cn/api/v1/banner?id=1
      * @apiParam (请求参数说明) {int} id  轮播图id
      * @apiSuccessExample {json} 返回样例:
      * {"id":1,"title":"一号轮播图","des":"我是一号轮播图！","url":"http:\/\/repair.com\/static\/imgs\/7CDCF0B5-A028-297D-C8A9-D10B97B8ADD6.jpg","category":1,"state":2}     * @apiSuccess (返回参数说明) {String} title    标题

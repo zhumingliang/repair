@@ -51,3 +51,19 @@ Route::get('api/:version/banner/mini/list', 'api/:version.Banner/getListForMini'
 Route::get('api/:version/banner/cms/list', 'api/:version.Banner/getListForCms');
 Route::get('api/:version/banner', 'api/:version.Banner/getTheBanner');
 
+
+Route::post('api/:version/guid/save', 'api/:version.Guid/save');
+Route::post('api/:version/guid/handel', 'api/:version.Guid/handel');
+Route::post('api/:version/guid/update', 'api/:version.Guid/update');
+Route::get('api/:version/guid/list', 'api/:version.Guid/getList');
+Route::get('api/:version/guid', 'api/:version.Banner/getTheGuid');
+
+
+Route::post('api/:version/category/save', 'api/:version.Category/save');
+Route::post('api/:version/category/handel', 'api/:version.Category/handel');
+Route::post('api/:version/category/update', 'api/:version.Category/update');
+Route::get('api/:version/category/mini/list', 'api/:version.Category/getListForMini');
+Route::get('api/:version/category/cms/list', 'api/:version.Category/getListForCms');
+Route::get('api/:version/category', 'api/:version.Banner/getTheCategory');
+
+

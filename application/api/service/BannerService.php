@@ -9,7 +9,6 @@
 namespace app\api\service;
 
 
-use app\api\model\AdminJoinT;
 use app\api\model\BannerMiniV;
 use app\api\model\BannerT;
 use app\lib\enum\CommonEnum;
