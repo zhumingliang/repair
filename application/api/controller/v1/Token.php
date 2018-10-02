@@ -24,7 +24,7 @@ class Token extends Controller
 {
     /**
      * @api {GET} /api/v1/token/admin  3-CMS获取登陆token
-     * @apiGroup  PC
+     * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  后台用户登录
      * @apiExample {post}  请求样例:
@@ -39,16 +39,18 @@ class Token extends Controller
      * {"u_id":1,"username":"管理员","token":"bde274895aa23cff9462d5db49690452"}
      * @apiSuccess (返回参数说明) {int} u_id 用户id
      * @apiSuccess (返回参数说明) {int} username 管理员名称
+     * @apiSuccess (返回参数说明) {int} username 管理员名称
      * @apiSuccess (返回参数说明) {String} token 口令令牌，每次请求接口需要传入，有效期 2 hours
-     * @param $phone
-     * @param $pwd
+
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      * @throws \think\Exception
      */
-    public function getAdminToken($phone, $pwd)
+    public function getAdminToken()
     {
-        (new TokenGet())->goCheck();
+        $phone=$this->request->param('phone');
+        $pwd=$this->request->param('pwd');
+        (new TokenGet())->scene('pc')->goCheck();
         $at = new AdminToken($phone, $pwd);
         $token = $at->get();
         return json($token);

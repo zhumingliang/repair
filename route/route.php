@@ -13,11 +13,11 @@ Route::get('think', function () {
     return 'hello,ThinkPHP5!';
 });
 
-Route::rule('/', 'index'); // 首页访问路由
+Route::rule('/', 'index');
 
 Route::get('api/:version/index', 'api/:version.Index/index');
 
-//Route::get('api/:version/token/userInfo', 'api/:version.Token/userInfo');
+Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 //Route::get('api/:version/token/userInfo', 'api/:version.Token/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 
@@ -47,4 +47,7 @@ Route::post('api/:version/strategy/delete', 'api/:version.Red/deleteStrategy');
 Route::post('api/:version/banner/save', 'api/:version.Banner/save');
 Route::post('api/:version/banner/handel', 'api/:version.Banner/handel');
 Route::post('api/:version/banner/update', 'api/:version.Banner/update');
+Route::get('api/:version/banner/mini/list', 'api/:version.Banner/getListForMini');
+Route::get('api/:version/banner/cms/list', 'api/:version.Banner/getListForCms');
+Route::get('api/:version/banner', 'api/:version.Banner/getTheBanner');
 

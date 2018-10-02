@@ -11,8 +11,11 @@ namespace app\api\model;
 
 use think\Model;
 
-class ImgT extends Model
+class ImgT extends BaseModel
 {
+    public function getUrlAttr($value, $data){
+        return $this->prefixImgUrl($value, $data);
+    }
 
 
 }

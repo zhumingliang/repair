@@ -18,12 +18,17 @@ class BannerValidate extends BaseValidate
         'category' => 'require|in:1,2,3,4',
         'type' => 'require|in:1,2',
         'state' => 'require|in:1,2',
+        'province' => 'require',
+        'city' => 'require',
+        'area' => 'require',
     ];
 
     protected $scene = [
-        'save' => ['title', 'des', 'category', 'type'],
+        'save' => ['title', 'des', 'category', 'category'],
         'handel' => ['id', 'state'],
-        'update' => ['id']
+        'update' => ['id'],
+        'list_mini' => ['type'],
+        'list_mini_join' => ['province', 'city', 'area'],
     ];
 
 

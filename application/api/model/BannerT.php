@@ -9,10 +9,11 @@
 namespace app\api\model;
 
 
-use think\Model;
 
-class BannerT extends Model
+class BannerT extends BaseModel
 {
-
+    public function getUrlAttr($value, $data){
+        return $this->prefixImgUrl($value, $data);
+    }
 
 }

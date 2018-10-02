@@ -35,6 +35,7 @@ class AdminToken extends Token
         try {
 
             $admin = AdminT::where('phone', '=', $this->phone)
+                ->with('adminJoin')
                 ->find();
 
             if (is_null($admin)) {
@@ -50,6 +51,15 @@ class AdminToken extends Token
                     'code' => 401,
                     'msg' => '密码不正确',
                     'errorCode' => 30002
+                ]);
+            }
+
+            if ($admin->state > 1) {
+
+                throw new TokenException([
+                    'code' => 401,
+                    'msg' => '该账号已暂停使用，请联系管理员',
+                    'errorCode' => 30004
                 ]);
             }
 
@@ -93,16 +103,22 @@ class AdminToken extends Token
 
         $cachedValue['token'] = $key;
         unset($cachedValue['phone']);
+        unset($cachedValue['u_id']);
         return $cachedValue;
     }
 
     private function prepareCachedValue($admin)
     {
-
+        $admin_join = $admin->adminJoin;
+        $grade = $admin->grade;
         $cachedValue = [
             'u_id' => $admin->id,
             'phone' => $admin->phone,
-            'username' => $admin->name,
+            'username' => $admin->username,
+            'grade' => $grade,
+            'province' => $grade > 1 ? $admin_join->province : '',
+            'city' => $grade > 1 ? $admin_join->city : '',
+            'area' => $grade > 1 ? $admin_join->area : '',
         ];
 
         return $cachedValue;

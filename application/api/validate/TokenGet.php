@@ -14,18 +14,18 @@ class TokenGet extends BaseValidate
     protected $rule = [
         'code' => 'require|isNotEmpty',
         'phone' => 'require|isMobile',
-        'passwd' => 'require|isNotEmpty'
+        'pwd' => 'require|isNotEmpty'
     ];
 
     protected $message = [
         'code' => '微信端获取Token，需要code',
         'phone' => '手机端获取Token，需要手机号',
-        'passwd' => '手机端获取Token，需要密码'
+        'pwd' => '手机端获取Token，需要密码'
     ];
 
     protected $scene = [
         'wx' => ['code'],
-        'pc' => ['phone', 'passwd'],
+        'pc' => ['phone', 'pwd'],
     ];
 
 }

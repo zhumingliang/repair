@@ -13,6 +13,11 @@ use think\Model;
 
 class AdminT extends Model
 {
+    public function adminJoin()
+    {
+        return $this->hasOne('AdminJoinT',
+            'admin_id', 'id');
+    }
 
 
 }

@@ -15,6 +15,11 @@ use think\Model;
 
 class CollectionServicesT extends Model
 {
+
+    public function getCoverAttr($value, $data){
+        return $this->prefixImgUrl($value, $data);
+    }
+
     public function service()
     {
         return $this->belongsTo('ServicesT',

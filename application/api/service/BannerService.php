@@ -9,8 +9,11 @@
 namespace app\api\service;
 
 
+use app\api\model\AdminJoinT;
+use app\api\model\BannerMiniV;
 use app\api\model\BannerT;
 use app\lib\enum\CommonEnum;
+use app\lib\enum\UserEnum;
 use app\lib\exception\BannerException;
 
 class BannerService
@@ -68,20 +71,90 @@ class BannerService
 
     }
 
+    /**
+     * 获取首页轮播图
+     * @param $params
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public static function getListForMini($params)
     {
         $type = $params['type'];
+        $list = array();
         if ($type == self::PLATFORM) {
             $list = BannerT::where('type', '=', $type)
-                ->where('state', '=', CommonEnum::STATE_IS_OK)
+                ->where('state', '=', CommonEnum::PASS)
+                ->field('id,title,des,url')
                 ->order('create_time desc')
                 ->select();
-
-            return $list;
         } else if ($type == self::JOIN) {
+            //$province = $params['province'];
+            $city = $params['city'];
+            $area = $params['area'];
+            $list = BannerMiniV::where('state', '=', CommonEnum::PASS)
+                ->where('category', '=', $params['category'])
+                ->where('city', '=', $city)
+                ->whereIn('area', [$area, '全部'], 'or')
+                ->field('id,title,des,url')
+                ->select();
+        }
+        return $list;
+
+    }
+
+
+    public static function getListForCMS($params)
+    {
+        $type = $params['type'];
+        $page = $params['page'];
+        $size = $params['size'];
+
+        $list = array();
+        if ($type == self::PLATFORM) {
+            $list = BannerT::where('type', '=', $type)
+                ->where('state', '=', CommonEnum::PASS)
+                ->field('id,title,des,url')
+                ->order('create_time desc')
+                ->paginate($size, false, ['page' => $page]);
+        } else if ($type == self::JOIN) {
+            $list = self::getListForCMSJoin($page, $size);
+
+        }
+        return $list;
+
+    }
+
+
+    /**
+     * CMS获取加盟商banner图片
+     * @param $page
+     * @param $size
+     * @return array|\think\Paginator
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
+    private static function getListForCMSJoin($page, $size)
+    {
+        $list = array();
+        $grade = Token::getCurrentTokenVar('grade');
+        if ($grade == UserEnum::USER_GRADE_ADMIN) {
+            $list = BannerMiniV::where('state', '<', CommonEnum::DELETE)
+                ->paginate($size, false, ['page' => $page]);
+
+        } else if ($grade == UserEnum::USER_GRADE_JOIN) {
+            $list = BannerMiniV::where('state', '<', CommonEnum::DELETE)
+                ->where('u_id', '=', Token::getCurrentUid())
+                ->hidden(['u_id'])
+                ->paginate($size, false, ['page' => $page]);
 
         }
 
+        return $list;
+
     }
+
 
 }
