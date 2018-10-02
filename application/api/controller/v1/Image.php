@@ -17,8 +17,8 @@ use app\lib\exception\ImageException;
 class Image extends BaseController
 {
     /**
-     * @api {POST} /api/v1/image/save  图片上传
-     * @apiGroup  PC
+     * @api {POST} /api/v1/image/save  19-图片上传
+     * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription
      * @apiExample {post}  请求样例:

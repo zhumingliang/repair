@@ -120,7 +120,7 @@ class Red extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/strategy/save  后台新增红包攻略
+     * @api {POST} /api/v1/strategy/save  20-后台新增红包攻略
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理新增红包攻略
@@ -158,7 +158,7 @@ class Red extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/strategy/update  后台修改红包攻略
+     * @api {POST} /api/v1/strategy/update  21-后台修改红包攻略
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 管理后台修改红包攻略
@@ -198,7 +198,7 @@ class Red extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/strategy/delete  后台删除红包攻略
+     * @api {POST} /api/v1/strategy/delete  22-后台删除红包攻略
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 管理后台删除指定红包攻略
