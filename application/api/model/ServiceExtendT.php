@@ -14,4 +14,10 @@ use think\Model;
 class ServiceExtendT extends Model
 {
 
+
+    public function service(){
+        return $this->belongsTo('ServicesT',
+            's_id', 'id');
+    }
+
 }

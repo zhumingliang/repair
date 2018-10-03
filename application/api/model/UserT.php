@@ -29,6 +29,12 @@ class UserT extends Model
         }
     }
 
+    public function shop()
+    {
+        return $this->hasOne('ShopT',
+            'u_id', 'id');
+    }
+
     /**
      * 根据openid获取用户数据
      * @param $openId

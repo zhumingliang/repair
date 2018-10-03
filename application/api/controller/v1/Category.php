@@ -117,7 +117,7 @@ class Category extends BaseController
         $id = CategoryT::update($params, ['id' => $params['id']]);
         if (!$id) {
             throw new CategoryException(['code' => 401,
-                'msg' => '修改分类图失败',
+                'msg' => '修改分类失败',
                 'errorCode' => 120003
             ]);
 
@@ -135,7 +135,7 @@ class Category extends BaseController
      * @apiDescription  小程序获取分类列表
      *
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/category/list?type=1
+     * http://mengant.cn/api/v1/category/mini/list?type=1
      * @apiParam (请求参数说明) {int} type    分类类别：1 | 家政；2 | 维修
      * @apiSuccessExample {json} 返回样例:
      * [{"id":1,"name":"钢筋工瓦工"},{"id":2,"name":"跑腿服务"},{"id":3,"name":"少儿培训"}]
@@ -184,6 +184,9 @@ class Category extends BaseController
      * ]
      * }
      *
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} id 分类id
      * @apiSuccess (返回参数说明) {String} name 分类名称
      * @apiSuccess (返回参数说明) {int} type 分类类别 1 | 家政；2 | 维修

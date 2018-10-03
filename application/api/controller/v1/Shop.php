@@ -175,7 +175,6 @@ class Shop extends BaseController
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
-
     public function checkBalanceForBond($money)
     {
         $res = ShopService::checkBalance($money);
@@ -187,6 +186,8 @@ class Shop extends BaseController
 
 
     }
+
+
 
 
 }

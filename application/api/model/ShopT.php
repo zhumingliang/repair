@@ -13,5 +13,9 @@ use think\Model;
 
 class ShopT extends Model
 {
+    public function getHeadUrlAttr($value, $data)
+    {
+        return $this->prefixImgUrl($value, $data);
+    }
 
 }

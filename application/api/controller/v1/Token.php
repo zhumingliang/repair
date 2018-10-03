@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\model\TestT;
+use app\api\model\UserT;
 use app\api\service\AdminToken;
 use app\api\service\UserToken;
 use app\api\validate\TokenGet;
@@ -97,17 +98,19 @@ class Token extends Controller
      *
      * @param string $code
      * @return \think\response\Json
-     * @throws ParameterException
      * @throws \app\lib\exception\TokenException
      * @throws \app\lib\exception\WeChatException
      * @throws \think\Exception
      */
     public function getUserToken($code = '')
     {
-        (new TokenGet())->scene('wx')->goCheck();
-        $ut = new UserToken($code);
-        $token = $ut->get();
-        return json($token);
+
+        //print_r($user);
+
+        /* (new TokenGet())->scene('wx')->goCheck();
+         $ut = new UserToken($code);
+         $token = $ut->get();
+         return json($token);*/
 
     }
 

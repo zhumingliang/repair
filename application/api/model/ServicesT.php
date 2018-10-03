@@ -9,10 +9,20 @@
 namespace app\api\model;
 
 
-use think\Model;
-
-class ServicesT extends Model
+class ServicesT extends BaseModel
 {
+
+    public function shop()
+    {
+        return $this->belongsTo('ShopT',
+            'shop_id', 'id');
+    }
+
+    public function getCoverAttr($value, $data)
+    {
+        return $this->prefixImgUrl($value, $data);
+    }
+
 
 
 }

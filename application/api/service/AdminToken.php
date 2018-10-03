@@ -109,17 +109,22 @@ class AdminToken extends Token
 
     private function prepareCachedValue($admin)
     {
-        $admin_join = $admin->adminJoin;
-        $grade = $admin->grade;
+
         $cachedValue = [
             'u_id' => $admin->id,
             'phone' => $admin->phone,
             'username' => $admin->username,
-            'grade' => $grade,
-            'province' => $grade > 1 ? $admin_join->province : '',
-            'city' => $grade > 1 ? $admin_join->city : '',
-            'area' => $grade > 1 ? $admin_join->area : '',
+            'grade' => $admin->grade,
         ];
+        $cachedValue['province'] = '';
+        $cachedValue['city'] = '';
+        $cachedValue['area'] = '';
+        if (isset($admin->adminJoin)) {
+            $admin_join = $admin->adminJoin;
+            $cachedValue['province'] = $admin_join->province;
+            $cachedValue['city'] = $admin_join->city;
+            $cachedValue['area'] = $admin_join->area;
+        }
 
         return $cachedValue;
     }

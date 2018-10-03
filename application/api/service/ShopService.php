@@ -87,7 +87,7 @@ class ShopService
 
 
     /**
-     * 新增商铺服务
+     *  新增商铺服务
      * @param $params
      * @throws Exception
      */

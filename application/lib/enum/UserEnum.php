@@ -15,8 +15,7 @@ class UserEnum
     //管理员
     const USER_GRADE_ADMIN = 1;
 
-
-    //录出员
+    //加盟商
     const USER_GRADE_JOIN = 2;
 
     //账号正常

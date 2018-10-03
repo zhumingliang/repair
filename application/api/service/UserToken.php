@@ -5,7 +5,6 @@ namespace app\api\service;
 
 
 use app\lib\enum\BookingReportEnum;
-use app\lib\enum\ScopeEnum;
 use app\lib\exception\TokenException;
 use app\lib\exception\WeChatException;
 use app\api\model\UserT as UserModel;
@@ -145,8 +144,12 @@ class UserToken extends Token
      */
     private function prepareCachedValue($wxResult, $u_id)
     {
-        $user = UserModel::where('id', $u_id)->find();
         $cachedValue = $wxResult;
+        $cachedValue['shop_id'] = 0;
+        $user = UserModel::with('shop')->where('id', $u_id)->find();
+        if (isset($user->shop) && ($user->shop->state == 2)) {
+            $cachedValue['shop_id'] = $user->shop->id;
+        }
         $cachedValue['uid'] = $u_id;
         $cachedValue['phone'] = $user['phone'];
         $cachedValue['openId'] = $user['openId'];

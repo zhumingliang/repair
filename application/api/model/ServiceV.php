@@ -2,17 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/9/18
- * Time: 下午11:18
+ * Date: 2018/10/4
+ * Time: 1:04 AM
  */
 
 namespace app\api\model;
 
-class ImgT extends BaseModel
+
+class ServiceV extends BaseModel
 {
-    public function getUrlAttr($value, $data){
+    public function getHeadUrlAttr($value, $data)
+    {
         return $this->prefixImgUrl($value, $data);
     }
-
 
 }

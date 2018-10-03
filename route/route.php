@@ -18,6 +18,7 @@ Route::rule('/', 'index');
 Route::get('api/:version/index', 'api/:version.Index/index');
 
 Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
+Route::get('api/:version/token/user', 'api/:version.Token/getUserToken');
 //Route::get('api/:version/token/userInfo', 'api/:version.Token/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 
@@ -65,5 +66,15 @@ Route::post('api/:version/category/update', 'api/:version.Category/update');
 Route::get('api/:version/category/mini/list', 'api/:version.Category/getListForMini');
 Route::get('api/:version/category/cms/list', 'api/:version.Category/getListForCms');
 Route::get('api/:version/category', 'api/:version.Banner/getTheCategory');
+
+Route::get('api/:version/extend/cms/list', 'api/:version.ServicesExtend/getListForCMS');
+Route::get('api/:version/extend/handel', 'api/:version.ServicesExtend/handel');
+Route::get('api/:version/extend/service', 'api/:version.ServicesExtend/getTheService');
+
+
+Route::post('api/:version/city/discount/save', 'api/:version.CityDiscount/save');
+Route::post('api/:version/city/discount/handel', 'api/:version.CityDiscount/handel');
+Route::post('api/:version/city/discount/update', 'api/:version.CityDiscount/update');
+Route::get('api/:version/city/discount/list', 'api/:version.CityDiscount/getList');
 
 
