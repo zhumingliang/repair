@@ -40,16 +40,16 @@ class Shop extends BaseController
      * "imgs": "1,2,3",
      * "id_number": "34272792931939123",
      * }
-     * @apiParam (返回参数说明) {String} name 店铺名称
-     * @apiParam (返回参数说明) {String} phone 商家手机号
-     * @apiParam (返回参数说明) {String} phone 备用号码
-     * @apiParam (返回参数说明) {String} province 省
-     * @apiParam (返回参数说明) {String} city 市
-     * @apiParam (返回参数说明) {String} area 区
-     * @apiParam (返回参数说明) {String} address 详细地址
-     * @apiParam (返回参数说明) {String} type 需求类别：1 | 维修；2 | 家政
-     * @apiParam (返回参数说明) {String} imgs 商家资料图片id，多个用逗号隔开
-     * @apiParam (返回参数说明) {String} head_url 头像，base64
+     * @apiParam (请求参数说明) {String} name 店铺名称
+     * @apiParam (请求参数说明) {String} phone 商家手机号
+     * @apiParam (请求参数说明) {String} phone 备用号码
+     * @apiParam (请求参数说明) {String} province 省
+     * @apiParam (请求参数说明) {String} city 市
+     * @apiParam (请求参数说明) {String} area 区
+     * @apiParam (请求参数说明) {String} address 详细地址
+     * @apiParam (请求参数说明) {String} type 需求类别：1 | 维修；2 | 家政
+     * @apiParam (请求参数说明) {String} imgs 商家资料图片id，多个用逗号隔开
+     * @apiParam (请求参数说明) {String} head_url 头像，base64
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -111,7 +111,7 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/demand/save  8-商家新增服务
+     * @api {POST} /api/v1/shop/service/save  8-商家新增服务
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序商家新增服务
@@ -127,15 +127,15 @@ class Shop extends BaseController
      * "extend": 1,
      * "imgs": "1,2,3",
      * }
-     * @apiParam (返回参数说明) {int} c_id 类别id
-     * @apiParam (返回参数说明) {String} name 服务名称
-     * @apiParam (返回参数说明) {String} des 服务描述
-     * @apiParam (返回参数说明) {String} area 区
-     * @apiParam (返回参数说明) {int} price 价格
-     * @apiParam (返回参数说明) {String} unit 单位
-     * @apiParam (返回参数说明) {String} cover 封面图 base64
-     * @apiParam (返回参数说明) {int} extend 是否推广：1 | 推广；2 | 不推广
-     * @apiParam (返回参数说明) {String} imgs 图片id，多个用逗号隔开
+     * @apiParam (请求参数说明) {int} c_id 类别id
+     * @apiParam (请求参数说明) {String} name 服务名称
+     * @apiParam (请求参数说明) {String} des 服务描述
+     * @apiParam (请求参数说明) {String} area 区
+     * @apiParam (请求参数说明) {int} price 价格
+     * @apiParam (请求参数说明) {String} unit 单位
+     * @apiParam (请求参数说明) {String} cover 封面图 base64
+     * @apiParam (请求参数说明) {int} extend 是否推广：1 | 推广；2 | 不推广
+     * @apiParam (请求参数说明) {String} imgs 图片id，多个用逗号隔开
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -187,7 +187,51 @@ class Shop extends BaseController
 
     }
 
+    /**Pay.php
+     * @api {POST} /api/v1/service/booking  42-用户预约商家服务
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户预约商家服务
+     * @apiExample {post}  请求样例:
+     * {
+     * "s_id": 1,
+     * "phone": "18956225230",
+     * "area": "天河区",
+     * "address": 馨园小区,
+     * "time_begin": "2018-10-05 09:00",
+     * "time_end": "2018-10-05 10:00",
+     * "remark": 我是备注,
+     * }
+     * @apiParam (请求参数说明) {int} s_id 服务id
+     * @apiParam (请求参数说明) {String} phone 手机号
+     * @apiParam (请求参数说明) {String} area 区
+     * @apiParam (请求参数说明) {String} address 地址
+     * @apiParam (请求参数说明) {String} time_begin 服务开始时间
+     * @apiParam (请求参数说明) {String} time_end 服务结束时间
+     * @apiParam (请求参数说明) {String} remark 备注
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":"3","money":1000}
+     * @apiSuccess (返回参数说明) {int} id 预约id
+     * @apiSuccess (返回参数说明) {int} money 该服务需支付费用
+     *
+     * @return \think\response\Json
+     * @throws ShopException
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function bookingService()
+    {
+        (new ShopValidate())->scene('booking')->goCheck();
+        $params = $this->request->param();
+        $res = ShopService::booking($params);
+        return json($res);
 
+
+    }
 
 
 }

@@ -10,9 +10,11 @@ namespace app\api\service;
 
 
 use app\api\model\ExtendRecordT;
+use app\api\model\ExtendV;
 use app\api\model\ServiceExtendT;
 use app\api\model\ServicesExtendV;
 use app\api\model\ServiceV;
+use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\ExtendException;
 use think\Db;
@@ -31,7 +33,7 @@ class ExtendService
      * @throws \app\lib\exception\TokenException
      * @throws \think\exception\DbException
      */
-    public static function getList($type, $page, $size,$keyW)
+    public static function getList($type, $page, $size, $keyW)
     {
         $list = array();
         // $u_id = Token::getCurrentUid();
@@ -143,6 +145,35 @@ class ExtendService
         return ServiceV::where('extend_id', '=', $extend_id)
             ->find();
 
+
+    }
+
+
+    /**
+     * 首页后去家政服务推广
+     * @param $area
+     * @param $size
+     * @param $page
+     * @param $c_id
+     * @return \think\Paginator
+     */
+    public static function getHoursList($area, $size, $page, $c_id)
+    {
+        return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_HOUSE);
+
+    }
+
+    /**
+     * 首页后去维修服务推广
+     * @param $area
+     * @param $size
+     * @param $page
+     * @param $c_id
+     * @return \think\Paginator
+     */
+    public static function getRepairList($area, $page,$size, $c_id)
+    {
+        return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_REPAIR);
 
     }
 

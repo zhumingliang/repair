@@ -19,4 +19,6 @@ class RedEnum
 
     const SHARE = 4;
 
+    const USED = 2;
+
 }

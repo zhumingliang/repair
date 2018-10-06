@@ -10,6 +10,9 @@ namespace app\api\service;
 
 
 use app\api\model\BondBalanceV;
+use app\api\model\CityDiscountT;
+use app\api\model\ExtendMoneyV;
+use app\api\model\ServiceBookingT;
 use app\api\model\ServiceExtendT;
 use app\api\model\ServicesImgT;
 use app\api\model\ServicesT;
@@ -224,6 +227,85 @@ class ShopService
     private static function checkShopStatus()
     {
         return true;
+
+    }
+
+    /**
+     * 保存预约订单
+     * @param $params
+     * @return array
+     * @throws Exception
+     * @throws ShopException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function booking($params)
+    {
+
+        $init_state = CommonEnum::ORDER_STATE_INIT;
+        $openid = Token::getCurrentOpenid();
+        $money = self::getServiceMoney($params['s_id']);
+        $params['openid'] = $openid;
+        $params['orderNumber'] = makeOrderNo();
+        $params['money'] = $money;
+        $params['pay_id'] = $init_state;
+        $params['refund_id'] = $init_state;
+        $params['comment_id'] = $init_state;
+        $params['confirm_id'] = $init_state;
+        $params['r_id'] = $init_state;
+        $booking = ServiceBookingT::create($params);
+        if (!$booking) {
+            throw new ShopException(
+                ['code' => 401,
+                    'msg' => '预约服务下单失败',
+                    'errorCode' => 60007
+                ]
+            );
+        }
+        return [
+            'id' => $booking->id,
+            'money' => $money
+        ];
+    }
+
+    /**
+     *  获取服务金额
+     * @param $id
+     * @return float|int|mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private static function getServiceMoney($id)
+    {
+        $service = ExtendMoneyV::get($id);
+        if ($service->state != self::SERVICE_EXTEND_PASS) {
+            return $service->price;
+        }
+
+        $discount = CityDiscountT::where('state', '=', CommonEnum::STATE_IS_OK)
+            ->where('city', '=', $service->city)
+            ->whereOr('type', '=', 1)
+            ->select();
+
+        if (!$discount) {
+            return $service->price;
+        }
+
+
+        $city_dis = 0;
+        $plate_dis = 0;
+        foreach ($discount as $k => $v) {
+            if ($v->city == $service->city) {
+                $city_dis = $v->discount;
+            } else {
+                $plate_dis = $v->discount;
+            }
+        }
+        $dis = $city_dis ? $city_dis : $plate_dis;
+        return ($service->price) * (1 - $dis / 100);
 
     }
 }

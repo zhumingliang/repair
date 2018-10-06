@@ -24,5 +24,4 @@ class ServicesT extends BaseModel
     }
 
 
-
 }

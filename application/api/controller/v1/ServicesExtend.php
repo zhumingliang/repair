@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\service\ExtendService;
 use app\api\validate\ExtendValidate;
+use app\api\validate\PagingParameter;
 use app\lib\exception\SuccessMessage;
 
 class ServicesExtend extends BaseController
@@ -30,6 +31,9 @@ class ServicesExtend extends BaseController
      * @apiParam (请求参数说明) {String} keyW 关键字查询
      * @apiSuccessExample {json} 返回样例:
      * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"extend_id":1,"s_id":5,"shop_name":"修之家","service_name":"修五金","type":1,"province":"安徽省","city":"铜陵市","area":"铜官区","state":1,"create_time":"2018-09-26 22:51:02"}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} extend_id 推广记录id
      * @apiSuccess (返回参数说明) {int} s_id 服务id
      * @apiSuccess (返回参数说明) {int} type 服务上级分类：1 | 家政；2 | 维修
@@ -52,7 +56,7 @@ class ServicesExtend extends BaseController
         $page = $this->request->param('page');
         $size = $this->request->param('size');
         $keyW = $this->request->param('keyW');
-        $list = ExtendService::getList($type, $page, $size,$keyW);
+        $list = ExtendService::getList($type, $page, $size, $keyW);
         return json($list);
 
 
@@ -120,7 +124,74 @@ class ServicesExtend extends BaseController
     }
 
 
+    /**
+     * @api {GET} /api/v1/extend/house 45-小程序首页推广列表-家政服务
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序首页推广列表-家政服务
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/extend/house?page=1&size=20&area="铜官区"&c_id=0
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {String} area 用户地址位置--区
+     * @apiParam (请求参数说明) {int} c_id 服务类别id，首页获取推广列表时默认为0，点击更多时，选择对应的类别传入对应的c_id
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":2,"per_page":"10","current_page":1,"last_page":1,"data":[{"s_id":1,"sell_money":"0","sell_num":"0","name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/B9439BE2-857E-22D2-D058-CFE57315EEAE.jpg","area":"铜官区"},{"s_id":5,"sell_money":"10000","sell_num":"1","name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","area":"铜官区"}]}     * @apiSuccess (返回参数说明) {int} s_id 服务id
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} s_id 服务id
+     * @apiSuccess (返回参数说明) {int} sell_money 总销量
+     * @apiSuccess (返回参数说明) {int} sell_num 成交额
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {String} cover 服务封面
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function getHoursList()
+    {
+        (new PagingParameter())->goCheck();
+        $params = $this->request->param();
+        $list = ExtendService::getHoursList($params['area'], $params['page'], $params['size'], $params['c_id']);
+        return json($list);
+    }
 
+    /**
+     * @api {GET} /api/v1/extend/repair 46-小程序首页推广列表-维修服务
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序首页推广列表-维修服务
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/extend/repair?page=1&size=20&area="铜官区"&c_id=0
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {String} area 用户地址位置--区
+     * @apiParam (请求参数说明) {int} c_id 服务类别id，首页获取推广列表时默认为0，点击更多时，选择对应的类别传入对应的c_id
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":2,"per_page":"10","current_page":1,"last_page":1,"data":[{"s_id":1,"sell_money":"0","sell_num":"0","name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/B9439BE2-857E-22D2-D058-CFE57315EEAE.jpg","area":"铜官区"},{"s_id":5,"sell_money":"10000","sell_num":"1","name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","area":"铜官区"}]}     * @apiSuccess (返回参数说明) {int} s_id 服务id
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} s_id 服务id
+     * @apiSuccess (返回参数说明) {int} sell_money 总销量
+     * @apiSuccess (返回参数说明) {int} sell_num 成交额
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {String} cover 服务封面
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
+
+    public function getRepairList()
+    {
+        (new PagingParameter())->goCheck();
+        $params = $this->request->param();
+        $list = ExtendService::getRepairList($params['area'], $params['page'], $params['size'], $params['c_id']);
+        return json($list);
+
+
+    }
 
 
 }

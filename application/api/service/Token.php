@@ -91,4 +91,22 @@ class Token
         }
     }
 
+    /**
+     * @param $checkedOpenid
+     * @return bool
+     * @throws Exception
+     * @throws TokenException
+     */
+    public static function isValidOperate($checkedOpenid)
+    {
+        if (!$checkedOpenid) {
+            throw new Exception('检查openid时必须传入一个被检查的openid');
+        }
+        $currentOperateUID = self::getCurrentOpenid();
+        if ($currentOperateUID == $checkedOpenid) {
+            return true;
+        }
+        return false;
+    }
+
 }

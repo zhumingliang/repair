@@ -22,4 +22,17 @@ class CommonEnum
     const PASS = 2;
 
     const DELETE = 3;
+
+    const ORDER_STATE_INIT = 99999;
+
+    const ORDER_IS_BOOKING = 1;
+
+    const ORDER_IS_DEMAND = 2;
+
+    const ORDER_IS_BOND = 3;
+
+    const EXTEND_HOUSE = 1;
+
+    const EXTEND_REPAIR = 2;
+
 }

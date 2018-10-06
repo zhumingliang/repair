@@ -19,17 +19,23 @@ class ShopValidate extends BaseValidate
         'city' => 'require',
         'arena' => 'require',
         'address' => 'require',
+        'time_begin' => 'require',
+        'time_end' => 'require',
         'type' => 'require|in:1,2',
         'imgs' => 'require',
         'head_url' => 'require',
         'id'=>'require|isPositiveInteger',
-        'state'=>'require|isPositiveInteger|in:2,3'
+        's_id'=>'require|isPositiveInteger',
+        'state'=>'require|isPositiveInteger|in:2,3',
+
     ];
 
     protected $scene = [
         'save' => ['name', 'phone', 'province', 'city', 'area', 'address', 'head_url', 'imgs',
             'type', 'id_number'],
-        'handel'=>['id','state']
+        'handel'=>['id','state'],
+        'booking'=>['s_id', 'area', 'address','phone','time_begin',
+            'time_end'],
     ];
 
 }

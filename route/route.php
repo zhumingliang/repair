@@ -30,6 +30,7 @@ Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
 Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
 Route::post('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
+Route::post('api/:version/service/booking', 'api/:version.Shop/bookingService');
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
 
@@ -70,6 +71,8 @@ Route::get('api/:version/category', 'api/:version.Banner/getTheCategory');
 Route::get('api/:version/extend/cms/list', 'api/:version.ServicesExtend/getListForCMS');
 Route::get('api/:version/extend/handel', 'api/:version.ServicesExtend/handel');
 Route::get('api/:version/extend/service', 'api/:version.ServicesExtend/getTheService');
+Route::get('api/:version/extend/house', 'api/:version.ServicesExtend/getHoursList');
+Route::get('api/:version/extend/repair', 'api/:version.ServicesExtend/getRepairList');
 
 
 Route::post('api/:version/city/discount/save', 'api/:version.CityDiscount/save');

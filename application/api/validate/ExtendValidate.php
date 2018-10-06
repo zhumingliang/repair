@@ -14,11 +14,16 @@ class ExtendValidate extends BaseValidate
     protected $rule = [
         'type' => 'require|in:1,2',
         'id' => 'require',
+        'area' => 'require',
+        'page' => 'isPositiveInteger',
+        'size' => 'isPositiveInteger',
+
     ];
     protected $scene = [
         'list' => ['type'],
         'handel' => ['type', 'id'],
-        'read' => ['id']
+        'read' => ['id'],
+        'index' => [ 'area', 'page', 'size']
     ];
 
 }
