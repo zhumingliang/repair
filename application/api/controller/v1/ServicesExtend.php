@@ -93,7 +93,7 @@ class ServicesExtend extends BaseController
 
     /**
      * @api {GET} /api/v1/extend/service  37-CMS获取指定推广商品信息
-     * @apiGroup  CMS
+     * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  CMS获取指定推广商品信息
      * http://mengant.cn/api/v1/extend/service?id=1
@@ -126,7 +126,7 @@ class ServicesExtend extends BaseController
 
     /**
      * @api {GET} /api/v1/extend/house 45-小程序首页推广列表-家政服务
-     * @apiGroup  CMS
+     * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序首页推广列表-家政服务
      *
