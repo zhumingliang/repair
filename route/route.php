@@ -84,3 +84,7 @@ Route::get('api/:version/city/discount/list', 'api/:version.CityDiscount/getList
 
 
 Route::get('api/:version/comment/service', 'api/:version.Comment/getCommentForService');
+
+
+Route::post('api/:version/rank/save', 'api/:version.Rank/save');
+Route::get('api/:version/rank/list', 'api/:version.Rank/getRank');

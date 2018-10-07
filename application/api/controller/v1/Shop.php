@@ -236,10 +236,10 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/service/mini/list 48-小程序首页家政/维修模块获取服务列表
+     * @api {GET} /api/v1/service/mini/list 48-小程序首页家政/维修模块/服务排行获取服务列表
      * @apiGroup  MINI
      * @apiVersion 1.0.1
-     * @apiDescription  小程序首页家政/维修模块获取服务列表
+     * @apiDescription  小程序首页家政/维修模块/服务排行获取服务列表（服务排行时获取对应的数据为10条：page=1;size=10）
      *
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/service/mini/list?id=5&page=1&size=15&area=铜官区&type=1&c_id=1
