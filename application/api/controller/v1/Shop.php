@@ -10,6 +10,8 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\ServiceListV;
+use app\api\model\ServiceV;
 use app\api\model\ShopT;
 use app\api\service\ShopService;
 use app\api\validate\ServiceValidate;
@@ -231,6 +233,39 @@ class Shop extends BaseController
         return json($res);
 
 
+    }
+
+    /**
+     * @api {GET} /api/v1/service/mini/list 48-小程序首页家政/维修模块获取服务列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序首页家政/维修模块获取服务列表
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/service/mini/list?id=5&page=1&size=15&area=铜官区&type=1&c_id=1
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {String} area 用户地址位置--区
+     * @apiParam (请求参数说明) {int} c_id 服务类别id，获取全部时默认为0
+     * @apiParam (请求参数说明) {int} type 模块类别：1 |家政；2 |维修
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":4,"per_page":"15","current_page":1,"last_page":1,"data":[{"id":5,"name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","sell_money":"10000","sell_num":"1","area":"铜官区"},{"id":4,"name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/E72CCAE6-79A1-D88D-F755-48FE0DB381BC.jpg","sell_money":"0","sell_num":"0","area":"铜官区"},{"id":2,"name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/5782AD69-9B21-2B94-DCCA-6AD299AF32E1.jpg","sell_money":"0","sell_num":"0","area":"铜官区"},{"id":1,"name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/B9439BE2-857E-22D2-D058-CFE57315EEAE.jpg","sell_money":"0","sell_num":"0","area":"铜官区"}]}     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} s_id 服务id
+     * @apiSuccess (返回参数说明) {int} sell_money 总销量
+     * @apiSuccess (返回参数说明) {int} sell_num 成交额
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {String} cover 服务封面
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function getServiceListForMini()
+    {
+        (new ShopValidate())->scene('service')->goCheck();
+        $params = $this->request->param();
+        return json(ServiceListV::getList($params['area'], $params['page'],
+            $params['size'], $params['c_id'], $params['type']));
     }
 
 

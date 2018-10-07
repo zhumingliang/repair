@@ -93,7 +93,7 @@ class ServicesExtend extends BaseController
 
     /**
      * @api {GET} /api/v1/extend/service  37-CMS获取指定推广商品信息
-     * @apiGroup  MINI
+     * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  CMS获取指定推广商品信息
      * http://mengant.cn/api/v1/extend/service?id=1
@@ -122,7 +122,6 @@ class ServicesExtend extends BaseController
         $service = ExtendService::getTheService($id);
         return json($service);
     }
-
 
     /**
      * @api {GET} /api/v1/extend/house 45-小程序首页推广列表-家政服务
@@ -159,7 +158,7 @@ class ServicesExtend extends BaseController
 
     /**
      * @api {GET} /api/v1/extend/repair 46-小程序首页推广列表-维修服务
-     * @apiGroup  CMS
+     * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序首页推广列表-维修服务
      *
@@ -191,6 +190,41 @@ class ServicesExtend extends BaseController
         return json($list);
 
 
+    }
+
+
+    /**
+     * @api {GET} /api/v1/extend/mini/service  47-小程序查看服务详情
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序查看服务详情(推广服务/家政/维修模块点击进入)
+     * http://mengant.cn/api/v1/extend/mini/service?id=1
+     * @apiParam (请求参数说明) {int} id  推广记录id
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":4,"shop_id":1,"name":"修五金","area":"台儿庄区","des":"五金大神","price":1000,"unit":"ci","collection":1,"imgs":[{"img_id":1,"img_url":{"url":"http:\/\/repair.com\/1212"}},{"img_id":2,"img_url":{"url":"http:\/\/repair.com\/121"}}],"shop":{"id":1,"address":"","phone":"1895622530"}}
+     * @apiSuccess (返回参数说明) {int} id 服务id
+     * @apiSuccess (返回参数说明) {int} shop_id 店铺id
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {String} des 服务描述
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {int} price 价格
+     * @apiSuccess (返回参数说明) {int} collection 用户是否收藏该服务：1 | 收藏；2 | 未收藏
+     * @apiSuccess (返回参数说明) {String} unit 单位
+     * @apiSuccess (返回参数说明) {String} imgs 轮播图
+     * @apiSuccess (返回参数说明) {int} img_id 图片id
+     * @apiSuccess (返回参数说明) {String} url 图片地址
+     *
+     * @param $id
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getServiceForMini($id)
+    {
+        return json(ExtendService::getServiceForMini($id));
     }
 
 

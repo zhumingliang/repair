@@ -9,9 +9,8 @@
 namespace app\api\model;
 
 
-use think\Model;
 
-class ShopT extends Model
+class ShopT extends BaseModel
 {
     public function getHeadUrlAttr($value, $data)
     {

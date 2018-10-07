@@ -2,24 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/9/26
- * Time: 下午10:27
+ * Date: 2018/10/7
+ * Time: 11:30 PM
  */
 
 namespace app\api\model;
 
 
-use think\Model;
 
-class ServicesImgT extends Model
+class ServiceCommentImgT extends BaseModel
 {
-    protected $hidden=['id','create_time','update_time','state','s_id'];
-
 
     public function imgUrl()
     {
         return $this->belongsTo('ImgT',
             'img_id', 'id');
     }
-
 }

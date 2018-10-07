@@ -9,10 +9,12 @@
 namespace app\api\service;
 
 
+use app\api\model\CollectionServicesT;
 use app\api\model\ExtendRecordT;
 use app\api\model\ExtendV;
 use app\api\model\ServiceExtendT;
 use app\api\model\ServicesExtendV;
+use app\api\model\ServicesT;
 use app\api\model\ServiceV;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
@@ -171,9 +173,52 @@ class ExtendService
      * @param $c_id
      * @return \think\Paginator
      */
-    public static function getRepairList($area, $page,$size, $c_id)
+    public static function getRepairList($area, $page, $size, $c_id)
     {
         return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_REPAIR);
+
+    }
+
+    /**
+     * 小程序获取指定服务信息
+     * @param $id
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getServiceForMini($id)
+    {
+        $service = ServicesT::getService($id);
+        $service['collection'] = self::checkCollection($id);
+        return $service;
+
+
+    }
+
+    /**
+     * 检查用户是否收藏该服务
+     * @param $id
+     * @return int|mixed
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private static function checkCollection($id)
+    {
+        $col = CollectionServicesT::where('u_id', '=', Token::getCurrentUid())
+            ->where('s_id', '=', $id)
+            ->find();
+
+        if (!$col) {
+            return 2;
+        }
+        return $col->state;
+
 
     }
 

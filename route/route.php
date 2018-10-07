@@ -31,6 +31,7 @@ Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
 Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
 Route::post('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
 Route::post('api/:version/service/booking', 'api/:version.Shop/bookingService');
+Route::get('api/:version/service/mini/list', 'api/:version.Shop/getServiceListForMini');
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
 
@@ -71,6 +72,7 @@ Route::get('api/:version/category', 'api/:version.Banner/getTheCategory');
 Route::get('api/:version/extend/cms/list', 'api/:version.ServicesExtend/getListForCMS');
 Route::get('api/:version/extend/handel', 'api/:version.ServicesExtend/handel');
 Route::get('api/:version/extend/service', 'api/:version.ServicesExtend/getTheService');
+Route::get('api/:version/extend/mini/service', 'api/:version.ServicesExtend/getServiceForMini');
 Route::get('api/:version/extend/house', 'api/:version.ServicesExtend/getHoursList');
 Route::get('api/:version/extend/repair', 'api/:version.ServicesExtend/getRepairList');
 
@@ -81,3 +83,4 @@ Route::post('api/:version/city/discount/update', 'api/:version.CityDiscount/upda
 Route::get('api/:version/city/discount/list', 'api/:version.CityDiscount/getList');
 
 
+Route::get('api/:version/comment/service', 'api/:version.Comment/getCommentForService');

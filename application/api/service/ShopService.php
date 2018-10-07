@@ -99,6 +99,7 @@ class ShopService
         Db::startTrans();
         try {
             $params['cover'] = base64toImg($params['cover']);
+            $params['state'] = CommonEnum::STATE_IS_OK;
             $extend = $params['extend'];
             $imgs = $params['imgs'];
             $obj = ServicesT::create($params);
@@ -308,4 +309,6 @@ class ShopService
         return ($service->price) * (1 - $dis / 100);
 
     }
+
+
 }
