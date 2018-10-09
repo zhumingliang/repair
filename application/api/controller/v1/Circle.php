@@ -12,8 +12,10 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\CircleCategoryT;
 use app\api\model\CircleExamineT;
+use app\api\model\CircleT;
 use app\api\service\CircleService;
 use app\api\validate\CircleValidate;
+use app\api\validate\PagingParameter;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\CircleException;
 use app\lib\exception\SuccessMessage;
@@ -137,8 +139,8 @@ class Circle extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/circle/mini/category/list 55-获取圈子类别列表
-     * @apiGroup  CMS
+     * @api {GET} /api/v1/circle/mini/category/list 55-小程序获取圈子类别列表
+     * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序获取圈子类别列表（圈子模块）
      * @apiExample {get}  请求样例:
@@ -157,12 +159,9 @@ class Circle extends BaseController
      */
     public function getCategoryListForMini()
     {
-
         $params = $this->request->param();
         $list = CircleService::getCategoryListForMini($params);
         return json($list);
-
-
     }
 
     /**
@@ -237,6 +236,241 @@ class Circle extends BaseController
         }
 
         return json($obj);
+
+    }
+
+    /**
+     * @api {POST} /api/v1/circle/save  56-CMS新增圈子文章
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  加盟商/小区管理员-新增圈子文章
+     * @apiExample {post}  请求样例:
+     * {
+     * "title": "你的睡眠真的好吗？",
+     * "head_img": "base64",
+     * "content": "每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？你知道吗，过短的休息时间有害身体，过长的休息也会对生命造成危害",
+     * "c_id": 1
+     * }
+     * @apiParam (请求参数说明) {String} title 文章标题
+     * @apiParam (请求参数说明) {String} head_img 文章封面图
+     * @apiParam (请求参数说明) {String} content 文章内容
+     * @apiParam (请求参数说明) {int} c_id 分类id
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @return \think\response\Json
+     * @throws CircleException
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function saveCircle()
+    {
+        (new CircleValidate())->scene('circle_save')->goCheck();
+        $params = $this->request->param();
+        CircleService::saveCircle($params);
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {POST} /api/v1/circle/handel  57-CMS圈子文章状态操作
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  删除/审核通过
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * "state":2
+     * }
+     * @apiParam (请求参数说明) {int} id  圈子id
+     * @apiParam (请求参数说明) {String} state   状态类别：2 审核通过；3|删除
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @throws CircleException
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function handel()
+    {
+        (new CircleValidate())->scene('handel')->goCheck();
+        $params = $this->request->param();
+        $id = CircleT::update(['state' => $params['state']], ['id' => $params['id']]);
+        if (!$id) {
+            throw new CircleException(['code' => 401,
+                'msg' => '圈子文章状态修改失败',
+                'errorCode' => 160005
+            ]);
+        }
+
+    }
+
+    /**
+     * @api {POST} /api/v1/circle/top/handel  58-CMS圈子文章置顶状态操作
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  删除/审核通过
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * "top":2
+     * }
+     * @apiParam (请求参数说明) {int} id  圈子id
+     * @apiParam (请求参数说明) {int} top   置顶状态：1 | 不置顶；2 | 置顶
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @throws CircleException
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function topHandel()
+    {
+        (new CircleValidate())->scene('top_handel')->goCheck();
+        $params = $this->request->param();
+        $id = CircleT::update(['top' => $params['top']], ['id' => $params['id']]);
+        if (!$id) {
+            throw new CircleException(['code' => 401,
+                'msg' => '圈子文章置顶状态修改失败',
+                'errorCode' => 160006
+            ]);
+        }
+
+    }
+
+    /**
+     * @api {GET} /api/v1/circle/cms/list 59-CMS获取圈子列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  CMS获取圈子列表(已经审核/未审核)
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/circle/category/list?page=1&size=20&type=1
+     * @apiParam (请求参数说明) {int} page  页数
+     * @apiParam (请求参数说明) {int} size   每页数据条数
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":5,"create_time":"2018-10-09 22:55:23","state":1,"top":1,"city":"铜陵市","title":"睡觉2","category":{"id":1,"name":"保姆"}},{"id":4,"create_time":"2018-10-09 22:34:18","state":1,"top":1,"city":"铜陵市","title":"睡觉","category":{"id":1,"name":"保姆"}}]}     * [{"id":1,"name":"失物招领"}]
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 文章id
+     * @apiSuccess (返回参数说明) {String} title  标题
+     * @apiSuccess (返回参数说明) {String} create_time 发布时间
+     * @apiSuccess (返回参数说明) {String} city 城市
+     * @apiSuccess (返回参数说明) {int} top 是否置顶
+     * @apiSuccess (返回参数说明) {Obj} category 圈子类别对象
+     * @apiSuccess (返回参数说明) {String} name 类别名称
+     *
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function getCircleListForCMS()
+    {
+        (new PagingParameter())->goCheck();
+        $params = $this->request->param();
+        $list = CircleService::getCircleListForCMS($params);
+        return json($list);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/circle/cms 60-CMS获取指定圈子文章
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  CMS获取指定圈子文章
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/circle/cms?id=4
+     * @apiParam (请求参数说明) {int} id  文章id
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":4,"head_img":"http:\/\/repair.com\/static\/imgs\/804054E6-3EB3-0133-C9B6-5F992F52B63B.jpg","content":"每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？你知道吗，过短的休息时间有害身体，过长的休息也会对生命造成危害。","create_time":"2018-10-09 22:34:18","city":"铜陵市","title":"睡觉","category":{"id":1,"name":"保姆"},"source":{"id":2,"grade":"2"}}
+     * @apiSuccess (返回参数说明) {int} id 文章id
+     * @apiSuccess (返回参数说明) {String} title  标题
+     * @apiSuccess (返回参数说明) {String} head_img
+     * @apiSuccess (返回参数说明) {String} create_time 发布时间
+     * @apiSuccess (返回参数说明) {String} content 内容
+     * @apiSuccess (返回参数说明) {String} city 城市
+     * @apiSuccess (返回参数说明) {int} top 是否置顶
+     * @apiSuccess (返回参数说明) {Obj} category 圈子类别对象
+     * @apiSuccess (返回参数说明) {String} name 类别名称
+     * @apiSuccess (返回参数说明) {Obj} source 发布所属对象
+     * @apiSuccess (返回参数说明) {String} name grade ： 1| 管理员；2 | 加盟商；2 | 小区管理员
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getTheCircle()
+    {
+        (new CircleValidate())->scene('id')->goCheck();
+        $id = $this->request->param('id');
+        return json(CircleT::getCircle($id));
+
+    }
+
+
+    /**
+     * @api {POST} /api/v1/circle/save  61-CMS修改圈子文章
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  CMS修改圈子文章
+     * @apiExample {post}  请求样例:
+     * {
+     * "id": 1,
+     * "title": "你的睡眠真的好吗？",
+     * "head_img": "base64",
+     * "content": "每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？你知道吗，过短的休息时间有害身体，过长的休息也会对生命造成危害",
+     * "c_id": 1
+     * }
+     * @apiParam (请求参数说明) {String} title 文章标题
+     * @apiParam (请求参数说明) {String} head_img 文章封面图
+     * @apiParam (请求参数说明) {String} content 文章内容
+     * @apiParam (请求参数说明) {int} c_id 分类id
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @throws CircleException
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function updateCircle()
+    {
+        (new CircleValidate())->scene('id')->goCheck();
+        $params = $this->request->param();
+        $circle_id = $params['id'];
+        if (isset($params['head_img'])) {
+            $params['head_img'] = base64toImg($params['head_img']);
+        }
+        $id = CircleT::update($params, ['id', $circle_id]);
+        if (!$id) {
+            throw new CircleException(['code' => 401,
+                'msg' => '修改圈子失败',
+                'errorCode' => 160007
+            ]);
+
+        }
+        return json(new  SuccessMessage());
+    }
+
+    public function getCircleListForMINI()
+    {
+        (new CircleValidate())->scene('circle_list_mini')->goCheck();
+        $params = $this->request->param();
+        $list = CircleService::getCircleListForMINI($params);
+        return json($list);
 
     }
 

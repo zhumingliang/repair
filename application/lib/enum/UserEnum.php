@@ -18,6 +18,7 @@ class UserEnum
     //加盟商
     const USER_GRADE_JOIN = 2;
 
+
     //账号正常
     const USER_STATE_OK = 1;
 

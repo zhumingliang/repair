@@ -10,12 +10,17 @@ namespace app\api\service;
 
 
 use app\api\model\CircleCategoryT;
+use app\api\model\CircleExamineT;
+use app\api\model\CircleT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
-use app\lib\exception\ParameterException;
+use app\lib\exception\CircleException;
 
 class CircleService
 {
+    const CIRCLE_NEED_EXAMINE = 2;
+    const CIRCLE_NOT_TOP = 1;
+    const CIRCLE_TOP = 2;
 
     /**
      * CMS 获取圈子类别列表（管理员-圈子分类列表/加盟商-新增圈子时获取分类列表）
@@ -75,13 +80,84 @@ class CircleService
 
     }
 
+
     /**
-     * 获取加盟商代理级别
-     * @return array
-     * @throws ParameterException
+     * 保存圈子
+     * @param $params
+     * @throws CircleException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
+    public static function saveCircle($params)
+    {
+        $u_id = Token::getCurrentUid();
+        $grade = Token::getCurrentTokenVar('grade');
+        $params['u_id'] = $u_id;
+        $params['state'] = self::checkCircleDefault() == self::CIRCLE_NEED_EXAMINE ? CommonEnum::READY : CommonEnum::PASS;
+        $params['top'] = self::CIRCLE_NOT_TOP;
+        $params['read_num'] = 0;
+        $params['province'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('province');
+        $params['city'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('city');
+        $params['area'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('area');
+        $params['parent_id'] = Token::getCurrentTokenVar('grade') == UserEnum::USER_GRADE_JOIN ? Token::getCurrentUid() : Token::getCurrentTokenVar('parent_id');
+        if (isset($params['head_img'])) {
+            $params['head_img'] = base64toImg($params['head_img']);
+        }
+
+        $id = CircleT::create($params);
+        if (!$id) {
+            throw new CircleException(['code' => 401,
+                'msg' => '新增圈子失败',
+                'errorCode' => 160004
+            ]);
+
+        }
+    }
+
+    /**
+     * 查看圈子是否审核默认设置
+     * @return array|int|null|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private static function checkCircleDefault()
+    {
+        $default = (new CircleExamineT())->field('default')->find();
+
+        return $default ? $default->default : 2;
+    }
+
+
+    public static function getCircleListForCMS($params)
+    {
+        $list = CircleT::getListForCms($params['page'], $params['size'], $params['state']);
+        return $list;
+
+    }
+
+
+    public static function getCircleListForMINI($params)
+    {
+        $list = CircleT::getListForMINI($params['page'], $params['size'], $params['province'], $params['city'], $params['area'], $params['c_id']);
+        return $list;
+
+    }
+
+    /**
+     * 指定圈子阅读量加一
+     * @param $id
+     */
+    private function incReadNum($id)
+    {
+        CircleT::where('id', $id)
+            ->inc('read_num');
+
+    }
+
     private static function getWhereOp()
     {
         $sql = '	province = "全部"
@@ -113,5 +189,6 @@ OR (province = "安徽省" AND city="铜陵市" AND area="铜官区")';
         throw new ParameterException();*/
 
     }
+
 
 }

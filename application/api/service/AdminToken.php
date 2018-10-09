@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\AdminT;
+use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
 use think\Exception;
 use think\facade\Cache;
@@ -115,18 +116,44 @@ class AdminToken extends Token
             'phone' => $admin->phone,
             'username' => $admin->username,
             'grade' => $admin->grade,
+            'parent_id' => $admin->parent_id,
         ];
+
         $cachedValue['province'] = '';
         $cachedValue['city'] = '';
         $cachedValue['area'] = '';
-        if (isset($admin->adminJoin)) {
-            $admin_join = $admin->adminJoin;
+        $admin_join = array();
+
+        if ($admin->grade == UserEnum::USER_GRADE_ADMIN || $admin->grade == UserEnum::USER_GRADE_JOIN) {
+            if (isset($admin->adminJoin)) {
+                $admin_join = $admin->adminJoin;
+            }
+        } else {
+            $parent_id = $admin->parent_id;
+            if ($parent_id) {
+                $parent = $this->getParent($parent_id);
+                if (isset($parent->adminJoin)) {
+                    $admin_join = $parent->adminJoin;
+                }
+            }
+
+        }
+        if ($admin_join) {
             $cachedValue['province'] = $admin_join->province;
             $cachedValue['city'] = $admin_join->city;
             $cachedValue['area'] = $admin_join->area;
         }
 
         return $cachedValue;
+    }
+
+    private function getParent($id)
+    {
+        $admin = AdminT::where('id', $id)
+            ->with('adminJoin')
+            ->find();
+        return $admin;
+
     }
 
 

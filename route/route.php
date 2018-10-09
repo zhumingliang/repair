@@ -96,3 +96,10 @@ Route::get('api/:version/circle/cms/category/list', 'api/:version.Circle/getCate
 Route::get('api/:version/circle/mini/category/list', 'api/:version.Circle/getCategoryListForMini');
 Route::post('api/:version/circle/pass/set', 'api/:version.Circle/circlePassSet');
 Route::get('api/:version/circle/pass/get', 'api/:version.Circle/getCirclePassSet');
+Route::post('api/:version/circle/save', 'api/:version.Circle/saveCircle');
+Route::post('api/:version/circle/update', 'api/:version.Circle/updateCircle');
+Route::post('api/:version/circle/handel', 'api/:version.Circle/handel');
+Route::post('api/:version/circle/top/handel', 'api/:version.Circle/topHandel');
+Route::get('api/:version/circle/cms/list', 'api/:version.Circle/getCircleListForCMS');
+Route::get('api/:version/circle/mini/list', 'api/:version.Circle/getCircleListForMINI');
+Route::get('api/:version/circle/cms', 'api/:version.Circle/getTheCircle');
