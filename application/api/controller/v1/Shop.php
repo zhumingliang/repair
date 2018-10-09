@@ -11,7 +11,6 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\ServiceListV;
-use app\api\model\ServiceV;
 use app\api\model\ShopT;
 use app\api\service\ShopService;
 use app\api\validate\ServiceValidate;

@@ -18,7 +18,7 @@ use app\lib\exception\SuccessMessage;
 class Category extends BaseController
 {
     /**
-     * @api {POST} /api/v1/guid/save  28-管理员新增分类
+     * @api {POST} /api/v1/category/save  28-管理员新增分类
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员新增分类
@@ -83,6 +83,7 @@ class Category extends BaseController
                 'errorCode' => 120002
             ]);
         }
+        return json(new SuccessMessage());
 
     }
 

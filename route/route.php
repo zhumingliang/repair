@@ -88,3 +88,11 @@ Route::get('api/:version/comment/service', 'api/:version.Comment/getCommentForSe
 
 Route::post('api/:version/rank/save', 'api/:version.Rank/save');
 Route::get('api/:version/rank/list', 'api/:version.Rank/getRank');
+
+
+Route::post('api/:version/circle/category/save', 'api/:version.Circle/saveCategory');
+Route::post('api/:version/circle/category/handel', 'api/:version.Circle/categoryHandel');
+Route::get('api/:version/circle/cms/category/list', 'api/:version.Circle/getCategoryListForCms');
+Route::get('api/:version/circle/mini/category/list', 'api/:version.Circle/getCategoryListForMini');
+Route::post('api/:version/circle/pass/set', 'api/:version.Circle/circlePassSet');
+Route::get('api/:version/circle/pass/get', 'api/:version.Circle/getCirclePassSet');

@@ -16,7 +16,7 @@ class DemandValidate extends BaseValidate
         'phone' => 'require',
         'province' => 'require',
         'city' => 'require',
-        'arena' => 'require',
+        'area' => 'require',
         'address' => 'require',
         'time_begin' => 'require',
         'time_end' => 'require',

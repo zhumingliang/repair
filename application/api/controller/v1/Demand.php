@@ -39,18 +39,18 @@ class Demand extends BaseController
      * "type": "1",
      * "imgs": "1,2,3",
      * }
-     * @apiParam (返回参数说明) {String} name 发布人
-     * @apiParam (返回参数说明) {String} phone 联系方式
-     * @apiParam (返回参数说明) {String} des 需求描述
-     * @apiParam (返回参数说明) {String} province 省
-     * @apiParam (返回参数说明) {String} city 市
-     * @apiParam (返回参数说明) {String} area 区
-     * @apiParam (返回参数说明) {String} address 详细地址
-     * @apiParam (返回参数说明) {String} time_begin 开始时间
-     * @apiParam (返回参数说明) {String} time_end 结束时间
-     * @apiParam (返回参数说明) {int} money 金额，标准单位为分
-     * @apiParam (返回参数说明) {String} type 需求类别：1 | 维修；2 | 家政
-     * @apiParam (返回参数说明) {String} imgs 图片id，多个用逗号隔开
+     * @apiParam (请求参数说明) {String} name 发布人
+     * @apiParam (请求参数说明) {String} phone 联系方式
+     * @apiParam (请求参数说明) {String} des 需求描述
+     * @apiParam (请求参数说明) {String} province 省
+     * @apiParam (请求参数说明) {String} city 市
+     * @apiParam (请求参数说明) {String} area 区
+     * @apiParam (请求参数说明) {String} address 详细地址
+     * @apiParam (请求参数说明) {String} time_begin 开始时间
+     * @apiParam (请求参数说明) {String} time_end 结束时间
+     * @apiParam (请求参数说明) {int} money 金额，标准单位为分
+     * @apiParam (请求参数说明) {String} type 需求类别：1 | 维修；2 | 家政
+     * @apiParam (请求参数说明) {String} imgs 图片id，多个用逗号隔开
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -70,7 +70,6 @@ class Demand extends BaseController
         $params['state'] = CommonEnum::STATE_IS_OK;
         DemandService::save($params);
         return json(new  SuccessMessage());
-
 
     }
 
