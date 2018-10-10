@@ -120,7 +120,7 @@ class UserToken extends Token
      */
     private function session_keyToCache($wxResult)
     {
-        $key = $wxResult['openId'];
+        $key = $wxResult['openid'];
         $value = $wxResult['session_key'];
         $expire_in = config('setting.session_key_expire_in');
         $request = Cache::remember($key, $value, $expire_in);
