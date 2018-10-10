@@ -32,6 +32,13 @@ class CircleT extends BaseModel
             'u_id', 'id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('CircleCommentT',
+            'c_id', 'id');
+
+    }
+
     public static function getListForCms($page, $size, $state)
     {
         $grade = Token::getCurrentTokenVar('grade');
@@ -59,7 +66,7 @@ class CircleT extends BaseModel
         $pagingData = self::where('state', '=', CommonEnum::PASS)
             ->where('c_id', '=', $c_id)
             ->whereRaw(preJoinSql($province, $city, $area))
-            ->hidden(['c_id', 'update_time', 'u_id', 'parent_id', 'province', 'area', 'city'])
+            ->hidden(['c_id', 'update_time', 'u_id', 'parent_id', 'province', 'area', 'city', 'state', 'top', 'content'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
 
@@ -84,6 +91,26 @@ class CircleT extends BaseModel
         }])
             ->where('id', $id)
             ->hidden(['c_id', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
+            ->find();
+
+        return $circle;
+    }
+
+
+    /**
+     * @param $id
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getCircleForMINI($id)
+    {
+        $circle = self::with(['comments' => function ($query) {
+            $query->where('parent_id', '=', 0);
+        }])
+            ->where('id', $id)
+            ->hidden(['title','city','c_id', 'head_img', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
             ->find();
 
         return $circle;

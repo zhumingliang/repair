@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\CircleCategoryT;
+use app\api\model\CircleCommentT;
 use app\api\model\CircleExamineT;
 use app\api\model\CircleT;
 use app\lib\enum\CommonEnum;
@@ -144,6 +145,41 @@ class CircleService
     {
         $list = CircleT::getListForMINI($params['page'], $params['size'], $params['province'], $params['city'], $params['area'], $params['c_id']);
         return $list;
+
+    }
+
+    public static function getCircleForMini($id)
+    {
+        //获取评论信息
+        $circle = CircleT::getCircleForMINI($id);
+        return $circle;
+
+
+    }
+
+    /**
+     * 圈子评论
+     * @param $params
+     * @throws CircleException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public static function saveComment($params)
+    {
+      /*  $params['openid'] = Token::getCurrentTokenVar('nickName');
+        $params['nickName'] = Token::getCurrentTokenVar('nickName');
+        $params['avatarUrl'] = Token::getCurrentTokenVar('avatarUrl');*/
+        $params['openid'] = 1;
+        $params['nickName'] ='朱明良';
+        $params['avatarUrl'] = 'http://avatarUrl';
+        $id = CircleCommentT::create($params);
+        if (!$id) {
+            throw new CircleException(['code' => 401,
+                'msg' => '新增圈子评论失败',
+                'errorCode' => 160008
+            ]);
+
+        }
 
     }
 

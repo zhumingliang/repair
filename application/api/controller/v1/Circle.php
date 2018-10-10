@@ -465,6 +465,33 @@ class Circle extends BaseController
         return json(new  SuccessMessage());
     }
 
+    /**
+     * @api {GET} /api/v1/circle/mini/list 62-小程序获取圈子文章列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序获取圈子文章列表
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/circle/category/list?page=1&size=20&c_id=1&province="安徽省"&city="铜陵市"&area="铜官区"
+     * @apiParam (请求参数说明) {int} page  页数
+     * @apiParam (请求参数说明) {int} size   每页数据条数
+     * @apiParam (请求参数说明) {int} c_id   圈子类别id
+     * @apiParam (请求参数说明) {String} province   省
+     * @apiParam (请求参数说明) {String} city   市
+     * @apiParam (请求参数说明) {String} area   区
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":8,"head_img":"http:\/\/repair.com\/static\/imgs\/284E6786-D6D7-64D0-30BA-3F359D42A3CA.jpg","create_time":"2018-10-10 01:32:20","title":"睡觉","read_num":0},{"id":7,"head_img":"http:\/\/repair.com\/static\/imgs\/98BBAF17-48E0-317D-7F8D-8A068270094E.jpg","create_time":"2018-10-10 01:23:17","title":"s","read_num":0}]}     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 文章id
+     * @apiSuccess (返回参数说明) {String} title  标题
+     * @apiSuccess (返回参数说明) {String} head_img  封面
+     * @apiSuccess (返回参数说明) {String} create_time 发布时间
+     * @apiSuccess (返回参数说明) {int} read_num 浏览数
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function getCircleListForMINI()
     {
         (new CircleValidate())->scene('circle_list_mini')->goCheck();
@@ -472,6 +499,55 @@ class Circle extends BaseController
         $list = CircleService::getCircleListForMINI($params);
         return json($list);
 
+    }
+
+
+    /**
+     * 63
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function getCircleForMini()
+    {
+        (new CircleValidate())->scene('id')->goCheck();
+        $id = $this->request->param('id');
+        $list = CircleService::getCircleForMini($id);
+        return json($list);
+
+    }
+
+    /**
+     * @api {POST} /api/v1/circle/comment/save  65-小程序评论圈子文章
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序评论圈子文章
+     * @apiExample {post}  请求样例:
+     * {
+     * "parent_id": 0,
+     * "content": "我是一条评论",
+     * "c_id": 1
+     * }
+     * @apiParam (请求参数说明) {int} parent_id 评论上一级id，如果没有则 0
+     * @apiParam (请求参数说明) {String} content 评论内容
+     * @apiParam (请求参数说明) {int}  c_id 圈子文章id
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @return \think\response\Json
+     * @throws CircleException
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function saveComment()
+    {
+        (new CircleValidate())->scene('comment_save')->goCheck();
+        $params = $this->request->param();
+        CircleService::saveComment($params);
+        return json(new SuccessMessage());
     }
 
 

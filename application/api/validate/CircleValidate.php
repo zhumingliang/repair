@@ -24,17 +24,19 @@ class CircleValidate extends BaseValidate
         'state' => 'require|isPositiveInteger|in:2,3',
         'top' => 'require|isPositiveInteger|in:2,1',
         'type' => 'require|isPositiveInteger|in:1,2',
+        'parent_id' => 'require',
 
     ];
 
     protected $scene = [
         'category_save' => ['province', 'city', 'area', 'name'],
-        'circle_list_mini' => ['province', 'city', 'area', 'page','size','c_id'],
+        'circle_list_mini' => ['province', 'city', 'area', 'page', 'size', 'c_id'],
         'handel' => ['id', 'state'],
         'top_handel' => ['id', 'top'],
         'id' => ['id'],
         'set' => ['id', 'state'],
-        'circle_save' => ['content', 'title', 'head_img', 'c_id']
+        'circle_save' => ['content', 'title', 'head_img', 'c_id'],
+        'comment_save' => ['content', 'parent_id', 'c_id']
     ];
 
 

@@ -103,3 +103,5 @@ Route::post('api/:version/circle/top/handel', 'api/:version.Circle/topHandel');
 Route::get('api/:version/circle/cms/list', 'api/:version.Circle/getCircleListForCMS');
 Route::get('api/:version/circle/mini/list', 'api/:version.Circle/getCircleListForMINI');
 Route::get('api/:version/circle/cms', 'api/:version.Circle/getTheCircle');
+Route::get('api/:version/circle/mini', 'api/:version.Circle/getCircleForMini');
+Route::post('api/:version/circle/comment/save', 'api/:version.Circle/saveComment');
