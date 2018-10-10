@@ -4,6 +4,7 @@
 namespace app\api\service;
 
 
+use app\api\model\UserT;
 use app\lib\exception\TokenException;
 use app\lib\exception\WeChatException;
 use app\api\model\UserT as UserModel;
@@ -164,9 +165,8 @@ class UserToken extends Token
      */
     private function newUser($openid)
     {
-        $user = new UserModel;
-        $user->openid = $openid;
-        return $user->id;
+        $id = UserT::create(['openId' => $openid]);
+        return $id;
     }
 
     /**
