@@ -91,7 +91,7 @@ class CircleT extends BaseModel
         }])
             ->where('id', $id)
             ->hidden(['c_id', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
-            ->find();
+            ->find()->toArray();
 
         return $circle;
     }
@@ -106,11 +106,8 @@ class CircleT extends BaseModel
      */
     public static function getCircleForMINI($id)
     {
-        $circle = self::with(['comments' => function ($query) {
-            $query->where('parent_id', '=', 0);
-        }])
-            ->where('id', $id)
-            ->hidden(['title','city','c_id', 'head_img', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
+        $circle = self::where('id', $id)
+            ->hidden(['title', 'city', 'c_id', 'head_img', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
             ->find();
 
         return $circle;

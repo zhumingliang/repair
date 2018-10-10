@@ -13,6 +13,7 @@ use app\api\model\CircleCategoryT;
 use app\api\model\CircleCommentT;
 use app\api\model\CircleExamineT;
 use app\api\model\CircleT;
+use app\api\model\CommentZanT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\CircleException;
@@ -148,13 +149,63 @@ class CircleService
 
     }
 
+    /**
+     * 小程序
+     * @param $id
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public static function getCircleForMini($id)
     {
+        self::incReadNum($id);
         //获取评论信息
         $circle = CircleT::getCircleForMINI($id);
         return $circle;
 
+    }
 
+    public static function comments($params)
+    {
+
+
+        //获取评论信息
+        $list = CircleCommentT::getList($params['page'], $params['size'], $params['id']);
+        $list['data'] = self::preComments($list['data']);
+        return $list;
+
+    }
+
+
+    private static function preComments($list)
+    {
+        if (empty($list)) {
+            return array();
+        }
+
+        foreach ($list as $k => $v) {
+            $list[$k]['children'] = self::getCommentList($v['id']);
+        }
+
+        return $list;
+
+    }
+
+    protected static function getCommentList($parent_id = 0, &$result = array())
+    {
+        $arr = CircleCommentT::where('parent_id', '=', $parent_id)
+            ->field('id,parent_id,nickName,avatarUrl,content,create_time')
+            ->order("create_time desc")->select();
+        if (empty($arr)) {
+            return array();
+        }
+        foreach ($arr as $cm) {
+            $thisArr =& $result[];
+            $cm["children"] = self::getCommentList($cm["id"], $thisArr);
+            $thisArr = $cm;
+        }
+        return $result;
     }
 
     /**
@@ -166,12 +217,10 @@ class CircleService
      */
     public static function saveComment($params)
     {
-      /*  $params['openid'] = Token::getCurrentTokenVar('nickName');
+        $params['openid'] = Token::getCurrentTokenVar('nickName');
         $params['nickName'] = Token::getCurrentTokenVar('nickName');
-        $params['avatarUrl'] = Token::getCurrentTokenVar('avatarUrl');*/
-        $params['openid'] = 1;
-        $params['nickName'] ='朱明良';
-        $params['avatarUrl'] = 'http://avatarUrl';
+        $params['avatarUrl'] = Token::getCurrentTokenVar('avatarUrl');
+        $params['zan'] = 0;
         $id = CircleCommentT::create($params);
         if (!$id) {
             throw new CircleException(['code' => 401,
@@ -184,45 +233,65 @@ class CircleService
     }
 
     /**
-     * 指定圈子阅读量加一
      * @param $id
+     * @throws CircleException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      */
-    private function incReadNum($id)
+    public static function zan($id)
     {
-        CircleT::where('id', $id)
-            ->inc('read_num');
+        if (!self::checkZan($id)) {
+            $zan_id = CommentZanT::create(['u_id' => Token::getCurrentUid(), 'c_id' => $id]);
+            if (!$zan_id) {
+                throw new CircleException(['code' => 401,
+                    'msg' => '添加用户点赞记录失败',
+                    'errorCode' => 160009
+                ]);
+
+                $up_id = CircleCommentT::where('id', $id)->inc('zan');
+                if (!$up_id) {
+                    throw new CircleException(['code' => 401,
+                        'msg' => '用户点赞失败',
+                        'errorCode' => 160010
+                    ]);
+                }
+            }
+
+            /* throw new CircleException(['code' => 401,
+                 'msg' => '用户已经点过赞',
+                 'errorCode' => 160009
+             ]);*/
+        }
+
 
     }
 
-    private static function getWhereOp()
+    /**
+     * 检测用是否已经评论
+     * @param $id
+     * @return float|string
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    private static function checkZan($id)
     {
-        $sql = '	province = "全部"
-OR ( province = "安徽省" AND city="全部")
-OR (province = "安徽省" AND city="铜陵市" AND area="全部")
-OR (province = "安徽省" AND city="铜陵市" AND area="铜官区")';
-        /*$whereOp = array();
-        $province = Token::getCurrentTokenVar('province');
-        $city = Token::getCurrentTokenVar('city');
-        $area = Token::getCurrentTokenVar('area');
-        if ($area != "全部") {
-            $whereOp['field'] = 'area';
-            $whereOp['value'] = $area;
-            return $whereOp;
-        }
+        $count = CommentZanT::where('c_id', $id)
+            ->where('u_id', Token::getCurrentUid())
+            ->count();
+        return $count;
 
-        if ($city != "全部") {
-            $whereOp['field'] = 'city';
-            $whereOp['value'] = $city;
-            return $whereOp;
-        }
 
-        if ($province != "全部") {
-            $whereOp['field'] = 'province';
-            $whereOp['value'] = $province;
-            return $whereOp;
-        }
+    }
 
-        throw new ParameterException();*/
+    /**
+     * 指定圈子阅读量加一
+     * @param $id
+     */
+    private
+    static function incReadNum($id)
+    {
+        CircleT::where('id', $id)
+            ->inc('read_num');
 
     }
 

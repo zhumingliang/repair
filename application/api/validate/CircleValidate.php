@@ -21,10 +21,13 @@ class CircleValidate extends BaseValidate
         'head_img' => 'require',
         'c_id' => 'require|isPositiveInteger',
         'id' => 'require|isPositiveInteger',
+        'page' => 'require|isPositiveInteger',
+        'size' => 'require|isPositiveInteger',
         'state' => 'require|isPositiveInteger|in:2,3',
         'top' => 'require|isPositiveInteger|in:2,1',
         'type' => 'require|isPositiveInteger|in:1,2',
         'parent_id' => 'require',
+
 
     ];
 
@@ -36,7 +39,8 @@ class CircleValidate extends BaseValidate
         'id' => ['id'],
         'set' => ['id', 'state'],
         'circle_save' => ['content', 'title', 'head_img', 'c_id'],
-        'comment_save' => ['content', 'parent_id', 'c_id']
+        'comment_save' => ['content', 'parent_id', 'c_id'],
+        'comments' => ['id', 'page', 'size']
     ];
 
 
