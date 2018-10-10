@@ -71,7 +71,7 @@ class UserToken extends Token
     private function grantToken($wxResult)
     {
 
-        $openid = $wxResult['openid'];
+        $openid = $wxResult['openId'];
         $user = UserModel::getByOpenID($openid);
         $u_id = $user['id'];
         if (!$user) {
