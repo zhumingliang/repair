@@ -4,13 +4,11 @@
 namespace app\api\service;
 
 
-use app\lib\enum\BookingReportEnum;
 use app\lib\exception\TokenException;
 use app\lib\exception\WeChatException;
 use app\api\model\UserT as UserModel;
 use think\facade\Cache;
 use zml\tp_tools\Curl;
-use zml\tp_tools\Redis;
 
 class UserToken extends Token
 {
