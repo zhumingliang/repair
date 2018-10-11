@@ -55,8 +55,19 @@ class Image extends BaseController
     public function upload()
     {
         $file = request()->file('file');
-        $name = ImageService::uploadImg($file);
-        return json(['name' => $name]);
+        $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/static/imgs';
+        if (!is_dir($path)) {
+            mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
+        }
+        //$name = guid();
+        $info = $file->move($path);
+        if($info){
+            return json(['name' => $info->getSaveName()]);
+        }else{
+            return json(['name' => $file->getError()]);
+        }
+
+
 
     }
 
