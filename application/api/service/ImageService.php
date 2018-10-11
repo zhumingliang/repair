@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\ImgT;
 use app\lib\enum\CommonEnum;
 use think\Exception;
 
@@ -39,6 +40,14 @@ class ImageService
             }
         }
         return $arr;
+    }
+
+    public static function getImageUrl($id)
+    {
+        $img = ImgT::where('id', $id)
+            ->find();
+        return $img->url;
+
     }
 
 

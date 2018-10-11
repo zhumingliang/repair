@@ -29,13 +29,13 @@ class Banner extends BaseController
      *       "des": "我是一号轮播图！"
      *       "url": "http://xxxxx"
      *       "category": 1
-     *       "img": "base64"
+     *       "img":1
      *     }
      * @apiParam (请求参数说明) {String} title    标题
      * @apiParam (请求参数说明) {String} des    轮播图内容
      * @apiParam (请求参数说明) {int} category    轮播图内容：管理员上传时：1 |  平台 ，2 | 外链；加盟商上传时：3 | 家政 ； 4 | 维修
      * @apiParam (请求参数说明) {String} url    图片外链地址：当category=2时，传入此参数，其余情况无需传入
-     * @apiParam (请求参数说明) {String} img    上传图片base64，当category=1，3，4时，传入此参数，其余情况无需传入
+     * @apiParam (请求参数说明) {String} img    上传图片id，当category=1，3，4时，传入此参数，其余情况无需传入
      *
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
@@ -111,7 +111,7 @@ class Banner extends BaseController
      * @apiParam (请求参数说明) {String} des    轮播图内容
      * @apiParam (请求参数说明) {int} category    轮播图内容：管理员上传时：1 |  平台 ，2 | 外链；加盟商上传时：3 | 家政 ； 4 | 维修
      * @apiParam (请求参数说明) {String} url    图片外链地址：当category=2时，传入此参数，其余情况无需传入
-     * @apiParam (请求参数说明) {String} img    上传图片base64，当category=1，3，4时，传入此参数，其余情况无需传入
+     * @apiParam (请求参数说明) {String} img    上传图片id，当category=1，3，4时，传入此参数，其余情况无需传入
      *
      * @return \think\response\Json
      * @throws BannerException

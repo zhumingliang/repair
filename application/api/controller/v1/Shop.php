@@ -37,7 +37,7 @@ class Shop extends BaseController
      * "area": "天河区",
      * "address": "石城大道",
      * "type": "1",
-     * "head_url": "dadasdsadfsfdasfasd",
+     * "head_url": 1,
      * "imgs": "1,2,3",
      * "id_number": "34272792931939123",
      * }
@@ -50,7 +50,7 @@ class Shop extends BaseController
      * @apiParam (请求参数说明) {String} address 详细地址
      * @apiParam (请求参数说明) {String} type 需求类别：1 | 维修；2 | 家政
      * @apiParam (请求参数说明) {String} imgs 商家资料图片id，多个用逗号隔开
-     * @apiParam (请求参数说明) {String} head_url 头像，base64
+     * @apiParam (请求参数说明) {String} head_url 头像id
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -123,7 +123,7 @@ class Shop extends BaseController
      * "area": "天河区",
      * "price": 500,
      * "unit": "次",
-     * "cover": "kdkmaskdmls;,ls;,",
+     * "cover": 1,
      * "des": "什么电脑都会修",
      * "extend": 1,
      * "imgs": "1,2,3",
@@ -134,7 +134,7 @@ class Shop extends BaseController
      * @apiParam (请求参数说明) {String} area 区
      * @apiParam (请求参数说明) {int} price 价格
      * @apiParam (请求参数说明) {String} unit 单位
-     * @apiParam (请求参数说明) {String} cover 封面图 base64
+     * @apiParam (请求参数说明) {String} cover 封面图id
      * @apiParam (请求参数说明) {int} extend 是否推广：1 | 推广；2 | 不推广
      * @apiParam (请求参数说明) {String} imgs 图片id，多个用逗号隔开
      * @apiSuccessExample {json} 返回样例:

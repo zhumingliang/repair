@@ -11,6 +11,7 @@ namespace app\api\service;
 
 use app\api\model\BannerMiniV;
 use app\api\model\BannerT;
+use app\api\model\ImgT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\BannerException;
@@ -37,7 +38,7 @@ class BannerService
         $params['type'] = $grade;
         $params['state'] = $state;
         if (isset($params['img'])) {
-            $params['url'] = base64toImg($params['img']);
+            $params['url'] = ImageService::getImageUrl($params['img']);
         }
         $id = BannerT::create($params);
         if (!$id) {
@@ -56,7 +57,7 @@ class BannerService
     {
 
         if (isset($params['img'])) {
-            $params['url'] = base64toImg($params['img']);
+            $params['url'] = ImageService::getImageUrl($params['img']);
         }
 
         $id = BannerT::update($params, ['id' => $params['id']]);

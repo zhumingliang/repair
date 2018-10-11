@@ -40,7 +40,8 @@ class ShopService
         Db::startTrans();
         try {
             $imgs = $params['imgs'];
-            $params['head_url'] = base64toImg($params['head_url']);
+            $params['head_url'] = ImageService::getImageUrl($params['head_url']);
+
             unset($params['imgs']);
             $obj = ShopT::create($params);
             if (!$obj) {
@@ -98,7 +99,7 @@ class ShopService
     {
         Db::startTrans();
         try {
-            $params['cover'] = base64toImg($params['cover']);
+            $params['cover'] = ImageService::getImageUrl($params['cover']);
             $params['state'] = CommonEnum::STATE_IS_OK;
             $extend = $params['extend'];
             $imgs = $params['imgs'];

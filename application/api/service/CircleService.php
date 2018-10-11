@@ -105,8 +105,9 @@ class CircleService
         $params['city'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('city');
         $params['area'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('area');
         $params['parent_id'] = Token::getCurrentTokenVar('grade') == UserEnum::USER_GRADE_JOIN ? Token::getCurrentUid() : Token::getCurrentTokenVar('parent_id');
+
         if (isset($params['head_img'])) {
-            $params['head_img'] = base64toImg($params['head_img']);
+            $params['head_img'] = ImageService::getImageUrl($params['head_img']);
         }
 
         $id = CircleT::create($params);

@@ -14,6 +14,7 @@ use app\api\model\CircleCategoryT;
 use app\api\model\CircleExamineT;
 use app\api\model\CircleT;
 use app\api\service\CircleService;
+use app\api\service\ImageService;
 use app\api\validate\CircleValidate;
 use app\api\validate\PagingParameter;
 use app\lib\enum\CommonEnum;
@@ -247,12 +248,12 @@ class Circle extends BaseController
      * @apiExample {post}  请求样例:
      * {
      * "title": "你的睡眠真的好吗？",
-     * "head_img": "base64",
+     * "head_img": 1,
      * "content": "每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？你知道吗，过短的休息时间有害身体，过长的休息也会对生命造成危害",
      * "c_id": 1
      * }
      * @apiParam (请求参数说明) {String} title 文章标题
-     * @apiParam (请求参数说明) {String} head_img 文章封面图
+     * @apiParam (请求参数说明) {String} head_img 文章封面图id
      * @apiParam (请求参数说明) {String} content 文章内容
      * @apiParam (请求参数说明) {int} c_id 分类id
      *
@@ -429,12 +430,12 @@ class Circle extends BaseController
      * {
      * "id": 1,
      * "title": "你的睡眠真的好吗？",
-     * "head_img": "base64",
+     * "head_img": 1,
      * "content": "每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？你知道吗，过短的休息时间有害身体，过长的休息也会对生命造成危害",
      * "c_id": 1
      * }
      * @apiParam (请求参数说明) {String} title 文章标题
-     * @apiParam (请求参数说明) {String} head_img 文章封面图
+     * @apiParam (请求参数说明) {String} head_img 文章封面图id
      * @apiParam (请求参数说明) {String} content 文章内容
      * @apiParam (请求参数说明) {int} c_id 分类id
      *
@@ -452,7 +453,7 @@ class Circle extends BaseController
         $params = $this->request->param();
         $circle_id = $params['id'];
         if (isset($params['head_img'])) {
-            $params['head_img'] = base64toImg($params['head_img']);
+            $params['head_img'] = ImageService::getImageUrl($params['head_img']);
         }
         $id = CircleT::update($params, ['id', $circle_id]);
         if (!$id) {
