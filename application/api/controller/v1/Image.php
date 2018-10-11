@@ -65,7 +65,11 @@ class Image extends BaseController
         }
         $info = $file->move($path);
         if ($info) {
-            $img = ImgT::create(['url' => $path . '/' . $info->getSaveName()]);
+            $img = ImgT::create(
+                [
+                    'url' => 'static/imgs' . '/' . $info->getSaveName(),
+                    'state' => CommonEnum::STATE_IS_OK]
+            );
             if (!$img) {
                 throw new ImageException();
             }

@@ -42,15 +42,14 @@ class Token extends Controller
      * @apiSuccess (返回参数说明) {int} username 管理员名称
      * @apiSuccess (返回参数说明) {int} username 管理员名称
      * @apiSuccess (返回参数说明) {String} token 口令令牌，每次请求接口需要传入，有效期 2 hours
-
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      * @throws \think\Exception
      */
     public function getAdminToken()
     {
-        $phone=$this->request->param('phone');
-        $pwd=$this->request->param('pwd');
+        $phone = $this->request->param('phone');
+        $pwd = $this->request->param('pwd');
         (new TokenGet())->scene('pc')->goCheck();
         $at = new AdminToken($phone, $pwd);
         $token = $at->get();
@@ -107,11 +106,16 @@ class Token extends Controller
 
         //print_r($user);
 
-         (new TokenGet())->scene('wx')->goCheck();
-         $ut = new UserToken($code);
-         $token = $ut->get();
-         return json($token);
+        (new TokenGet())->scene('wx')->goCheck();
+        $ut = new UserToken($code);
+        $token = $ut->get();
+        return json($token);
 
+    }
+
+    public function getVillageToken()
+    {
+        
     }
 
 
