@@ -26,7 +26,7 @@ class ShopValidate extends BaseValidate
         'head_url' => 'require',
         'id' => 'require|isPositiveInteger',
         's_id' => 'require|isPositiveInteger',
-        'c_id' => 'require|isPositiveInteger',
+        'c_id' => 'require',
         'page' => 'require|isPositiveInteger',
         'size' => 'require|isPositiveInteger',
         'state' => 'require|isPositiveInteger|in:2,3',

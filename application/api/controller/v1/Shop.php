@@ -241,7 +241,7 @@ class Shop extends BaseController
      * @apiDescription  小程序首页家政/维修模块/服务排行获取服务列表（服务排行时获取对应的数据为10条：page=1;size=10）
      *
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/service/mini/list?id=5&page=1&size=15&area=铜官区&type=1&c_id=1
+     * https://mengant.cn/api/v1/service/mini/list?&page=1&size=15&area=铜官区&type=1&c_id=1
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiParam (请求参数说明) {String} area 用户地址位置--区

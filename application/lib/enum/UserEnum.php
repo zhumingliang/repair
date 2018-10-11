@@ -18,6 +18,9 @@ class UserEnum
     //加盟商
     const USER_GRADE_JOIN = 2;
 
+    //小区管理员
+    const USER_GRADE_VILLAGE = 3;
+
 
     //账号正常
     const USER_STATE_OK = 1;

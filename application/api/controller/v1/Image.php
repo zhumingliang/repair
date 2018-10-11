@@ -53,6 +53,7 @@ class Image extends BaseController
 
 
     /**
+     * 小程序推送图片
      * @return \think\response\Json
      * @throws ImageException
      */

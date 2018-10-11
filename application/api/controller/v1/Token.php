@@ -115,7 +115,12 @@ class Token extends Controller
 
     public function getVillageToken()
     {
-        
+        $phone = $this->request->param('phone');
+        $pwd = $this->request->param('pwd');
+        (new TokenGet())->scene('pc')->goCheck();
+        $at = new AdminToken($phone, $pwd);
+        $token = $at->get();
+        return json($token);
     }
 
 
