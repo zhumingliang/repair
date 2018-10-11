@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\ImgT;
+use app\api\service\ImageService;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\ImageException;
 
@@ -37,6 +38,8 @@ class Image extends BaseController
      */
     public function save($img)
     {
+
+
         $param['url'] = base64toImg($img);
         $param['state'] = CommonEnum::STATE_IS_OK;
         $obj = ImgT::create($param);
@@ -45,6 +48,15 @@ class Image extends BaseController
         }
 
         return json(['id' => $obj->id]);
+
+    }
+
+
+    public function upload()
+    {
+        $file = request()->file('file');
+        $name = ImageService::uploadImg($file);
+        return json(['name' => $name]);
 
     }
 

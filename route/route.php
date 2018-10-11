@@ -22,7 +22,8 @@ Route::get('api/:version/token/user', 'api/:version.Token/getUserToken');
 //Route::get('api/:version/token/userInfo', 'api/:version.Token/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 
-Route::post('api/:version/image/save', 'api/:version.Image/save');
+Route::rule('api/:version/image/save', 'api/:version.Image/save');
+Route::rule('api/:version/image/upload', 'api/:version.Image/upload');
 
 Route::post('api/:version/demand/save', 'api/:version.Demand/save');
 
