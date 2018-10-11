@@ -29,6 +29,7 @@ Route::post('api/:version/demand/save', 'api/:version.Demand/save');
 
 Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
+Route::get('api/:version/shop/info', 'api/:version.Shop/shopInfo');
 Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
 Route::post('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
 Route::post('api/:version/service/booking', 'api/:version.Shop/bookingService');

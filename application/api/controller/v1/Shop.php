@@ -74,14 +74,14 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/shop/handel  7-商铺申请审核
-     * @apiGroup  CMS
+     * @api {GET} /api/v1/shop/handel  7-商铺状态操作
+     * @apiGroup  COMMON
      * @apiVersion 1.0.1
-     * @apiDescription  管理员审核商铺申请：同意或者拒绝
+     * @apiDescription  管理员审核商铺申请：同意或者拒绝;审核通过之后，商家确认操作
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/shop/handel?id=1&state=2
      * @apiParam (请求参数说明) {int} id  申请id
-     * @apiParam (请求参数说明) {int} state  申请操作：2 | 同意；3 | 拒绝
+     * @apiParam (请求参数说明) {int} state  申请操作：2 | 同意；3 | 拒绝；4 | 审核通过之后，商家确认操作
      *
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
@@ -265,6 +265,46 @@ class Shop extends BaseController
         $params = $this->request->param();
         return json(ServiceListV::getList($params['area'], $params['page'],
             $params['size'], $params['c_id'], $params['type']));
+    }
+
+    /**
+     * @api {GET} /api/v1/shop/info 69-小程序商家查看店铺状态并获取数据（点击商家入驻）
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  商家点击商家入驻，显示店铺申请状态和获取信息（接口返回数据如果为null，则没有申请店铺）
+     *
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shop/info
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":1,"type":1,"name":"修之家","address":"","province":"安徽省","city":"铜陵市","area":"铜官区","phone":"1895622530","phone_sub":"","id_number":"","head_url":"http:\/\/repair.com\/","state":1,"imgs":[{"img_id":1,"img_url":{"url":"http:\/\/repair.com\/1212"}},{"img_id":2,"img_url":{"url":"http:\/\/repair.com\/121"}}]}
+     * @apiSuccess (返回参数说明) {int} id 店铺id
+     * @apiSuccess (返回参数说明) {String} name 店铺名称
+     * @apiSuccess (返回参数说明) {String} phone 商家手机号
+     * @apiSuccess (返回参数说明) {String} phone 备用号码
+     * @apiSuccess (返回参数说明) {String} province 省
+     * @apiSuccess (返回参数说明) {String} city 市
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} address 详细地址
+     * @apiSuccess (返回参数说明) {String} type 需求类别：1 | 维修；2 | 家政
+     * @apiSuccess (返回参数说明) {String} imgs 商家资料图片
+     * @apiSuccess (返回参数说明) {String} head_url 头像
+     * @apiSuccess (返回参数说明) {int} state 店铺状态：1 | 申请中 ； 2 | 已审核; 4 | 审核通过并确认
+     *
+     * @return \think\response\Json
+     */
+    public function shopInfo()
+    {
+        $info = ShopService::getShopInfo();
+        return json($info);
+
+    }
+
+    /**
+     * 上传商家员工头像
+     */
+    public function shopStaff()
+    {
+
     }
 
 

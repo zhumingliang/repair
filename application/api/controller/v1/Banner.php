@@ -220,7 +220,8 @@ class Banner extends BaseController
      * http://mengant.cn/api/v1/banner?id=1
      * @apiParam (请求参数说明) {int} id  轮播图id
      * @apiSuccessExample {json} 返回样例:
-     * {"id":1,"title":"一号轮播图","des":"我是一号轮播图！","url":"http:\/\/repair.com\/static\/imgs\/7CDCF0B5-A028-297D-C8A9-D10B97B8ADD6.jpg","category":1,"state":2}     * @apiSuccess (返回参数说明) {String} title    标题
+     * {"id":1,"title":"一号轮播图","des":"我是一号轮播图！","url":"http:\/\/repair.com\/static\/imgs\/7CDCF0B5-A028-297D-C8A9-D10B97B8ADD6.jpg","category":1,"state":2}
+     * @apiSuccess (返回参数说明) {String} title    标题
      * @apiSuccess (返回参数说明) {String} des    轮播图内容
      * @apiSuccess (返回参数说明) {int} category    轮播图内容：管理员上传时：1 |  平台 ，2 | 外链；加盟商上传时：3 | 家政 ； 4 | 维修
      * @apiSuccess (返回参数说明) {String} url    图片外链地址：当category=2时，传入此参数，其余情况无需传入

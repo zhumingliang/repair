@@ -13,6 +13,8 @@ use app\api\model\AdminT;
 use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
 use think\Exception;
+use think\facade\Cache;
+use think\facade\Request;
 
 class VillageToken
 {
@@ -60,15 +62,8 @@ class VillageToken
                 ]);
             }
 
-            /**
-             * 获取缓存参数
-             */
-            $cachedValue = $this->prepareCachedValue($admin);
-            /**
-             * 缓存数据
-             */
-            $token = $this->saveToCache('', $cachedValue);
-            return $token;
+            $parent_id = $admin->parent_id;
+            $this->updateCache($parent_id);
 
         } catch (Exception $e) {
             throw $e;
@@ -76,13 +71,27 @@ class VillageToken
 
     }
 
-
-    private function getJoin($parent_id)
+    /**
+     * @param $parent_id
+     * @throws Exception
+     * @throws TokenException
+     */
+    private function updateCache($parent_id)
     {
-        $admin = AdminT::where('phone', '=', $this->phone)
-            ->with('adminJoin')
-            ->find();
+        $cache = Token::getCurrentTokenVar();
+        $cache = json_decode($cache, true);
 
+        $cache['parent_id'] = $parent_id;
+
+        $cache = json_encode($cache);
+        $token = Request::header('token');
+        // $result = Redis::instance()->set($token, $cache, config('setting.token_expire_in'));
+        $result = Cache::remember($token, $cache, config('setting.token_expire_in'));
+        if (!$result) {
+            throw new TokenException(['msg' => '数据缓存失败',
+                'errorCode' => 20002]);
+        }
     }
+
 
 }

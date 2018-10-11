@@ -18,6 +18,7 @@ use app\api\model\ServicesImgT;
 use app\api\model\ServicesT;
 use app\api\model\ShopImgT;
 use app\api\model\ShopT;
+use app\api\validate\TokenGet;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\ShopException;
 use think\Db;
@@ -308,6 +309,15 @@ class ShopService
         }
         $dis = $city_dis ? $city_dis : $plate_dis;
         return ($service->price) * (1 - $dis / 100);
+
+    }
+
+
+    public static function getShopInfo()
+    {
+        $u_id = Token::getCurrentUid();
+        $info = ShopT::getShopInfo($u_id);
+        return $info;
 
     }
 

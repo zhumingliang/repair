@@ -29,7 +29,6 @@ class ServiceListV extends BaseModel
             ->hidden(['type','province','city','c_id','shop_name'])
             ->order('sell_num desc,sell_money desc')
             ->paginate($size, false, ['page' => $page]);
-
         return $pagingData;
 
     }

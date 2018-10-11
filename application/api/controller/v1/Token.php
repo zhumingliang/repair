@@ -113,14 +113,35 @@ class Token extends Controller
 
     }
 
+    /**
+     * @api {GET} /api/v1/token/admin  68-小程序用户登录小区管理员
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户登录小区管理员
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "phone": "18956225230",
+     *       "pwd": "a123456"
+     *     }
+     * @apiParam (请求参数说明) {String} phone    用户手机号
+     * @apiParam (请求参数说明) {String} pwd   用户密码
+     * @apiSuccessExample {json} 返回样例:
+     *{"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
+     * @apiSuccess (返回参数说明) {String} msg 信息描述
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \think\Exception
+     */
     public function getVillageToken()
     {
         $phone = $this->request->param('phone');
         $pwd = $this->request->param('pwd');
         (new TokenGet())->scene('pc')->goCheck();
         $at = new AdminToken($phone, $pwd);
-        $token = $at->get();
-        return json($token);
+        $at->get();
+        return json(new SuccessMessage());
     }
 
 
