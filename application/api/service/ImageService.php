@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\lib\enum\CommonEnum;
+use think\Exception;
 
 class ImageService
 {
@@ -43,15 +44,20 @@ class ImageService
 
     public static function uploadImg($file)
     {
-        $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/static/imgs';
-        if (!is_dir($path)) {
-            mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
+        try{
+            $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/static/imgs';
+            if (!is_dir($path)) {
+                mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
+            }
+            $name = guid();
+            $imgUrl = $path . '/' . $name . '.jpg';
+            $a = file_put_contents($imgUrl, $file);
+            $imgUrl2 = 'static/imgs/' . $name . '.jpg';
+            return $a ? $imgUrl2 : '';
+        }catch (Exception $e){
+            return $e->getMessage();
         }
-        $name = guid();
-        $imgUrl = $path . '/' . $name . '.jpg';
-        $a = file_put_contents($imgUrl, $file);
-        $imgUrl2 = 'static/imgs/' . $name . '.jpg';
-        return $a ? $imgUrl2 : '';
+
 
 
     }
