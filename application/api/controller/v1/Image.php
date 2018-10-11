@@ -52,6 +52,10 @@ class Image extends BaseController
     }
 
 
+    /**
+     * @return \think\response\Json
+     * @throws ImageException
+     */
     public function upload()
     {
         $file = request()->file('file');
@@ -59,15 +63,17 @@ class Image extends BaseController
         if (!is_dir($path)) {
             mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
         }
-        //$name = guid();
         $info = $file->move($path);
-        if($info){
-            return json(['name' => $info->getSaveName()]);
-        }else{
-            return json(['name' => $file->getError()]);
+        if ($info) {
+            $img = ImgT::create(['url' => $path . '/' . $info->getSaveName()]);
+            if (!$img) {
+                throw new ImageException();
+            }
+            return json(['id' => $img->id]);
+
+        } else {
+            throw new ImageException();
         }
-
-
 
     }
 
