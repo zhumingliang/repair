@@ -44,6 +44,7 @@ class ImageService
 
     public static function uploadImg($file)
     {
+        var_dump($file);
         try{
             $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/static/imgs';
             if (!is_dir($path)) {
@@ -52,6 +53,7 @@ class ImageService
             $name = guid();
             $imgUrl = $path . '/' . $name . '.jpg';
             $a = file_put_contents($imgUrl, $file);
+
             $imgUrl2 = 'static/imgs/' . $name . '.jpg';
             return $a ? $imgUrl2 : '';
         }catch (Exception $e){
