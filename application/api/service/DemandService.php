@@ -12,6 +12,7 @@ namespace app\api\service;
 use app\api\model\DemandImgT;
 use app\api\model\DemandT;
 use app\api\model\DemandV;
+use app\api\model\UserT;
 use app\lib\exception\DemandException;
 use think\Db;
 use think\Exception;
@@ -81,6 +82,7 @@ class DemandService
     {
         $list = DemandV::getList($params['province'], $params['city'], $params['area'], $params['page'], $params['size']);
         $list['data'] = self::preListData($list['data'], $params['latitude'], $params['longitude']);
+        $list['grade'] = self::getuserGrade();
         return $list;
 
     }
@@ -113,7 +115,6 @@ class DemandService
      */
     private static function getDistance($lat1, $lng1, $lat2, $lng2, $radius = 6378.137)
     {
-
         $rad = floatval(M_PI / 180.0);
         $lat1 = floatval($lat1) * $rad;
         $lon1 = floatval($lng1) * $rad;
@@ -126,7 +127,15 @@ class DemandService
         }
         $dist = $dist * $radius;
         return round($dist, 1);
+    }
 
-
+    private static function getuserGrade()
+    {
+        $u_id = Token::getCurrentUid();
+        $user = UserT::with('shop')->where('id', $u_id)->find();
+        if (isset($user->shop) && ($user->shop->state == 2)) {
+            return 2;
+        }
+        return 1;
     }
 }
