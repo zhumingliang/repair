@@ -11,6 +11,7 @@ namespace app\api\service;
 
 use app\api\model\CircleCategoryT;
 use app\api\model\CircleCommentT;
+use app\api\model\CircleCommentV;
 use app\api\model\CircleExamineT;
 use app\api\model\CircleT;
 use app\api\model\CommentZanT;
@@ -170,11 +171,13 @@ class CircleService
     public static function comments($params)
     {
 
+        $list=CircleCommentV::getList($params['page'], $params['size'], $params['id']);
+        return $list;
 
-        //获取评论信息
+      /*  //获取评论信息
         $list = CircleCommentT::getList($params['page'], $params['size'], $params['id']);
         $list['data'] = self::preComments($list['data']);
-        return $list;
+        return $list;*/
 
     }
 
