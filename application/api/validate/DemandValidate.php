@@ -18,11 +18,19 @@ class DemandValidate extends BaseValidate
         'city' => 'require',
         'area' => 'require',
         'address' => 'require',
+        'longitude' => 'require',
+        'latitude' => 'require',
         'time_begin' => 'require',
         'time_end' => 'require',
         'money' => 'require|isPositiveInteger',
         'type' => 'require|in:1,2',
         'imgs' => 'require'
+    ];
+
+    protected $scene = [
+        'save' => ['name', 'phone','province', 'city','area', 'address',
+            'longitude', 'latitude','time_begin', 'time_end','money','type','imgs'],
+        'handel' => ['id', 'state']
     ];
 
 }

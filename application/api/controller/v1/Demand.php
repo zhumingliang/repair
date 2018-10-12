@@ -33,6 +33,8 @@ class Demand extends BaseController
      * "city": "广州市",
      * "area": "天河区",
      * "address": "石城大道",
+     * "longitude": "1298281.12131",
+     * "latitude": "21312.1212",
      * "time_begin": "23:02:40",
      * "time_end": "23:02:43",
      * "money": "10000",
@@ -46,6 +48,8 @@ class Demand extends BaseController
      * @apiParam (请求参数说明) {String} city 市
      * @apiParam (请求参数说明) {String} area 区
      * @apiParam (请求参数说明) {String} address 详细地址
+     * @apiParam (请求参数说明) {String} longitude 经度
+     * @apiParam (请求参数说明) {String} latitude 纬度
      * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {String} time_end 结束时间
      * @apiParam (请求参数说明) {int} money 金额，标准单位为分
@@ -63,13 +67,19 @@ class Demand extends BaseController
      */
     public function save()
     {
-        (new DemandValidate())->goCheck();
+        (new DemandValidate())->scene('save')->goCheck();
         $u_id = TokenService::getCurrentUid();
         $params = $this->request->param();
         $params['u_id'] = $u_id;
         $params['state'] = CommonEnum::STATE_IS_OK;
         DemandService::save($params);
         return json(new  SuccessMessage());
+
+    }
+
+    public function getList()
+    {
+
 
     }
 

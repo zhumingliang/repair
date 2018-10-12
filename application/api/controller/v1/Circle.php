@@ -580,7 +580,8 @@ class Circle extends BaseController
      * @apiParam (请求参数说明) {int} size   每页数据条数
      * @apiParam (请求参数说明) {int} c_id   圈子文章id
      * @apiSuccessExample {json} 返回样例:
-     * {"total":1,"per_page":"5","current_page":1,"last_page":1,"data":[{"id":1,"parent_id":0,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1","create_time":"2018-10-10 18:53:41","children":[{"id":3,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-2","create_time":"2018-10-10 23:13:07","children":null},{"id":2,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-1","create_time":"2018-10-10 23:13:00","children":[{"id":4,"parent_id":2,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a2-1","create_time":"2018-10-10 23:13:16","children":null}]}]}]}     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * {"total":1,"per_page":"5","current_page":1,"last_page":1,"data":[{"id":1,"parent_id":0,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1","create_time":"2018-10-10 18:53:41","children":[{"id":3,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-2","create_time":"2018-10-10 23:13:07","children":null},{"id":2,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-1","create_time":"2018-10-10 23:13:00","children":[{"id":4,"parent_id":2,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a2-1","create_time":"2018-10-10 23:13:16","children":null}]}]}]}
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
