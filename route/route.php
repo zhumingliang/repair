@@ -26,6 +26,8 @@ Route::rule('api/:version/image/save', 'api/:version.Image/save');
 Route::rule('api/:version/image/upload', 'api/:version.Image/upload');
 
 Route::rule('api/:version/demand/save', 'api/:version.Demand/save');
+Route::rule('api/:version/demand/handel', 'api/:version.Demand/handel');
+Route::get('api/:version/demand/list', 'api/:version.Demand/getList');
 
 Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');

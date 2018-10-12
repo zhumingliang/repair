@@ -11,6 +11,7 @@ namespace app\api\service;
 
 use app\api\model\DemandImgT;
 use app\api\model\DemandT;
+use app\api\model\DemandV;
 use app\lib\exception\DemandException;
 use think\Db;
 use think\Exception;
@@ -76,4 +77,56 @@ class DemandService
     }
 
 
+    public static function getList($params)
+    {
+        $list = DemandV::getList($params['province'], $params['city'], $params['area'], $params['page'], $params['size']);
+        $list['data'] = self::preListData($list['data'], $params['latitude'], $params['longitude']);
+        return $list;
+
+    }
+
+
+    private static function preListData($list, $lat, $lng)
+    {
+        if (!count($list)) {
+            return $list;
+        }
+        foreach ($list as $k => $v) {
+            $lat1 = $v['latitude'];
+            $ln1 = $v['longitude'];
+            $list[$k]['distance'] = self::getDistance($lat1, $ln1, $lat, $lng);
+        }
+
+        return $list;
+
+    }
+
+
+    /**
+     *计算两经纬度之间的距离
+     * @param $lat1
+     * @param $lng1
+     * @param $lat2
+     * @param $lng2
+     * @param float $radius
+     * @return float
+     */
+    private static function getDistance($lat1, $lng1, $lat2, $lng2, $radius = 6378.137)
+    {
+
+        $rad = floatval(M_PI / 180.0);
+        $lat1 = floatval($lat1) * $rad;
+        $lon1 = floatval($lng1) * $rad;
+        $lat2 = floatval($lat2) * $rad;
+        $lon2 = floatval($lng2) * $rad;
+        $theta = $lon2 - $lon1;
+        $dist = acos(sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($theta));
+        if ($dist < 0) {
+            $dist += M_PI;
+        }
+        $dist = $dist * $radius;
+        return round($dist, 1);
+
+
+    }
 }
