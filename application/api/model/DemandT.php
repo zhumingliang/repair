@@ -13,6 +13,12 @@ use think\Model;
 
 class DemandT extends Model
 {
+    public function imgs()
+    {
+        return $this->hasMany('DemandImgT',
+            'd_id', 'id');
+    }
+
 
 
 }

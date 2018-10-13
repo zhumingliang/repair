@@ -27,7 +27,8 @@ class Comment extends BaseController
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiParam (请求参数说明) {int} id 服务id
      * @apiSuccessExample {json} 返回样例:
-     * {"total":1,"per_page":"15","current_page":1,"last_page":1,"data":[{"content":"这次服务很满意","create_time":"2018-10-08 00:11:56","imgs":[{"c_id":1,"img_id":1,"img_url":{"url":"http:\/\/repair.com\/1212"}},{"c_id":1,"img_id":2,"img_url":{"url":"http:\/\/repair.com\/121"}}],"user":{"id":1,"nickName":"盟蚁","avatarUrl":""}}]}     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * {"total":1,"per_page":"15","current_page":1,"last_page":1,"data":[{"content":"这次服务很满意","create_time":"2018-10-08 00:11:56","imgs":[{"c_id":1,"img_id":1,"img_url":{"url":"http:\/\/repair.com\/1212"}},{"c_id":1,"img_id":2,"img_url":{"url":"http:\/\/repair.com\/121"}}],"user":{"id":1,"nickName":"盟蚁","avatarUrl":""}}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {String} content 评论内容

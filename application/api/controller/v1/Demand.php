@@ -54,7 +54,7 @@ class Demand extends BaseController
      * @apiParam (请求参数说明) {String} latitude 纬度
      * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {String} time_end 结束时间
-     * @apiParam (请求参数说明) {int} money 金额，标准单位为分
+     * @apiParam (请求参数说明) {int} origin_money 金额，标准单位为分
      * @apiParam (请求参数说明) {String} type 需求类别：1 | 维修；2 | 家政
      * @apiParam (请求参数说明) {String} imgs 图片id，多个用逗号隔开
      * @apiSuccessExample {json} 返回样例:
@@ -72,13 +72,13 @@ class Demand extends BaseController
         (new DemandValidate())->scene('save')->goCheck();
         $u_id = TokenService::getCurrentUid();
         $params = $this->request->param();
+        $params['actual_money'] = $params['origin_money'];
         $params['u_id'] = $u_id;
         $params['state'] = CommonEnum::STATE_IS_OK;
         DemandService::save($params);
         return json(new  SuccessMessage());
 
     }
-
 
     /**
      * @api {POST} /api/v1/demand/handel  70-小程序用户取消需求订单
@@ -111,7 +111,6 @@ class Demand extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/demand/list 71-小程序用户获取需求大厅类列表
      * @apiGroup  MINI
@@ -124,7 +123,6 @@ class Demand extends BaseController
      * @apiParam (请求参数说明) {String} area 区
      * @apiParam (请求参数说明) {String} longitude 经度
      * @apiParam (请求参数说明) {String} latitude 纬度
-     * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json} 返回样例:
@@ -146,6 +144,52 @@ class Demand extends BaseController
         $params = $this->request->param();
         $list = DemandService::getList($params);
         return json($list);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/demand 72-小程序用户指定需求信息
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户指定需求信息
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/demand?id=1
+     * @apiParam (请求参数说明) {int} id 需求id
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":1,"name":"朱明良","phone":"18956225230","des":"修马桶","province":"安徽省","city":"铜陵市","area":"铜官山区","address":"高速","time_begin":"2018-10-01 08:00:00","time_end":"2018-10-01 12:00:00","origin_money":800,"imgs":[{"d_id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"d_id":1,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"d_id":1,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]}
+     * @apiSuccess (返回参数说明) {String} name 发布人
+     * @apiSuccess (返回参数说明) {String} phone 联系方式
+     * @apiSuccess (返回参数说明) {String} des 需求描述
+     * @apiSuccess (返回参数说明) {String} province 省
+     * @apiSuccess (返回参数说明) {String} city 市
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} address 详细地址
+     * @apiSuccess (返回参数说明) {int} origin_money 酬金
+     * @apiSuccess (返回参数说明) {String} time_begin 开始时间
+     * @apiSuccess (返回参数说明) {String} time_end 结束时间
+     * @apiSuccess (返回参数说明) {Obj} imgs 图片对象
+     * @apiSuccess (返回参数说明) {String} url 图片地址
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getTheDemand()
+    {
+        (new DemandValidate())->scene('handel')->goCheck();
+        $id = $this->request->param('id');
+        $demand = DemandT::with([
+            'imgs' => function ($query) {
+                $query->with(['imgUrl'])
+                    ->where('state', '=', 1);
+            }])
+            ->where('id', $id)
+            ->hidden(['create_time', 'type', 'update_time', 'u_id', 'longitude', 'state', 'latitude', 'actual_money'])
+            ->find();
+        return json($demand);
+
 
     }
 

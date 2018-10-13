@@ -299,6 +299,7 @@ class Shop extends BaseController
 
     }
 
+
     /**
      * 上传商家员工头像
      */

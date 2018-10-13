@@ -171,13 +171,13 @@ class CircleService
     public static function comments($params)
     {
 
-        $list=CircleCommentV::getList($params['page'], $params['size'], $params['id']);
+        $list = CircleCommentV::getList($params['page'], $params['size'], $params['id']);
         return $list;
 
-      /*  //获取评论信息
-        $list = CircleCommentT::getList($params['page'], $params['size'], $params['id']);
-        $list['data'] = self::preComments($list['data']);
-        return $list;*/
+        /*  //获取评论信息
+          $list = CircleCommentT::getList($params['page'], $params['size'], $params['id']);
+          $list['data'] = self::preComments($list['data']);
+          return $list;*/
 
     }
 
@@ -238,6 +238,7 @@ class CircleService
 
     /**
      * @param $id
+     * @return int
      * @throws CircleException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -261,11 +262,10 @@ class CircleService
                 }
             }
 
-            /* throw new CircleException(['code' => 401,
-                 'msg' => '用户已经点过赞',
-                 'errorCode' => 160009
-             ]);*/
+            return 1;
         }
+
+        return 2;
 
 
     }
