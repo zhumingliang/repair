@@ -213,8 +213,8 @@ class CircleService
     }
 
     /**
-     * 圈子评论
      * @param $params
+     * @return mixed
      * @throws CircleException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -233,6 +233,8 @@ class CircleService
             ]);
 
         }
+
+        return id;
 
     }
 

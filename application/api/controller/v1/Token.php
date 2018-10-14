@@ -89,12 +89,12 @@ class Token extends Controller
      * @apiParam (请求参数说明) {String} code    小程序code
      *
      * @apiSuccessExample {json} 返回样例:
-     *{"token":"f4ad56e55cad93833180186f22586a08","type":1}
+     *{"token":"f4ad56e55cad93833180186f22586a08","type":1,"shop_id":1}
      * @apiSuccess (返回参数说明) {Sting} token 口令令牌，每次请求接口需要传入，有效期 2 hours
      * @apiSuccess (返回参数说明) {int} type 数据库是否缓存小程序用户信息
+     * @apiSuccess (返回参数说明) {int} shop_id 店铺id，店铺上传商家员工图片时，需要携带此参数
      * type=1时，表示已缓存
      * type=2 表示没有缓存数据，需要请求userInfo接口
-     *
      * @param string $code
      * @return \think\response\Json
      * @throws \app\lib\exception\TokenException

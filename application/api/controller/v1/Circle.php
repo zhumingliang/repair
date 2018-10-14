@@ -551,9 +551,8 @@ class Circle extends BaseController
      * @apiParam (请求参数说明) {int}  c_id 圈子文章id
      *
      * @apiSuccessExample {json} 返回样例:
-     * {"msg": "ok","error_code": 0}
-     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
-     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * {"id": 1}
+     * @apiSuccess (返回参数说明) {int} id 评论id
      *
      * @return \think\response\Json
      * @throws CircleException
@@ -565,8 +564,9 @@ class Circle extends BaseController
     {
         (new CircleValidate())->scene('comment_save')->goCheck();
         $params = $this->request->param();
-        CircleService::saveComment($params);
-        return json(new SuccessMessage());
+        $id = CircleService::saveComment($params);
+
+        return json(['id' => $id]);
     }
 
     /**

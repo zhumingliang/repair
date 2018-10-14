@@ -131,3 +131,30 @@ OR (province = "' . $province . '" AND city="' . $city . '" AND area="' . $area 
     return $sql;
 
 }
+
+
+function preJoinSqlForGetDShops($province, $city, $area)
+{
+    $sql = '';
+    if ($province == "全部") {
+        return $sql;
+    } else {
+        $sql .= 'province = "' . $province . '"';
+
+        if ($city == "全部") {
+            return $sql;
+        } else {
+            $sql .= ' AND city="' . $city . '"';
+
+            if ($area == "全部") {
+                return $sql;
+            } else {
+                $sql .= ' AND area="' . $area . '"';
+
+            }
+
+        }
+    }
+    return $sql;
+
+}

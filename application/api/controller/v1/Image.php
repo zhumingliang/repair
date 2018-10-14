@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\ImgT;
 use app\api\service\ImageService;
+use app\api\validate\ImageValidate;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\ImageException;
 
@@ -53,33 +54,45 @@ class Image extends BaseController
 
 
     /**
-     * 小程序推送图片
-     * @return \think\response\Json
-     * @throws ImageException
+     * @api {POST} /api/v1/image/upload  72-接受小程序推送图片并保存
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiSuccessExample {json} 返回样例:
+     *{"id":17}
+     * @apiSuccess (返回参数说明) {int} id 图片id
+     * @throws \app\lib\exception\ParameterException
      */
     public function upload()
     {
+        (new ImageValidate())->goCheck();
         $file = request()->file('file');
-        $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/static/imgs';
-        if (!is_dir($path)) {
-            mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
-        }
-        $info = $file->move($path);
-        if ($info) {
-            $img = ImgT::create(
-                [
-                    'url' => 'static/imgs' . '/' . $info->getSaveName(),
-                    'state' => CommonEnum::STATE_IS_OK]
-            );
-            if (!$img) {
-                throw new ImageException();
-            }
-            return json(['id' => $img->id]);
+        $res = ImageService::saveImageFromWX($file);
+        return json([
+            'id' => $res
+        ]);
+    }
 
-        } else {
-            throw new ImageException();
-        }
+
+    /**
+     * @api {POST} /api/v1/image/search  73-接受小程序小区管理员推送图片并识别订单
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiSuccessExample {json} 返回样例:
+     *{"id":17}
+     * @apiSuccess (返回参数说明) {int} id 图片id
+     */
+    public function search()
+    {
+        //(new ImageValidate())->goCheck();
+        $file = request()->file('file');
+        $city = $this->request->param('city');
+        $orders = ImageService::staffSearch($file, md5($city));
+        return json($orders);
+
 
     }
+
 
 }

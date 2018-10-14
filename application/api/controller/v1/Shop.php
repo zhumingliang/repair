@@ -19,6 +19,7 @@ use  app\api\service\Token as TokenService;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\ShopException;
 use app\lib\exception\SuccessMessage;
+use think\Validate;
 
 class Shop extends BaseController
 {
@@ -188,7 +189,7 @@ class Shop extends BaseController
 
     }
 
-    /**Pay.php
+    /**
      * @api {POST} /api/v1/service/booking  42-用户预约商家服务
      * @apiGroup  MINI
      * @apiVersion 1.0.1
@@ -291,6 +292,8 @@ class Shop extends BaseController
      * @apiSuccess (返回参数说明) {int} state 店铺状态：1 | 申请中 ； 2 | 已审核; 4 | 审核通过并确认
      *
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      */
     public function shopInfo()
     {
@@ -299,12 +302,143 @@ class Shop extends BaseController
 
     }
 
+    /**
+     * @api {POST} /api/v1/shop/update  74-修改店铺信息
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户修改店铺信息
+     * @apiExample {post}  请求样例:
+     * {
+     * "id": 1,
+     * "name": "维修小铺",
+     * "phone": "18956225230",
+     * "province": "广东省",
+     * "city": "广州市",
+     * "area": "天河区",
+     * "des": "提供最好的服务",
+     * "staffs": "1,2,3",
+     * }
+     * @apiParam (请求参数说明) {int} id 店铺id
+     * @apiParam (请求参数说明) {String} name 店铺名称
+     * @apiParam (请求参数说明) {String} phone 商家手机号
+     * @apiParam (请求参数说明) {String} province 省
+     * @apiParam (请求参数说明) {String} city 市
+     * @apiParam (请求参数说明) {String} area 区
+     * @apiParam (请求参数说明) {String} des 商家介绍
+     * @apiParam (请求参数说明) {String} staffs 商家员工头像列表：只有首次添加或者修改时才传入此参数，并且只传入修改值
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @return \think\response\Json
+     * @throws \think\Exception
+     */
+    public function updateShop()
+    {
+        $params = $this->request->param();
+        ShopService::updateShop($params);
+        return json(new SuccessMessage());
+
+
+    }
 
     /**
-     * 上传商家员工头像
+     * @api {POST} /api/v1/shop/staff/examine 75-后台审核店铺员工头像
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  通过操作
+     * @apiExample {get}  请求样例:
+     * {
+     * "id": 1,
+     * "url": "https://",
+     * "city": "广州市"
+     * }
+     * @apiParam (请求参数说明) {int} id  店铺和与员工头像关联id
+     * @apiParam (请求参数说明) {String} url 头像id
+     * @apiParam (请求参数说明) {String} city 当前城市
+     *
+     * @apiSuccessExample {json} 返回样例:
+     *{"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
+     * @apiSuccess (返回参数说明) {String} msg 信息描述
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \think\Exception
      */
-    public function shopStaff()
+    public function examineStaff()
     {
+        (new ShopValidate())->scene('staff')->goCheck();
+        $params = $this->request->param();
+        ShopService::examineStaff($params['id'], $params['url'], $params['city']);
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {POST} /api/v1/shop/staff/delete 76-小程序删除店铺员工头像信息
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  删除操作
+     * @apiExample {get}  请求样例:
+     * {
+     * "id": 1,
+     * "face_token": "a104e76591417d746c754dfd37113331",
+     * "city": "广州市"
+     * }
+     * @apiParam (请求参数说明) {int} id  店铺和与员工头像关联id
+     * @apiParam (请求参数说明) {String} face_token 员工在人脸库识别标识;
+     * 当获取店铺信息接口返回face_token为null时，表示还未审核通过，face_token传入为null即可
+     * @apiParam (请求参数说明) {String} city 城市
+     *
+     * @apiSuccessExample {json} 返回样例:
+     *{"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
+     * @apiSuccess (返回参数说明) {String} msg 信息描述
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \think\Exception
+     */
+    public function deleteStaff()
+    {
+        (new ShopValidate())->scene('id')->goCheck();
+        $params = $this->request->param();
+        ShopService::deleteStaff($params['id'], $params['city'], $params['face_token']);
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {GET} /api/v1/shop/info/edit 77-小程序商家获取店铺信息-编辑
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shop/info/edit
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":1,"name":"修之家","province":"安徽省","city":"铜陵市","area":"铜官区","phone":"1895622530","address":"","des":null,"staffs":[{"id":1,"img_id":1,"state":1,"face_token":null,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"id":2,"img_id":2,"state":2,"face_token":"sasadasdas","img_url":{"url":"https:\/\/mengant.cn\/121"}}]}
+     * @apiSuccess (返回参数说明) {int} id 店铺id
+     * @apiSuccess (返回参数说明) {String} name 店铺名称
+     * @apiSuccess (返回参数说明) {String} phone 商家手机号
+     * @apiSuccess (返回参数说明) {String} province 省
+     * @apiSuccess (返回参数说明) {String} city 市
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} address 详细地址
+     * @apiSuccess (返回参数说明) {int} des 店铺简介
+     * @apiSuccess (返回参数说明) {String} staffs 商家员工头像图片
+     * @apiSuccess (返回参数说明) {int} staffs->id 店铺与员工头像关联id
+     * @apiSuccess (返回参数说明) {int} staffs->state  员工头像状态：1 | 审核中；2 | 审核通过
+     * @apiSuccess (返回参数说明) {String} staffs->img_url->url  员工头像地址
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function shopInfoForEdit()
+    {
+        $info = ShopService::getInfoForEdit();
+        return json($info);
 
     }
 

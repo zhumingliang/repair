@@ -17,9 +17,11 @@ use app\api\model\ServiceExtendT;
 use app\api\model\ServicesImgT;
 use app\api\model\ServicesT;
 use app\api\model\ShopImgT;
+use app\api\model\ShopStaffImgT;
 use app\api\model\ShopT;
 use app\api\validate\TokenGet;
 use app\lib\enum\CommonEnum;
+use app\lib\exception\FaceException;
 use app\lib\exception\ShopException;
 use think\Db;
 use think\Exception;
@@ -72,6 +74,54 @@ class ShopService
 
 
     /**
+     * 修改店铺信息
+     * @param $params
+     * @throws Exception
+     */
+    public static function updateShop($params)
+    {
+
+        Db::startTrans();
+        try {
+            if (isset($params['staffs'])) {
+                $staffs = $params['staffs'];
+                unset($params['staffs']);
+                $relation = [
+                    'name' => 's_id',
+                    'value' => $params['id']
+                ];
+                $staff_res = self::saveStaffRelation($staffs, $relation);
+                if (!$staff_res) {
+                    Db::rollback();
+                    throw new ShopException(
+                        ['code' => 401,
+                            'msg' => '创建商铺员工头像关联失败',
+                            'errorCode' => 600011
+                        ]
+                    );
+                }
+
+            }
+            $res = ShopT::update($params, ['id' => $params['id']]);
+            if (!$res) {
+                Db::rollback();
+                throw new ShopException(
+                    ['code' => 401,
+                        'msg' => '店铺修改失败',
+                        'errorCode' => 600012
+                    ]
+                );
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+
+    }
+
+    /**
      * 保存申请和图片关联
      * @param $imgs
      * @param $relation
@@ -90,6 +140,18 @@ class ShopService
 
     }
 
+
+    private static function saveStaffRelation($imgs, $relation)
+    {
+        $data = ImageService::ImageHandel($imgs, $relation);
+        $staffImgT = new ShopStaffImgT();
+        $res = $staffImgT->saveAll($data);
+        if (!$res) {
+            return false;
+        }
+        return true;
+
+    }
 
     /**
      *  新增商铺服务
@@ -152,7 +214,6 @@ class ShopService
 
     }
 
-
     /**
      * 新增服务推广记录
      * @param $s_id
@@ -169,7 +230,6 @@ class ShopService
         return $obj_extend;
 
     }
-
 
     /**
      * 新增服务图片关联
@@ -223,13 +283,6 @@ class ShopService
             ];
         }
 
-
-    }
-
-
-    private static function checkShopStatus()
-    {
-        return true;
 
     }
 
@@ -312,12 +365,134 @@ class ShopService
 
     }
 
-
+    /**
+     * 获取店铺信息-审核状态
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     */
     public static function getShopInfo()
     {
         $u_id = Token::getCurrentUid();
         $info = ShopT::getShopInfo($u_id);
         return $info;
+
+    }
+
+
+    /**
+     * * 获取店铺信息-编辑
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     */
+    public static function getInfoForEdit()
+    {
+        $u_id = 1;//Token::getCurrentUid();
+        $info = ShopT::getShopInfoForEdit($u_id);
+        return $info;
+    }
+
+
+    /**
+     * 对商铺图片进行审核通过
+     * 并将数据保存到百度云人脸库
+     * @param $shop_img_id
+     * @param $url
+     * @param $city
+     * @throws Exception
+     */
+    public static function examineStaff($shop_img_id, $url, $city)
+    {
+
+        Db::startTrans();
+        try {
+            //检测图片是否合格
+            $face = FaceService::instance();
+            if (!$face->detectFace($url)) {
+                Db::rollback();
+                throw  new FaceException();
+            }
+            //添加图片到百度人脸库--检测合格
+            $groupId = md5($city);
+            $register_res = $face->register($url, $groupId, $shop_img_id);
+            if (!$register_res['res']) {
+                throw  new FaceException(
+                    ['code' => 401,
+                        'msg' => '上传图片到百度云人脸库失败',
+                        'errorCode' => 99004
+                    ]
+                );
+            }
+            //将face_token关联到ShopStaffImgT
+            //修改店铺关联状态
+            $res = ShopStaffImgT::update(
+                [
+                    'state' => CommonEnum::PASS,
+                    'face_token' => $register_res['face_token']
+                ],
+                ['id' => $shop_img_id]);
+            if (!$res) {
+                Db::rollback();
+                throw new ShopException(
+                    ['code' => 401,
+                        'msg' => '图片状态修改失败',
+                        'errorCode' => 50009
+                    ]
+                );
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+
+    }
+
+
+    /**
+     * 对商铺图片进行删除处理
+     * 并将数据从百度云人脸库删除
+     * @param $shop_img_id
+     * @param $face_token
+     * @param $city
+     * @throws Exception
+     */
+    public static function deleteStaff($shop_img_id, $city, $face_token)
+    {
+
+        Db::startTrans();
+        try {
+            //修改店铺关联状态
+            $res = ShopStaffImgT::update(
+                [
+                    'state' => CommonEnum::DELETE,
+                ],
+                ['id' => $shop_img_id]);
+            if (!$res) {
+                Db::rollback();
+                throw new ShopException(
+                    ['code' => 401,
+                        'msg' => '图片状删除改失败',
+                        'errorCode' => 50010
+                    ]
+                );
+            }
+            if ($face_token) {
+                $face = FaceService::instance();
+                if (!$face->deleteFace($shop_img_id, $city, $face_token)) {
+                    Db::rollback();
+                    throw  new FaceException();
+                }
+            }
+
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
 
     }
 

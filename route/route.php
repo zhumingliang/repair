@@ -33,10 +33,14 @@ Route::get('api/:version/demand', 'api/:version.Demand/getTheDemand');
 Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
 Route::get('api/:version/shop/info', 'api/:version.Shop/shopInfo');
+Route::get('api/:version/shop/info/edit', 'api/:version.Shop/shopInfoForEdit');
 Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
 Route::post('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
 Route::post('api/:version/service/booking', 'api/:version.Shop/bookingService');
 Route::get('api/:version/service/mini/list', 'api/:version.Shop/getServiceListForMini');
+Route::get('api/:version/shop/staff', 'api/:version.Shop/shopStaff');
+Route::post('api/:version/shop/staff/examine', 'api/:version.Shop/examineStaff');
+Route::post('api/:version/shop/staff/delete', 'api/:version.Shop/deleteStaff');
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
 
