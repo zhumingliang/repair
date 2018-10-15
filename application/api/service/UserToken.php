@@ -84,7 +84,9 @@ class UserToken extends Token
 
         if (empty($cachedValue['nickName']) && empty($cachedValue['province'])) {
             return ['token' => $token,
-                'type' => $this->USER_MSG_IS_NULL];
+                'type' => $this->USER_MSG_IS_NULL
+                , 'shop_id' => $cachedValue['shop_id']
+            ];
 
         }
         return [

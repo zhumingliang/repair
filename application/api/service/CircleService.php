@@ -152,7 +152,6 @@ class CircleService
     }
 
     /**
-     * 小程序
      * @param $id
      * @return array|null|\PDOStatement|string|\think\Model
      * @throws \think\db\exception\DataNotFoundException
@@ -161,9 +160,9 @@ class CircleService
      */
     public static function getCircleForMini($id)
     {
-        self::incReadNum($id);
-        //获取评论信息
         $circle = CircleT::getCircleForMINI($id);
+        $circle['read_num'] = $circle['read_num'] + 1;
+        $circle->save();
         return $circle;
 
     }
@@ -178,7 +177,7 @@ class CircleService
             foreach ($data as $k => $v) {
                 if (empty($data[$k]['zans'])) {
                     $data[$k]['state'] = 0;
-                }else{
+                } else {
                     $data[$k]['state'] = 1;
 
                 }
@@ -237,7 +236,7 @@ class CircleService
      */
     public static function saveComment($params)
     {
-        $params['openid'] = Token::getCurrentTokenVar('nickName');
+        $params['openid'] = Token::getCurrentTokenVar('openId');
         $params['nickName'] = Token::getCurrentTokenVar('nickName');
         $params['avatarUrl'] = Token::getCurrentTokenVar('avatarUrl');
         $params['zan'] = 0;
@@ -260,6 +259,9 @@ class CircleService
      * @throws CircleException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public static function zan($id)
     {
@@ -271,7 +273,10 @@ class CircleService
                     'errorCode' => 160009
                 ]);
 
-                $up_id = CircleCommentT::where('id', $id)->inc('zan');
+                $cm = new CircleCommentT();
+                $obj = $cm->where('id', $id)->find();
+                $obj['zan'] = $obj['zan'] + 1;
+                $up_id = $cm->save();
                 if (!$up_id) {
                     throw new CircleException(['code' => 401,
                         'msg' => '用户点赞失败',
@@ -301,19 +306,6 @@ class CircleService
             ->where('u_id', Token::getCurrentUid())
             ->count();
         return $count;
-
-
-    }
-
-    /**
-     * 指定圈子阅读量加一
-     * @param $id
-     */
-    private
-    static function incReadNum($id)
-    {
-        CircleT::where('id', $id)
-            ->inc('read_num');
 
     }
 
