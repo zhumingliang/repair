@@ -34,7 +34,8 @@ class Red extends BaseController
      * "end_time": "2018-10-28",
      * "detail": {
      * "id": 2,
-     * "name": "首次好评红包"
+     * "name": "首次好评红包",
+     * "money":1
      * }
      * },
      * {
@@ -44,7 +45,8 @@ class Red extends BaseController
      * "end_time": "2018-10-28",
      * "detail": {
      * "id": 4,
-     * "name": "分享红包"
+     * "name": "分享红包",
+     * "money":1
      * }
      * },
      * {
@@ -54,7 +56,8 @@ class Red extends BaseController
      * "end_time": "2018-10-28",
      * "detail": {
      * "id": 3,
-     * "name": "店铺首次下单"
+     * "name": "店铺首次下单",
+     * "money":1
      * }
      * },
      * {
@@ -64,7 +67,8 @@ class Red extends BaseController
      * "end_time": "2018-10-28",
      * "detail": {
      * "id": 2,
-     * "name": "首次好评红包"
+     * "name": "首次好评红包",
+     * "money":1
      * }
      * },
      * {
@@ -74,7 +78,9 @@ class Red extends BaseController
      * "end_time": "2018-10-28",
      * "detail": {
      * "id": 1,
-     * "name": "首次登录"
+     * "name": "首次登录",
+     * "money":1
+     *
      * }
      * }
      * ]
@@ -196,7 +202,6 @@ class Red extends BaseController
     }
 
 
-
     /**
      * @api {POST} /api/v1/strategy/delete  22-后台删除红包攻略
      * @apiGroup  CMS
@@ -216,7 +221,8 @@ class Red extends BaseController
      * @return \think\response\Json
      * @throws RedException
      */
-    public function deleteStrategy($id){
+    public function deleteStrategy($id)
+    {
         $data = [
             'state' => CommonEnum::STATE_IS_FAIL
         ];

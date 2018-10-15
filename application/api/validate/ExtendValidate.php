@@ -23,7 +23,8 @@ class ExtendValidate extends BaseValidate
         'list' => ['type'],
         'handel' => ['type', 'id'],
         'read' => ['id'],
-        'index' => [ 'area', 'page', 'size']
+        'index_more' => ['area', 'page', 'size'],
+        'index' => ['area']
     ];
 
 }

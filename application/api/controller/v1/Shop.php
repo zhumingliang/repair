@@ -236,7 +236,7 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/service/mini/list 48-小程序首页家政/维修模块/服务排行获取服务列表
+     * @api {GET} /api/v1/service/mini/list 48-小程序首页家政/维修模块/服务排行获取服务列表/家政维修服务点击更多
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序首页家政/维修模块/服务排行获取服务列表（服务排行时获取对应的数据为10条：page=1;size=10）

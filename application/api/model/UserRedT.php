@@ -32,7 +32,6 @@ class UserRedT extends Model
     /**
      * 获取用户红包列表
      * @return array|\PDOStatement|string|\think\Collection
-     * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -43,9 +42,8 @@ class UserRedT extends Model
         $u_id = 1;// Token::getCurrentUid();
         $time_begin = date('Y-m-d', strtotime('-' . 30 . ' day',
             time()));
-        echo $time_begin;
         $list = self::with(['detail' => function ($query) {
-            $query->field('id,name');
+            $query->field('id,name,money');
         }])
             ->where('state', '=', CommonEnum::STATE_IS_OK)
             ->where('u_id', '=', $u_id)

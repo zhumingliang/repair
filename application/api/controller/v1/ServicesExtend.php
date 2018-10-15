@@ -123,47 +123,46 @@ class ServicesExtend extends BaseController
         return json($service);
     }
 
+
     /**
-     * @api {GET} /api/v1/extend/house 45-小程序首页推广列表-家政服务
+     * @api {GET} /api/v1/service/index 45-小程序首页服务列表-家政服务/维修服务
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序首页推广列表-家政服务
      *
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/extend/house?page=1&size=20&area="铜官区"&c_id=0
-     * @apiParam (请求参数说明) {int} page 当前页码
-     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * http://mengant.cn/api/v1/extend/index?&area="铜官区"
      * @apiParam (请求参数说明) {String} area 用户地址位置--区
-     * @apiParam (请求参数说明) {int} c_id 服务类别id，首页获取推广列表时默认为0，点击更多时，选择对应的类别传入对应的c_id
      * @apiSuccessExample {json} 返回样例:
-     * {"total":2,"per_page":"10","current_page":1,"last_page":1,"data":[{"s_id":1,"sell_money":"0","sell_num":"0","name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/B9439BE2-857E-22D2-D058-CFE57315EEAE.jpg","area":"铜官区"},{"s_id":5,"sell_money":"10000","sell_num":"1","name":"修五金","cover":"http:\/\/repair.com\/static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","area":"铜官区"}]}     * @apiSuccess (返回参数说明) {int} s_id 服务id
-     * @apiSuccess (返回参数说明) {int} total 数据总数
-     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
-     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * [{"s_id":1,"sell_money":"0","sell_num":"0","name":"修五金1","cover":"https:\/\/mengant.cn\/static\/imgs\/B9439BE2-857E-22D2-D058-CFE57315EEAE.jpg","type":1},{"s_id":2,"sell_money":"0","sell_num":"0","name":"修五金2","cover":"https:\/\/mengant.cn\/static\/imgs\/5782AD69-9B21-2B94-DCCA-6AD299AF32E1.jpg","type":1},{"s_id":5,"sell_money":"10000","sell_num":"1","name":"修五金4","cover":"https:\/\/mengant.cn\/static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","type":1}]
      * @apiSuccess (返回参数说明) {int} s_id 服务id
      * @apiSuccess (返回参数说明) {int} sell_money 总销量
      * @apiSuccess (返回参数说明) {int} sell_num 成交额
      * @apiSuccess (返回参数说明) {String} name 服务名称
      * @apiSuccess (返回参数说明) {String} cover 服务封面
+     * @apiSuccess (返回参数说明) {int} type 服务类别：1 | 家政；2 | 维修
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
-    public function getHoursList()
+    public function getServiceIndex()
     {
-        (new PagingParameter())->goCheck();
+        (new ExtendValidate())->scene('index')->goCheck();
         $params = $this->request->param();
-        $list = ExtendService::getHoursList($params['area'], $params['page'], $params['size'], $params['c_id']);
+        $list = ExtendService::getIndexServiceList($params['area']);
         return json($list);
     }
 
     /**
-     * @api {GET} /api/v1/extend/repair 46-小程序首页推广列表-维修服务
-     * @apiGroup  MINI
+     * @api {GET} /api/v1/extend/repair 46-小程序首页服务列表-获取更多
+     * @apiGroup  UNUSED
      * @apiVersion 1.0.1
      * @apiDescription  小程序首页推广列表-维修服务
      *
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/extend/repair?page=1&size=20&area="铜官区"&c_id=0
+     * http://mengant.cn/api/v1/service/index/more?page=1&size=20&area="铜官区"&c_id=0&type=1
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiParam (请求参数说明) {String} area 用户地址位置--区

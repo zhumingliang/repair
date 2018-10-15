@@ -12,6 +12,7 @@ namespace app\api\service;
 use app\api\model\CollectionServicesT;
 use app\api\model\ExtendRecordT;
 use app\api\model\ExtendV;
+use app\api\model\IndexServiceV;
 use app\api\model\ServiceExtendT;
 use app\api\model\ServicesExtendV;
 use app\api\model\ServicesT;
@@ -152,21 +153,39 @@ class ExtendService
 
 
     /**
-     * 首页后去家政服务推广
+     * @param $area
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getIndexServiceList($area)
+    {
+        //return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_HOUSE);
+        return IndexServiceV::getList($area);
+
+    }
+
+
+    /**
      * @param $area
      * @param $size
      * @param $page
      * @param $c_id
-     * @return \think\Paginator
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public static function getHoursList($area, $size, $page, $c_id)
     {
-        return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_HOUSE);
+        //return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_HOUSE);
+        return IndexServiceV::getList($area);
 
     }
 
     /**
-     * 首页后去维修服务推广
+     * 首页维修服务推广
      * @param $area
      * @param $size
      * @param $page

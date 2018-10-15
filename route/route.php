@@ -84,6 +84,7 @@ Route::get('api/:version/extend/service', 'api/:version.ServicesExtend/getTheSer
 Route::get('api/:version/extend/mini/service', 'api/:version.ServicesExtend/getServiceForMini');
 Route::get('api/:version/extend/house', 'api/:version.ServicesExtend/getHoursList');
 Route::get('api/:version/extend/repair', 'api/:version.ServicesExtend/getRepairList');
+Route::get('api/:version/service/index', 'api/:version.ServicesExtend/getServiceIndex');
 
 
 Route::post('api/:version/city/discount/save', 'api/:version.CityDiscount/save');
