@@ -116,3 +116,4 @@ Route::get('api/:version/circle/cms', 'api/:version.Circle/getTheCircle');
 Route::get('api/:version/circle/mini', 'api/:version.Circle/getCircleForMini');
 Route::post('api/:version/circle/comment/save', 'api/:version.Circle/saveComment');
 Route::get('api/:version/circle/comment/list', 'api/:version.Circle/getComments');
+Route::post('api/:version/circle/comment/zan', 'api/:version.Circle/zan');
