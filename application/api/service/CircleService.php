@@ -172,6 +172,22 @@ class CircleService
     {
 
         $list = CircleCommentV::getList($params['page'], $params['size'], $params['id']);
+
+        $data = $list['data'];
+        if (count($data)) {
+            foreach ($data as $k => $v) {
+                if (empty($data[$k]['zans'])) {
+                    $data[$k]['state'] = 0;
+                }else{
+                    $data[$k]['state'] = 1;
+
+                }
+                unset($data[$k]['zans']);
+            }
+
+            $list['data'] = $data;
+        }
+
         return $list;
 
         /*  //获取评论信息

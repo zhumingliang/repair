@@ -581,7 +581,7 @@ class Circle extends BaseController
      * @apiParam (请求参数说明) {int} size   每页数据条数
      * @apiParam (请求参数说明) {int} c_id   圈子文章id
      * @apiSuccessExample {json} 返回样例:
-     * {"total":4,"per_page":"5","current_page":1,"last_page":1,"data":[{"c_id":7,"id":4,"parent_id":2,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a2-1","create_time":"2018-10-10 23:13:16","openid":"1","zan":0,"parent_name":"朱明良","parent_url":"http:\/\/avatarUrl","parent_content":"a1-1"},{"c_id":7,"id":3,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-2","create_time":"2018-10-10 23:13:07","openid":"1","zan":0,"parent_name":"朱明良","parent_url":"http:\/\/avatarUrl","parent_content":"a1"},{"c_id":7,"id":2,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-1","create_time":"2018-10-10 23:13:00","openid":"1","zan":0,"parent_name":"朱明良","parent_url":"http:\/\/avatarUrl","parent_content":"a1"},{"c_id":7,"id":1,"parent_id":0,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1","create_time":"2018-10-10 18:53:41","openid":"1","zan":0,"parent_name":null,"parent_url":null,"parent_content":null}]}
+    {"total":4,"per_page":"5","current_page":1,"last_page":1,"data":[{"id":4,"parent_id":2,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a2-1","create_time":"2018-10-10 23:13:16","zan":0,"parent_name":"朱明良","parent_url":"http:\/\/avatarUrl","parent_content":"a1-1","state":0},{"id":3,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-2","create_time":"2018-10-10 23:13:07","zan":0,"parent_name":"朱明良","parent_url":"http:\/\/avatarUrl","parent_content":"a1","state":0},{"id":2,"parent_id":1,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1-1","create_time":"2018-10-10 23:13:00","zan":0,"parent_name":"朱明良","parent_url":"http:\/\/avatarUrl","parent_content":"a1","state":1},{"id":1,"parent_id":0,"nickName":"朱明良","avatarUrl":"http:\/\/avatarUrl","content":"a1","create_time":"2018-10-10 18:53:41","zan":0,"parent_name":null,"parent_url":null,"parent_content":null,"state":1}]}
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
@@ -596,6 +596,7 @@ class Circle extends BaseController
      * @apiSuccess (返回参数说明) {String} parent_name 上级用户名称
      * @apiSuccess (返回参数说明) {String} parent_content 上级用户内容
      * @apiSuccess (返回参数说明) {String} parent_url 上级用户头像
+     * @apiSuccess (返回参数说明) {String} state 当前用户是否已经点赞
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      */
@@ -617,7 +618,7 @@ class Circle extends BaseController
      * {
      * "id": 1,
      * }
-     * @apiParam (请求参数说明) {int} id 评论id：只有parent_id=0的评论可以被赞
+     * @apiParam (请求参数说明) {int} id 评论id
      *
      * @apiSuccessExample {json} 返回样例:
      * {"state": 1}

@@ -14,4 +14,5 @@ use think\Model;
 class CommentZanT extends Model
 {
 
+    protected $hidden=['create_time','update_time','c_id','u_id'];
 }
