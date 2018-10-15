@@ -43,12 +43,12 @@ class UserRedT extends Model
         $time_begin = date('Y-m-d', strtotime('-' . 30 . ' day',
             time()));
         $list = self::with(['detail' => function ($query) {
-            $query->field('id,name,money');
+            $query->field('id,name');
         }])
             ->where('state', '=', CommonEnum::STATE_IS_OK)
             ->where('u_id', '=', $u_id)
             ->whereTime('create_time', '>', $time_begin)
-            ->field('id,r_id,create_time')
+            ->field('id,r_id,create_time,money')
             ->order('create_time desc')
             ->select();
         return $list;

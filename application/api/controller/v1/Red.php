@@ -32,10 +32,10 @@ class Red extends BaseController
      * "r_id": 2,
      * "create_time": "2018-09-28",
      * "end_time": "2018-10-28",
+     * "money":1
      * "detail": {
      * "id": 2,
-     * "name": "首次好评红包",
-     * "money":1
+     * "name": "首次好评红包"
      * }
      * },
      * {
@@ -43,10 +43,10 @@ class Red extends BaseController
      * "r_id": 4,
      * "create_time": "2018-09-28",
      * "end_time": "2018-10-28",
+     * "money":1
      * "detail": {
      * "id": 4,
-     * "name": "分享红包",
-     * "money":1
+     * "name": "分享红包"
      * }
      * },
      * {
@@ -54,10 +54,10 @@ class Red extends BaseController
      * "r_id": 3,
      * "create_time": "2018-09-28",
      * "end_time": "2018-10-28",
+     * "money":1
      * "detail": {
      * "id": 3,
-     * "name": "店铺首次下单",
-     * "money":1
+     * "name": "店铺首次下单"
      * }
      * },
      * {
@@ -65,10 +65,10 @@ class Red extends BaseController
      * "r_id": 2,
      * "create_time": "2018-09-28",
      * "end_time": "2018-10-28",
+     * "money":1
      * "detail": {
      * "id": 2,
-     * "name": "首次好评红包",
-     * "money":1
+     * "name": "首次好评红包"
      * }
      * },
      * {
@@ -76,10 +76,10 @@ class Red extends BaseController
      * "r_id": 1,
      * "create_time": "2018-09-28",
      * "end_time": "2018-10-28",
+     * "money":1
      * "detail": {
      * "id": 1,
-     * "name": "首次登录",
-     * "money":1
+     * "name": "首次登录"
      *
      * }
      * }
@@ -89,6 +89,7 @@ class Red extends BaseController
      * @apiSuccess (返回参数说明) {String} end_time 红包使用截止时间
      * @apiSuccess (返回参数说明) {obj} detail 红包详情对象
      * @apiSuccess (返回参数说明) {String} name 红包名称
+     * @apiSuccess (返回参数说明) {int} money 红包金额
      *
      * @return \think\response\Json
      * @throws \app\lib\exception\TokenException
