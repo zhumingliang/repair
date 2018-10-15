@@ -54,8 +54,7 @@ class ShopT extends BaseModel
             ->with([
                 'staffs' => function ($query) {
                     $query->with(['imgUrl'])
-                        ->where('state', '<', CommonEnum::DELETE)
-                    ;
+                        ->where('state', '<', CommonEnum::DELETE);
                 }
             ])
             ->field('id,name,province,city,area,phone,address,des')
@@ -100,6 +99,14 @@ class ShopT extends BaseModel
             ->field('city')
             ->find();
         return $shop['city'];
+
+    }
+
+
+    public static function getShopId($u_id)
+    {
+        $shop = self::where('u_id', $u_id)->find();
+        return $shop['id'];
 
     }
 

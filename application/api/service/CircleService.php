@@ -248,8 +248,7 @@ class CircleService
             ]);
 
         }
-
-        return id;
+        return $id;
 
     }
 
