@@ -151,7 +151,7 @@ class UserToken extends Token
         if (isset($user->shop) && ($user->shop->state == 2)) {
             $cachedValue['shop_id'] = $user->shop->id;
         }
-        $cachedValue['uid'] = $u_id;
+        $cachedValue['u_id'] = $u_id;
         $cachedValue['phone'] = $user['phone'];
         $cachedValue['openId'] = $user['openId'];
         $cachedValue['gender'] = $user['gender'];
