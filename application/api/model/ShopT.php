@@ -26,10 +26,10 @@ class ShopT extends BaseModel
             's_id', 'id');
     }
 
-    public function getHeadUrlAttr($value, $data)
+  /*  public function getHeadUrlAttr($value, $data)
     {
         return $this->prefixImgUrl($value, $data);
-    }
+    }*/
 
 
     public static function getShopInfo($u_id)

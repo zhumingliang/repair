@@ -53,7 +53,7 @@ class OrderService
             );
         }
 
-        $demand = DemandT::where('id', $d_id);
+        $demand = DemandT::where('id', $d_id)->find();
         if ($demand->state == CommonEnum::STATE_IS_FAIL) {
             throw new OrderException(
                 ['code' => 401,
