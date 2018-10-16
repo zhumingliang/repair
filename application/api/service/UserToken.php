@@ -150,7 +150,7 @@ class UserToken extends Token
         $cachedValue = $wxResult;
         $cachedValue['shop_id'] = 0;
         $user = UserModel::with('shop')->where('id', $u_id)->find();
-        if (isset($user->shop) && ($user->shop->state == 2)) {
+        if (isset($user->shop) && ($user->shop->state == 2 || $user->shop->state == 4)) {
             $cachedValue['shop_id'] = $user->shop->id;
         }
         $cachedValue['u_id'] = $u_id;

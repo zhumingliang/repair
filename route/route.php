@@ -120,3 +120,6 @@ Route::get('api/:version/circle/comment/list', 'api/:version.Circle/getComments'
 Route::post('api/:version/circle/comment/zan', 'api/:version.Circle/zan');
 
 Route::post('api/:version/order/taking', 'api/:version.Order/orderTaking');
+Route::post('api/:version/order/phone/confirm', 'api/:version.Order/phone');
+Route::post('api/:version/order/price/update', 'api/:version.Order/price');
+Route::post('api/:version/order', 'api/:version.Order/getOrderInfo');

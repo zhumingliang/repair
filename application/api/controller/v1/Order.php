@@ -54,14 +54,20 @@ class Order extends BaseController
     }
 
     /**
-     * 79-获取需求信息
+     * 79-获取订单信息
      * $order_id
      */
-    public function getDemandInfo()
+    public function getOrderInfo()
     {
-        (new OrderValidate())->scene('id')->goCheck();
+        (new OrderValidate())->scene('phone')->goCheck();
         $id = $this->request->param('id');
-        $info = DemandOrderV::where('id', $id)->find();
+        $type = $this->request->param('type');
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+            $info = DemandOrderV::where('order_id', $id)->find();
+        } else {
+            $info = array();
+        }
+
         return json($info);
 
 
