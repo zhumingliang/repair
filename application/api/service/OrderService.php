@@ -18,11 +18,13 @@ use app\lib\exception\OrderException;
 class OrderService
 {
     /**
-     * 店铺接单
      * @param $d_id
      * @param $u_id
      * @return mixed
      * @throws OrderException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public static function taking($d_id, $u_id)
     {

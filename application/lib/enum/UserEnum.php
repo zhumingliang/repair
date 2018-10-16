@@ -28,5 +28,14 @@ class UserEnum
     //账号停用
     const USER_STATE_STOP = 2;
 
+    //小程序普通用户
+    const USER_MINI_NORMAL = 1;
+
+    //小程序店铺
+    const USER_MINI_SHOP = 2;
+
+    //小程序小区管理员
+    const USER_MINI_VILLAGE = 3;
+
 
 }

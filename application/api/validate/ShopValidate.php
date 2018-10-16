@@ -31,7 +31,7 @@ class ShopValidate extends BaseValidate
         'face_token' => 'require',
         'page' => 'require|isPositiveInteger',
         'size' => 'require|isPositiveInteger',
-        'state' => 'require|isPositiveInteger|in:2,3',
+        'state' => 'require|isPositiveInteger|in:2,3,4',
     ];
 
     protected $scene = [

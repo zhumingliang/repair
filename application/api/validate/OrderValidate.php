@@ -13,10 +13,14 @@ class OrderValidate extends BaseValidate
 {
     protected $rule = [
         'id' => 'require|isPositiveInteger',
+        'type' => 'require|isPositiveInteger|in:1,2',
+        'money' => 'require|isPositiveInteger',
     ];
 
     protected $scene = [
-        'taking' => ['id'],
+        'id' => ['id'],
+        'phone' => ['id', 'type'],
+        'price' => ['id', 'type', 'money'],
     ];
 
 }
