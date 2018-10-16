@@ -15,12 +15,16 @@ class OrderValidate extends BaseValidate
         'id' => 'require|isPositiveInteger',
         'type' => 'require|isPositiveInteger|in:1,2',
         'money' => 'require|isPositiveInteger',
+        'order_type'=>'require|isPositiveInteger',
+        'page'=>'require|isPositiveInteger',
+        'size'=>'require|isPositiveInteger',
     ];
 
     protected $scene = [
         'id' => ['id'],
         'phone' => ['id', 'type'],
         'price' => ['id', 'type', 'money'],
+        'list'=>['order_type', 'page', 'size']
     ];
 
 }

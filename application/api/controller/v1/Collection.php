@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\service\CollectionService;
 use app\api\validate\CollectionValidate;
 use app\lib\exception\SuccessMessage;
+use app\api\service\Token as TokenService;
 
 class Collection extends BaseController
 {
@@ -74,6 +75,8 @@ class Collection extends BaseController
      * @return \think\response\Json
      * @throws \app\lib\exception\CollectionException
      * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      */
     public function handel($id, $type)
     {

@@ -123,3 +123,4 @@ Route::post('api/:version/order/taking', 'api/:version.Order/orderTaking');
 Route::post('api/:version/order/phone/confirm', 'api/:version.Order/phone');
 Route::post('api/:version/order/price/update', 'api/:version.Order/price');
 Route::post('api/:version/order', 'api/:version.Order/getOrderInfo');
+Route::post('api/:version/order/demand/list', 'api/:version.Order/getDemandList');

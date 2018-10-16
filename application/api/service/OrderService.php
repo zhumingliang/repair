@@ -10,14 +10,18 @@ namespace app\api\service;
 
 
 use app\api\model\DemandOrderT;
+use app\api\model\DemandOrderV;
 use app\api\model\DemandT;
+use app\api\model\ServiceBookingV;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
+use app\lib\enum\OrderEnum;
 use app\lib\exception\OrderException;
 
 class OrderService
 {
     /**
+     * 商家接单
      * @param $d_id
      * @param $u_id
      * @return mixed
@@ -97,6 +101,97 @@ class OrderService
         }
         return $db->id;
 
+
+    }
+
+    /**
+     * 获取订单信息
+     * @param $o_id
+     * @param $order_type
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getOrderInfo($o_id, $order_type)
+    {
+        if ($order_type == CommonEnum::ORDER_IS_DEMAND) {
+            return self::getDemandInfo($o_id);
+
+        } else {
+            return self::getServiceInfo($o_id);
+        }
+
+    }
+
+    /**
+     * 获取需求订单详情
+     * @param $o_id
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private static function getDemandInfo($o_id)
+    {
+        $info = DemandOrderV::where('order_id', $o_id)->hidden(['state'])->find();
+        return $info;
+    }
+
+    /**
+     * 获取服务订单详情
+     * @param $o_id
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private static function getServiceInfo($o_id)
+    {
+        $info = ServiceBookingV::where('order_id', $o_id)->hidden(['state'])->find();
+        return $info;
+    }
+
+
+    public static function getDemandList($order_type, $page, $size)
+    {
+
+        $shop_id = 1;//Token::getCurrentTokenVar('shop_id');
+        if (!$shop_id) {
+
+        } else {
+            return self::getDemandListForNormal($order_type, $page, $size);
+
+        }
+
+    }
+
+    private static function getDemandListForNormal($order_type, $page, $size)
+    {
+        $u_id = 1;//Token::getCurrentUid();
+        switch ($order_type) {
+            case OrderEnum::DEMAND_NORMAL_TAKING:
+                return DemandOrderV::takingList($u_id, $page, $size);
+                break;
+            case OrderEnum::DEMAND_NORMAL_PAY:
+                '';
+                break;
+            case OrderEnum::DEMAND_NORMAL_CONFIRM:
+                '';
+                break;
+            case OrderEnum::DEMAND_NORMAL_COMMENT:
+                '';
+                break;
+            case OrderEnum::DEMAND_NORMAL_COMPLETE:
+                '';
+                break;
+
+        }
+
+    }
+
+    private function getDemandListForShop($order_type)
+    {
 
     }
 
