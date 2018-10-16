@@ -54,7 +54,7 @@ class Demand extends BaseController
      * @apiParam (请求参数说明) {String} latitude 纬度
      * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {String} time_end 结束时间
-     * @apiParam (请求参数说明) {int} origin_money 金额，标准单位为分
+     * @apiParam (请求参数说明) {int} money 金额，标准单位为元
      * @apiParam (请求参数说明) {String} type 需求类别：1 | 维修；2 | 家政
      * @apiParam (请求参数说明) {String} imgs 图片id，多个用逗号隔开
      * @apiSuccessExample {json} 返回样例:
@@ -72,7 +72,6 @@ class Demand extends BaseController
         (new DemandValidate())->scene('save')->goCheck();
         $u_id = TokenService::getCurrentUid();
         $params = $this->request->param();
-        $params['actual_money'] = $params['origin_money'];
         $params['u_id'] = $u_id;
         $params['state'] = CommonEnum::STATE_IS_OK;
         DemandService::save($params);

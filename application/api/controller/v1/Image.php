@@ -61,11 +61,10 @@ class Image extends BaseController
      * @apiSuccessExample {json} 返回样例:
      *{"id":17}
      * @apiSuccess (返回参数说明) {int} id 图片id
-     * @throws \app\lib\exception\ParameterException
      */
     public function upload()
     {
-        (new ImageValidate())->goCheck();
+        //(new ImageValidate())->goCheck();
         $file = request()->file('file');
         $res = ImageService::saveImageFromWX($file);
         return json([

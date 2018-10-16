@@ -24,6 +24,7 @@ Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 
 Route::rule('api/:version/image/save', 'api/:version.Image/save');
 Route::rule('api/:version/image/upload', 'api/:version.Image/upload');
+Route::rule('api/:version/image/search', 'api/:version.Image/search');
 
 Route::rule('api/:version/demand/save', 'api/:version.Demand/save');
 Route::rule('api/:version/demand/handel', 'api/:version.Demand/handel');

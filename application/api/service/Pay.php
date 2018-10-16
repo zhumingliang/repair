@@ -106,7 +106,7 @@ class Pay
     private function makeWxPreOrder($totalPrice)
     {
 
-        $openid = Token::getCurrentTokenVar('openid');
+        $openid = Token::getCurrentOpenid();
         if (!$openid) {
             throw new TokenException();
         }

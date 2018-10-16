@@ -240,15 +240,15 @@ class CircleService
         $params['nickName'] = Token::getCurrentTokenVar('nickName');
         $params['avatarUrl'] = Token::getCurrentTokenVar('avatarUrl');
         $params['zan'] = 0;
-        $id = CircleCommentT::create($params);
-        if (!$id) {
+        $comments = CircleCommentT::create($params);
+        if (!$comments->id) {
             throw new CircleException(['code' => 401,
                 'msg' => '新增圈子评论失败',
                 'errorCode' => 160008
             ]);
 
         }
-        return $id;
+        return $comments->id;
 
     }
 
