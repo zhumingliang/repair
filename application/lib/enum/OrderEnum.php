@@ -29,4 +29,23 @@ class OrderEnum
     const DEMAND_NORMAL_COMPLETE = 5;
 
 
+    const SERVICE_SHOP_CONFIRM = 1;
+
+    const SERVICE_SHOP_BEGIN = 2;
+
+    const SERVICE_SHOP_ING = 3;
+
+    const SERVICE_SHOP_COMPLETE = 4;
+
+    const SERVICE_NORMAL_BOOKING = 1;
+
+    const SERVICE_NORMAL_PAY = 2;
+
+    const SERVICE_NORMAL_CONFIRM = 3;
+
+    const SERVICE_NORMAL_COMMENT = 4;
+
+    const SERVICE_NORMAL_COMPLETE = 5;
+
+
 }

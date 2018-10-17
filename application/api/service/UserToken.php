@@ -151,9 +151,15 @@ class UserToken extends Token
     {
         $cachedValue = $wxResult;
         $cachedValue['shop_id'] = 0;
+        $cachedValue['province'] = '';
+        $cachedValue['city'] = '';
+        $cachedValue['area'] ='';
         $user = UserModel::with('shop')->where('id', $u_id)->find();
         if (isset($user->shop) && ($user->shop->state == 2 || $user->shop->state == 4)) {
             $cachedValue['shop_id'] = $user->shop->id;
+            $cachedValue['province'] = $user->shop->province;
+            $cachedValue['city'] = $user->shop->city;
+            $cachedValue['area'] =$user->shop->area;
         }
         $cachedValue['u_id'] = $u_id;
         $cachedValue['phone'] = $user['phone'];

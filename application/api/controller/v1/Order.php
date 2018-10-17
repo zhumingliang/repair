@@ -152,8 +152,8 @@ class Order extends BaseController
 
     /**
      * 81-获取服务列表
-     * 普通用户 type: 已预约；待付款；待确认；待评价；已完成
-     * 店铺 type: 待确认；待服务；服务中；已完成
+     * 普通用户 type: 已预约；待付款；待确认；待评价；已完成（1-5）
+     * 店铺 type: 待确认；待服务；服务中；已完成(1-4)
      */
     public function getServiceList()
     {

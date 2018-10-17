@@ -15,6 +15,7 @@ use app\api\model\DemandT;
 use app\api\model\OrderCommentImgT;
 use app\api\model\OrderCommentT;
 use app\api\model\ServiceBookingV;
+use app\api\model\ServiceOrderV;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\OrderEnum;
@@ -182,6 +183,8 @@ class OrderService
 
     /**
      * 获取服务订单列表
+     * 普通用户 type: 已预约；待付款；待确认；待评价；已完成（1-5）
+     * 店铺 type: 待确认；待服务；服务中；已完成(1-4)
      * @param $order_type
      * @param $page
      * @param $size
@@ -191,7 +194,7 @@ class OrderService
      */
     public static function getServiceList($order_type, $page, $size)
     {
-        $shop_id = Token::getCurrentTokenVar('shop_id');
+        $shop_id = 1;//Token::getCurrentTokenVar('shop_id');
         if (!$shop_id) {
             return self::getServiceListForShop($shop_id, $order_type, $page, $size);
         } else {
@@ -310,39 +313,52 @@ class OrderService
 
     private static function getServiceListForNormal($order_type, $page, $size)
     {
-        $u_id = Token::getCurrentUid();
+        $openid = 1;//Token::getCurrentOpenid();
         switch ($order_type) {
-            case OrderEnum::DEMAND_NORMAL_TAKING:
-                return DemandOrderV::takingList($u_id, $page, $size);
+            case OrderEnum::SERVICE_NORMAL_BOOKING:
+                return ServiceOrderV::bookingList($openid, $page, $size);
                 break;
-            case OrderEnum::DEMAND_NORMAL_PAY:
-                return DemandOrderV::payList($u_id, $page, $size);
+            case OrderEnum::SERVICE_NORMAL_PAY:
+                return DemandOrderV::payList($openid, $page, $size);
                 break;
-            case OrderEnum::DEMAND_NORMAL_CONFIRM:
-                return DemandOrderV::confirmList($u_id, $page, $size);
+            case OrderEnum::SERVICE_NORMAL_CONFIRM:
+                return DemandOrderV::confirmList($openid, $page, $size);
                 break;
-            case OrderEnum::DEMAND_NORMAL_COMMENT:
-                return DemandOrderV::commentList($u_id, $page, $size);
+            case OrderEnum::SERVICE_NORMAL_COMMENT:
+                return DemandOrderV::commentList($openid, $page, $size);
                 break;
-            case OrderEnum::DEMAND_NORMAL_COMPLETE:
-                return DemandOrderV::completeList($u_id, $page, $size);
+            case OrderEnum::SERVICE_NORMAL_COMPLETE:
+                return DemandOrderV::completeList($openid, $page, $size);
                 break;
 
         }
 
     }
 
+    /**
+     *  已预约；待付款；待确认；待评价；已完成（1-5）
+     * @param $shop_id
+     * @param $order_type
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     */
     private static function getServiceListForShop($shop_id, $order_type, $page, $size)
     {
 
-        if ($order_type == OrderEnum::DEMAND_SHOP_TAKING) {
-            return DemandOrderV::service($shop_id, $page, $size);
-
-        } else if ($order_type == OrderEnum::DEMAND_SHOP_CONFIRM) {
-            return DemandOrderV::shopConfirm($shop_id, $page, $size);
-
-        } else if ($order_type == OrderEnum::DEMAND_SHOP_COMPLETE) {
-            return DemandOrderV::shopComplete($shop_id, $page, $size);
+        switch ($order_type) {
+            case OrderEnum::SERVICE_SHOP_CONFIRM:
+                return DemandOrderV::takingList($shop_id, $page, $size);
+                break;
+            case OrderEnum::SERVICE_SHOP_BEGIN:
+                return DemandOrderV::payList($shop_id, $page, $size);
+                break;
+            case OrderEnum::SERVICE_SHOP_ING:
+                return DemandOrderV::confirmList($shop_id, $page, $size);
+                break;
+            case OrderEnum::SERVICE_SHOP_COMPLETE:
+                return DemandOrderV::commentList($shop_id, $page, $size);
+                break;
 
         }
 

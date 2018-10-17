@@ -13,6 +13,18 @@ use think\Model;
 
 class ServiceOrderV extends Model
 {
+
+    public static function bookingList($openid, $page, $size)
+    {
+        $list = DemandUserV::where('openid', $openid)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->whereTime('time_begin', date('Y-m-d H:i'))
+            ->field('order_id,demand_name as source_name,time_begin,time_end,money as origin_money')
+            ->paginate($size, false, ['page' => $page]);
+        return $list;
+
+
+    }
     public static function takingList($u_id, $page, $size)
     {
         $minute = 20;
