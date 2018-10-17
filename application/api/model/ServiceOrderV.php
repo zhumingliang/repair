@@ -2,17 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/10/16
- * Time: 2:41 PM
+ * Date: 2018/10/17
+ * Time: 4:03 PM
  */
 
 namespace app\api\model;
 
 
-use app\lib\enum\CommonEnum;
 use think\Model;
 
-class DemandOrderV extends Model
+class ServiceOrderV extends Model
 {
     public static function takingList($u_id, $page, $size)
     {
@@ -152,6 +151,5 @@ class DemandOrderV extends Model
 
         return $list;
     }
-
 
 }

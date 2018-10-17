@@ -12,11 +12,15 @@ namespace app\api\service;
 use app\api\model\DemandOrderT;
 use app\api\model\DemandOrderV;
 use app\api\model\DemandT;
+use app\api\model\OrderCommentImgT;
+use app\api\model\OrderCommentT;
 use app\api\model\ServiceBookingV;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\OrderEnum;
 use app\lib\exception\OrderException;
+use think\Db;
+use think\Exception;
 
 class OrderService
 {
@@ -92,6 +96,7 @@ class OrderService
             'r_id' => CommonEnum::ORDER_STATE_INIT,
             'state' => CommonEnum::STATE_IS_OK,
             'phone_user' => CommonEnum::STATE_IS_FAIL,
+            'service_begin' => CommonEnum::STATE_IS_FAIL,
             'phone_shop' => CommonEnum::STATE_IS_FAIL
 
         ]);
@@ -152,13 +157,21 @@ class OrderService
         return $info;
     }
 
-
+    /**
+     *  获取订单列表
+     * @param $order_type
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
     public static function getDemandList($order_type, $page, $size)
     {
 
-        $shop_id = 1;//Token::getCurrentTokenVar('shop_id');
+        $shop_id = Token::getCurrentTokenVar('shop_id');
         if (!$shop_id) {
-
+            return self::getDemandListForShop($shop_id, $order_type, $page, $size);
         } else {
             return self::getDemandListForNormal($order_type, $page, $size);
 
@@ -166,32 +179,173 @@ class OrderService
 
     }
 
+
+    /**
+     * 获取服务订单列表
+     * @param $order_type
+     * @param $page
+     * @param $size
+     * @return mixed
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     */
+    public static function getServiceList($order_type, $page, $size)
+    {
+        $shop_id = Token::getCurrentTokenVar('shop_id');
+        if (!$shop_id) {
+            return self::getServiceListForShop($shop_id, $order_type, $page, $size);
+        } else {
+            return self::getServiceListForNormal($order_type, $page, $size);
+
+        }
+
+    }
+
+    /**
+     * 保存订单评论
+     * @param $params
+     * @throws Exception
+     */
+    public static function saveComment($params)
+    {
+
+        Db::startTrans();
+        try {
+            $imgs = $params['imgs'];
+            unset($params['imgs']);
+            $params['u_id'] = 1;//Token::getCurrentUid();
+            $params['state'] = CommonEnum::STATE_IS_OK;
+            $obj = OrderCommentT::create($params);
+            if (!$obj) {
+                throw new OrderException(
+                    ['code' => 401,
+                        'msg' => '新增评论失败',
+                        'errorCode' => 150010
+                    ]
+                );
+            }
+            $relation = [
+                'name' => 'o_id',
+                'value' => $obj->id
+            ];
+            $res = self::saveImageRelation($imgs, $relation);
+            if (!$res) {
+                Db::rollback();
+                throw new OrderException(
+                    ['code' => 401,
+                        'msg' => '创建评论图片关联失败',
+                        'errorCode' => 150011
+                    ]
+                );
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+
+    }
+
+    /**
+     * 保存评论和图片关联
+     * @param $imgs
+     * @param $relation
+     * @return bool
+     * @throws \Exception
+     */
+    private static function saveImageRelation($imgs, $relation)
+    {
+        $data = ImageService::ImageHandel($imgs, $relation);
+        $OCI = new OrderCommentImgT();
+        $res = $OCI->saveAll($data);
+        if (!$res) {
+            return false;
+        }
+        return true;
+
+    }
+
     private static function getDemandListForNormal($order_type, $page, $size)
     {
-        $u_id = 1;//Token::getCurrentUid();
+        $u_id = Token::getCurrentUid();
         switch ($order_type) {
             case OrderEnum::DEMAND_NORMAL_TAKING:
                 return DemandOrderV::takingList($u_id, $page, $size);
                 break;
             case OrderEnum::DEMAND_NORMAL_PAY:
-                '';
+                return DemandOrderV::payList($u_id, $page, $size);
                 break;
             case OrderEnum::DEMAND_NORMAL_CONFIRM:
-                '';
+                return DemandOrderV::confirmList($u_id, $page, $size);
                 break;
             case OrderEnum::DEMAND_NORMAL_COMMENT:
-                '';
+                return DemandOrderV::commentList($u_id, $page, $size);
                 break;
             case OrderEnum::DEMAND_NORMAL_COMPLETE:
-                '';
+                return DemandOrderV::completeList($u_id, $page, $size);
                 break;
 
         }
 
     }
 
-    private function getDemandListForShop($order_type)
+    private static function getDemandListForShop($shop_id, $order_type, $page, $size)
     {
+
+        if ($order_type == OrderEnum::DEMAND_SHOP_TAKING) {
+            return DemandOrderV::service($shop_id, $page, $size);
+
+        } else if ($order_type == OrderEnum::DEMAND_SHOP_CONFIRM) {
+            return DemandOrderV::shopConfirm($shop_id, $page, $size);
+
+        } else if ($order_type == OrderEnum::DEMAND_SHOP_COMPLETE) {
+            return DemandOrderV::shopComplete($shop_id, $page, $size);
+
+        }
+
+
+    }
+
+
+    private static function getServiceListForNormal($order_type, $page, $size)
+    {
+        $u_id = Token::getCurrentUid();
+        switch ($order_type) {
+            case OrderEnum::DEMAND_NORMAL_TAKING:
+                return DemandOrderV::takingList($u_id, $page, $size);
+                break;
+            case OrderEnum::DEMAND_NORMAL_PAY:
+                return DemandOrderV::payList($u_id, $page, $size);
+                break;
+            case OrderEnum::DEMAND_NORMAL_CONFIRM:
+                return DemandOrderV::confirmList($u_id, $page, $size);
+                break;
+            case OrderEnum::DEMAND_NORMAL_COMMENT:
+                return DemandOrderV::commentList($u_id, $page, $size);
+                break;
+            case OrderEnum::DEMAND_NORMAL_COMPLETE:
+                return DemandOrderV::completeList($u_id, $page, $size);
+                break;
+
+        }
+
+    }
+
+    private static function getServiceListForShop($shop_id, $order_type, $page, $size)
+    {
+
+        if ($order_type == OrderEnum::DEMAND_SHOP_TAKING) {
+            return DemandOrderV::service($shop_id, $page, $size);
+
+        } else if ($order_type == OrderEnum::DEMAND_SHOP_CONFIRM) {
+            return DemandOrderV::shopConfirm($shop_id, $page, $size);
+
+        } else if ($order_type == OrderEnum::DEMAND_SHOP_COMPLETE) {
+            return DemandOrderV::shopComplete($shop_id, $page, $size);
+
+        }
+
 
     }
 

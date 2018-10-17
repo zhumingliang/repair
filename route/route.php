@@ -124,3 +124,7 @@ Route::post('api/:version/order/phone/confirm', 'api/:version.Order/phone');
 Route::post('api/:version/order/price/update', 'api/:version.Order/price');
 Route::post('api/:version/order', 'api/:version.Order/getOrderInfo');
 Route::post('api/:version/order/demand/list', 'api/:version.Order/getDemandList');
+Route::post('api/:version/order/service/list', 'api/:version.Order/getServiceList');
+Route::post('api/:version/order/comment', 'api/:version.Order/comment');
+Route::post('api/:version/order/confirm', 'api/:version.Order/confirm');
+Route::post('api/:version/order/service/begin', 'api/:version.Order/serviceBegin');

@@ -8,6 +8,7 @@
 
 namespace app\api\service;
 
+use app\api\model\DemandOrderT;
 use app\api\model\ServiceBookingT;
 use app\api\model\UserRedT;
 use app\api\model\WxPayT;
@@ -226,6 +227,7 @@ class Pay
             $order = ServiceBookingT::where('id', '=', $this->orderID);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_DEMAND) {
+            $order = DemandOrderT::where('id', '=', $this->orderID);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
 
@@ -272,6 +274,9 @@ class Pay
     private function checkRed()
     {
 
+        if ($this->r_id) {
+            return 0;
+        }
         $red = UserRedT::where('u_id', '=', Token::getCurrentUid())
             ->where('r_id', '=', $this->r_id)
             ->find();

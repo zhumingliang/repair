@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\validate\IDMustBePostiveInt;
 use app\api\service\Pay as PayService;
+use app\api\validate\PayValidate;
 use wxpay\PayNotifyCallBack;
 
 class Pay extends BaseController
@@ -33,21 +34,18 @@ class Pay extends BaseController
      * "jsApiParameters": "{\"appId\":\"wxe259f1f58695b35e\",\"nonceStr\":\"m8l2v92he4ca4vjpfscpgbt5u0l8optz\",\"package\":\"prepay_id=wx201705061742181721b8ef8e0586973210\",\"signType\":\"MD5\",\"timeStamp\":\"1494063753\",\"paySign\":\"2177F2F635987A96D0F05B72299CF855\"}"
      * }
      * @apiSuccess (返回参数说明) {String} jsApiParameters 前端支付所需数据
-     * @param string $id
      * @return \think\response\Json
-     * @throws \app\lib\exception\BookingException
      * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\PayException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      * @throws \wxpay\WxPayException
      */
-    public function getPreOrder($id = '')
+    public function getPreOrder()
     {
-        (new IDMustBePostiveInt())->goCheck();
-        $pay = new PayService($id);
+        (new PayValidate())->scene('pre')->goCheck();
+        $params = $this->request->param();
+        $pay = new PayService($params['id'], $params['type'], $params['r_id']);
         return json($pay->pay());
     }
 
