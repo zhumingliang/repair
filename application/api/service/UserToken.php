@@ -86,7 +86,9 @@ class UserToken extends Token
             return ['token' => $token,
                 'type' => $this->USER_MSG_IS_NULL
                 , 'shop_id' => $cachedValue['shop_id'],
-                'city' => $cachedValue['city']
+                'city' => $cachedValue['city'],
+                'province' => $cachedValue['province'],
+                'area' => $cachedValue['area'],
             ];
 
         }
@@ -94,7 +96,9 @@ class UserToken extends Token
             'token' => $token,
             'type' => $this->USER_MSG_IS_OK,
             'shop_id' => $cachedValue['shop_id'],
-            'city' => $cachedValue['city']
+            'city' => $cachedValue['city'],
+            'province' => $cachedValue['province'],
+            'area' => $cachedValue['area'],
         ];
     }
 
@@ -153,13 +157,13 @@ class UserToken extends Token
         $cachedValue['shop_id'] = 0;
         $cachedValue['province'] = '';
         $cachedValue['city'] = '';
-        $cachedValue['area'] ='';
+        $cachedValue['area'] = '';
         $user = UserModel::with('shop')->where('id', $u_id)->find();
         if (isset($user->shop) && ($user->shop->state == 2 || $user->shop->state == 4)) {
             $cachedValue['shop_id'] = $user->shop->id;
             $cachedValue['province'] = $user->shop->province;
             $cachedValue['city'] = $user->shop->city;
-            $cachedValue['area'] =$user->shop->area;
+            $cachedValue['area'] = $user->shop->area;
         }
         $cachedValue['u_id'] = $u_id;
         $cachedValue['phone'] = $user['phone'];

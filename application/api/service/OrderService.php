@@ -313,22 +313,22 @@ class OrderService
 
     private static function getServiceListForNormal($order_type, $page, $size)
     {
-        $openid = 1;//Token::getCurrentOpenid();
+        $u_id = 1;//Token::getCurrentUid();
         switch ($order_type) {
             case OrderEnum::SERVICE_NORMAL_BOOKING:
-                return ServiceOrderV::bookingList($openid, $page, $size);
+                return ServiceOrderV::bookingList($u_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_NORMAL_PAY:
-                return DemandOrderV::payList($openid, $page, $size);
+                return ServiceOrderV::payList($u_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_NORMAL_CONFIRM:
-                return DemandOrderV::confirmList($openid, $page, $size);
+                return ServiceOrderV::confirmList($u_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_NORMAL_COMMENT:
-                return DemandOrderV::commentList($openid, $page, $size);
+                return ServiceOrderV::commentList($u_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_NORMAL_COMPLETE:
-                return DemandOrderV::completeList($openid, $page, $size);
+                return ServiceOrderV::completeList($u_id, $page, $size);
                 break;
 
         }
@@ -348,16 +348,16 @@ class OrderService
 
         switch ($order_type) {
             case OrderEnum::SERVICE_SHOP_CONFIRM:
-                return DemandOrderV::takingList($shop_id, $page, $size);
+                return ServiceOrderV::takingList($shop_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_SHOP_BEGIN:
-                return DemandOrderV::payList($shop_id, $page, $size);
+                return ServiceOrderV::payList($shop_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_SHOP_ING:
-                return DemandOrderV::confirmList($shop_id, $page, $size);
+                return ServiceOrderV::confirmList($shop_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_SHOP_COMPLETE:
-                return DemandOrderV::commentList($shop_id, $page, $size);
+                return ServiceOrderV::commentList($shop_id, $page, $size);
                 break;
 
         }

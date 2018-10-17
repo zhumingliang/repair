@@ -9,36 +9,20 @@
 namespace app\api\model;
 
 
+use app\lib\enum\CommonEnum;
 use think\Model;
 
 class ServiceOrderV extends Model
 {
 
-    public static function bookingList($openid, $page, $size)
+    public static function bookingList($u_id, $page, $size)
     {
-        $list = DemandUserV::where('openid', $openid)
+        $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('phone_user', CommonEnum::STATE_IS_FAIL)
+            ->where('phone_shop', CommonEnum::STATE_IS_FAIL)
             ->whereTime('time_begin', date('Y-m-d H:i'))
-            ->field('order_id,demand_name as source_name,time_begin,time_end,money as origin_money')
-            ->paginate($size, false, ['page' => $page]);
-        return $list;
-
-
-    }
-    public static function takingList($u_id, $page, $size)
-    {
-        $minute = 20;
-        $time_limit = date('Y-m-d H:i', strtotime('-' . $minute . ' minute',
-            time()));
-        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d %H:%i")';
-        $sql = '( phone_user = 2 AND phone_shop = 2 AND  order_time >= ' . $time_limit . ') ';
-        $sql .= 'OR';
-        $sql .= ' ( order_id = 0)';
-        $list = DemandUserV::where('u_id', $u_id)
-            ->where('state', CommonEnum::STATE_IS_OK)
-            ->whereTime('time_begin', date('Y-m-d H:i'))
-            ->whereRaw($sql)
-            ->field('order_id,demand_name as source_name,time_begin,time_end,money as origin_money')
+            ->field('order_id, source_name,time_begin,time_end,origin_money')
             ->paginate($size, false, ['page' => $page]);
         return $list;
 
@@ -47,20 +31,14 @@ class ServiceOrderV extends Model
 
     public static function payList($u_id, $page, $size)
     {
-        $minute = 20;
-        $time_limit = date('Y-m-d H:i', strtotime('-' . $minute . ' minute',
-            time()));
-        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d %H:%i")';
-
-        $sql = '( phone_user = 2 OR phone_shop = 2 AND  order_time < ' . $time_limit . ') ';
-        $sql .= 'OR';
-        $sql .= ' ((phone_user = 1 OR phone_shop = 1) AND pay_id=' . CommonEnum::ORDER_STATE_INIT . ')';
+        $sql = ' ((phone_user = 1 OR phone_shop = 1) AND pay_id=' . CommonEnum::ORDER_STATE_INIT . ')';
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->whereTime('time_begin', date('Y-m-d H:i'))
             ->whereRaw($sql)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money')
+            ->field('order_id, source_name,time_begin,time_end,origin_money')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
