@@ -11,8 +11,10 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\ServiceListV;
+use app\api\model\ServicesT;
 use app\api\model\ShopT;
 use app\api\service\ShopService;
+use app\api\validate\PagingParameter;
 use app\api\validate\ServiceValidate;
 use app\api\validate\ShopValidate;
 use  app\api\service\Token as TokenService;
@@ -439,6 +441,81 @@ class Shop extends BaseController
     {
         $info = ShopService::getInfoForEdit();
         return json($info);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/shop/service/list 87-获取店铺我的服务列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shop/service/list?page=1&size=10
+     * @apiParam (请求参数说明) {int} page  页码
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":4,"per_page":"10","current_page":1,"last_page":1,"data":[{"id":5,"name":"修五金4","price":1000,"cover":"https:\/\/mengant.cn\/static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg"},{"id":4,"name":"修五金3","price":1000,"cover":"https:\/\/mengant.cn\/static\/imgs\/E72CCAE6-79A1-D88D-F755-48FE0DB381BC.jpg"},{"id":2,"name":"修五金2","price":1000,"cover":"https:\/\/mengant.cn\/static\/imgs\/5782AD69-9B21-2B94-DCCA-6AD299AF32E1.jpg"},{"id":1,"name":"修五金1","price":1000,"cover":"https:\/\/mengant.cn\/static\/imgs\/B9439BE2-857E-22D2-D058-CFE57315EEAE.jpg"}]}
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 服务id
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {int} price 价格
+     * @apiSuccess (返回参数说明) {String} cover 封面
+     *
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
+    public function getServiceList($page = 1, $size = 10)
+    {
+        (new PagingParameter())->goCheck();
+        $list = ServicesT::where('shop_id', TokenService::getCurrentTokenVar('shop+id'))
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->field('id, name,price,cover')
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+        return json($list);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/shop/service/delete  88-商铺删除服务
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/shop/service/delete?id=1
+     * @apiParam (请求参数说明) {int} id  服务id
+     * @apiSuccessExample {json} 返回样例:
+     *{"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
+     * @apiSuccess (返回参数说明) {String} msg 信息描述
+     *
+     * @return \think\response\Json
+     * @throws ShopException
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function deleteService()
+    {
+        (new ShopValidate())->scene('id')->goCheck();
+        $id = $this->request->param('id');
+        $res = ServicesT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$res) {
+            throw new ShopException([
+                ['code' => 401,
+                    'msg' => '删除操作失败',
+                    'errorCode' => 600019
+                ]
+            ]);
+        }
+        return json(new SuccessMessage());
 
     }
 

@@ -26,10 +26,10 @@ class ServicesT extends BaseModel
 
 
 
-    public function getCoverAttr($value, $data)
+   /* public function getCoverAttr($value, $data)
     {
         return $this->prefixImgUrl($value, $data);
-    }
+    }*/
 
     /**
      * 小程序获取服务信息

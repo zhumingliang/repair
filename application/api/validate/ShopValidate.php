@@ -37,6 +37,7 @@ class ShopValidate extends BaseValidate
     protected $scene = [
         'save' => ['name', 'phone', 'province', 'city', 'area', 'address', 'head_url', 'imgs',
             'type', 'id_number'],
+        'id' => ['id'],
         'handel' => ['id', 'state'],
         'delete' => ['id', 'city', 'face_token'],
         'booking' => ['s_id', 'area', 'address', 'phone', 'time_begin',
