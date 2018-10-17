@@ -103,23 +103,22 @@ class Order extends BaseController
 
     }
 
-
     /**
-     * @api {GET} /api/v1/order/demand/list 80-获取服务订单列表
+     * @api {GET} /api/v1/order/demand/list 80-获取需求订单列表
      * @apiGroup  MINI
      * @apiVersion 1.0.1
-     * @apiDescription 普通用户/店铺获取服务订单列表
+     * @apiDescription 普通用户/店铺获取需求订单列表
      *
      * @apiExample {get}  请求样例:
      * https://mengant.cn/api/v1/order/demand/list?page=1&size=10&order_type
      * @apiParam (请求参数说明) {int} page  页码
      * @apiParam (请求参数说明) {int} size  每页条数
-     * @apiParam (请求参数说明) {int} order_type  订单类别 ：1 | 待接单；2 | 待付款；3 | 待确认；4 | 待评价；5 | 已完成
+     * @apiParam (请求参数说明) {int} order_type  用户订单类别 ：1 | 待接单；2 | 待付款；3 | 待确认；4 | 待评价；5 | 已完成
+     * 商铺订单类别：1 | 待服务；2 | 待确认；3 | 已完成
      * @apiSuccessExample {json} 待接单-返回样例:
      * {"total":1,"per_page":"10","current_page":1,"last_page":1,"data":[{"order_id":1,"source_name":"修马桶","time_begin":"2018-10-17 08:00:00","time_end":"2018-10-01 12:00:00","money":800}]}
      * @apiSuccessExample {json} 用户（待付款/待确认/待评价/）、商家（待服务；待确认；已完成）-返回样例:
      * {"total":1,"per_page":"10","current_page":1,"last_page":1,"data":[{"order_id":2,"source_name":"修电脑","time_begin":"2018-10-17 08:00:00","time_end":"2018-10-15 12:00:00","origin_money":800,"update_money":800}]}
-     * @apiSuccess (返回参数说明) {int} order_id 订单id
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
@@ -129,7 +128,8 @@ class Order extends BaseController
      * @apiSuccess (返回参数说明) {String} source_name 需求名称
      * @apiSuccess (返回参数说明) {String} time_begin 服务开始时间
      * @apiSuccess (返回参数说明) {String} time_end 服务结束时间
-     * @apiSuccess (返回参数说明) {String} phone 手机号
+     * @apiSuccess (返回参数说明) {String} user_phone 用户手机号
+     * @apiSuccess (返回参数说明) {String} shop_phone 店铺手机号
      * @apiSuccess (返回参数说明) {int} origin_money 订单原金额
      * @apiSuccess (返回参数说明) {int} update_money 订单修改之后金额
      * @apiSuccess (返回参数说明) {int} phone_user 商家是否联系用户：1 | 是；2 | 否
@@ -151,7 +151,35 @@ class Order extends BaseController
     }
 
     /**
-     * 81-获取服务列表
+     * @api {GET} /api/v1/order/service/list 81-获取服务列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription 普通用户/店铺获取服务订单列表
+     *
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/order/service/list?page=1&size=10&order_type
+     * @apiParam (请求参数说明) {int} page  页码
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiParam (请求参数说明) {int} order_type  用户订单类别 ： 已预约；待付款；待确认；待评价；已完成（1-5）
+     * 店铺订单类别：待确认；待服务；服务中；已完成(1-4)
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":"10","current_page":1,"last_page":1,"data":[{"order_id":1,"source_id":5,"shop_id":1,"source_name":"修五金4","time_begin":"2018-10-19 23:24:46","time_end":"2018-10-06 23:24:49","origin_money":1000,"update_money":10000,"phone_shop":1,"phone_user":1}]}
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} order_id 订单id
+     * @apiSuccess (返回参数说明) {String} source_name 服务名称
+     * @apiSuccess (返回参数说明) {String} time_begin 服务开始时间
+     * @apiSuccess (返回参数说明) {String} time_end 服务结束时间
+     * @apiSuccess (返回参数说明) {String} user_phone 用户手机号
+     * @apiSuccess (返回参数说明) {String} shop_phone 店铺手机号
+     * @apiSuccess (返回参数说明) {int} origin_money 订单原金额
+     * @apiSuccess (返回参数说明) {int} update_money 订单修改之后金额
+     * @apiSuccess (返回参数说明) {int} phone_user 商家是否联系用户：1 | 是；2 | 否
+     * @apiSuccess (返回参数说明) {int} phone_shop 用户是否联系商家：1 | 是；2 | 否
+     *
      * 普通用户 type: 已预约；待付款；待确认；待评价；已完成（1-5）
      * 店铺 type: 待确认；待服务；服务中；已完成(1-4)
      */
@@ -163,7 +191,6 @@ class Order extends BaseController
         return json($list);
 
     }
-
 
     /**
      * @api {POST} /api/v1/order/phone/confirm  82-店铺（需求订单）确认电话联系
@@ -377,7 +404,6 @@ class Order extends BaseController
         return json(new SuccessMessage());
 
     }
-
 
     /**
      * @api {POST} /api/v1/order/shop/confirm  86-商家确认服务订单

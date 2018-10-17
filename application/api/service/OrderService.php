@@ -194,8 +194,8 @@ class OrderService
      */
     public static function getServiceList($order_type, $page, $size)
     {
-        $shop_id = 1;//Token::getCurrentTokenVar('shop_id');
-        if (!$shop_id) {
+        $shop_id =Token::getCurrentTokenVar('shop_id');
+        if ($shop_id) {
             return self::getServiceListForShop($shop_id, $order_type, $page, $size);
         } else {
             return self::getServiceListForNormal($order_type, $page, $size);
@@ -360,13 +360,13 @@ class OrderService
                 return ServiceOrderV::shopConfirm($shop_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_SHOP_BEGIN:
-                return ServiceOrderV::payList($shop_id, $page, $size);
+                return ServiceOrderV::service($shop_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_SHOP_ING:
-                return ServiceOrderV::confirmList($shop_id, $page, $size);
+                return ServiceOrderV::serviceIng($shop_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_SHOP_COMPLETE:
-                return ServiceOrderV::commentList($shop_id, $page, $size);
+                return ServiceOrderV::shopComplete($shop_id, $page, $size);
                 break;
 
         }

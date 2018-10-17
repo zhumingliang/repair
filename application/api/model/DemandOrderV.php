@@ -49,7 +49,7 @@ class DemandOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereTime('time_begin', date('Y-m-d H:i'))
             ->whereRaw($sql)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money')
+            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -64,7 +64,7 @@ class DemandOrderV extends Model
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money')
+            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -78,7 +78,7 @@ class DemandOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('confirm_id', '=', 1)
             ->where('comment_id', '=', CommonEnum::ORDER_STATE_INIT)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money')
+            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -100,7 +100,7 @@ class DemandOrderV extends Model
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money')
+            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -112,8 +112,8 @@ class DemandOrderV extends Model
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
-            ->where('service_id', '=', CommonEnum::STATE_IS_FAIL)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,phone')
+            ->where('service_begin', '=', CommonEnum::STATE_IS_FAIL)
+            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -126,7 +126,7 @@ class DemandOrderV extends Model
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,phone')
+            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -146,7 +146,7 @@ class DemandOrderV extends Model
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
-            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,phone')
+            ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
 
