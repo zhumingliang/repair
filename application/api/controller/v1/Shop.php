@@ -21,7 +21,6 @@ use  app\api\service\Token as TokenService;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\ShopException;
 use app\lib\exception\SuccessMessage;
-use think\Validate;
 
 class Shop extends BaseController
 {

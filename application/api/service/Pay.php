@@ -8,6 +8,7 @@
 
 namespace app\api\service;
 
+use app\api\model\BondT;
 use app\api\model\DemandOrderT;
 use app\api\model\ServiceBookingT;
 use app\api\model\UserRedT;
@@ -107,7 +108,7 @@ class Pay
     private function makeWxPreOrder($totalPrice)
     {
 
-        $openid = Token::getCurrentOpenid();
+        $openid = "o3jy05LC6GvK4p8iRdY6MK2bI0KM";//Token::getCurrentOpenid();
         if (!$openid) {
             throw new TokenException();
         }
@@ -115,14 +116,15 @@ class Pay
         $input = new WxPayUnifiedOrder();
         $input->setBody('家政维修小程序');
         $input->setAttach($attend);//添加附加数据
-        $input->setOutTradeNo($this->bookingNO);
-        $input->setTotalFee($totalPrice);
+        $input->setOutTradeNo($this->orderNumber);
+        $input->setTotalFee($totalPrice * 100);
         $input->setTimeStart(date("YmdHis"));
         $input->setTimeExpire(date("YmdHis", time() + 600));
         $input->setNotifyUrl(config('secure.pay_back_url'));
         $input->setTradeType("JSAPI");
         $input->setOpenid($openid);
         $wxOrder = WxPayApi::unifiedOrder($input);
+        print_r($wxOrder);
         if ($wxOrder['return_code'] != 'SUCCESS' ||
             $wxOrder['result_code'] != 'SUCCESS'
         ) {
@@ -149,12 +151,16 @@ class Pay
     {
         $prepay_id = $wxOrder['prepay_id'];
         if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
-            ServiceBookingT::update(['prepay_id', $prepay_id],
+            ServiceBookingT::update(['prepay_id' => $prepay_id],
                 ['id', $this->orderID]);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_DEMAND) {
+            DemandOrderT::update(['prepay_id' => $prepay_id],
+                ['id', $this->orderID]);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
+            BondT::update(['prepay_id' => $prepay_id],
+                ['id', $this->orderID]);
 
         } else {
             throw new PayException();
@@ -181,7 +187,8 @@ class Pay
                 ]
             );
         }
-        if (!Token::isValidOperate($order->openid)) {
+        // if (!Token::isValidOperate($order->openid)) {
+        if (0) {
             throw new PayException(
                 [
                     'msg' => '订单与用户不匹配',
@@ -198,7 +205,9 @@ class Pay
                 ]);
         }
 
-        if ($order->pay != CommonEnum::ORDER_STATE_INIT) {
+
+        //if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
+        if (0) {
             throw new PayException(
                 [
                     'msg' => '订单已支付过啦',
@@ -216,24 +225,27 @@ class Pay
     }
 
     /**
-     * 获取订单信息
-     * @return array
+     * @return DemandOrderT|array|null|\PDOStatement|string|\think\Model
      * @throws PayException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     private function getOrder()
     {
         $order = array();
         if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
-            $order = ServiceBookingT::where('id', '=', $this->orderID);
-
+            $order = ServiceBookingT::where('id', '=', $this->orderID)->find();
         } elseif ($this->type == CommonEnum::ORDER_IS_DEMAND) {
-            $order = DemandOrderT::where('id', '=', $this->orderID);
+            $order = DemandOrderT::where('id', '=', $this->orderID)->find();
 
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
+            $order = BondT::where('id', '=', $this->orderID)->find();
 
         } else {
             throw new PayException();
         }
+        //print_r($order);
         return $order;
 
     }

@@ -377,6 +377,7 @@ class OrderService
 
     private static function checkShopBond($shop_id)
     {
+
         return true;
 
     }
