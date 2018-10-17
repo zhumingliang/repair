@@ -311,9 +311,18 @@ class OrderService
     }
 
 
+    /**
+     *  已预约；待付款；待确认；待评价；已完成（1-5）
+     * @param $order_type
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     */
     private static function getServiceListForNormal($order_type, $page, $size)
     {
-        $u_id = 1;//Token::getCurrentUid();
+        $u_id = Token::getCurrentUid();
         switch ($order_type) {
             case OrderEnum::SERVICE_NORMAL_BOOKING:
                 return ServiceOrderV::bookingList($u_id, $page, $size);
@@ -336,7 +345,7 @@ class OrderService
     }
 
     /**
-     *  已预约；待付款；待确认；待评价；已完成（1-5）
+     * 待确认；待服务；服务中；已完成(1-4)
      * @param $shop_id
      * @param $order_type
      * @param $page
@@ -348,7 +357,7 @@ class OrderService
 
         switch ($order_type) {
             case OrderEnum::SERVICE_SHOP_CONFIRM:
-                return ServiceOrderV::takingList($shop_id, $page, $size);
+                return ServiceOrderV::shopConfirm($shop_id, $page, $size);
                 break;
             case OrderEnum::SERVICE_SHOP_BEGIN:
                 return ServiceOrderV::payList($shop_id, $page, $size);

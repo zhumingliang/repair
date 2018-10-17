@@ -166,17 +166,15 @@ class Order extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/order/phone/confirm  82-用户/店铺（需求订单/服务订单）确认电话联系
+     * @api {POST} /api/v1/order/phone/confirm  82-店铺（需求订单）确认电话联系
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 确认电话联系
      * @apiExample {post}  请求样例:
      *    {
      *       "id": 1,
-     *       "type": 2
      *     }
      * @apiParam (请求参数说明) {int} id  需求id
-     * @apiParam (请求参数说明) {int} type  订单类别：1 | 服务订单；2 | 需求订单
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
@@ -192,15 +190,10 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('phone')->goCheck();
         $id = $this->request->param('id');
-        $type = $this->request->param('type');
         $shop_id = TokenService::getCurrentTokenVar('shop_id');
         $user = $shop_id ? 'phone_user' : 'phone_shop';
 
-        if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $res = DemandOrderT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
-        } else {
-            $res = ServiceBookingT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
-        }
+        $res = DemandOrderT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         if (!$res) {
             throw  new OrderException(
                 ['code' => 401,
@@ -215,18 +208,19 @@ class Order extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/order/price/update  82-商家修改订单价格（需求订单/服务订单）
+     * @api {POST} /api/v1/order/price/update  82-商家修改订单价格（需求订单）
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 商家修改订单价格
      * @apiExample {post}  请求样例:
      *    {
      *       "id": 1,
-     *       "type": 2
+     *       "money": 100,
+     *       "price_remark": "我就是想修改价格"
      *     }
      * @apiParam (请求参数说明) {int} id  需求id
-     * @apiParam (请求参数说明) {int} type  订单类别：1 | 服务订单；2 | 需求订单
      * @apiParam (请求参数说明) {int} money 修改之后的价格
+     * @apiParam (请求参数说明) {String} price_remark 备注
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
@@ -239,14 +233,11 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('price')->goCheck();
         $id = $this->request->param('id');
-        $type = $this->request->param('type');
+        $remark = $this->request->param('remark');
         $money = $this->request->param('money');
+        $res = DemandOrderT::update(['origin_money' => $money, 'price_remark' => $remark],
+            ['id' => $id]);
 
-        if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $res = DemandOrderT::update(['origin_money' => $money], ['id' => $id]);
-        } else {
-            $res = ServiceBookingT::update(['origin_money' => $money], ['id' => $id]);
-        }
         if (!$res) {
             throw  new OrderException(
                 ['code' => 401,
@@ -384,6 +375,48 @@ class Order extends BaseController
 
         }
         return json(new SuccessMessage());
+
+    }
+
+
+    /**
+     * @api {POST} /api/v1/order/shop/confirm  86-商家确认服务订单
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "id": 1,
+     *       "money": 100,
+     *       "price_remark": "我就是想修改价格"
+     *     }
+     * @apiParam (请求参数说明) {int} id  服务id
+     * @apiParam (请求参数说明) {int} money 修改之后的价格（如果修改价格，需要传入后台）
+     * @apiParam (请求参数说明) {String} price_remark 备注
+     * @apiSuccessExample {json} 返回样例:
+     *{"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
+     * @apiSuccess (返回参数说明) {String} msg 信息描述
+     * @throws OrderException
+     * @throws \app\lib\exception\ParameterException
+     */
+
+    public function shopConfirmService()
+    {
+        (new OrderValidate())->scene('id')->goCheck();
+        $params = $this->request->param();
+        $params['phone_user'] = 2;
+        $id = $params['id'];
+        $res = ServiceBookingT::update($params, ['id' => $id]);
+        if ($res) {
+            throw  new OrderException(
+                ['code' => 401,
+                    'msg' => '确认状态修改失败！',
+                    'errorCode' => 150009
+                ]
+            );
+        }
+
 
     }
 

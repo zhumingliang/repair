@@ -19,11 +19,10 @@ class OrderValidate extends BaseValidate
         'order_type' => 'require|isPositiveInteger',
         'page' => 'require|isPositiveInteger',
         'size' => 'require|isPositiveInteger',
-        'o_id'=>'require|isPositiveInteger',
-        's_id'=>'require|isPositiveInteger',
-        'score_type'=>'require|isPositiveInteger|in:1,2,3',
-        'score'=>'require|isPositiveInteger',
-
+        'o_id' => 'require|isPositiveInteger',
+        's_id' => 'require|isPositiveInteger',
+        'score_type' => 'require|isPositiveInteger|in:1,2,3',
+        'score' => 'require|isPositiveInteger',
 
 
     ];
@@ -31,9 +30,9 @@ class OrderValidate extends BaseValidate
     protected $scene = [
         'id' => ['id'],
         'phone' => ['id', 'type'],
-        'price' => ['id', 'type', 'money'],
+        'price' => ['id', 'money'],
         'confirm' => ['id', 'type', 'confirm'],
-        'comment' => ['o_id', 's_id', 'score_type','score'],
+        'comment' => ['o_id', 's_id', 'score_type', 'score'],
         'list' => ['order_type', 'page', 'size']
     ];
 
