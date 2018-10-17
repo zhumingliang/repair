@@ -14,7 +14,7 @@ class ServiceValidate extends BaseValidate
     protected $rule = [
         'c_id' => 'require|isPositiveInteger',
         'name' => 'require',
-        'arena' => 'require',
+        'area' => 'require',
         'price' => 'require',
         'unit' => 'require',
         'cover' => 'require',
