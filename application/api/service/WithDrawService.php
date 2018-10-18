@@ -9,10 +9,9 @@
 namespace app\api\service;
 
 
-use app\api\controller\v1\Order;
 use app\api\model\BondBalanceV;
-use app\api\model\BondT;
 use app\api\model\BusinessBalanceV;
+use app\api\model\PaymentsV;
 use app\api\model\WithdrawMiniT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\WithdrawException;
@@ -41,8 +40,8 @@ class WithDrawService
         }
     }
 
-
     /**
+     * 保存提现申请
      * @param $type
      * @param $money
      * @throws WithdrawException
@@ -76,6 +75,41 @@ class WithDrawService
         ]);
         if (!$res) {
             throw  new WithdrawException();
+        }
+    }
+
+    /**
+     * 获取提现列表
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public static function withdraws($page, $size)
+    {
+        $u_id = Token::getCurrentUid();
+        return WithdrawMiniT::getList($u_id, $page, $size);
+    }
+
+
+    /**
+     * 收支明细列表
+     * @param $page
+     * @param $size
+     * @return array|\think\Paginator|void
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public static function payments($page, $size)
+    {
+        $u_id = Token::getCurrentUid();
+        $shop_id = Token::getCurrentTokenVar('shop_id');
+        if ($shop_id) {
+            return PaymentsV::getListForShop($shop_id, $u_id, $page, $size);
+        } else {
+            return PaymentsV::getListForNormal($u_id, $page, $size);
+
         }
     }
 

@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\model\BondT;
 use app\api\model\WithdrawMiniT;
 use app\api\service\WithDrawService;
+use app\api\validate\PagingParameter;
 use app\api\validate\WithdrawValidate;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\SuccessMessage;
@@ -81,7 +82,7 @@ class Withdraw extends BaseController
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
             ->where('u_id', TokenService::getCurrentUid())
             ->count();
-  
+
         return json(['state' => $count + 1]);
     }
 
@@ -136,4 +137,70 @@ class Withdraw extends BaseController
         }
     }
 
+    /**
+     * @api {GET} /api/v1/withdraws 94-获取提现记录
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/withdraws?&page=1&size=15
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":1,"money":1000,"account":"微信零钱","create_time":"2018-10-18 13:31:23","state":1,"pay_id":99999,"type":1}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 订单id
+     * @apiSuccess (返回参数说明) {int} money 提现金额
+     * @apiSuccess (返回参数说明) {String} account 到账账户
+     * @apiSuccess (返回参数说明) {int} state 订单状态：1 | 正常；2 | 拒绝
+     * @apiSuccess (返回参数说明) {int} pay_id 平台是否支付到账：99999 为未支付
+     * @apiSuccess (返回参数说明) {int} type 提现类别：1 | 保证金；2 | 余额
+     * @apiSuccess (返回参数说明) {String} create_time 提现时间
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function getWithdrawList()
+    {
+        (new PagingParameter())->goCheck();
+        $params = $this->request->param();
+        $list = WithDrawService::withdraws($params['page'], $params['size']);
+        return json($list);
+    }
+
+    /**
+     * @api {GET} /api/v1/payments 95-获取收支明细
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/payments?&page=1&size=15
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"order_name":"修电脑","order_time":"2018-10-16 11:26:55","money":-800}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {String} order_name 消费名称
+     * @apiSuccess (返回参数说明) {String} order_time 订单时间
+     * @apiSuccess (返回参数说明) {int} money 金额
+
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \think\Exception
+     */
+    public function getPayments()
+    {
+        (new PagingParameter())->goCheck();
+        $params = $this->request->param();
+        $list = WithDrawService::payments($params['page'], $params['size']);
+        return json($list);
+
+    }
 }
