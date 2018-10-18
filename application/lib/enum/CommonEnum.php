@@ -35,4 +35,8 @@ class CommonEnum
 
     const EXTEND_REPAIR = 2;
 
+    const WITHDRAW_BOND = 1;
+
+    const WITHDRAW_BUSINESS = 2;
+    
 }

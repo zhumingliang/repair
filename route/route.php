@@ -137,3 +137,9 @@ Route::rule('api/:version/pay/notify', 'api/:version.Pay/receiveNotify');
 
 Route::post('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
 Route::post('api/:version/bond/save', 'api/:version.Bond/save');
+
+Route::get('api/:version/withdraw/balance', 'api/:version.Withdraw/getBalance');
+Route::get('api/:version/withdraw/bond/check', 'api/:version.Withdraw/checkBond');
+Route::get('api/:version/withdraw/check', 'api/:version.Withdraw/checkWithdraw');
+Route::get('api/:version/withdraw/apply', 'api/:version.Withdraw/apply');
+
