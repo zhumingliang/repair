@@ -151,15 +151,15 @@ class Pay
         $prepay_id = $wxOrder['prepay_id'];
         if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
             ServiceBookingT::update(['prepay_id' => $prepay_id],
-                ['id'=>$this->orderID]);
+                ['id' => $this->orderID]);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_DEMAND) {
             DemandOrderT::update(['prepay_id' => $prepay_id],
-                ['id'=>$this->orderID]);
+                ['id' => $this->orderID]);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
             BondT::update(['prepay_id' => $prepay_id],
-                ['id'=> $this->orderID]);
+                ['id' => $this->orderID]);
 
         } else {
             throw new PayException();
@@ -186,8 +186,8 @@ class Pay
                 ]
             );
         }
-        // if (!Token::isValidOperate($order->openid)) {
-        if (0) {
+        if (!Token::isValidOperate($order->openid)) {
+            //if (0) {
             throw new PayException(
                 [
                     'msg' => '订单与用户不匹配',
@@ -205,8 +205,8 @@ class Pay
         }
 
 
-        //if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
-        if (0) {
+        if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
+            //if (0) {
             throw new PayException(
                 [
                     'msg' => '订单已支付过啦',
@@ -238,8 +238,9 @@ class Pay
             $order = DemandOrderT::where('id', '=', $this->orderID)->find();
 
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
-            $order = BondT::where('id', '=', $this->orderID)->find();
-
+            $order = BondT::where('id', '=', $this->orderID)
+                ->field('id,u_id,1 as state,money as origin_money,pay_id,openid,order_number')
+                ->find();
         } else {
             throw new PayException();
         }
