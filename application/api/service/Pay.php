@@ -124,7 +124,6 @@ class Pay
         $input->setTradeType("JSAPI");
         $input->setOpenid($openid);
         $wxOrder = WxPayApi::unifiedOrder($input);
-        print_r($wxOrder);
         if ($wxOrder['return_code'] != 'SUCCESS' ||
             $wxOrder['result_code'] != 'SUCCESS'
         ) {
@@ -152,15 +151,15 @@ class Pay
         $prepay_id = $wxOrder['prepay_id'];
         if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
             ServiceBookingT::update(['prepay_id' => $prepay_id],
-                ['id', $this->orderID]);
+                ['id'=>$this->orderID]);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_DEMAND) {
             DemandOrderT::update(['prepay_id' => $prepay_id],
-                ['id', $this->orderID]);
+                ['id'=>$this->orderID]);
 
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
             BondT::update(['prepay_id' => $prepay_id],
-                ['id', $this->orderID]);
+                ['id'=> $this->orderID]);
 
         } else {
             throw new PayException();
@@ -233,7 +232,6 @@ class Pay
      */
     private function getOrder()
     {
-        $order = array();
         if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
             $order = ServiceBookingT::where('id', '=', $this->orderID)->find();
         } elseif ($this->type == CommonEnum::ORDER_IS_DEMAND) {
@@ -245,7 +243,6 @@ class Pay
         } else {
             throw new PayException();
         }
-        //print_r($order);
         return $order;
 
     }
