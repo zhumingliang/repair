@@ -142,7 +142,6 @@ class Withdraw extends BaseController
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription
-     *
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/withdraws?&page=1&size=15
      * @apiParam (请求参数说明) {int} page 当前页码
@@ -189,8 +188,6 @@ class Withdraw extends BaseController
      * @apiSuccess (返回参数说明) {String} order_name 消费名称
      * @apiSuccess (返回参数说明) {String} order_time 订单时间
      * @apiSuccess (返回参数说明) {int} money 金额
-
-     *
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      * @throws \think\Exception
