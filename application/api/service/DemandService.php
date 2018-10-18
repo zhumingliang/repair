@@ -30,6 +30,11 @@ class DemandService
         Db::startTrans();
         try {
             $imgs = $params['imgs'];
+            if (strlen($imgs)) {
+                $imgs_arr = explode(',', $imgs);
+                $params['cover'] = ImageService::getImageUrl($imgs_arr[0]);
+            }
+
             unset($params['imgs']);
             $obj = DemandT::create($params);
             if (!$obj) {
