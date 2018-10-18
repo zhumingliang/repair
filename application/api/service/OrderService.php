@@ -154,7 +154,7 @@ class OrderService
      */
     private static function getServiceInfo($o_id)
     {
-        $info = ServiceBookingV::where('order_id', $o_id)->hidden(['state'])->find();
+        $info = ServiceOrderV::where('order_id', $o_id)->hidden(['state'])->find();
         return $info;
     }
 
@@ -194,7 +194,7 @@ class OrderService
      */
     public static function getServiceList($order_type, $page, $size)
     {
-        $shop_id =Token::getCurrentTokenVar('shop_id');
+        $shop_id = Token::getCurrentTokenVar('shop_id');
         if ($shop_id) {
             return self::getServiceListForShop($shop_id, $order_type, $page, $size);
         } else {
