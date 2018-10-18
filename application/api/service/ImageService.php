@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\ImgT;
+use app\api\model\OrderListV;
 use app\api\model\ShopStaffImgT;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
@@ -127,7 +128,8 @@ class ImageService
         $shop_id = $shop['s_id'];
         //获取该店铺订单列表
         $orders = self::getOrderForShop($shop_id);
-        return $orders;
+        $shop_info = ShopT::where('id', $shop_id)->field('name,area,address,phone')->find();
+        return ['orders' => $orders, 'shop_info' => $shop_info];
 
 
     }
@@ -135,10 +137,16 @@ class ImageService
     /**
      * 获取店铺此时正在服务中服务订单和需求订单
      * @param $shop_id
-     * @return array
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     private static function getOrderForShop($shop_id)
     {
+        $list = OrderListV::where('shop_id', $shop_id)
+            ->select();
+        return $list;
 
     }
 
