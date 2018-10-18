@@ -139,7 +139,7 @@ class ImageService
      */
     private static function getOrderForShop($shop_id)
     {
-        return array();
+
     }
 
 
