@@ -274,7 +274,7 @@ class CircleService
 
                 $cm = new CircleCommentT();
                 $obj = $cm->where('id', $id)->find();
-                $obj['zan'] = $obj['zan'] + 1;
+                $obj->zan = $obj->zan + 1;
                 $up_id = $cm->save();
                 if (!$up_id) {
                     throw new CircleException(['code' => 401,
