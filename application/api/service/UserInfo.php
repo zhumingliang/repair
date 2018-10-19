@@ -149,7 +149,7 @@ class UserInfo
         $cache = json_encode($cache);
         $token = Request::header('token');
         // $result = Redis::instance()->set($token, $cache, config('setting.token_expire_in'));
-        $result = Cache::remember($token, $cache, config('setting.token_expire_in'));
+        $result = Cache::set($token, $cache, config('setting.token_expire_in'));
         if (!$result) {
             throw new TokenException(['msg' => '数据缓存失败',
                 'errorCode' => 20002]);
