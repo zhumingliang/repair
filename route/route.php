@@ -19,7 +19,7 @@ Route::get('api/:version/index', 'api/:version.Index/index');
 
 Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 Route::get('api/:version/token/user', 'api/:version.Token/getUserToken');
-//Route::get('api/:version/token/userInfo', 'api/:version.Token/userInfo');
+Route::post('api/:version/user/info', 'api/:version.User/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 
 Route::rule('api/:version/image/save', 'api/:version.Image/save');
