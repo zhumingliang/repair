@@ -70,7 +70,8 @@ class UserInfo
                 'session_key' => $session_key,
                 'encryptedData' => $this->encryptedData,
                 'iv' => $this->iv,
-                'data' => $data
+                'data' => $data,
+                'errCode'=>$errCode
 
             ]);
             throw new WeChatException(['code' => 401,
