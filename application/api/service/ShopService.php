@@ -11,9 +11,13 @@ namespace app\api\service;
 
 use app\api\model\BondBalanceV;
 use app\api\model\CityDiscountT;
+use app\api\model\CollectionServicesT;
+use app\api\model\CollectionShopT;
 use app\api\model\ExtendMoneyV;
+use app\api\model\OrderCommentT;
 use app\api\model\ServiceBookingT;
 use app\api\model\ServiceExtendT;
+use app\api\model\ServiceListV;
 use app\api\model\ServicesImgT;
 use app\api\model\ServicesT;
 use app\api\model\ShopImgT;
@@ -388,7 +392,7 @@ class ShopService
      */
     public static function getInfoForEdit()
     {
-        $u_id = 1;//Token::getCurrentUid();
+        $u_id = Token::getCurrentUid();
         $info = ShopT::getShopInfoForEdit($u_id);
         return $info;
     }
@@ -494,6 +498,45 @@ class ShopService
         }
 
 
+    }
+
+    /**
+     * 用户进入店铺 获取店铺信息
+     * @param $id
+     * @return array
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     */
+    public static function getInfoForNormal($id)
+    {
+
+        $info = ShopT::getShopInfoForNormal($id);
+
+        $comment_count = OrderCommentT::where('s_id', $id)
+            ->count();
+
+
+        $collection = CollectionShopT::where('u_id', Token::getCurrentUid())
+            ->where('s_id', $id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->count();
+
+
+        return [
+            'info' => $info,
+            'comment_count' => $comment_count,
+            'score' => self::getShopScore($id),
+            'collection' => $collection
+        ];
+    }
+
+
+    public static function getShopScore($shop_id)
+    {
+        $comment_score = OrderCommentT::where('id', $shop_id)
+            ->avg('score');
+        $score = $comment_score ? $comment_score : 5;
+        return $score;
     }
 
 

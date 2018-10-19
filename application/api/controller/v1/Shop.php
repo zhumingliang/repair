@@ -518,5 +518,76 @@ class Shop extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/shop/service/normal/list 98-用户进入商家店铺获取店铺服务列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shop/service/normal/list?page=1&size=1&id=1
+     * @apiParam (请求参数说明) {int} page  页码
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiParam (请求参数说明) {int} id  店铺id
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":3,"per_page":"1","current_page":1,"last_page":3,"data":[{"id":2,"shop_id":1,"name":"修五金2","cover":"https:\/\/mengant.cn\/static\/imgs\/5782AD69-9B21-2B94-DCCA-6AD299AF32E1.jpg","sell_num":"0","price":1000,"unit":"ci"}]}
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 服务id
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {int} price 价格
+     * @apiSuccess (返回参数说明) {String} cover 封面
+     * @apiSuccess (返回参数说明) {String} unit 单位
+     * @apiSuccess (返回参数说明) {int} sell_num 出售服务数量
+     *
+     */
+    public function getServiceListForNormal()
+    {
+        (new  ShopValidate())->scene('list')->goCheck();
+        $params = $this->request->param();
+        $list = ServiceListV::where('shop_id', $params['id'])
+            ->field('id,shop_id,name,cover,sell_num,price,unit')
+            ->paginate($params['size'], false, ['page' => $params['page']])->toArray();
+        return json($list);
+
+
+    }
+
+
+    /**
+     * @api {GET} /api/v1/shop/info/normal 99-用户进入店铺 获取店铺信息
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shop/info/normal?id=1
+     * @apiParam (请求参数说明) {int} id  店铺id
+     * @apiSuccessExample {json} 返回样例:
+     * {"info":{"id":1,"name":"修之家","area":"铜官区","address":"","imgs":[{"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}}]},"comment_count":1,"score":5,"collection":1}
+     * @apiSuccess (返回参数说明) {int} id 店铺id
+     * @apiSuccess (返回参数说明) {String} name 店铺名称
+     * @apiSuccess (返回参数说明) {String} phone 商家手机号
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} address 详细地址
+     * @apiSuccess (返回参数说明) {String} type 需求类别：1 | 维修；2 | 家政
+     * @apiSuccess (返回参数说明) {String} imgs 商家资料图片
+     * @apiSuccess (返回参数说明) {String} head_url 头像
+     * @apiSuccess (返回参数说明) {int} comment_count 评论数
+     * @apiSuccess (返回参数说明) {int} score 店铺分数
+     * @apiSuccess (返回参数说明) {int} collection 是否收藏：1 是；0 | 否
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function getShopInfoForNormal()
+    {
+        $id = $this->request->param('id');
+        $info = ShopService::getInfoForNormal($id);
+
+        return json($info);
+    }
+
 
 }

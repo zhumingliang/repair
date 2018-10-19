@@ -26,10 +26,10 @@ class ShopT extends BaseModel
             's_id', 'id');
     }
 
-  /*  public function getHeadUrlAttr($value, $data)
-    {
-        return $this->prefixImgUrl($value, $data);
-    }*/
+    /*  public function getHeadUrlAttr($value, $data)
+      {
+          return $this->prefixImgUrl($value, $data);
+      }*/
 
 
     public static function getShopInfo($u_id)
@@ -42,6 +42,22 @@ class ShopT extends BaseModel
                 }
             ])
             ->hidden(['u_id', 'create_time', 'update_time', 'frozen'])
+            ->find();
+        return $info;
+
+    }
+
+
+    public static function getShopInfoForNormal($id)
+    {
+        $info = self::where('id', '=', $id)
+            ->with([
+                'imgs' => function ($query) {
+                    $query->with(['imgUrl'])
+                        ->where('state', '=', 1);
+                }
+            ])
+            ->field('id,name,area,address,phone')
             ->find();
         return $info;
 

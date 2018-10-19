@@ -34,6 +34,7 @@ Route::get('api/:version/demand', 'api/:version.Demand/getTheDemand');
 Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
 Route::get('api/:version/shop/info', 'api/:version.Shop/shopInfo');
+Route::get('api/:version/shop/info/normal', 'api/:version.Shop/getShopInfoForNormal');
 Route::get('api/:version/shop/info/edit', 'api/:version.Shop/shopInfoForEdit');
 Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
 Route::post('api/:version/service/booking', 'api/:version.Shop/bookingService');
@@ -43,6 +44,7 @@ Route::get('api/:version/shop/service/list', 'api/:version.Shop/getServiceList')
 Route::post('api/:version/shop/staff/examine', 'api/:version.Shop/examineStaff');
 Route::post('api/:version/shop/staff/delete', 'api/:version.Shop/deleteStaff');
 Route::post('api/:version/shop/service/delete', 'api/:version.Shop/deleteService');
+Route::get('api/:version/shop/service/normal/list', 'api/:version.Shop/getServiceListForNormal');
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
 
@@ -127,6 +129,7 @@ Route::get('api/:version/order', 'api/:version.Order/getOrderInfo');
 Route::post('api/:version/order/demand/list', 'api/:version.Order/getDemandList');
 Route::post('api/:version/order/service/list', 'api/:version.Order/getServiceList');
 Route::post('api/:version/order/comment', 'api/:version.Order/comment');
+Route::get('api/:version/order/comments', 'api/:version.Order/getCommentsForShop');
 Route::post('api/:version/order/confirm', 'api/:version.Order/confirm');
 Route::post('api/:version/order/shop/confirm', 'api/:version.Order/shopConfirmService');
 Route::post('api/:version/order/service/begin', 'api/:version.Order/serviceBegin');

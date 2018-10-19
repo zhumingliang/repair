@@ -43,7 +43,8 @@ class ShopValidate extends BaseValidate
         'booking' => ['s_id', 'area', 'address', 'phone', 'time_begin',
             'time_end'],
         'service' => ['type', 'page', 'size', 'c_id', 'area'],
-        'staff' => ['id', 'img_id', 'city']
+        'staff' => ['id', 'img_id', 'city'],
+        'list' => ['id', 'page', 'size']
     ];
 
 }

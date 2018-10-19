@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\DemandOrderT;
+use app\api\model\OrderCommentV;
 use app\api\model\ServiceBookingT;
 use app\api\service\OrderService;
 use app\api\validate\OrderValidate;
@@ -441,6 +442,44 @@ class Order extends BaseController
                 ]
             );
         }
+
+
+    }
+
+
+    /**
+     * @api {GET} /api/v1/order/comments 100-获取店铺评论列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/order/comments?page=1&size=1&id=1
+     * @apiParam (请求参数说明) {int} page  页码
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiParam (请求参数说明) {int} id  店铺id
+     * @apiSuccessExample {json} 返回样例:
+    {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"shop_id":1,"content":"这次服务我很满意。","avatarUrl":"","create_time":"2018-10-17 11:16:46"}]}
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} shop_id 店铺id
+     * @apiSuccess (返回参数说明) {String} content 评论内容
+     * @apiSuccess (返回参数说明) {String} avatarUrl 头像
+     * @apiSuccess (返回参数说明) {String} create_time 创建时间
+     *
+     * @param $id
+     * @param $page
+     * @param $size
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     */
+    public function getCommentsForShop($id, $page, $size)
+    {
+        $list = OrderCommentV::where('shop_id', $id)
+            ->paginate($size, false, ['page' => $page]);
+        return json($list);
 
 
     }
