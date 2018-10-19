@@ -9,15 +9,13 @@
 namespace app\api\service;
 
 
-use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
 use app\lib\exception\UserInfoException;
 use app\lib\exception\WeChatException;
 use think\facade\Cache;
 use think\facade\Request;
-use WxMsg\WXBizDataCrypt;
-use zml\tp_tools\Redis;
 use app\api\model\UserT as UserModel;
+use wxmsg\WXBizDataCrypt;
 
 class UserInfo
 {

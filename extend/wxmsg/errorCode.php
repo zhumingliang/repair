@@ -11,7 +11,7 @@
  *    <li>-41016: base64解密失败</li>
  * </ul>
  */
-namespace WxMsg;
+namespace wxmsg;
 
 class ErrorCode
 {

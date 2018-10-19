@@ -7,7 +7,7 @@
  */
 
 
-namespace WxMsg;
+namespace wxmsg;
 
 class WXBizDataCrypt
 {

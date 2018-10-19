@@ -26,7 +26,7 @@ $encryptedData="CiyLU1Aw2KjvrjMdj8YKliAjtP4gsMZM
 
 $iv = 'r7BXXKkLb8qrSNn05n0qiA==';
 
-$pc = new WXBizDataCrypt($appid, $sessionKey);
+$pc = new \wxmsg\WXBizDataCrypt($appid, $sessionKey);
 $errCode = $pc->decryptData($encryptedData, $iv, $data );
 
 if ($errCode == 0) {

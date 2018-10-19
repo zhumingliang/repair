@@ -17,6 +17,7 @@ use app\api\validate\ImageValidate;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\ImageException;
 use app\lib\exception\SuccessMessage;
+use WxMsg\WXBizDataCrypt;
 
 class Image extends BaseController
 {
@@ -107,8 +108,6 @@ class Image extends BaseController
         $city = $this->request->param('city');
         $orders = ImageService::staffSearch($file, md5($city));
         return json($orders);
-
-
     }
 
 
