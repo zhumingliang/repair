@@ -18,6 +18,7 @@ use app\api\model\CommentZanT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\CircleException;
+use think\Db;
 
 class CircleService
 {
@@ -272,10 +273,8 @@ class CircleService
                     'errorCode' => 160009
                 ]);
 
-                $cm = new CircleCommentT();
-                $obj = $cm->where('id', $id)->find();
-                $obj->zan = $obj->zan + 1;
-                $up_id = $cm->save();
+                $up_id = Db::name('circle_comment_t')->where('id', $id)->setInc('zan', 1);
+
                 if (!$up_id) {
                     throw new CircleException(['code' => 401,
                         'msg' => '用户点赞失败',
