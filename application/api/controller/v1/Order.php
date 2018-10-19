@@ -446,7 +446,6 @@ class Order extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/order/comments 100-获取店铺评论列表
      * @apiGroup  MINI
@@ -458,7 +457,7 @@ class Order extends BaseController
      * @apiParam (请求参数说明) {int} size  每页条数
      * @apiParam (请求参数说明) {int} id  店铺id
      * @apiSuccessExample {json} 返回样例:
-    {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"shop_id":1,"content":"这次服务我很满意。","avatarUrl":"","create_time":"2018-10-17 11:16:46"}]}
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"shop_id":1,"content":"这次服务我很满意。","avatarUrl":"","create_time":"2018-10-17 11:16:46"}]}
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
@@ -482,6 +481,12 @@ class Order extends BaseController
         return json($list);
 
 
+    }
+
+
+    public function indexSearch()
+    {
+        $params = $this->request->param();
     }
 
 

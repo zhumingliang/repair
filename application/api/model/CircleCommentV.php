@@ -24,7 +24,7 @@ class CircleCommentV extends Model
     public static function getList($page, $size, $c_id)
     {//Token::getCurrentUid()
         $pagingData = self::with(['zans' => function ($query) {
-            $query->where('u_id', 1);
+            $query->where('u_id', Token::getCurrentUid());
         }])->where('c_id', '=', $c_id)
             ->hidden(['openid', 'c_id'])
             ->order('create_time desc')
