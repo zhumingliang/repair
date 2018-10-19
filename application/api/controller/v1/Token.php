@@ -103,9 +103,6 @@ class Token extends Controller
      */
     public function getUserToken($code = '')
     {
-
-        //print_r($user);
-
         (new TokenGet())->scene('wx')->goCheck();
         $ut = new UserToken($code);
         $token = $ut->get();

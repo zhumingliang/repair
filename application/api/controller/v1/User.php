@@ -53,6 +53,18 @@ class User extends BaseController
         $user_info = new UserInfoService($iv, $encryptedData);
         $user_info->saveUserInfo();
         return json(new SuccessMessage());
+        /*
+                $appid = 'wxd11ca80b97562519';
+                $sessionKey = 'q8E0dSZWz9oFfCFZwlISyA==';
+
+                $encryptedData="MNxlGRub5DEw+scX/2NiOL906tAZhkAcqGL8JeXJJkkBqAAgG/1tD2wmukeAxOa5FaeJiMFgquVOXQ/2RrpJHxR7iQ5Z808e7q1MbwlxuCAoqqvnD9XQkAiaVk9Ozf/x/MwlGo5ssJbBgwAEnVcK9XtP/hOibWHCAF+4WgUAkHH1mynjJnFHJYY/bC0uIS3kIFz/xiuA46HScGCHqEXmpSRxh1QVcJgRcXIS8Tiz4p1oCXSGVxUrCfl+Bfk09dHUH8ev3FB/tCpiFOngwr7gZshSvtGbTDbvzesCaMoTBLepIWN4/ZLx4zDu9ntAT7uoatYAJzt1YkS9sRIfUzNMPFHloj2BBFC6yj7alv3iIQXszukf9e6gVQ2gR3fNrqGXHHgJJfd3Pz54dAQWkDjgo7eEWsoqXPF0ONuy3Te+Q7zTk6L0JGmmohN7ijwkixYzQRiEU0CkvUIF01vu9lbgwpWdzLh9iTvg0ATMIJf5Tgc=
+        ";
+
+                $iv = 'g2n/InvQRsZnml2KAFTVGA==';
+
+                $pc = new \wxmsg\WXBizDataCrypt($appid, $sessionKey);
+                $errCode = $pc->decryptData($encryptedData, $iv, $data );
+                echo $errCode;*/
     }
 
 
