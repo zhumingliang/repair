@@ -273,14 +273,15 @@ class CircleService
                     'errorCode' => 160009
                 ]);
 
-                $up_id = Db::name('circle_comment_t')->where('id', $id)->setInc('zan', 1);
+                $up_id = Db::name('circle_comment_t')->fetchSql(true)->where('id', $id)->setInc('zan', 1);
+                echo $up_id;
 
-                if (!$up_id) {
-                    throw new CircleException(['code' => 401,
-                        'msg' => '用户点赞失败',
-                        'errorCode' => 160010
-                    ]);
-                }
+                /*  if (!$up_id) {
+                      throw new CircleException(['code' => 401,
+                          'msg' => '用户点赞失败',
+                          'errorCode' => 160010
+                      ]);
+                  }*/
             }
 
             return 1;
