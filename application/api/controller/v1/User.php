@@ -8,7 +8,9 @@
 
 namespace app\api\controller\v1;
 
+use app\api\model\ImgT;
 use app\api\model\UserT;
+use app\api\service\ImageService;
 use app\api\validate\UserInfo;
 
 use app\api\controller\BaseController;
@@ -66,7 +68,7 @@ class User extends BaseController
      * "phone": "18956225230",
      * "address": 广州市天河区,
      * }
-     * @apiParam (请求参数说明) {String} avatarUrl  用户头像 base64
+     * @apiParam (请求参数说明) {String} avatarUrl  用户头像id
      * @apiParam (请求参数说明) {String} nickName    用户昵称
      * @apiParam (请求参数说明) {String} phone    联系方式
      * @apiParam (请求参数说明) {String} address    所在地
@@ -86,7 +88,7 @@ class User extends BaseController
         $u_id = TokenService::getCurrentUid();
         $params = $this->request->param();
         if (key_exists('avatarUrl', $params)) {
-            $avatarUrl = config('setting.img_prefix') . base64toImg($params['avatarUrl']);
+            $avatarUrl = config('setting.img_prefix') . ImageService::getImageUrl($params['avatarUrl']);
             $params['avatarUrl'] = $avatarUrl;
         }
         $res = UserT::update($params, ['id' => $u_id]);
