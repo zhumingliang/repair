@@ -15,7 +15,6 @@ use app\lib\exception\WeChatException;
 use think\facade\Cache;
 use think\facade\Request;
 use app\api\model\UserT as UserModel;
-use wxmsg\WXBizDataCrypt;
 
 class UserInfo
 {
@@ -60,7 +59,7 @@ class UserInfo
     private function encodeUserInfo($session_key)
     {
 
-        $pc = new WXBizDataCrypt($this->wxAppID, $session_key);
+        $pc = new WXBizDataCryptService($this->wxAppID, $session_key);
         $errCode = $pc->decryptData($this->encryptedData, $this->iv, $data);
         if ($errCode == 0) {
             return json_decode($data);
