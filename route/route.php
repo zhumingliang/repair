@@ -136,7 +136,6 @@ Route::post('api/:version/order/service/begin', 'api/:version.Order/serviceBegin
 Route::get('api/:version/index/search', 'api/:version.Order/indexSearch');
 
 
-
 Route::get('api/:version/pay/getPreOrder', 'api/:version.Pay/getPreOrder');
 Route::rule('api/:version/pay/notify', 'api/:version.Pay/receiveNotify');
 
@@ -149,4 +148,7 @@ Route::get('api/:version/withdraw/check', 'api/:version.Withdraw/checkWithdraw')
 Route::get('api/:version/withdraw/apply', 'api/:version.Withdraw/apply');
 Route::get('api/:version/withdraws', 'api/:version.Withdraw/getWithdrawList');
 Route::get('api/:version/payments', 'api/:version.Withdraw/getPayments');
+
+Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
+Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 

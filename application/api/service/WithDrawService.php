@@ -122,7 +122,7 @@ class WithDrawService
     }
 
 
-    private static function getBusinessBalance($shop_id)
+    public static function getBusinessBalance($shop_id)
     {
         $day = 7;
         $time_limit = date('Y-m-d', strtotime('-' . $day . ' day',

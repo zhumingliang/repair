@@ -26,11 +26,12 @@ use think\Exception;
 class OrderService
 {
     /**
-     * 商家接单
+     *  商家接单
      * @param $d_id
      * @param $u_id
      * @return mixed
      * @throws OrderException
+     * @throws \app\lib\exception\OrderMsgException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -87,7 +88,7 @@ class OrderService
         $db = DemandOrderT::create([
             'd_id' => $d_id,
             's_id' => $shop_id,
-            'oeder_number' => makeOrderNo(),
+            'order_number' => makeOrderNo(),
             'pay_money' => $demand->money,
             'origin_money' => $demand->money,
             'pay_id' => CommonEnum::ORDER_STATE_INIT,
@@ -105,6 +106,8 @@ class OrderService
         if (!$db) {
             throw  new OrderException();
         }
+        //添加用户消息提示
+        OrderMsgService::saveNormal($u_id, $db->id);
         return $db->id;
 
 

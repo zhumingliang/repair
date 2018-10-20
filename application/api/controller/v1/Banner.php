@@ -132,10 +132,8 @@ class Banner extends BaseController
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序用户获取轮播图（首页轮播图/家政/维修模块轮播图）
-     *
      * @apiExample {get}  获取小程序首页轮播图请求样例:
      * http://mengant.cn/api/v1/banner/mini/list?type=1
-     *
      * @apiExample {get}  获取小程序家政/维修模块轮播图请求样例:
      * http://mengant.cn/api/v1/banner/mini/list?province=安徽省&city=铜陵市&area=铜官区&type=2&category=4
      * @apiParam (请求参数说明) {int}  type 轮播图类别：1 | 首页轮播图；2 | 家政/维修模块轮播图
@@ -174,7 +172,6 @@ class Banner extends BaseController
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  CMS获取轮播图列表（首页轮播图/家政/维修模块轮播图）
-     *
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/banner/mini/list?type=1&page=1&size=20
      * @apiParam (请求参数说明) {int}  type 轮播图类别：1 | 首页轮播图；2 | 家政/维修模块轮播图

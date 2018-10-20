@@ -325,6 +325,10 @@ class ShopService
                 ]
             );
         }
+
+        //添加服务记录
+        OrderMsgService::saveShop(Token::getCurrentUid(), $booking->id);
+
         return [
             'id' => $booking->id,
             'money' => $money
@@ -550,7 +554,7 @@ class ShopService
     {
         $list = array();
         if ($search_type == self::SEARCH_SHOP) {
-            $list=ShopListV::getList($type, $area, $key, $page, $size);
+            $list = ShopListV::getList($type, $area, $key, $page, $size);
 
         } else if ($search_type == self::SEARCH_SERVICE) {
             if ($type < 4) {
