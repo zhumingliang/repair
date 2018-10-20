@@ -52,7 +52,7 @@ class PersonalCenter extends BaseController
      * @apiParam (请求参数说明) {int} page  页数
      * @apiParam (请求参数说明) {int} size   每页数据条数
      * @apiSuccessExample {json} 返回样例:
-     * {"total":1,"per_page":"5","current_page":1,"last_page":1,"data":[{"id":1,"order_id":1,"cover":"static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","money":2000,"name":"修五金4","u_id":1,"state":1}]}
+     * {"total":1,"per_page":"5","current_page":1,"last_page":1,"data":[{"id":1,"order_id":1,"cover":"static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","money":2000,"name":"修五金4","u_id":1,"state":1,"create_time":"2018-10-16 11:23:22"}]}
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
@@ -63,6 +63,7 @@ class PersonalCenter extends BaseController
      * @apiSuccess (返回参数说明) {String} cover 封面图
      * @apiSuccess (返回参数说明) {int} money  金额
      * @apiSuccess (返回参数说明) {String} name  名称
+     * @apiSuccess (返回参数说明) {String} create_time  时间
      * @param $page
      * @param $size
      * @return \think\response\Json
