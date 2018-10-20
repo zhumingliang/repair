@@ -133,6 +133,8 @@ Route::get('api/:version/order/comments', 'api/:version.Order/getCommentsForShop
 Route::post('api/:version/order/confirm', 'api/:version.Order/confirm');
 Route::post('api/:version/order/shop/confirm', 'api/:version.Order/shopConfirmService');
 Route::post('api/:version/order/service/begin', 'api/:version.Order/serviceBegin');
+Route::get('api/:version/index/search', 'api/:version.Order/indexSearch');
+
 
 
 Route::get('api/:version/pay/getPreOrder', 'api/:version.Pay/getPreOrder');

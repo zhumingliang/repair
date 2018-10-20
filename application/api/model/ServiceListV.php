@@ -11,10 +11,10 @@ namespace app\api\model;
 
 class ServiceListV extends BaseModel
 {
-    public function getCoverAttr($value, $data)
-    {
-        return $this->prefixImgUrl($value, $data);
-    }
+    /* public function getCoverAttr($value, $data)
+     {
+         return $this->prefixImgUrl($value, $data);
+     }*/
 
 
     public static function getList($area, $page, $size, $c_id, $type)
@@ -26,11 +26,33 @@ class ServiceListV extends BaseModel
                     $query->where('c_id', '=', $c_id);
                 }
             })
-            ->hidden(['type','province','city','c_id','shop_name'])
+            ->hidden(['type', 'province', 'city', 'c_id', 'shop_name'])
             ->order('sell_num desc,sell_money desc')
             ->paginate($size, false, ['page' => $page]);
         return $pagingData;
 
     }
+
+    public static function getListForSell($type, $area, $key, $page, $size)
+    {
+
+        $order = 'id';
+        if ($type == 5) {
+            $order = 'sell_money desc';
+        } else if ($type == 6) {
+            $order = 'sell_money';
+        }
+        $pagingData = self::where('area', $area)
+            ->where(function ($query) use ($key) {
+                if ($key) {
+                    $query->where('name', 'like', '%' . $key . '%');
+                }
+            })
+            ->field('id,cover,name,sell_money as price')
+            ->order($order)
+            ->paginate($size, false, ['page' => $page]);
+        return $pagingData;
+    }
+
 
 }

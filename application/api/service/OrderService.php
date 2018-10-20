@@ -180,7 +180,6 @@ class OrderService
 
     }
 
-
     /**
      * 获取服务订单列表
      * 普通用户 type: 已预约；待付款；待确认；待评价；已完成（1-5）
@@ -310,7 +309,6 @@ class OrderService
 
     }
 
-
     /**
      *  已预约；待付款；待确认；待评价；已完成（1-5）
      * @param $order_type
@@ -374,7 +372,6 @@ class OrderService
 
     }
 
-
     private static function checkShopBond($shop_id)
     {
 
@@ -387,12 +384,5 @@ class OrderService
         return true;
 
     }
-
-    private static function prefixOrder($order)
-    {
-
-
-    }
-
 
 }

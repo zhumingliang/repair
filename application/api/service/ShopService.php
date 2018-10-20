@@ -21,6 +21,7 @@ use app\api\model\ServiceListV;
 use app\api\model\ServicesImgT;
 use app\api\model\ServicesT;
 use app\api\model\ShopImgT;
+use app\api\model\ShopListV;
 use app\api\model\ShopStaffImgT;
 use app\api\model\ShopT;
 use app\api\validate\TokenGet;
@@ -36,6 +37,8 @@ class ShopService
     const SERVICE_EXTEND_READY = 1;
     const SERVICE_EXTEND_PASS = 2;
     const SERVICE_EXTEND_REFUSE = 3;
+    const SEARCH_SHOP = 1;
+    const SEARCH_SERVICE = 2;
 
     /**
      * 保存成为商铺申请
@@ -75,7 +78,6 @@ class ShopService
         }
 
     }
-
 
     /**
      * 修改店铺信息
@@ -143,7 +145,6 @@ class ShopService
         return true;
 
     }
-
 
     private static function saveStaffRelation($imgs, $relation)
     {
@@ -383,7 +384,6 @@ class ShopService
 
     }
 
-
     /**
      * * 获取店铺信息-编辑
      * @return array|null|\PDOStatement|string|\think\Model
@@ -396,7 +396,6 @@ class ShopService
         $info = ShopT::getShopInfoForEdit($u_id);
         return $info;
     }
-
 
     /**
      * 对商铺图片进行审核通过
@@ -453,7 +452,6 @@ class ShopService
 
 
     }
-
 
     /**
      * 对商铺图片进行删除处理
@@ -530,13 +528,41 @@ class ShopService
         ];
     }
 
-
     public static function getShopScore($shop_id)
     {
         $comment_score = OrderCommentT::where('id', $shop_id)
             ->avg('score');
         $score = $comment_score ? $comment_score : 5;
         return $score;
+    }
+
+    /**
+     * @param $search_type 1 | 店铺；2 | 服务
+     * @param $type 1 | 综合，2 |价格由高到底 3 | 价格由低到高，4| 销售量，5 | 销售量由低到高，6 | 销售量由高到底
+     * @param $area
+     * @param $key
+     * @param $page
+     * @param $size
+     * @return array|\think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public static function getListIndex($search_type, $type, $area, $key, $page, $size)
+    {
+        $list = array();
+        if ($search_type == self::SEARCH_SHOP) {
+            $list=ShopListV::getList($type, $area, $key, $page, $size);
+
+        } else if ($search_type == self::SEARCH_SERVICE) {
+            if ($type < 4) {
+                $list = ServicesT::getServiceForPrice($type, $area, $key, $page, $size);
+
+            } else {
+                $list = ServiceListV::getListForSell($type, $area, $key, $page, $size);
+            }
+
+        }
+
+        return $list;
     }
 
 
