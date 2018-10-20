@@ -87,6 +87,7 @@ class Pay
 
         $pay_id = $this->savePayRecord($notify, $order);
         $order->pay_id = $pay_id;
+        $order->pay_money = $notify->getTotalFee();
         if (!$order->save()) {
             LogService::Log('微信支付回调成功后修改订单状态出错，id：' . $this->orderID);
             //修改信息失败
