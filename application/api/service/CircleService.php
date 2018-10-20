@@ -18,7 +18,6 @@ use app\api\model\CommentZanT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\CircleException;
-use think\Db;
 
 class CircleService
 {
@@ -161,9 +160,10 @@ class CircleService
      */
     public static function getCircleForMini($id)
     {
+        CircleT::where('id', $id)
+            ->inc('read_num', 1)->update();;
+
         $circle = CircleT::getCircleForMINI($id);
-        $circle['read_num'] = $circle['read_num'] + 1;
-        $circle->save();
         return $circle;
 
     }
@@ -172,7 +172,6 @@ class CircleService
     {
 
         $list = CircleCommentV::getList($params['page'], $params['size'], $params['id']);
-
         $data = $list['data'];
         if (count($data)) {
             foreach ($data as $k => $v) {
@@ -259,9 +258,6 @@ class CircleService
      * @throws CircleException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public static function zan($id)
     {
@@ -273,15 +269,14 @@ class CircleService
                     'errorCode' => 160009
                 ]);
 
-                $up_id = Db::name('circle_comment_t')->fetchSql(true)->where('id', $id)->setInc('zan', 1);
-                echo $up_id;
-
-                /*  if (!$up_id) {
-                      throw new CircleException(['code' => 401,
-                          'msg' => '用户点赞失败',
-                          'errorCode' => 160010
-                      ]);
-                  }*/
+            }
+            $up_id = CircleCommentT::where('id', $id)
+                ->inc('zan')->update();
+            if (!$up_id) {
+                throw new CircleException(['code' => 401,
+                    'msg' => '用户点赞失败',
+                    'errorCode' => 160010
+                ]);
             }
 
             return 1;
