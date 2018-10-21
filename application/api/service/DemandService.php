@@ -85,7 +85,7 @@ class DemandService
 
     public static function getList($params)
     {
-        $list = DemandV::getList($params['province'], $params['city'], $params['area'], $params['page'], $params['size']);
+        $list = DemandV::getList($type, $params['province'], $params['city'], $params['area'], $params['page'], $params['size']);
         $list['data'] = self::preListData($list['data'], $params['latitude'], $params['longitude']);
         $list['grade'] = self::getuserGrade();
         return $list;

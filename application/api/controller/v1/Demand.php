@@ -116,7 +116,8 @@ class Demand extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  小程序用户获取需求大厅类列表
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/demand/list?province=安徽省&city=铜陵市&area=铜官山区&latitude=31.253411&longitude=121.518998&page=1&size=20
+     * http://mengant.cn/api/v1/demand/list?type=1&province=安徽省&city=铜陵市&area=铜官山区&latitude=31.253411&longitude=121.518998&page=1&size=20
+     * @apiParam (请求参数说明) {int} type 类别 ： 1 | 服务；2 | 需求
      * @apiParam (请求参数说明) {String} province 省
      * @apiParam (请求参数说明) {String} city 市
      * @apiParam (请求参数说明) {String} area 区
