@@ -41,7 +41,7 @@ class AdminToken extends Token
 
             if (is_null($admin)) {
                 throw new TokenException([
-                    'code' => 404,
+                    'code' => 401,
                     'msg' => '用户不存在',
                     'errorCode' => 30000
                 ]);
