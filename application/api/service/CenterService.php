@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\DemandOrderV;
 use app\api\model\OrderNormalMsgT;
 use app\api\model\OrderShopMsgT;
 use app\lib\enum\CommonEnum;
@@ -35,7 +36,8 @@ class CenterService
         return [
             'userInfo' => $this->userInfo(),
             'balance' => $this->balance(),
-            'msg_count' => $this->msgCount()
+            'msg_count' => $this->msgCount(),
+            'demand_count' => $this->demandCount()
         ];
 
 
@@ -73,6 +75,16 @@ class CenterService
 
         return OrderShopMsgT::where('state', CommonEnum::STATE_IS_OK)
             ->count();
+    }
+
+    private function demandCount()
+    {
+        if (!$this->shop_id) {
+            return DemandOrderV::getCountForNormal($this->u_id);
+        }
+
+        return DemandOrderV::getCountForShop($this->shop_id);
+
     }
 
 }

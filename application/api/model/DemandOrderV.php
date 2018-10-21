@@ -171,4 +171,43 @@ class DemandOrderV extends Model
     }
 
 
+    public static function getCountForShop($s_id)
+    {
+        $day = 7;
+        $time_limit = date('Y-m-d', strtotime('-' . $day . ' day',
+            time()));
+        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d")';
+
+        $sql = '( confirm_id =2  AND comment_id = 99999 AND   order_time > ' . $time_limit . ') ';
+        $sql .= 'OR';
+        $sql .= ' (comment_id = 99999)';
+        $count = self::where('shop_id', $s_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
+        return $count;
+    }
+
+
+    public static function getCountForNormal($u_id)
+    {
+        $day = 7;
+        $time_limit = date('Y-m-d', strtotime('-' . $day . ' day',
+            time()));
+        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d")';
+
+
+        $sql = '( confirm_id =2  AND comment_id = 99999 AND   order_time > ' . $time_limit . ') ';
+        $sql .= 'OR';
+        $sql .= ' (comment_id = 99999)';
+
+        $count = self::where('u_id', $u_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
+        return $count;
+
+    }
+
+
 }
