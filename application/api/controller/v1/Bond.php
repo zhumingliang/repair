@@ -50,6 +50,7 @@ class Bond extends BaseController
         $params['openid'] = TokenService::getCurrentOpenid();
         $params['order_number'] = makeOrderNo();
         $params['pay_id'] = CommonEnum::ORDER_STATE_INIT;
+        $params['state'] = CommonEnum::STATE_IS_OK;
         $bond = BondT::create($params);
         if (!$bond) {
             throw new BondException();

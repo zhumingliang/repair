@@ -18,7 +18,7 @@ class PayValidate extends BaseValidate
     ];
 
     protected $scene = [
-        'pre' => ['id', 'type', 'r_id'],
+        'pre' => ['id', 'type'],
         'search' => ['city'],
     ];
 
