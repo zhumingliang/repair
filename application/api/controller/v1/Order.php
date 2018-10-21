@@ -502,7 +502,6 @@ class Order extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/index/search 101-首页搜索
      * @apiGroup  MINI
@@ -514,6 +513,7 @@ class Order extends BaseController
      * @apiParam (请求参数说明) {int} size  每页条数
      * @apiParam (请求参数说明) {int} search_type 查询类别：1 | 店铺；2 | 服务
      * @apiParam (请求参数说明) {int} type 排序类别：1 | 综合，2 |价格由高到底 3 | 价格由低到高，4| 销售量，5 | 销售量由低到高，6 | 销售量由高到底
+     * @apiParam (请求参数说明) {int} area  区
      * @apiSuccessExample {json} 返回样例:
      * {"total":3,"per_page":"10","current_page":1,"last_page":1,"data":[{"id":2,"cover":"static\/imgs\/5782AD69-9B21-2B94-DCCA-6AD299AF32E1.jpg","name":"修五金2","price":"0"},{"id":4,"cover":"static\/imgs\/E72CCAE6-79A1-D88D-F755-48FE0DB381BC.jpg","name":"修五金3","price":"0"},{"id":5,"cover":"static\/imgs\/CE41DE68-9E89-B6C1-E63D-57149CC54BBF.jpg","name":"修五金4","price":"10000"}]}
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
@@ -567,8 +567,7 @@ class Order extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/order/phone/check
-     *  105-检测订单是否电话沟通（需求订单/服务订单）
+     * @api {POST} /api/v1/order/phone/check 106-检测订单是否电话沟通（需求订单/服务订单）
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription1 1.需求订单 ：用户-点击付款-需要检测商家有无选择已经电话联系;2.服务订单：用户-点击付款-需要检测商家有无选择已经电话联系
