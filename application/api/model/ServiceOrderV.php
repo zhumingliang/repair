@@ -21,7 +21,7 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             // ->where('phone_user', CommonEnum::STATE_IS_FAIL)
             // ->where('phone_shop', CommonEnum::STATE_IS_FAIL)
-            ->where('shop_conform', CommonEnum::STATE_IS_FAIL)
+            ->where('shop_confirm', CommonEnum::STATE_IS_FAIL)
             ->whereTime('time_begin', date('Y-m-d H:i'))
             //->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone,area,address')
             ->paginate($size, false, ['page' => $page]);
@@ -37,7 +37,7 @@ class ServiceOrderV extends Model
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereTime('time_begin', date('Y-m-d H:i'))
-            ->where('shop_conform', CommonEnum::STATE_IS_OK)
+            ->where('shop_confirm', CommonEnum::STATE_IS_OK)
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
             // ->whereRaw($sql)
             // ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
