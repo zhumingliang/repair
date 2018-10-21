@@ -88,6 +88,7 @@ class Order extends BaseController
      * @apiSuccess (返回参数说明) {String} order_time 订单创建时间
      * @apiSuccess (返回参数说明) {int} comment_id 评论状态：99999 | 没有评论 ；除此之外表示已经评论
      * @apiSuccess (返回参数说明) {int} confirm_id 确认操作id：未确认：99999；1  | 完工；2 | 协商
+     * @apiSuccess (返回参数说明) {int} shop_confirm  商家是否 确认订单
      * @apiSuccess (返回参数说明) {int} pay_id 支付id：99999 | 未支付 ；除此之外表示已经支付
      * @apiSuccess (返回参数说明) {int} refund_id 退款id：99999 | 未退款 ；除此之外表示已经退款
      *
