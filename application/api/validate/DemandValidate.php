@@ -33,7 +33,7 @@ class DemandValidate extends BaseValidate
     protected $scene = [
         'save' => ['name', 'phone', 'province', 'city', 'area', 'address',
             'longitude', 'latitude', 'time_begin', 'time_end', 'money', 'type', 'imgs'],
-        'list' => ['province', 'city', 'area', 'longitude', 'latitude', 'page', 'size'],
+        'list' => ['province', 'city', 'area', 'longitude', 'latitude', 'page', 'size','type'],
         'handel'=>['id']
     ];
 

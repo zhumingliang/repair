@@ -117,7 +117,7 @@ class Demand extends BaseController
      * @apiDescription  小程序用户获取需求大厅类列表
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/demand/list?type=1&province=安徽省&city=铜陵市&area=铜官山区&latitude=31.253411&longitude=121.518998&page=1&size=20
-     * @apiParam (请求参数说明) {int} type 类别 ： 1 | 服务；2 | 需求
+     * @apiParam (请求参数说明) {int} type 类别 ： 1 | 家政；2 | 维修
      * @apiParam (请求参数说明) {String} province 省
      * @apiParam (请求参数说明) {String} city 市
      * @apiParam (请求参数说明) {String} area 区
@@ -126,13 +126,14 @@ class Demand extends BaseController
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json} 返回样例:
-     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":3,"des":"修热水器","money":800,"latitude":"31.277117","longitude":"120.744587","distance":73.7}],"grade":1}
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":3,"des":"修热水器","money":800,"latitude":"31.277117","longitude":"120.744587","distance":73.7,"area":"台儿庄区"}],"grade":1}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} id 需求id
      * @apiSuccess (返回参数说明) {String} des 需求描述
      * @apiSuccess (返回参数说明) {int} money 预算
+     * @apiSuccess (返回参数说明) {String} area 区
      * @apiSuccess (返回参数说明) {int} grade 用户角色：1 | 普通小程序用户；2 | 商家
      * @apiSuccess (返回参数说明) {float} distance 需求发布地址和店铺当前位置的具体，单位：km
      * @return \think\response\Json
