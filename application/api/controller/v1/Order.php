@@ -194,15 +194,17 @@ class Order extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/order/phone/confirm  82-店铺（需求订单）确认电话联系
+     * @api {POST} /api/v1/order/phone/confirm  82-（需求订单/服务订单）确认电话联系
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 确认电话联系
      * @apiExample {post}  请求样例:
      *    {
      *       "id": 1,
+     *       "type": 1
      *     }
-     * @apiParam (请求参数说明) {int} id  需求id
+     * @apiParam (请求参数说明) {int} id  订单id
+     * @apiParam (请求参数说明) {int} type  订单类别:1 | 服务订单；2 | 需求订单
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
@@ -218,10 +220,14 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('phone')->goCheck();
         $id = $this->request->param('id');
+        $type = $this->request->param('type');
         $shop_id = TokenService::getCurrentTokenVar('shop_id');
         $user = $shop_id ? 'phone_user' : 'phone_shop';
-
-        $res = DemandOrderT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+            $res = DemandOrderT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        } else {
+            $res = ServiceBookingT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        }
         if (!$res) {
             throw  new OrderException(
                 ['code' => 401,
@@ -236,17 +242,19 @@ class Order extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/order/price/update  82-商家修改订单价格（需求订单）
+     * @api {POST} /api/v1/order/price/update  82-商家修改订单价格（需求订单/服务订单）
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 商家修改订单价格
      * @apiExample {post}  请求样例:
      *    {
      *       "id": 1,
+     *       "type": 2,
      *       "money": 100,
      *       "price_remark": "我就是想修改价格"
      *     }
      * @apiParam (请求参数说明) {int} id  需求id
+     * @apiParam (请求参数说明) {int} type  订单类别:1 | 服务订单；2 | 需求订单
      * @apiParam (请求参数说明) {int} money 修改之后的价格
      * @apiParam (请求参数说明) {String} price_remark 备注
      * @apiSuccessExample {json} 返回样例:
@@ -263,8 +271,15 @@ class Order extends BaseController
         $id = $this->request->param('id');
         $remark = $this->request->param('remark');
         $money = $this->request->param('money');
-        $res = DemandOrderT::update(['origin_money' => $money, 'price_remark' => $remark],
-            ['id' => $id]);
+        $type = $this->request->param('type');
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+            $res = DemandOrderT::update(['origin_money' => $money, 'price_remark' => $remark],
+                ['id' => $id]);
+        } else {
+            $res = ServiceBookingT::update(['origin_money' => $money, 'price_remark' => $remark],
+                ['id' => $id]);
+        }
+
 
         if (!$res) {
             throw  new OrderException(
@@ -332,7 +347,6 @@ class Order extends BaseController
      *     }
      * @apiParam (请求参数说明) {int} id  订单id
      * @apiParam (请求参数说明) {int} type  订单类别：1 | 服务订单；2 | 需求订单
-     * @apiParam (请求参数说明) {int} money 修改之后的价格
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
@@ -344,6 +358,8 @@ class Order extends BaseController
         (new OrderValidate())->scene('phone')->goCheck();
         $id = $this->request->param('id');
         $type = $this->request->param('type');
+        //检测订单是否已经支付
+
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
             $res = DemandOrderT::update(['service_begin' => CommonEnum::STATE_IS_OK], ['id' => $id]);
         } else {
@@ -407,19 +423,17 @@ class Order extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/order/shop/confirm  86-商家确认服务订单
+     * @api {POST} /api/v1/order/shop/confirm  86-商家确认订单(服务订单/需求订单)
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription
      * @apiExample {post}  请求样例:
      *    {
      *       "id": 1,
-     *       "money": 100,
-     *       "price_remark": "我就是想修改价格"
+     *       "type": 1
      *     }
      * @apiParam (请求参数说明) {int} id  服务id
-     * @apiParam (请求参数说明) {int} money 修改之后的价格（如果修改价格，需要传入后台）
-     * @apiParam (请求参数说明) {String} price_remark 备注
+     * @apiParam (请求参数说明) {int} type  订单类别：1 | 服务订单；2 | 需求订单
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
@@ -428,13 +442,17 @@ class Order extends BaseController
      * @throws \app\lib\exception\ParameterException
      */
 
-    public function shopConfirmService()
+    public function shopConfirmOrder()
     {
-        (new OrderValidate())->scene('id')->goCheck();
-        $params = $this->request->param();
-        $params['phone_user'] = 2;
-        $id = $params['id'];
-        $res = ServiceBookingT::update($params, ['id' => $id]);
+        (new OrderValidate())->scene('phone')->goCheck();
+        $id = $this->request->param('id');
+        $type = $this->request->param('type');
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+            $res = DemandOrderT::update(['shop_confirm', CommonEnum::STATE_IS_OK], ['id' => $id]);
+
+        } else {
+            $res = ServiceBookingT::update(['shop_confirm', CommonEnum::STATE_IS_OK], ['id' => $id]);
+        }
         if ($res) {
             throw  new OrderException(
                 ['code' => 401,
@@ -516,6 +534,70 @@ class Order extends BaseController
         $params = $this->request->param();
         $list = ShopService::getListIndex($params['search_type'], $params['type'], $params['area'], $params['key'], $params['page'], $params['size']);
         return json($list);
+    }
+
+    /**
+     * @api {POST} /api/v1/order/pay/check  105-检测订单是否已经支付（需求订单/服务订单）
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  1.需求订单 ：店铺-点击去服务-需要检测用户是否已经支付;2.服务订单 ：店铺-点击去服务-需要检测用户是否已经支付
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "id": 1,
+     *       "type": 1,
+     *     }
+     * @apiParam (请求参数说明) {int} id  订单id
+     * @apiParam (请求参数说明) {int} id  订单类别：1 | 服务订单；2 | 需求订单
+     * @apiSuccessExample {json} 返回样例:
+     *{"sate":1}
+     * @apiSuccess (返回参数说明) {int} state 支付状态：1 | 已经支付；2 | 没有支付
+     * @param $id
+     * @param $type
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function checkPay($id, $type)
+    {
+        return json([
+            'state' => OrderService::checkOrderPay($id, $type)
+        ]);
+
+    }
+
+    /**
+     * @api {POST} /api/v1/order/phone/check
+     *  105-检测订单是否电话沟通（需求订单/服务订单）
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription1 1.需求订单 ：用户-点击付款-需要检测商家有无选择已经电话联系;2.服务订单：用户-点击付款-需要检测商家有无选择已经电话联系
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "id": 1,
+     *       "type": 1,
+     *     }
+     * @apiParam (请求参数说明) {int} id  订单id
+     * @apiParam (请求参数说明) {int} id  订单类别：1 | 服务订单；2 | 需求订单
+     * @apiSuccessExample {json} 返回样例:
+     *{"sate":1}
+     * @apiSuccess (返回参数说明) {int} state 支付状态：1 | 是；2 | 否
+     *
+     * @param $id
+     * @param $type
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function checkPhone($id, $type)
+    {
+        return json([
+            'state' => OrderService::checkPhone($id, $type)
+        ]);
+
     }
 
 

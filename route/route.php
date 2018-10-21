@@ -131,9 +131,11 @@ Route::get('api/:version/order/service/list', 'api/:version.Order/getServiceList
 Route::post('api/:version/order/comment', 'api/:version.Order/comment');
 Route::get('api/:version/order/comments', 'api/:version.Order/getCommentsForShop');
 Route::post('api/:version/order/confirm', 'api/:version.Order/confirm');
-Route::post('api/:version/order/shop/confirm', 'api/:version.Order/shopConfirmService');
+Route::post('api/:version/order/shop/confirm', 'api/:version.Order/shopConfirmOrder');
 Route::post('api/:version/order/service/begin', 'api/:version.Order/serviceBegin');
 Route::get('api/:version/index/search', 'api/:version.Order/indexSearch');
+Route::post('api/:version/order/pay/check', 'api/:version.Order/checkPay');
+Route::post('api/:version/order/phone/check', 'api/:version.Order/checkPhone');
 
 
 Route::get('api/:version/pay/getPreOrder', 'api/:version.Pay/getPreOrder');

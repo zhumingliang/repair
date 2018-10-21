@@ -14,6 +14,7 @@ use app\api\model\DemandOrderV;
 use app\api\model\DemandT;
 use app\api\model\OrderCommentImgT;
 use app\api\model\OrderCommentT;
+use app\api\model\ServiceBookingT;
 use app\api\model\ServiceBookingV;
 use app\api\model\ServiceOrderV;
 use app\api\model\ShopT;
@@ -372,6 +373,61 @@ class OrderService
 
         }
 
+
+    }
+
+
+    /**
+     * 需求订单 ：店铺-点击去服务-需要检测用户是否已经支付
+     * 服务订单 ：店铺-点击去服务-需要检测用户是否已经支付
+     * @param $id
+     * @param $type
+     * @return int
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function checkOrderPay($id, $type)
+    {
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+            $pay_id = DemandOrderT::where('id', $id)->field('pay_id')->find()->toArray();
+        } else {
+            $pay_id = ServiceBookingT::where('id', $id)->field('pay_id')->find()->toArray();
+        }
+        return $pay_id == CommonEnum::ORDER_STATE_INIT ? 2 : 1;
+
+    }
+
+
+    /**
+     * 需求订单 ：用户-点击付款-需要检测商家有无选择已经电话联系
+     * 服务订单：用户-点击付款-需要检测商家有无选择已经电话联系
+     * @param $id
+     * @param $type
+     * @return array|int
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function checkPhone($id, $type)
+    {
+        $shop_id = Token::getCurrentTokenVar('shop_id');
+        $phone = 1;
+        if (!$shop_id) {
+            //普通用户
+            if ($type == CommonEnum::ORDER_IS_DEMAND) {
+                $phone = DemandOrderT::where('id', $id)
+                    ->field('phone_user')
+                    ->find()->toArray();
+            } else {
+                $phone = ServiceBookingT::where('id', $id)
+                    ->field('phone_user')
+                    ->find()->toArray();
+            }
+        }
+        return $phone;
 
     }
 

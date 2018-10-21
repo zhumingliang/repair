@@ -41,15 +41,15 @@ class DemandOrderV extends Model
             time()));
         $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d %H:%i")';
 
-        $sql = '( phone_user = 2 OR phone_shop = 2 AND  order_time < ' . $time_limit . ') ';
+        $sql = '( shop_confirm = 2 AND  order_time < ' . $time_limit . ') ';
         $sql .= 'OR';
-        $sql .= ' ((phone_user = 1 OR phone_shop = 1) AND pay_id=' . CommonEnum::ORDER_STATE_INIT . ')';
+        $sql .= ' ((shop_confirm = 1) AND pay_id=' . CommonEnum::ORDER_STATE_INIT . ')';
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereTime('time_begin', date('Y-m-d H:i'))
             ->whereRaw($sql)
-           // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
+            // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -64,7 +64,7 @@ class DemandOrderV extends Model
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-           // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
+            // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -78,7 +78,7 @@ class DemandOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('confirm_id', '=', 1)
             ->where('comment_id', '=', CommonEnum::ORDER_STATE_INIT)
-           // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
+            // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -100,25 +100,42 @@ class DemandOrderV extends Model
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
-          //  ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
+            //  ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
 
     }
 
+    /**
+     * 商家待服务
+     * @param $s_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function service($s_id, $page, $size)
     {
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
-            ->where('service_begin', '=', CommonEnum::STATE_IS_FAIL)
-           // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
+            ->where('shop_confirm', CommonEnum::STATE_IS_FAIL)
+            //->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
+            //->where('service_begin', '=', CommonEnum::STATE_IS_FAIL)
+            // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
 
+    /**
+     * 商家待确认
+     * @param $s_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function shopConfirm($s_id, $page, $size)
     {
         $list = self::where('shop_id', $s_id)
@@ -126,7 +143,7 @@ class DemandOrderV extends Model
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-           // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
+            // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -146,7 +163,7 @@ class DemandOrderV extends Model
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
-         //   ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
+            //   ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
 
