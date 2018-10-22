@@ -181,8 +181,8 @@ class UserToken extends Token
      */
     private function newUser($openid)
     {
-        $id = UserT::create(['openId' => $openid]);
-        return $id;
+        $user = UserT::create(['openId' => $openid]);
+        return $user->id;
     }
 
     /**
