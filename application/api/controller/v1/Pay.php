@@ -45,7 +45,7 @@ class Pay extends BaseController
     {
         (new PayValidate())->scene('pre')->goCheck();
         $params = $this->request->param();
-        $pay = new PayService($params['id'], $params['type'], $params['r_id']);
+        $pay = new PayService($params['id'], $params['type'], $this->request->param('r_id'));
         return json($pay->pay());
     }
 
