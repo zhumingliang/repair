@@ -147,7 +147,7 @@ Route::post('api/:version/bond/save', 'api/:version.Bond/save');
 Route::get('api/:version/withdraw/balance', 'api/:version.Withdraw/getBalance');
 Route::get('api/:version/withdraw/bond/check', 'api/:version.Withdraw/checkBond');
 Route::get('api/:version/withdraw/check', 'api/:version.Withdraw/checkWithdraw');
-Route::get('api/:version/withdraw/apply', 'api/:version.Withdraw/apply');
+Route::post('api/:version/withdraw/apply', 'api/:version.Withdraw/apply');
 Route::get('api/:version/withdraws', 'api/:version.Withdraw/getWithdrawList');
 Route::get('api/:version/payments', 'api/:version.Withdraw/getPayments');
 
