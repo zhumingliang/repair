@@ -9,6 +9,7 @@
 namespace app\api\model;
 
 
+use app\api\service\Token;
 use app\lib\enum\CommonEnum;
 use think\Model;
 
