@@ -28,9 +28,9 @@ class Image extends BaseController
      * @apiDescription
      * @apiExample {post}  请求样例:
      *    {
-     *       "base64": "4f4bc4dec97d474b"
+     *       "img": "4f4bc4dec97d474b"
      *     }
-     * @apiParam (请求参数说明) {String} base64    图片base64位编码
+     * @apiParam (请求参数说明) {String} img    图片base64位编码
      *
      * @apiSuccessExample {json} 返回样例:
      *{"id":17}
