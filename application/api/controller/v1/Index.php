@@ -6,7 +6,9 @@ class Index
 {
     public function index()
     {
-        echo 'success';
+        $token = "4013e96782dcf82dcf8bc0d5cd51b202";
+        $info = \app\api\service\Token::getCurrentTokenVar();
+        return json($info);
     }
 
     public function hello($name = 'ThinkPHP5')
