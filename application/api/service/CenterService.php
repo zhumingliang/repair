@@ -52,7 +52,10 @@ class CenterService
     {
         return [
             'avatarUrl' => Token::getCurrentTokenVar('avatarUrl'),
-            'nickName' => Token::getCurrentTokenVar('nickName')
+            'nickName' => Token::getCurrentTokenVar('nickName'),
+            'city' => Token::getCurrentTokenVar('city'),
+            'province' => Token::getCurrentTokenVar('province'),
+            'area' => Token::getCurrentTokenVar('area')
         ];
     }
 

@@ -27,9 +27,12 @@ class PersonalCenter extends BaseController
      * @apiDescription
      * http://mengant.cn/api/v1/center/info
      * @apiSuccessExample {json} 返回样例:
-     * {"userInfo":{"avatarUrl":1,"nickName":1},"balance":0,"msg_count":1,"demand_count":1}
+     * {"userInfo":{"avatarUrl":1,"nickName":1,"province":"安徽省","city":"铜陵市","area":"铜官区"},"balance":0,"msg_count":1,"demand_count":1}
      * @apiSuccess (返回参数说明) {String} avatarUrl    用户头像
      * @apiSuccess (返回参数说明) {String} nickName    昵称
+     * @apiSuccess (返回参数说明) {String} province    省
+     * @apiSuccess (返回参数说明) {String} city    市
+     * @apiSuccess (返回参数说明) {String} area    区
      * @apiSuccess (返回参数说明) {int} balance  余额
      * @apiSuccess (返回参数说明) {int} msg_count  未读信息
      * @apiSuccess (返回参数说明) {int} demand_count  需求订单数量
