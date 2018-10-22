@@ -12,6 +12,7 @@ namespace app\api\service;
 use app\api\model\DemandOrderV;
 use app\api\model\OrderNormalMsgT;
 use app\api\model\OrderShopMsgT;
+use app\api\model\UserT;
 use app\lib\enum\CommonEnum;
 
 class CenterService
@@ -50,13 +51,8 @@ class CenterService
      */
     private function userInfo()
     {
-        return [
-            'avatarUrl' => Token::getCurrentTokenVar('avatarUrl'),
-            'nickName' => Token::getCurrentTokenVar('nickName'),
-            'city' => Token::getCurrentTokenVar('city'),
-            'province' => Token::getCurrentTokenVar('province'),
-            'area' => Token::getCurrentTokenVar('area')
-        ];
+        return UserT::where('id', Token::getCurrentUid())
+            ->field('nickName,province,city,area,phone,avatarUrl,address')->find()->toArray();
     }
 
     private function balance()
