@@ -327,7 +327,7 @@ class ShopService
         }
 
         //添加服务记录
-        OrderMsgService::saveShop(Token::getCurrentUid(), $booking->id);
+        OrderMsgService::saveShop(Token::getCurrentUid(), $booking->id, 2, 1);
 
         return [
             'id' => $booking->id,

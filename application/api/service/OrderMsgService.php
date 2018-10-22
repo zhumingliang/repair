@@ -18,12 +18,14 @@ use app\lib\exception\OrderMsgException;
 class OrderMsgService
 {
 
-    public static function saveNormal($u_id, $order_id)
+    public static function saveNormal($u_id, $order_id, $order_type, $type)
     {
 
         $data = [
             'u_id' => $u_id,
             'order_id' => $order_id,
+            'type' => $type,
+            'order_type' => $order_type,
             'state' => CommonEnum::STATE_IS_OK
         ];
         $msg = OrderNormalMsgT::create($data);
@@ -34,12 +36,14 @@ class OrderMsgService
     }
 
 
-    public static function saveShop($u_id, $order_id)
+    public static function saveShop($u_id, $order_id, $order_type, $type)
     {
 
         $data = [
             'u_id' => $u_id,
             'order_id' => $order_id,
+            'type' => $type,
+            'order_type' => $order_type,
             'state' => CommonEnum::STATE_IS_OK
         ];
         $msg = OrderShopMsgT::create($data);

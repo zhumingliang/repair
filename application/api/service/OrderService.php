@@ -14,6 +14,7 @@ use app\api\model\DemandOrderV;
 use app\api\model\DemandT;
 use app\api\model\OrderCommentImgT;
 use app\api\model\OrderCommentT;
+use app\api\model\OrderUserShopV;
 use app\api\model\ServiceBookingT;
 use app\api\model\ServiceBookingV;
 use app\api\model\ServiceOrderV;
@@ -108,7 +109,7 @@ class OrderService
             throw  new OrderException();
         }
         //添加用户消息提示
-        OrderMsgService::saveNormal($u_id, $db->id);
+        OrderMsgService::saveNormal($demand->u_id, $db->id, 1, 2);
         return $db->id;
 
 
@@ -442,6 +443,15 @@ class OrderService
     {
         return true;
 
+    }
+
+    public static function getUID($order_id, $type)
+    {
+
+        $info = OrderUserShopV::where('id', $order_id)
+            ->where('type', $type)
+            ->field('u_id');
+        return $info['u_id'];
     }
 
 }

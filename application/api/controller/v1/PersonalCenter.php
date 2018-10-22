@@ -64,6 +64,8 @@ class PersonalCenter extends BaseController
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {int} id 消息id
+     * @apiSuccess (返回参数说明) {int} order_type 订单状态（和80/81 接口保持一致）
+     * @apiSuccess (返回参数说明) {int} type 订单类别：1 | 需求订单；2 | 服务订单
      * @apiSuccess (返回参数说明) {int} order_id 订单id
      * @apiSuccess (返回参数说明) {String} cover 封面图
      * @apiSuccess (返回参数说明) {int} money  金额

@@ -55,6 +55,7 @@ class DemandService
                 );
             }
             Db::commit();
+
         } catch (Exception $e) {
             Db::rollback();
             throw $e;

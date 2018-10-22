@@ -12,7 +12,9 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\DemandOrderT;
 use app\api\model\OrderCommentV;
+use app\api\model\OrderNormalMsgT;
 use app\api\model\ServiceBookingT;
+use app\api\service\OrderMsgService;
 use app\api\service\OrderService;
 use app\api\service\ShopService;
 use app\api\validate\OrderValidate;
@@ -440,6 +442,7 @@ class Order extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
      * @apiSuccess (返回参数说明) {String} msg 信息描述
      * @throws OrderException
+     * @throws \app\lib\exception\OrderMsgException
      * @throws \app\lib\exception\ParameterException
      */
 
@@ -462,6 +465,9 @@ class Order extends BaseController
                 ]
             );
         }
+
+        //生成订单通知信息
+        OrderMsgService::saveNormal(OrderService::getUID($id, $type), $id, $type, 2);
 
 
     }
