@@ -459,7 +459,7 @@ class Order extends BaseController
         } else {
             $res = ServiceBookingT::update(['shop_confirm' => CommonEnum::STATE_IS_OK], ['id' => $id]);
         }
-        if ($res) {
+        if (!$res) {
             throw  new OrderException(
                 ['code' => 401,
                     'msg' => '确认状态修改失败！',
