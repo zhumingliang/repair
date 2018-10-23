@@ -425,7 +425,6 @@ class WxPayApi
     {
         //获取通知的数据
         $xml = file_get_contents("php://input");
-        Log::info($xml);
         //如果返回成功则验证签名
         try {
             $result = WxPayResults::Init($xml);
