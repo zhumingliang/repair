@@ -314,6 +314,7 @@ class ShopService
         $params['pay_id'] = $init_state;
         $params['refund_id'] = $init_state;
         $params['comment_id'] = $init_state;
+        $params['comment_id'] = $init_state;
         $params['confirm_id'] = $init_state;
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['phone_user'] = CommonEnum::STATE_IS_FAIL;
