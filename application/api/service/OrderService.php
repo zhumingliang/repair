@@ -176,7 +176,7 @@ class OrderService
     {
 
         $shop_id = Token::getCurrentTokenVar('shop_id');
-        if (!$shop_id) {
+        if ($shop_id) {
             return self::getDemandListForShop($shop_id, $order_type, $page, $size);
         } else {
             return self::getDemandListForNormal($order_type, $page, $size);
