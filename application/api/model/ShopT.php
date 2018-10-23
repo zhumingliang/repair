@@ -73,7 +73,7 @@ class ShopT extends BaseModel
                         ->where('state', '<', CommonEnum::DELETE);
                 }
             ])
-            ->field('id,name,province,city,area,phone,address,des')
+            ->field('id,name,province,city,area,phone,address,des,head_url')
             ->find();
         return $info;
 
