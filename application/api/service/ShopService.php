@@ -316,6 +316,8 @@ class ShopService
         $params['comment_id'] = $init_state;
         $params['confirm_id'] = $init_state;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['phone_user'] = CommonEnum::STATE_IS_FAIL;
+        $params['phone_shop'] = CommonEnum::STATE_IS_FAIL;
         $params['r_id'] = $init_state;
         $booking = ServiceBookingT::create($params);
         if (!$booking) {
