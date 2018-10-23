@@ -609,4 +609,36 @@ class Order extends BaseController
     }
 
 
+    /**
+     * @api {POST} /api/v1/order/service/handel  109-小程序用户取消预约订单
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户取消需求订单
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * }
+     * @apiParam (请求参数说明) {int} id 订单id
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @throws DemandException
+     */
+    public function serviceHandel()
+    {
+        $params = $this->request->param();
+        $id = ServiceBookingT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $params['id']]);
+        if (!$id) {
+            throw new DemandException(['code' => 401,
+                'msg' => '操作需求状态失败',
+                'errorCode' => 120002
+            ]);
+        }
+        return json(new SuccessMessage());
+
+    }
+
+
 }
