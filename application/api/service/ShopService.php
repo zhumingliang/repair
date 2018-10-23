@@ -309,8 +309,8 @@ class ShopService
         $openid = Token::getCurrentOpenid();
         $money = self::getServiceMoney($params['s_id']);
         $params['openid'] = $openid;
-        $params['orderNumber'] = makeOrderNo();
-        $params['money'] = $money;
+        $params['order_number'] = makeOrderNo();
+        $params['origin_money'] = $money;
         $params['pay_id'] = $init_state;
         $params['refund_id'] = $init_state;
         $params['comment_id'] = $init_state;

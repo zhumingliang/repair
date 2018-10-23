@@ -88,11 +88,13 @@ class Pay
             return true;
         }
 
+        print_r($order);
         $pay_id = $this->savePayRecord($notify, $order);
         $order->pay_id = $pay_id;
         $order->pay_money = $notify->getTotalFee();
+
         if (!$order->save()) {
-            LogService::Log('微信支付回调成功后修改订单状态出错，id：' . $this->orderID);
+            // LogService::Log('微信支付回调成功后修改订单状态出错，id：' . $this->orderID);
             //修改信息失败
             return false;
         }
@@ -268,9 +270,10 @@ class Pay
         $wpt->transaction_id = $notify->getTransactionId();
         if (!$wpt->save()) {
             //存储失败
-
-            LogService::Log('微信支付回调成功后保存支付信息出错，notify：'
-                . json_decode($notify));
+            echo "error=spr";
+            /*
+                        LogService::Log('微信支付回调成功后保存支付信息出错，notify：'
+                            . json_decode($notify));*/
         }
 
         return $wpt->id;
