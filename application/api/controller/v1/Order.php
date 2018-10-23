@@ -229,9 +229,9 @@ class Order extends BaseController
         $shop_id = TokenService::getCurrentTokenVar('shop_id');
         $user = $shop_id ? 'phone_user' : 'phone_shop';
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $res = DemandOrderT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+            $res = DemandOrderT::update([$user => CommonEnum::STATE_IS_OK], ['id' => $id]);
         } else {
-            $res = ServiceBookingT::update([$user => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+            $res = ServiceBookingT::update([$user => CommonEnum::STATE_IS_OK], ['id' => $id]);
         }
         if (!$res) {
             throw  new OrderException(
