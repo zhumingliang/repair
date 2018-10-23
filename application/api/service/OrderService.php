@@ -459,7 +459,7 @@ class OrderService
         $info = OrderUserShopV::where('id', $order_id)
             ->where('type', $type)
             ->field('u_id')
-            ->find()->toArray();
+            ->find();
         return $info['u_id'];
     }
 
