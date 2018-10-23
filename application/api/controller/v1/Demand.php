@@ -74,6 +74,7 @@ class Demand extends BaseController
         $params = $this->request->param();
         $params['u_id'] = $u_id;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['origin_money'] = $params['money'];
         DemandService::save($params);
         return json(new  SuccessMessage());
 
@@ -187,14 +188,12 @@ class Demand extends BaseController
                     ->where('state', '=', 1);
             }])
             ->where('id', $id)
-            ->hidden(['create_time', 'type', 'update_time', 'u_id', 'longitude', 'state', 'latitude', 'actual_money'])
+            ->hidden(['create_time', 'type', 'update_time', 'u_id', 'longitude', 'state', 'latitude', 'money'])
             ->find();
         return json($demand);
 
 
     }
-
-
 
 
 }
