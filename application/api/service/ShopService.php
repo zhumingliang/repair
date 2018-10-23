@@ -315,6 +315,7 @@ class ShopService
         $params['refund_id'] = $init_state;
         $params['comment_id'] = $init_state;
         $params['confirm_id'] = $init_state;
+        $params['state'] = CommonEnum::STATE_IS_OK;
         $params['r_id'] = $init_state;
         $booking = ServiceBookingT::create($params);
         if (!$booking) {
