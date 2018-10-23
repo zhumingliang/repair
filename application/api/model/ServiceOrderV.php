@@ -103,7 +103,8 @@ class ServiceOrderV extends Model
     {
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->where('phone_user', '=', CommonEnum::STATE_IS_FAIL)
+           // ->where('phone_user', '=', CommonEnum::STATE_IS_FAIL)
+            ->where('pay_id','',CommonEnum::ORDER_STATE_INIT)
             // ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
