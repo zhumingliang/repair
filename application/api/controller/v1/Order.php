@@ -454,10 +454,10 @@ class Order extends BaseController
         $id = $this->request->param('id');
         $type = $this->request->param('type');
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $res = DemandOrderT::update(['shop_confirm', CommonEnum::STATE_IS_OK], ['id' => $id]);
+            $res = DemandOrderT::update(['shop_confirm' => CommonEnum::STATE_IS_OK], ['id' => $id]);
 
         } else {
-            $res = ServiceBookingT::update(['shop_confirm', CommonEnum::STATE_IS_OK], ['id' => $id]);
+            $res = ServiceBookingT::update(['shop_confirm' => CommonEnum::STATE_IS_OK], ['id' => $id]);
         }
         if ($res) {
             throw  new OrderException(
