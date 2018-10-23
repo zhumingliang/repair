@@ -555,7 +555,6 @@ class Shop extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/shop/info/normal 99-用户进入店铺 获取店铺信息
      * @apiGroup  MINI
@@ -588,6 +587,16 @@ class Shop extends BaseController
 
         return json($info);
     }
+
+    /**
+     * CMS-商家管理-获取待审核列表（管理员）
+     */
+    public function getListToApply()
+    {
+
+
+    }
+
 
 
 }

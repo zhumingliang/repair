@@ -154,3 +154,5 @@ Route::get('api/:version/payments', 'api/:version.Withdraw/getPayments');
 Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 
+Route::get('api/:version/units/mini', 'api/:version.Unit/getUnitsForMini');
+
