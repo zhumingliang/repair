@@ -36,7 +36,7 @@ class ServiceOrderV extends Model
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->whereTime('time_begin', '>',date('Y-m-d H:i'))
+            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
             ->where('shop_confirm', CommonEnum::STATE_IS_OK)
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
             // ->whereRaw($sql)
@@ -103,8 +103,8 @@ class ServiceOrderV extends Model
     {
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-           // ->where('phone_user', '=', CommonEnum::STATE_IS_FAIL)
-            ->where('pay_id','',CommonEnum::ORDER_STATE_INIT)
+            // ->where('phone_user', '=', CommonEnum::STATE_IS_FAIL)
+            ->where('pay_id', '=', CommonEnum::ORDER_STATE_INIT)
             // ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
