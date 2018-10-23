@@ -16,7 +16,7 @@ class IndexServiceV extends BaseModel
 
     public function getCoverAttr($value, $data)
     {
-        return $this->prefixImgUrl($value);
+        return $this->prefixImgUrl($value, $data);
     }
 
 
