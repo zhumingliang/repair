@@ -114,9 +114,10 @@ class Order extends BaseController
      * @apiDescription 普通用户/店铺获取需求订单列表
      *
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/order/demand/list?page=1&size=10&order_type
+     * https://mengant.cn/api/v1/order/demand/list?page=1&size=10&order_type&list_type=1
      * @apiParam (请求参数说明) {int} page  页码
      * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiParam (请求参数说明) {int} list_type  订单入口：1 | 普通用户入口；2 | 商家入口
      * @apiParam (请求参数说明) {int} order_type  用户订单类别 ：1 | 待接单；2 | 待付款；3 | 待确认；4 | 待评价；5 | 已完成
      * 商铺订单类别：1 | 待服务；2 | 待确认；3 | 已完成
      * @apiSuccessExample {json} 待接单-返回样例:
@@ -148,7 +149,7 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('list')->goCheck();
         $params = $this->request->param();
-        $list = OrderService::getDemandList($params['order_type'], $params['page'], $params['size']);
+        $list = OrderService::getDemandList($params['order_type'], $params['page'], $params['size'], $params['list_type']);
         return json($list);
 
 
@@ -161,9 +162,10 @@ class Order extends BaseController
      * @apiDescription 普通用户/店铺获取服务订单列表
      *
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/order/service/list?page=1&size=10&order_type
+     * https://mengant.cn/api/v1/order/service/list?page=1&size=10&order_type&list_type=1
      * @apiParam (请求参数说明) {int} page  页码
      * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiParam (请求参数说明) {int} list_type  订单入口：1 | 普通用户入口；2 | 商家入口
      * @apiParam (请求参数说明) {int} order_type  用户订单类别 ： 已预约；待付款；待确认；待评价；已完成（1-5）
      * 店铺订单类别：待确认；待服务；服务中；已完成(1-4)
      * @apiSuccessExample {json} 返回样例:
@@ -191,7 +193,7 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('list')->goCheck();
         $params = $this->request->param();
-        $list = OrderService::getServiceList($params['order_type'], $params['page'], $params['size']);
+        $list = OrderService::getServiceList($params['order_type'], $params['page'], $params['size'], $params['list_type']);
         return json($list);
 
     }

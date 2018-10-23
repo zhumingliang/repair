@@ -16,7 +16,6 @@ use app\api\model\OrderCommentImgT;
 use app\api\model\OrderCommentT;
 use app\api\model\OrderUserShopV;
 use app\api\model\ServiceBookingT;
-use app\api\model\ServiceBookingV;
 use app\api\model\ServiceOrderV;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
@@ -168,15 +167,15 @@ class OrderService
      * @param $order_type
      * @param $page
      * @param $size
+     * @param $list_type 订单入口：1 | 普通用户；2 | 商家用户
      * @return \think\Paginator
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
-    public static function getDemandList($order_type, $page, $size)
+    public static function getDemandList($order_type, $page, $size, $list_type)
     {
-
         $shop_id = Token::getCurrentTokenVar('shop_id');
-        if ($shop_id) {
+        if ($shop_id && ($list_type == 2)) {
             return self::getDemandListForShop($shop_id, $order_type, $page, $size);
         } else {
             return self::getDemandListForNormal($order_type, $page, $size);
@@ -192,14 +191,15 @@ class OrderService
      * @param $order_type
      * @param $page
      * @param $size
+     * @param $list_type 订单入口：1 | 普通用户；2 | 商家用户
      * @return mixed
      * @throws Exception
      * @throws \app\lib\exception\TokenException
      */
-    public static function getServiceList($order_type, $page, $size)
+    public static function getServiceList($order_type, $page, $size, $list_type)
     {
         $shop_id = Token::getCurrentTokenVar('shop_id');
-        if ($shop_id) {
+        if ($shop_id && ($list_type == 2)) {
             return self::getServiceListForShop($shop_id, $order_type, $page, $size);
         } else {
             return self::getServiceListForNormal($order_type, $page, $size);

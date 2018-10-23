@@ -23,6 +23,7 @@ class OrderValidate extends BaseValidate
         's_id' => 'require|isPositiveInteger',
         'score_type' => 'require|isPositiveInteger|in:1,2,3',
         'score' => 'require|isPositiveInteger',
+        'list_type' => 'require|isPositiveInteger|in:1,2',
 
 
     ];
@@ -33,7 +34,7 @@ class OrderValidate extends BaseValidate
         'price' => ['id', 'money'],
         'confirm' => ['id', 'type', 'confirm'],
         'comment' => ['o_id', 's_id', 'score_type', 'score'],
-        'list' => ['order_type', 'page', 'size']
+        'list' => ['order_type', 'page', 'size','list_type']
     ];
 
 }
