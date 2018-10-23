@@ -16,7 +16,7 @@ class IndexServiceV extends BaseModel
 
     public function getCoverAttr($value, $data)
     {
-        return $this->prefixImgUrl($value, $data);
+        return $this->prefixImgUrl($value);
     }
 
 
@@ -32,7 +32,7 @@ class IndexServiceV extends BaseModel
     {
         $list = self::where('area', '=', $area)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->hidden(['province', 'city', 'c_id', 'shop_name','id','area','state'])
+            ->hidden(['province', 'city', 'c_id', 'shop_name', 'id', 'area', 'state'])
             ->select();
 
         return $list;

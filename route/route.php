@@ -34,6 +34,7 @@ Route::get('api/:version/demand', 'api/:version.Demand/getTheDemand');
 Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
 Route::get('api/:version/shop/info', 'api/:version.Shop/shopInfo');
+Route::get('api/:version/shop/info/cms', 'api/:version.Shop/shopInfoForCMS');
 Route::get('api/:version/shop/info/normal', 'api/:version.Shop/getShopInfoForNormal');
 Route::get('api/:version/shop/info/edit', 'api/:version.Shop/shopInfoForEdit');
 Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
@@ -155,4 +156,6 @@ Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 
 Route::get('api/:version/units/mini', 'api/:version.Unit/getUnitsForMini');
+
+Route::get('api/:version/shops/ready', 'api/:version.Shop/getListWithReady');
 

@@ -47,6 +47,21 @@ class ShopT extends BaseModel
 
     }
 
+    public static function getShopInfoForCMS($id)
+    {
+        $info = self::where('id', '=', $id)
+            ->with([
+                'imgs' => function ($query) {
+                    $query->with(['imgUrl'])
+                        ->where('state', '=', 1);
+                }
+            ])
+            ->hidden(['u_id', 'update_time', 'frozen'])
+            ->find();
+        return $info;
+
+    }
+
 
     public static function getShopInfoForNormal($id)
     {
@@ -123,6 +138,23 @@ class ShopT extends BaseModel
     {
         $shop = self::where('u_id', $u_id)->find();
         return $shop['id'];
+
+    }
+
+    /**
+     * 获取店铺待审核列表
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public static function readyList($page, $size)
+    {
+        $pagingData = self::where('state', CommonEnum::STATE_IS_OK)
+            ->field('id as shop_id,u_id,type,name,city')
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+        return $pagingData;
 
     }
 

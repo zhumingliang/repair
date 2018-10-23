@@ -388,6 +388,13 @@ class ShopService
 
     }
 
+    public static function getShopInfoForCms($id)
+    {
+        $info = ShopT::getShopInfoForCMS($id);
+        return $info;
+
+    }
+
     /**
      * * 获取店铺信息-编辑
      * @return array|null|\PDOStatement|string|\think\Model
@@ -568,7 +575,6 @@ class ShopService
 
         return $list;
     }
-
 
 
 }

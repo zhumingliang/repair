@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\model\ServiceListV;
 use app\api\model\ServicesT;
 use app\api\model\ShopT;
+use app\api\service\ShopListService;
 use app\api\service\ShopService;
 use app\api\validate\PagingParameter;
 use app\api\validate\ServiceValidate;
@@ -589,15 +590,70 @@ class Shop extends BaseController
     }
 
     /**
-     * CMS-商家管理-获取待审核列表（管理员）
+     * @api {GET} /api/v1/shops/ready  108-CMS-商家管理-获取待审核列表（管理员）
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shops/ready?page=1&size=20
+     * @apiParam (请求参数说明) {int} page  页码
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"shop_id":1,"u_id":1,"type":1,"name":"修之家","city":"铜陵市"}]}
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int}  shop_id 店铺id
+     * @apiSuccess (返回参数说明) {int} u_id 用户id
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {int} type 1 | 维修店铺；2 | 家政店铺
+     * @apiSuccess (返回参数说明) {String} city 城市
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \think\exception\DbException
      */
-    public function getListToApply()
+    public function getShopsForCMS($page = 1, $size = 20, $key = '', $type = 1)
     {
-
-
+       // $list = (new ShopListService())->getReady($page, $size);
+       // return json($list);
 
     }
 
+    /**
+     * @api {GET} /api/v1/shop/info/cms 109-CMS-商家管理-获取店铺信息
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  商家列表-进入
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shop/info/cms?id=8
+     * @apiParam (请求参数说明) {int} id  店铺id
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":1,"type":1,"name":"修之家","address":"","province":"安徽省","city":"铜陵市","area":"铜官区","phone":"1895622530","phone_sub":"","id_number":"","create_time":"2018-09-26 21:22:55","head_url":"","state":1,"des":null,"imgs":[{"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}}]}
+     * @apiSuccess (返回参数说明) {int} id 店铺id
+     * @apiSuccess (返回参数说明) {String} name 店铺名称
+     * @apiSuccess (返回参数说明) {String} phone 商家手机号
+     * @apiSuccess (返回参数说明) {String} phone 备用号码
+     * @apiSuccess (返回参数说明) {String} province 省
+     * @apiSuccess (返回参数说明) {String} city 市
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} address 详细地址
+     * @apiSuccess (返回参数说明) {String} type 需求类别：1 | 维修；2 | 家政
+     * @apiSuccess (返回参数说明) {String} imgs 商家资料图片
+     * @apiSuccess (返回参数说明) {String} head_url 头像
+     * @apiSuccess (返回参数说明) {String} create_time 申请时间
+     *
+     * @param $id
+     * @return \think\response\Json
+     */
+    public function shopInfoForCMS($id)
+    {
+        $info = ShopService::getShopInfoForCms($id);
+        return json($info);
 
+    }
 
 }
