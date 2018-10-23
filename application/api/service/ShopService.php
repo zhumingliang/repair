@@ -314,8 +314,6 @@ class ShopService
         $params['pay_id'] = $init_state;
         $params['refund_id'] = $init_state;
         $params['comment_id'] = $init_state;
-        $params['province'] = Token::getCurrentTokenVar('province');
-        $params['city'] = Token::getCurrentTokenVar('city');
         $params['confirm_id'] = $init_state;
         $params['r_id'] = $init_state;
         $booking = ServiceBookingT::create($params);
