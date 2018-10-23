@@ -32,6 +32,7 @@ Route::get('api/:version/demand/list', 'api/:version.Demand/getList');
 Route::get('api/:version/demand', 'api/:version.Demand/getTheDemand');
 
 Route::post('api/:version/shop/apply', 'api/:version.Shop/ShopApply');
+Route::post('api/:version/shop/update', 'api/:version.Shop/updateShop');
 Route::get('api/:version/shop/handel', 'api/:version.Shop/handel');
 Route::get('api/:version/shop/info', 'api/:version.Shop/shopInfo');
 Route::get('api/:version/shop/info/cms', 'api/:version.Shop/shopInfoForCMS');

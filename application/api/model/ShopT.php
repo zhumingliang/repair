@@ -158,4 +158,11 @@ class ShopT extends BaseModel
 
     }
 
+    public static function shopsForJoin($province, $city, $area, $page, $size, $key)
+    {
+        $sql = preJoinSqlForGetDShops($province, $city, $area);
+
+
+    }
+
 }

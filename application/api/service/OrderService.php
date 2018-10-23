@@ -297,6 +297,14 @@ class OrderService
 
     }
 
+    /**
+     * @param $shop_id
+     * @param $order_type
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     private static function getDemandListForShop($shop_id, $order_type, $page, $size)
     {
 

@@ -16,15 +16,22 @@ use app\lib\enum\UserEnum;
 class ShopListService
 {
 
-    public function getShops()
+    private $ready = 1;
+    private $all = 2;
+
+    public function getShops($page, $size, $type)
     {
         $grade = Token::getCurrentTokenVar('grade');
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
 
+
         } else {
             $province = Token::getCurrentTokenVar('province');
-            $city = Token::getCurrentTokenVar('province');
-            $province = Token::getCurrentTokenVar('province');
+            $city = Token::getCurrentTokenVar('city');
+            $area = Token::getCurrentTokenVar('area');
+
+            //获取加盟商所有店铺
+
         }
     }
 
@@ -38,6 +45,11 @@ class ShopListService
     private function getReady($page, $size, $key)
     {
         return ShopT::readyList($page, $size);
+    }
+
+    private function shopsForJoin($province, $city, $area, $key)
+    {
+
     }
 
 }
