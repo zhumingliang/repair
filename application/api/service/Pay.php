@@ -123,7 +123,8 @@ class Pay
         $input->setBody('家政维修小程序');
         $input->setAttach($attend);//添加附加数据
         $input->setOutTradeNo($this->orderNumber);
-        $input->setTotalFee($totalPrice * 100);
+        //$input->setTotalFee($totalPrice * 100);
+        $input->setTotalFee(1);
         $input->setTimeStart(date("YmdHis"));
         $input->setTimeExpire(date("YmdHis", time() + 600));
         $input->setNotifyUrl(config('secure.pay_back_url'));
