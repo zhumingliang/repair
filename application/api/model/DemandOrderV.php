@@ -120,7 +120,7 @@ class DemandOrderV extends Model
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             //->where('shop_confirm', CommonEnum::STATE_IS_FAIL)
-            ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
+            //->where('pay_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_FAIL)
             // ->field('order_id,source_name,time_begin,time_end,origin_money,update_money,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
