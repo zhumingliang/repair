@@ -90,7 +90,7 @@ class OrderService
             'd_id' => $d_id,
             's_id' => $shop_id,
             'order_number' => makeOrderNo(),
-            'pay_money' => $demand->money,
+            'pay_money' => 0,
             'origin_money' => $demand->money,
             'pay_id' => CommonEnum::ORDER_STATE_INIT,
             'confirm_id' => CommonEnum::ORDER_STATE_INIT,
@@ -221,7 +221,7 @@ class OrderService
         try {
             $imgs = $params['imgs'];
             unset($params['imgs']);
-            $params['u_id'] = 1;//Token::getCurrentUid();
+            $params['u_id'] = Token::getCurrentUid();
             $params['state'] = CommonEnum::STATE_IS_OK;
             $obj = OrderCommentT::create($params);
             if (!$obj) {
@@ -232,20 +232,35 @@ class OrderService
                     ]
                 );
             }
-            $relation = [
-                'name' => 'o_id',
-                'value' => $obj->id
-            ];
-            $res = self::saveImageRelation($imgs, $relation);
-            if (!$res) {
+            if (strlen($imgs)) {
+                $relation = [
+                    'name' => 'o_id',
+                    'value' => $obj->id
+                ];
+                $res = self::saveImageRelation($imgs, $relation);
+                if (!$res) {
+                    Db::rollback();
+                    throw new OrderException(
+                        ['code' => 401,
+                            'msg' => '创建评论图片关联失败',
+                            'errorCode' => 150011
+                        ]
+                    );
+                }
+            }
+
+            //修改评论状态
+            $com_id = ServiceBookingT::update(['comment_id' => $obj->id], ['id' => $params['o_id']]);
+            if (!$com_id) {
                 Db::rollback();
                 throw new OrderException(
                     ['code' => 401,
-                        'msg' => '创建评论图片关联失败',
+                        'msg' => '修改评论状态失败',
                         'errorCode' => 150011
                     ]
                 );
             }
+
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();
