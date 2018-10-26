@@ -20,7 +20,7 @@ class DemandOrderV extends Model
         $time_limit = date('Y-m-d H:i', strtotime('-' . $minute . ' minute',
             time()));
         $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d %H:%i")';
-        $sql = '( shop_confirm =2  AND  order_time >= ' . $time_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time < ' . $time_limit . ') ';
         $sql .= 'OR';
         $sql .= ' ( order_id = 0)';
         $list = DemandUserV::where('u_id', $u_id)
@@ -32,6 +32,11 @@ class DemandOrderV extends Model
         return $list;
     }
 
+    /**
+     * 获取订单是否被接
+     * @param $id
+     * @return float|string
+     */
     public static function getOrderToCheck($id)
     {
         $minute = 20;
@@ -56,7 +61,7 @@ class DemandOrderV extends Model
             time()));
         $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d %H:%i")';
 
-        $sql = '( shop_confirm = 2 AND  order_time < ' . $time_limit . ') ';
+        $sql = '( shop_confirm = 2 AND  order_time > ' . $time_limit . ') ';
         $sql .= 'OR';
         $sql .= ' ((shop_confirm = 1) AND pay_id=' . CommonEnum::ORDER_STATE_INIT . ')';
 
