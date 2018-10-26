@@ -21,7 +21,7 @@ class DemandV extends Model
         $sql = preJoinSql($province, $city, $area);
         $list = self::where('d_state', '=', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
-            ->whereTime('time_begin', '<', date('Y-m-d H:i'))
+            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
             ->where('type', $type)
             ->whereRaw('o_id = 0 OR (shop_confirm =2 AND date_format(order_time,"%Y-%m-%d %H:%i") > date_format("' . $time_now . '","%Y-%m-%d %H:%i")) ')
             ->field('id,des,money,latitude,longitude,area')
