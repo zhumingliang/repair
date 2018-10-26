@@ -30,8 +30,23 @@ class DemandOrderV extends Model
             //->field('order_id,demand_name as source_name,time_begin,time_end,money as origin_money')
             ->paginate($size, false, ['page' => $page]);
         return $list;
+    }
 
-
+    public static function getOrderToCheck($id)
+    {
+        $minute = 20;
+        $time_limit = date('Y-m-d H:i', strtotime('-' . $minute . ' minute',
+            time()));
+        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d %H:%i")';
+        $sql = '( shop_confirm =2  AND  order_time < ' . $time_limit . ') ';
+        $sql .= 'OR';
+        $sql .= ' ( shop_confirm = 1)';
+        $count = DemandUserV::where('id', '=', $id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            ->whereRaw($sql)
+            ->count();
+        return $count;
     }
 
     public static function payList($u_id, $page, $size)
@@ -170,7 +185,6 @@ class DemandOrderV extends Model
         return $list;
     }
 
-
     public static function getCountForShop($s_id)
     {
         $day = 7;
@@ -187,7 +201,6 @@ class DemandOrderV extends Model
             ->count();
         return $count;
     }
-
 
     public static function getCountForNormal($u_id)
     {

@@ -397,9 +397,11 @@ class ShopService
     public static function getShopInfoForCms($id)
     {
         $info = ShopT::getShopInfoForCMS($id);
+        $info['bond_balance']=WithDrawService::getBondBalance($info->u_id);
         return $info;
 
     }
+
 
     /**
      * * 获取店铺信息-编辑

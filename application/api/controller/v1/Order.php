@@ -50,6 +50,9 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('id')->goCheck();
         $id = $this->request->param('id');
+
+
+
         $u_id = TokenService::getCurrentUid();
         $o_id = OrderService::taking($id, $u_id);
         return json([
@@ -608,7 +611,6 @@ class Order extends BaseController
         ]);
 
     }
-
 
     /**
      * @api {POST} /api/v1/order/service/handel  109-小程序用户取消预约订单

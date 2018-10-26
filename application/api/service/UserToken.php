@@ -158,7 +158,9 @@ class UserToken extends Token
         $cachedValue['province'] = '';
         $cachedValue['city'] = '';
         $cachedValue['area'] = '';
-        $user = UserModel::with('shop')->where('id', $u_id)->find();
+        $user = UserModel::with('shop')
+            ->where('id', $u_id)
+            ->find();
         if (isset($user->shop) && ($user->shop->state == 2 || $user->shop->state == 4)) {
             $cachedValue['shop_id'] = $user->shop->id;
             $cachedValue['province'] = $user->shop->province;

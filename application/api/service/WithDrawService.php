@@ -31,7 +31,7 @@ class WithDrawService
             return ['balance' => 0];
         } else {
             //余额：保证金/营业额度
-            $bond_balance = self::getBondBalance();
+            $bond_balance = self::getBondBalance(Token::getCurrentUid());
             $business_balance = self::getBusinessBalance($shop_id);
             return [
                 'bond_balance' => $bond_balance,
@@ -52,7 +52,7 @@ class WithDrawService
     {
 
         if ($type == CommonEnum::WITHDRAW_BOND) {
-            $balance = self::getBondBalance();
+            $balance = self::getBondBalance(Token::getCurrentUid());
             if ($balance - 500 < $money) {
                 throw  new WithdrawException(
                     ['code' => 401,
@@ -113,9 +113,9 @@ class WithDrawService
         }
     }
 
-    private static function getBondBalance()
+    public static function getBondBalance($u_id)
     {
-        $balance = BondBalanceV::where('u_id', Token::getCurrentUid())
+        $balance = BondBalanceV::where('u_id', $u_id)
             ->sum('money');
         return $balance;
 

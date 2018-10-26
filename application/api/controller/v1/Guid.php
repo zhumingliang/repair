@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\GuidInitT;
 use app\api\model\GuidT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\GuidException;
@@ -179,6 +180,44 @@ class Guid extends BaseController
         $category = GuidT::get($id)
             ->hidden(['create_time', 'update_time,state']);
         return json($category);
+    }
+
+
+    public function guidInit()
+    {
+        $init = GuidInitT::find();
+        return $init['state'];
+    }
+
+
+    /**
+     * @api {POST} /api/v1/guid/handel  15-引导图状态操作
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  管理员删除引导图
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * }
+     * @apiParam (请求参数说明) {int} id  轮播图id
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @throws GuidException
+     */
+    public function initHandel($id, $state)
+    {
+        $params = $this->request->param();
+        $id = GuidT::update(['state' => $state], ['id' => $id]);
+        if (!$id) {
+            throw new GuidException(['code' => 401,
+                'msg' => '操作引导图状态失败',
+                'errorCode' => 110002
+            ]);
+        }
+
     }
 
 

@@ -77,14 +77,14 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/shop/handel  7-商铺状态操作
+     * @api {GET} /api/v1/shop/handel  7-商铺状态操作（CMS管理员/小程序用户）
      * @apiGroup  COMMON
      * @apiVersion 1.0.1
-     * @apiDescription  管理员审核商铺申请：同意或者拒绝;审核通过之后，商家确认操作
+     * @apiDescription  管理员审核商铺申请：同意或者拒绝;管理员商铺状态操作：删除；审核通过之后，商家确认操作
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/shop/handel?id=1&state=2
      * @apiParam (请求参数说明) {int} id  申请id
-     * @apiParam (请求参数说明) {int} state  申请操作：2 | 同意；3 | 拒绝；4 | 审核通过之后，商家确认操作
+     * @apiParam (请求参数说明) {int} state  管理员操作：申请操作：2 | 同意；3 | 拒绝；5 | 删除；小程序用户操作：4 | 审核通过之后，商家确认操作;
      *
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
@@ -590,16 +590,17 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/shops/ready  108-CMS-商家管理-获取待审核列表（管理员）
+     * @api {GET} /api/v1/shops/list/cms  108-CMS-商家管理-获取待审核列表/商家列表（管理员/加盟商）
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/shops/ready?page=1&size=20
+     * https://mengant.cn/api/v1/shops/list/cms?page=1&size=20&type=1
      * @apiParam (请求参数说明) {int} page  页码
      * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiParam (请求参数说明) {int} type  列表类别：1 | 待审核；2 | 已审核
      * @apiSuccessExample {json} 返回样例:
-     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"shop_id":1,"u_id":1,"type":1,"name":"修之家","city":"铜陵市"}]}
+     * {"total":3,"per_page":"20","current_page":1,"last_page":1,"data":[{"shop_id":10,"u_id":8,"type":1,"name":"鑫鑫保姆","city":"玉树藏族自治州"},{"shop_id":8,"u_id":17,"type":2,"name":"家政测试","city":"枣庄市"},{"shop_id":1,"u_id":1,"type":1,"name":"修之家","city":"铜陵市"}]}
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
@@ -607,19 +608,23 @@ class Shop extends BaseController
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {int}  shop_id 店铺id
      * @apiSuccess (返回参数说明) {int} u_id 用户id
-     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {String} name 商铺名称
      * @apiSuccess (返回参数说明) {int} type 1 | 维修店铺；2 | 家政店铺
      * @apiSuccess (返回参数说明) {String} city 城市
+     * @apiSuccess (返回参数说明) {String} area 区
      * @param int $page
      * @param int $size
+     * @param string $key
+     * @param int $type
      * @return \think\response\Json
-     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public function getShopsForCMS($page = 1, $size = 20, $key = '', $type = 1)
+    public function ShopsForCMS($page = 1, $size = 20, $key = '', $type = 1)
     {
-       // $list = (new ShopListService())->getReady($page, $size);
-       // return json($list);
+        $list = (new ShopListService())->getShops($page, $size, $type, $key);
+        return json($list);
 
     }
 
@@ -632,7 +637,7 @@ class Shop extends BaseController
      * https://mengant.cn/api/v1/shop/info/cms?id=8
      * @apiParam (请求参数说明) {int} id  店铺id
      * @apiSuccessExample {json} 返回样例:
-     * {"id":1,"type":1,"name":"修之家","address":"","province":"安徽省","city":"铜陵市","area":"铜官区","phone":"1895622530","phone_sub":"","id_number":"","create_time":"2018-09-26 21:22:55","head_url":"","state":1,"des":null,"imgs":[{"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}}]}
+     * {"id":9,"u_id":19,"type":1,"name":"兄弟庆典","address":"台儿庄区兴中路劳动局北临","province":"山东省","city":"枣庄市","area":"台儿庄区","phone":"13581129678","phone_sub":"13963262516","id_number":"370405198408126088","create_time":"2018-10-24 09:40:56","head_url":"https:\/\/mengant.cn\/static\/imgs\/20181024\/0f575244d0f25d33bd642366b832206a.jpg","state":4,"des":null,"bond_balance":0,"imgs":[{"img_id":240,"img_url":{"url":"https:\/\/mengant.cn\/static\/imgs\/20181024\/accf0ed8a4a45f276a88b2a518170a90.jpg"}},{"img_id":242,"img_url":{"url":"https:\/\/mengant.cn\/static\/imgs\/20181024\/35b05e19b41e65902c57113ed4742989.jpg"}}]}
      * @apiSuccess (返回参数说明) {int} id 店铺id
      * @apiSuccess (返回参数说明) {String} name 店铺名称
      * @apiSuccess (返回参数说明) {String} phone 商家手机号
@@ -641,6 +646,7 @@ class Shop extends BaseController
      * @apiSuccess (返回参数说明) {String} city 市
      * @apiSuccess (返回参数说明) {String} area 区
      * @apiSuccess (返回参数说明) {String} address 详细地址
+     * @apiSuccess (返回参数说明) {String} bond_balance 保证金余额
      * @apiSuccess (返回参数说明) {String} type 需求类别：1 | 维修；2 | 家政
      * @apiSuccess (返回参数说明) {String} imgs 商家资料图片
      * @apiSuccess (返回参数说明) {String} head_url 头像
@@ -653,6 +659,34 @@ class Shop extends BaseController
     {
         $info = ShopService::getShopInfoForCms($id);
         return json($info);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/shop/frozen  110-后台冻结商铺
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/shop/frozen?id=1
+     * @apiParam (请求参数说明) {int} id  商家id
+     * @apiSuccessExample {json} 返回样例:
+     *{"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
+     * @apiSuccess (返回参数说明) {String} msg 信息描述
+     * @param $id
+     * @return \think\response\Json
+     */
+    public function shopFrozen($id)
+    {
+        $res = ShopT::update(['frozen' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$res) {
+            ['code' => 401,
+                'msg' => '冻结操作失败',
+                'errorCode' => 600020
+            ];
+        }
+        return json(new SuccessMessage());
 
     }
 

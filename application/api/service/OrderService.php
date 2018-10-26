@@ -27,7 +27,7 @@ use think\Exception;
 class OrderService
 {
     /**
-     *  商家接单
+     * 商家接单
      * @param $d_id
      * @param $u_id
      * @return mixed
@@ -39,6 +39,15 @@ class OrderService
      */
     public static function taking($d_id, $u_id)
     {
+
+        if (self::checkTaking($d_id)) {
+            throw new OrderException(
+                ['code' => 401,
+                    'msg' => '订单已被接单',
+                    'errorCode' => 150007
+                ]
+            );
+        }
         $shop_id = ShopT::getShopId($u_id);
         if (empty($shop_id)) {
             throw new OrderException(
@@ -49,7 +58,7 @@ class OrderService
             );
 
         }
-        if (!self::checkShopBond($shop_id)) {
+        if (!self::checkShopBond($u_id)) {
             throw new OrderException(
                 ['code' => 401,
                     'msg' => '店铺保证金不足，请支付保证金',
@@ -57,7 +66,7 @@ class OrderService
                 ]
             );
         }
-        if (!self::checkShopForzen($shop_id)) {
+        if (!self::checkShopFrozen($shop_id)) {
             throw new OrderException(
                 ['code' => 401,
                     'msg' => '店铺保已经被冻结，无法接单。',
@@ -104,16 +113,29 @@ class OrderService
             'phone_shop' => CommonEnum::STATE_IS_FAIL
 
         ]);
-
         if (!$db) {
             throw  new OrderException();
         }
         //添加用户消息提示
         OrderMsgService::saveNormal($demand->u_id, $db->id, 1, 2);
         return $db->id;
+    }
 
+    /**
+     * 检测是否已被抢单
+     * @param $id
+     * @return bool
+     * true 已抢
+     */
+    private static function checkTaking($id)
+    {
+        if (DemandOrderV::getOrderToCheck($id)) {
+            return false;
+        }
+        return true;
 
     }
+
 
     /**
      * 获取订单信息
@@ -128,7 +150,6 @@ class OrderService
     {
         if ($order_type == CommonEnum::ORDER_IS_DEMAND) {
             return self::getDemandInfo($o_id);
-
         } else {
             return self::getServiceInfo($o_id);
         }
@@ -459,13 +480,18 @@ class OrderService
     private static function checkShopBond($shop_id)
     {
 
+
         return true;
 
     }
 
-    private static function checkShopForzen($shop_id)
+    private static function checkShopFrozen($shop_id)
     {
-        return true;
+        $frozen = ShopT::where('id', $shop_id)
+            ->field('frozen')
+            ->find();
+
+        return !($frozen['frozen'] - 1);
 
     }
 

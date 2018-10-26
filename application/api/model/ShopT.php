@@ -56,7 +56,7 @@ class ShopT extends BaseModel
                         ->where('state', '=', 1);
                 }
             ])
-            ->hidden(['u_id', 'update_time', 'frozen'])
+            ->hidden([ 'update_time', 'frozen'])
             ->find();
         return $info;
 
@@ -142,15 +142,21 @@ class ShopT extends BaseModel
     }
 
     /**
-     * 获取店铺待审核列表
+     * 管理员获取店铺待审核列表（全部）
      * @param $page
      * @param $size
+     * @param $key
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public static function readyList($page, $size)
+    public static function readyList($page, $size, $key)
     {
-        $pagingData = self::where('state', CommonEnum::STATE_IS_OK)
+        $pagingData = self::where('state', CommonEnum::READY)
+            ->where(function ($query) use ($key) {
+                if ($key) {
+                    $query->where('name', 'like', '%' . $key . '%');
+                }
+            })
             ->field('id as shop_id,u_id,type,name,city')
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
@@ -158,9 +164,56 @@ class ShopT extends BaseModel
 
     }
 
+
+    /**
+     * 管理员获取店铺通过审核列表
+     * @param $page
+     * @param $size
+     * @param $key
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public static function passList($page, $size, $key)
+    {
+        $pagingData = self::whereIn('state', '2,4')
+            ->where(function ($query) use ($key) {
+                if ($key) {
+                    $query->where('name', 'like', '%' . $key . '%');
+                }
+            })
+            ->field('id as shop_id,u_id,type,name,city')
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+        return $pagingData;
+
+    }
+
+    /**
+     *加盟商获取通过店铺列表
+     * @param $province
+     * @param $city
+     * @param $area
+     * @param $page
+     * @param $size
+     * @param $key
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function shopsForJoin($province, $city, $area, $page, $size, $key)
     {
         $sql = preJoinSqlForGetDShops($province, $city, $area);
+
+        $pagingData = self::whereIn('state', '2,4')
+            ->whereRaw($sql)
+            ->where(function ($query) use ($key) {
+                if ($key) {
+                    $query->where('name', 'like', '%' . $key . '%');
+                }
+            })
+            ->field('id as shop_id,u_id,type,name,area')
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+        return $pagingData;
 
 
     }

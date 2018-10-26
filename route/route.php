@@ -47,6 +47,10 @@ Route::post('api/:version/shop/staff/examine', 'api/:version.Shop/examineStaff')
 Route::post('api/:version/shop/staff/delete', 'api/:version.Shop/deleteStaff');
 Route::post('api/:version/shop/service/delete', 'api/:version.Shop/deleteService');
 Route::get('api/:version/shop/service/normal/list', 'api/:version.Shop/getServiceListForNormal');
+Route::get('api/:version/shops/list/cms', 'api/:version.Shop/ShopsForCMS');
+Route::get('api/:version/shop/info/cms', 'api/:version.Shop/shopInfoForCMS');
+Route::get('api/:version/shop/frozen', 'api/:version.Shop/shopFrozen');
+
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
 
@@ -144,7 +148,7 @@ Route::post('api/:version/order/service/handel', 'api/:version.Order/serviceHand
 Route::get('api/:version/pay/getPreOrder', 'api/:version.Pay/getPreOrder');
 Route::rule('api/:version/pay/notify', 'api/:version.Pay/receiveNotify');
 
-Route::post('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
+Route::get('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
 Route::post('api/:version/bond/save', 'api/:version.Bond/save');
 
 Route::get('api/:version/withdraw/balance', 'api/:version.Withdraw/getBalance');
@@ -158,6 +162,3 @@ Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 
 Route::get('api/:version/units/mini', 'api/:version.Unit/getUnitsForMini');
-
-Route::get('api/:version/shops/ready', 'api/:version.Shop/getListWithReady');
-
