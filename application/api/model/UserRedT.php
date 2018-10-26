@@ -39,7 +39,7 @@ class UserRedT extends Model
      */
     public static function getList()
     {
-        $u_id = 1;// Token::getCurrentUid();
+        $u_id = Token::getCurrentUid();
         $time_begin = date('Y-m-d', strtotime('-' . 30 . ' day',
             time()));
         $list = self::with(['detail' => function ($query) {
