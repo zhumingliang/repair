@@ -40,7 +40,7 @@ class OrderService
     public static function taking($d_id, $u_id)
     {
 
-        if (self::checkTaking($d_id)) {
+        if (!self::checkTaking($d_id)) {
             throw new OrderException(
                 ['code' => 401,
                     'msg' => '订单已被接单',

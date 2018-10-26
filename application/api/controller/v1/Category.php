@@ -31,7 +31,6 @@ class Category extends BaseController
      * @apiParam (请求参数说明) {int} type    分类上级：1 | 家政；2| 维修
      * @apiParam (请求参数说明) {String} name    分类名称
      * @apiParam (请求参数说明) {int} order    排序，最大值100
-     *
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误

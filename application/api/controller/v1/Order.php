@@ -50,9 +50,6 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('id')->goCheck();
         $id = $this->request->param('id');
-
-
-
         $u_id = TokenService::getCurrentUid();
         $o_id = OrderService::taking($id, $u_id);
         return json([
