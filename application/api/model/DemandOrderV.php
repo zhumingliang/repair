@@ -38,7 +38,7 @@ class DemandOrderV extends Model
         $time_limit = date('Y-m-d H:i', strtotime('-' . $minute . ' minute',
             time()));
         $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d %H:%i")';
-        $sql = '( shop_confirm =2  AND  order_time < ' . $time_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time > ' . $time_limit . ') ';
         $sql .= 'OR';
         $sql .= ' ( shop_confirm = 1)';
         $count = DemandUserV::where('id', '=', $id)
