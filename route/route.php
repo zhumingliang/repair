@@ -164,3 +164,8 @@ Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 
 Route::get('api/:version/units/mini', 'api/:version.Unit/getUnitsForMini');
+
+Route::post('api/:version/system/file/save', 'api/:version.System/saveFile');
+Route::post('api/:version/system/file/update', 'api/:version.System/updateFile');
+Route::get('api/:version/system/file', 'api/:version.System/file');
+Route::get('api/:version/system/demand', 'api/:version.System/getDemand');

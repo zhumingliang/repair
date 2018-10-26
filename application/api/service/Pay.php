@@ -8,10 +8,13 @@
 
 namespace app\api\service;
 
+use app\api\controller\v1\Demand;
 use app\api\model\BondT;
 use app\api\model\DemandOrderT;
+use app\api\model\DemandT;
 use app\api\model\ServiceBookingT;
 use app\api\model\UserRedT;
+use app\api\model\UserT;
 use app\api\model\WxPayT;
 
 use app\lib\enum\CommonEnum;
@@ -19,6 +22,7 @@ use app\lib\enum\RedEnum;
 use app\lib\exception\PayException;
 use app\lib\exception\TokenException;
 use think\Exception;
+use think\Model;
 use wxpay\database\WxPayUnifiedOrder;
 use wxpay\JsApiPay;
 use wxpay\WxPayApi;
@@ -243,7 +247,7 @@ class Pay
             $order = ServiceBookingT::where('id', '=', $this->orderID)->find();
         } elseif ($this->type == CommonEnum::ORDER_IS_DEMAND) {
             $order = DemandOrderT::where('id', '=', $this->orderID)->find();
-
+            $order['openid'] = $this->getOpenidForDemand($order->d_id);
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
             $order = BondT::where('id', '=', $this->orderID)
                 ->field('id,u_id,1 as state,money as origin_money,pay_id,openid,order_number')
@@ -252,6 +256,17 @@ class Pay
             throw new PayException();
         }
         return $order;
+
+    }
+
+    private function getOpenidForDemand($id)
+    {
+
+        $demand = DemandT::where('id', $id)
+            ->find();
+        $user = UserT::where('id', $demand->u_id)->find();
+        return $user->openId;
+
 
     }
 
