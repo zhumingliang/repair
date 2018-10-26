@@ -78,7 +78,9 @@ Route::post('api/:version/guid/save', 'api/:version.Guid/save');
 Route::post('api/:version/guid/handel', 'api/:version.Guid/handel');
 Route::post('api/:version/guid/update', 'api/:version.Guid/update');
 Route::get('api/:version/guid/list', 'api/:version.Guid/getList');
-Route::get('api/:version/guid', 'api/:version.Banner/getTheGuid');
+Route::get('api/:version/guid', 'api/:version.Guid/getTheGuid');
+Route::get('api/:version/guid/init', 'api/:version.Guid/guidInit');
+Route::get('api/:version/guid/init/handel', 'api/:version.Guid/initHandel');
 
 
 Route::post('api/:version/category/save', 'api/:version.Category/save');

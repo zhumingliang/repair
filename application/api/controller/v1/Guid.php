@@ -183,40 +183,61 @@ class Guid extends BaseController
     }
 
 
+    /**
+     * @api {GET} /api/v1/guid/init  112-小程序和后台获取系统设置引导图显示方式
+     * @apiGroup  COMMON
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序和后台获取系统设置引导图显示方式
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/guid/init
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":1,"type":1,"create_time":"2018-10-26 11:35:44","update_time":"2018-10-26 11:35:46"}
+     * @apiSuccess (返回参数说明) {int} id 引导图设置id
+     * @apiSuccess (返回参数说明) {String} type 设置状态：1为始终显示，2新用户显示，3再次登录显示
+     * @return mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function guidInit()
     {
         $init = GuidInitT::find();
-        return $init['state'];
+        return json($init);
     }
 
 
     /**
-     * @api {POST} /api/v1/guid/handel  15-引导图状态操作
+     * @api {POST} /api/v1/guid/initHandel  113-CMS设置小程序初始化时，引导图显示方式
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员删除引导图
      * @apiExample {POST}  请求样例:
      * {
      * "id": 1,
+     * "type":1
      * }
-     * @apiParam (请求参数说明) {int} id  轮播图id
+     * @apiParam (请求参数说明) {int} id  设置id
+     * @apiParam (请求参数说明) {int} type  设置状态：1为始终显示，2新用户显示，3再次登录显示
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     *
+     * @param $id
+     * @param $type
+     * @return \think\response\Json
      * @throws GuidException
      */
-    public function initHandel($id, $state)
+    public function initHandel($id, $type)
     {
-        $params = $this->request->param();
-        $id = GuidT::update(['state' => $state], ['id' => $id]);
+        $id = GuidT::update(['state' => $type], ['id' => $id]);
         if (!$id) {
             throw new GuidException(['code' => 401,
-                'msg' => '操作引导图状态失败',
-                'errorCode' => 110002
+                'msg' => '操作引导图初始化状态失败',
+                'errorCode' => 110007
             ]);
         }
+
+        return json(new SuccessMessage());
 
     }
 

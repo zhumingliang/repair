@@ -436,10 +436,11 @@ class OrderService
     public static function checkOrderPay($id, $type)
     {
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $pay_id = DemandOrderT::where('id', $id)->field('pay_id')->find()->toArray();
+            $order = DemandOrderT::where('id', $id)->field('pay_id')->find()->toArray();
         } else {
-            $pay_id = ServiceBookingT::where('id', $id)->field('pay_id')->find()->toArray();
+            $order = ServiceBookingT::where('id', $id)->field('pay_id')->find()->toArray();
         }
+        $pay_id = $order['pay_id'];
         return $pay_id == CommonEnum::ORDER_STATE_INIT ? 2 : 1;
 
     }
