@@ -68,11 +68,12 @@ class CenterService
     {
 
         if (!$this->shop_id) {
-            return OrderNormalMsgT::where('state', CommonEnum::STATE_IS_OK)
+            return OrderNormalMsgT::where('u_id', $this->u_id)
+                ->where('state', CommonEnum::STATE_IS_OK)
                 ->count();
         }
 
-        return OrderShopMsgT::where('state', CommonEnum::STATE_IS_OK)
+        return OrderShopMsgT::where('u_id', $this->u_id)->where('state', CommonEnum::STATE_IS_OK)
             ->count();
     }
 
