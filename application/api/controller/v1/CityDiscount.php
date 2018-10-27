@@ -48,6 +48,22 @@ class CityDiscount extends BaseController
     {
         $params = $this->request->param();
         $params['state'] = CommonEnum::STATE_IS_OK;
+        //检查是否已经新增该区域设置
+        $count = CityDiscountT::where('province', $params['province'])
+            ->where('city', $params['city'])
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->count('id');
+        if ($count){
+            throw new SystemException(
+                [
+                    'code' => 401,
+                    'msg' => '该城市已经添加优惠设置',
+                    'errorCode' => 140015
+                ]
+            );
+        }
+
+
         $id = CityDiscountT::create($params);
         if ($id) {
             throw  new SystemException();
@@ -57,7 +73,7 @@ class CityDiscount extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/category/handel  39-城市优惠状态操作
+     * @api {POST} /api/v1/city/discount/handel  39-城市优惠状态操作
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员删除城市优惠
@@ -153,17 +169,18 @@ class CityDiscount extends BaseController
      * @apiSuccess (返回参数说明) {String} city 市
      * @apiSuccess (返回参数说明) {int} discount 优惠折扣
      *
+     * @param $page
+     * @param $size
      * @return \think\response\Json
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getList()
+    public function getList($page, $size)
     {
         $list = CityDiscountT::where('state', '=', CommonEnum::STATE_IS_OK)
             ->hidden(['state,create_time,update_time'])
             ->order('create_time desc')
-            ->select();
+            ->paginate($size, false, ['page' => $page])
+            ->toArray();
         return json($list);
     }
 

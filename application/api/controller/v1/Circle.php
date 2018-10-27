@@ -420,7 +420,6 @@ class Circle extends BaseController
 
     }
 
-
     /**
      * @api {POST} /api/v1/circle/save  61-CMS修改圈子文章
      * @apiGroup  CMS
@@ -607,7 +606,6 @@ class Circle extends BaseController
         $list = CircleService::comments($params);
         return json($list);
     }
-
 
     /**
      * @api {POST} /api/v1/circle/comment/zan  67-小程序用户给圈子评论点赞
