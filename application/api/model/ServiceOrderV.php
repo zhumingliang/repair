@@ -16,53 +16,102 @@ class ServiceOrderV extends Model
 {
     //-----------------------------用户订单数据接口------------------------------------
 
+    /**
+     * 已预约
+     * 1.在规定时间内商家确认订单
+     * @param $u_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function bookingList($u_id, $page, $size)
     {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $shop_confirm = $orderTime['shop_confirm'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            // ->where('phone_user', CommonEnum::STATE_IS_FAIL)
-            // ->where('phone_shop', CommonEnum::STATE_IS_FAIL)
             ->where('shop_confirm', CommonEnum::STATE_IS_FAIL)
-            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            //->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone,area,address')
+            //->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            ->whereTime('order_time', '<', $shop_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
         return $list;
 
 
     }
 
+    /**
+     * 待付款
+     * 规定时间内未付款
+     * @param $u_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function payList($u_id, $page, $size)
     {
-        //$sql = ' ((phone_user = 1 OR phone_shop = 1) AND pay_id=' . CommonEnum::ORDER_STATE_INIT . ')';
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $pay = $orderTime['pay'];
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            //->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            ->whereTime('order_time', '<', $pay_limit)
             ->where('shop_confirm', CommonEnum::STATE_IS_OK)
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
-            // ->whereRaw($sql)
-            // ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
 
     }
 
+    /**
+     * 待确认
+     * 未超出待确认时间设置
+     * @param $u_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function confirmList($u_id, $page, $size)
     {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
-            ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            // ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
+            //  ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
+            ->whereTime('order_time', '<', $user_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
 
     }
 
+    /**
+     * 待评价
+     * @param $u_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function commentList($u_id, $page, $size)
     {
 
@@ -70,29 +119,45 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('confirm_id', '=', 1)
             ->where('comment_id', '=', CommonEnum::ORDER_STATE_INIT)
-            // ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
 
     }
 
+    /**
+     * 已完成订单
+     * 1.用户已评价订单
+     * 2.用户已经支付，但是没有在规定时间内确认
+     * 3.用户确认订单时，选择协商订单，并且超出规定协商时间
+     * @param $u_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function completeList($u_id, $page, $size)
     {
-        $day = 7;
-        $time_limit = date('Y-m-d', strtotime('-' . $day . ' day',
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
             time()));
-        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d")';
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( confirm_id =2  AND comment_id = 99999 AND   order_time < ' . $time_limit . ') ';
+        $sql = '( comment_id <> 99999 ) ';
         $sql .= 'OR';
-        $sql .= ' (comment_id <> 99999)';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= 'OR';
+        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
-            //  ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -101,54 +166,121 @@ class ServiceOrderV extends Model
 
 //-----------------------------店铺订单数据接口------------------------------------
 
+    /**
+     * 待确认
+     * 1.商家在规定时间内没有确认订单
+     * @param $s_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function shopConfirm($s_id, $page, $size)
     {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $shop_confirm = $orderTime['shop_confirm'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            // ->where('phone_user', '=', CommonEnum::STATE_IS_FAIL)
-            ->where('pay_id', '=', CommonEnum::ORDER_STATE_INIT)
-            // ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
+            ->where('shop_confirm', '=', CommonEnum::STATE_IS_FAIL)
+            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            ->whereTime('order_time', '<', $shop_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
 
+    /**
+     * 待服务
+     * 1.用户已经支付-商家没有去服务
+     * 2.商家已确认-用户在规定时间内没有支付
+     * @param $s_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function service($s_id, $page, $size)
     {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $pay = $orderTime['pay'];
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+
+        $sql = ' ( pay_id <> 99999 AND service_begin = 2)';
+        $sql .= '( shop_confirm =1 AND  pay_id  = 99999  AND  order_time < ' . $pay_limit . ') ';
+
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
-            ->where('service_begin', '=', CommonEnum::STATE_IS_FAIL)
-            //->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
+            ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
 
+    /**
+     * 服务中
+     * 用户已经支付-商家去服务-用户在规定时间是没有确认完成/协商
+     * @param $s_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function serviceIng($s_id, $page, $size)
     {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
-            //->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
+            ->whereTime('order_time', '<', $user_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
 
+    /**
+     * 已完成
+     * 1.用户已评价订单
+     * 2.用户已经支付，但是没有在规定时间内确认
+     * 3.用户确认订单时，选择协商订单，并且超出规定协商时间
+     * @param $s_id
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
     public static function shopComplete($s_id, $page, $size)
     {
-        $day = 7;
-        $time_limit = date('Y-m-d', strtotime('-' . $day . ' day',
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
             time()));
-        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d")';
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( confirm_id =2  AND   order_time < ' . $time_limit . ') ';
+
+        $sql = '( comment_id <> 99999 ) ';
         $sql .= 'OR';
-        $sql .= ' (confirm_id = 1)';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= 'OR';
+        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
 
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
@@ -164,9 +296,10 @@ class ServiceOrderV extends Model
 
     /**
      * 未完成订单：
-     * 1.订单未取消
-     * 2.用户支付了订单
-     * 3.规定时间内用户未确定订单
+     * 1.规定时间内未确认
+     * 2.商户已确认-用户规定时间内未支付
+     * 3.用户已经支付-规定时间内用户未确定订单
+     * 4.用户在规定时间内处于协商
      * @param $key
      * @param $page
      * @param $size
@@ -182,10 +315,24 @@ class ServiceOrderV extends Model
             time()));
         $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
             time()));
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+
 
         $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
         $sql .= 'OR';
         $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
+        $sql .= 'OR';
+        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time < ' . $user_confirm_limit . ')';
+        $sql .= 'OR';
+        $sql .= ' ( confirm_id = 2 AND order_time < ' . $consult_limit . ')';
 
         $list = self::where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
@@ -205,7 +352,8 @@ class ServiceOrderV extends Model
      * @param $key
      * @param $page
      * @param $size
-     * @return mixed
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
      */
     public static function readyCommentForReport($key, $page, $size)
     {
@@ -230,7 +378,7 @@ class ServiceOrderV extends Model
      * @param $page
      * @param $size
      * @return \think\Paginator
-     * @return mixed
+     * @throws \think\exception\DbException
      */
     public static function completeForReport($key, $page, $size)
     {
@@ -241,10 +389,13 @@ class ServiceOrderV extends Model
             time()));
         $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
             time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= 'OR';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 9999  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999  order_time > ' . $user_confirm_limit . ') ';
         $sql .= 'OR';
         $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
 
@@ -280,6 +431,9 @@ class ServiceOrderV extends Model
             time()));
         $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
             time()));
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+
 
         $sql = '( pay_id <> 99999 ) ';
         $sql .= 'OR';

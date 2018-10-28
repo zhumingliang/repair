@@ -15,6 +15,20 @@ class OrderReportService
 {
     public function demandReportForAdmin($key, $report_type, $page, $size)
     {
+        $list = array();
+        if ($report_type == 1) {
+
+        } else if ($report_type == 2) {
+
+        }
+
+        return $list;
+
+
+    }
+
+    public function serviceReportForAdmin($key, $report_type, $page, $size)
+    {
         switch ($report_type) {
             case OrderEnum::DEMAND_NORMAL_TAKING:
                 return DemandOrderV::takingList($u_id, $page, $size);

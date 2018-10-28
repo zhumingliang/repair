@@ -356,7 +356,7 @@ class Shop extends BaseController
      * "city": "广州市"
      * }
      * @apiParam (请求参数说明) {int} id  店铺和与员工头像关联id
-     * @apiParam (请求参数说明) {String} url 头像id
+     * @apiParam (请求参数说明) {String} url 头像url
      * @apiParam (请求参数说明) {String} city 当前城市
      *
      * @apiSuccessExample {json} 返回样例:
