@@ -315,11 +315,11 @@ class DemandOrderV extends Model
         $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ' ) ';
         $sql .= 'OR';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ') ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ' ) ';
         $sql .= 'OR';
-        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time < ' . $user_confirm_limit . ') ';
+        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time < ' . $user_confirm_limit . ' ) ';
         $sql .= 'OR';
         $sql .= ' ( confirm_id = 2 AND order_time < ' . $consult_limit . ')';
 
