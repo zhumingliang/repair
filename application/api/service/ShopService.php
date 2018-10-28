@@ -500,13 +500,13 @@ class ShopService
                     ]
                 );
             }
-            if ($face_token) {
+          /*  if ($face_token) {
                 $face = FaceService::instance();
                 if (!$face->deleteFace($shop_img_id, $city, $face_token)) {
                     Db::rollback();
                     throw  new FaceException();
                 }
-            }
+            }*/
 
             Db::commit();
         } catch (Exception $e) {
