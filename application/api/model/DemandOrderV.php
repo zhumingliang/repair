@@ -359,6 +359,7 @@ class DemandOrderV extends Model
         $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
         $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
         $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
         $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
