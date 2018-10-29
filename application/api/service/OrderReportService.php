@@ -237,6 +237,9 @@ class OrderReportService
 
     private function checkComplete($data)
     {
+        if ($data['comment_id'] != CommonEnum::ORDER_STATE_INIT) {
+            return true;
+        }
 
 
     }

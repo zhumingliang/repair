@@ -30,9 +30,8 @@ class Collection extends BaseController
      * @apiParam (请求参数说明) {String} id  服务/店铺 id
      * @apiParam (请求参数说明) {String} type   收藏类别：1 服务；2| 店铺
      * @apiSuccessExample {json} 返回样例:
-     * {"msg": "ok","error_code": 0}
-     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
-     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * {"id": 1}
+     * @apiSuccess (返回参数说明) {int} id 收藏id
      *
      *
      * @param $id
@@ -46,8 +45,8 @@ class Collection extends BaseController
     public function save($id, $type)
     {
         (new CollectionValidate())->scene('save')->goCheck();
-        CollectionService::save($id, $type);
-        return json(new SuccessMessage());
+        $id = CollectionService::save($id, $type);
+        return json(['id' => $id]);
 
     }
 

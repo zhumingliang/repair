@@ -49,6 +49,8 @@ class CollectionService
 
         }
 
+        return $save_id;
+
     }
 
     /**
