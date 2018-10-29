@@ -21,9 +21,10 @@ class CollectionService
 
 
     /**
-     * 新增收藏
+     *  新增收藏
      * @param $id
      * @param $type
+     * @return mixed
      * @throws CollectionException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -36,20 +37,24 @@ class CollectionService
             'u_id' => $u_id,
             'state' => CommonEnum::STATE_IS_OK
         ];
-        $save_id = 0;
         if ($type === self::COLLECTION_HOUSE) {
             //收藏服务
-            $save_id = CollectionServicesT::create($data);
+            $save = CollectionServicesT::create($data);
+            if (!$save->id) {
+                throw  new  CollectionException();
+
+            }
+            return $save->id;
         } else if ($type == self::COLLECTION_REPAIR) {
             //收藏店铺
-            $save_id = CollectionShopT::create($data);
-        }
-        if (!$save_id) {
-            throw  new  CollectionException();
+            $save = CollectionShopT::create($data);
+            if (!$save->id) {
+                throw  new  CollectionException();
 
+            }
+            return $save->id;
         }
 
-        return $save_id;
 
     }
 
@@ -59,7 +64,8 @@ class CollectionService
      * @param $type
      * @throws CollectionException
      */
-    public static function handel($id, $type)
+    public
+    static function handel($id, $type)
     {
         $save_id = 0;
         if ($type === self::COLLECTION_HOUSE) {
@@ -88,7 +94,8 @@ class CollectionService
      * @param $size
      * @return array|\think\Paginator
      */
-    public static function getList($type, $page, $size)
+    public
+    static function getList($type, $page, $size)
     {
         $obj = [];
         if ($type == self::COLLECTION_REPAIR) {

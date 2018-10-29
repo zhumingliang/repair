@@ -536,14 +536,14 @@ class ShopService
         $collection = CollectionShopT::where('u_id', Token::getCurrentUid())
             ->where('s_id', $id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->count();
+            ->find();
 
 
         return [
             'info' => $info,
             'comment_count' => $comment_count,
             'score' => self::getShopScore($id),
-            'collection' => $collection
+            'collection' => $collection->id
         ];
     }
 

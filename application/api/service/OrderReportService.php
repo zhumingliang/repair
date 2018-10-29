@@ -12,6 +12,7 @@ namespace app\api\service;
 use app\api\model\DemandOrderV;
 use app\api\model\OrderReportV;
 use app\api\model\ServiceOrderV;
+use app\api\model\SystemTimeT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\OrderEnum;
 use app\lib\enum\UserEnum;
@@ -46,7 +47,6 @@ class OrderReportService
             $list['data'] = $this->prefixOrderState($data);
         }
 
-
         return $list;
 
 
@@ -59,6 +59,7 @@ class OrderReportService
      */
     private function prefixOrderState($list)
     {
+        print_r($list);
         if (count($list)) {
             foreach ($list as $k => $v) {
                 if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
@@ -240,7 +241,33 @@ class OrderReportService
         if ($data['comment_id'] != CommonEnum::ORDER_STATE_INIT) {
             return true;
         }
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
 
+        if ($data['pay_id'] != CommonEnum::ORDER_STATE_INIT &&
+            $data['confirm_id'] == CommonEnum::ORDER_STATE_INIT &&
+            time() > $user_confirm_limit
+        ) {
+
+            return true;
+
+        }
+
+        if ($data['pay_id'] != CommonEnum::ORDER_STATE_INIT &&
+            $data['confirm_id'] == 2 &&
+            time() > $consult_limit
+        ) {
+
+            return true;
+
+        }
+
+        return false;
 
     }
 
