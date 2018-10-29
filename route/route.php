@@ -186,3 +186,9 @@ Route::post('api/:version/system/join/save', 'api/:version.JoinCommission/save')
 Route::post('api/:version/system/join/handel', 'api/:version.JoinCommission/handel');
 Route::get('api/:version/system/join/list', 'api/:version.JoinCommission/getList');
 
+
+Route::get('api/:version/report/export/city', 'api/:version.OrderReport/exportWithCity');
+Route::get('api/:version/report/export', 'api/:version.OrderReport/exportWithoutCity');
+Route::get('api/:version/report/demand/admin', 'api/:version.OrderReport/getDemandReportForAdmin');
+Route::get('api/:version/report/service/admin', 'api/:version.OrderReport/getServiceReportForAdmin');
+Route::get('api/:version/report/order/join', 'api/:version.OrderReport/getOrderReportForJoin');

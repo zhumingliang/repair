@@ -10,7 +10,12 @@ namespace app\api\service;
 
 
 use app\api\model\DemandOrderV;
+use app\api\model\OrderReportV;
 use app\api\model\ServiceOrderV;
+use app\lib\enum\CommonEnum;
+use app\lib\enum\OrderEnum;
+use app\lib\enum\UserEnum;
+use app\lib\exception\OrderException;
 
 class OrderReportService
 {
@@ -34,14 +39,48 @@ class OrderReportService
         } else if ($report_type == 3) {
 
             $list = DemandOrderV::completeForReport($key, $page, $size);
-        } else if ($report_type == 2) {
+        } else if ($report_type == 1) {
 
             $list = DemandOrderV::allForReport($key, $page, $size);
+            $data = $list['data'];
+            $list['data'] = $this->prefixOrderState($data);
         }
 
 
         return $list;
 
+
+    }
+
+    /**
+     * 处理订单状态
+     * @param $list
+     * @return mixed
+     */
+    private function prefixOrderState($list)
+    {
+        if (count($list)) {
+            foreach ($list as $k => $v) {
+                if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
+                    $list[$k]['order_state'] = "未完成";
+                } else {
+                    if ($this->checkComment($list)) {
+                        $list[$k]['order_state'] = "待评价";
+                        continue;
+                    }
+
+                    if ($this->checkComplete($list)) {
+                        $list[$k]['order_state'] = '已完成';
+                        continue;
+                    }
+
+                    $list[$k]['order_state'] = '未完成';
+
+                }
+            }
+
+        }
+        return $list;
 
     }
 
@@ -82,30 +121,70 @@ class OrderReportService
     }
 
 
-
-    public function exportBookRuleList()
+    /**
+     *  按城市导出数据
+     * @param $province
+     * @param $city
+     * @param $time_begin
+     * @param $time_end
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function exportReportForCity($province, $city, $time_begin, $time_end)
     {
-        $book = D('BookRule');
-        $obj = $book->getRuleList(I('get.page'),
-            I('get.rows'), I('get.key'), 1);
+        $list = OrderReportV::reportForCity($province, $city, $time_begin, $time_end);
 
         $header = array(
-            '预定ID',
-            '开始时间',
-            '定场周期',
-            '定场数量',
-            '场地名称',
-            '定场下单人',
-            '定场操作人',
-            '状态'
+            '下单人id',
+            '下单时间',
+            '电话',
+            '价格',
+            '服务名称',
+            '订单号',
+            '红包金额',
+            '区域'
         );
 
-        $file_name = '批量定场信息列表' . '-' . date('Y-m-d', time()) . '.csv';
-        $this->put_csv($obj['rows'], $header, $file_name);
-
+        $file_name = '城市订单导出' . '-' . date('Y-m-d', time()) . '.csv';
+        $this->put_csv($list, $header, $file_name);
 
     }
 
+
+    /**
+     * @param $time_begin
+     * @param $time_end
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function exportReport($time_begin, $time_end)
+    {
+        if (Token::getCurrentTokenVar('grade') == UserEnum::USER_GRADE_ADMIN) {
+            $list = OrderReportV::reportWithoutCity($time_begin, $time_end);
+
+        } else {
+            $province = Token::getCurrentTokenVar('province');
+            $city = Token::getCurrentTokenVar('city');
+            $area = Token::getCurrentTokenVar('area');
+            $list = OrderReportV::reportForJoin($province, $city, $area, $time_begin, $time_end);
+
+        }
+        $header = array(
+            '下单人id',
+            '下单时间',
+            '电话',
+            '价格',
+            '服务名称',
+            '订单号',
+            '红包金额',
+            '城市'
+        );
+        $file_name = '订单导出' . '-' . date('Y-m-d', time()) . '.csv';
+        $this->put_csv($list, $header, $file_name);
+
+    }
 
     /**
      * 导出数据到CSV文件
@@ -144,6 +223,22 @@ class OrderReportService
         unset($list);
         fclose($file);
         exit();
+    }
+
+
+    private function checkComment($data)
+    {
+        if ($data['confirm_id'] == 1 && $data['comment_id'] == CommonEnum::ORDER_STATE_INIT) {
+            return true;
+        }
+        return false;
+
+    }
+
+    private function checkComplete($data)
+    {
+
+
     }
 
 }

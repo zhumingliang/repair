@@ -63,7 +63,7 @@ class ServicesExtend extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/category/handel  36-推广商品状态操作
+     * @api {POST} /api/v1/extend/handel  36-推广商品状态操作
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员/加盟商 操作推广商品状态
@@ -122,7 +122,6 @@ class ServicesExtend extends BaseController
         $service = ExtendService::getTheService($id);
         return json($service);
     }
-
 
     /**
      * @api {GET} /api/v1/service/index 45-小程序首页服务列表-家政服务/维修服务
@@ -191,7 +190,6 @@ class ServicesExtend extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/extend/mini/service  47-小程序查看服务详情
      * @apiGroup  MINI
@@ -207,7 +205,7 @@ class ServicesExtend extends BaseController
      * @apiSuccess (返回参数说明) {String} des 服务描述
      * @apiSuccess (返回参数说明) {String} area 区
      * @apiSuccess (返回参数说明) {int} price 价格
-     * @apiSuccess (返回参数说明) {int} collection 用户是否收藏该服务：1 | 收藏；2 | 未收藏
+     * @apiSuccess (返回参数说明) {int} collection 用户是否收藏该服务：>0 | 收藏；0 | 未收藏
      * @apiSuccess (返回参数说明) {String} unit 单位
      * @apiSuccess (返回参数说明) {String} imgs 轮播图
      * @apiSuccess (返回参数说明) {int} img_id 图片id

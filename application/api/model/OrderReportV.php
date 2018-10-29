@@ -39,9 +39,9 @@ class OrderReportV extends Model
 
 
         $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
-        $sql .= 'OR';
+        $sql .= ' OR ';
         $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
-        $sql .= 'OR';
+        $sql .= ' OR ';
         $sql .= ' ( pay_id <> 99999)';
 
         $sql_join = preJoinSqlForGetDShops(Token::getCurrentTokenVar('province'), Token::getCurrentTokenVar('city'),
@@ -60,7 +60,6 @@ class OrderReportV extends Model
         return $list;
 
     }
-
 
     /**
      * 加盟商获取完成订单
@@ -86,7 +85,7 @@ class OrderReportV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= 'OR';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
         $sql .= 'OR';
         $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
 
@@ -97,11 +96,60 @@ class OrderReportV extends Model
             ->whereRaw($sql_join)
             ->where(function ($query) use ($key) {
                 if ($key) {
-                    $query->where('source', 'like', '%' . $key . '%');
+                    $query->where('source_name', 'like', '%' . $key . '%');
                 }
             })
             ->paginate($size, false, ['page' => $page]);
 
+        return $list;
+
+    }
+
+    /**
+     * 按城市导出数据
+     * @param $province
+     * @param $city
+     * @param $time_begin
+     * @param $time_end
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function reportForCity($province, $city, $time_begin, $time_end)
+    {
+        $list = self::where('province', $province)
+            ->where('city', $city)
+            ->whereTime('order_time', 'between', [$time_begin, $time_end])
+            ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,area')
+            ->select()
+            ->toArray();
+        return $list;
+
+    }
+
+
+    public static function reportWithoutCity($time_begin, $time_end)
+    {
+        $list = self::where('state', CommonEnum::STATE_IS_OK)
+            ->whereTime('order_time', 'between', [$time_begin, $time_end])
+            ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,city')
+            ->select()
+            ->toArray();
+        return $list;
+
+    }
+
+
+    public static function reportForJoin($province, $city, $area, $time_begin, $time_end)
+    {
+        $sql = preJoinSqlForGetDShops($province, $city, $area);
+        $list = self::where('state', CommonEnum::STATE_IS_OK)
+            ->whereTime('order_time', 'between', [$time_begin, $time_end])
+            ->whereRaw($sql)
+            ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,city')
+            ->select()
+            ->toArray();
         return $list;
 
     }

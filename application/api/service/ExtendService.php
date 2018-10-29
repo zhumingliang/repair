@@ -234,9 +234,13 @@ class ExtendService
             ->find();
 
         if (!$col) {
-            return 2;
+            return 0;
         }
-        return $col->state;
+        if ($col->state == CommonEnum::STATE_IS_OK) {
+            return $col->id;
+        } else {
+            return 0;
+        }
 
 
     }
