@@ -537,13 +537,17 @@ class ShopService
             ->where('s_id', $id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->find();
+        $collection_id = 0;
+        if ($collection) {
+            $collection_id = $collection->id;
+        }
 
 
         return [
             'info' => $info,
             'comment_count' => $comment_count,
             'score' => self::getShopScore($id),
-            'collection' => $collection->id
+            'collection' => $collection_id
         ];
     }
 

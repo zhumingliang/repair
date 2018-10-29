@@ -47,7 +47,7 @@ class OrderReportService
             $list['data'] = $this->prefixOrderState($data);
         }
 
-        return $list;
+        //return $list;
 
 
     }
@@ -59,7 +59,6 @@ class OrderReportService
      */
     private function prefixOrderState($list)
     {
-        print_r($list);
         if (count($list)) {
             foreach ($list as $k => $v) {
                 if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
