@@ -38,7 +38,7 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('shop_confirm', CommonEnum::STATE_IS_FAIL)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '<', $shop_confirm_limit)
+            ->whereTime('order_time', '>', $shop_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
         return $list;
 
@@ -65,7 +65,7 @@ class ServiceOrderV extends Model
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '<', $pay_limit)
+            ->whereTime('order_time', '>', $pay_limit)
             ->where('shop_confirm', CommonEnum::STATE_IS_OK)
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
             ->paginate($size, false, ['page' => $page]);
@@ -97,7 +97,7 @@ class ServiceOrderV extends Model
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             //  ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            ->whereTime('order_time', '<', $user_confirm_limit)
+            ->whereTime('order_time', '>', $user_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -151,9 +151,9 @@ class ServiceOrderV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= ' OR ';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999  AND order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999  AND order_time < ' . $user_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
@@ -187,8 +187,8 @@ class ServiceOrderV extends Model
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('shop_confirm', '=', CommonEnum::STATE_IS_FAIL)
-            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '<', $shop_confirm_limit)
+           // ->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            ->whereTime('order_time', '>', $shop_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -214,7 +214,7 @@ class ServiceOrderV extends Model
 
         $sql = ' ( pay_id <> 99999 AND service_begin = 2)';
         $sql .= ' OR ';
-        $sql .= '( shop_confirm =1 AND  pay_id  = 99999  AND  order_time < ' . $pay_limit . ') ';
+        $sql .= '( shop_confirm =1 AND  pay_id  = 99999  AND  order_time > ' . $pay_limit . ') ';
 
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
@@ -246,7 +246,7 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
-            ->whereTime('order_time', '<', $user_confirm_limit)
+            ->whereTime('order_time', '>', $user_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -279,9 +279,9 @@ class ServiceOrderV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= 'OR';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= 'OR';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
@@ -328,13 +328,13 @@ class ServiceOrderV extends Model
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
         $sql .= ' OR ';
-        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time < ' . $user_confirm_limit . ')';
+        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time > ' . $user_confirm_limit . ')';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND order_time < ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND order_time > ' . $consult_limit . ')';
 
         $list = self::where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
@@ -397,9 +397,9 @@ class ServiceOrderV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= ' OR ';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $list = self::whereRaw($sql)
             ->where(function ($query) use ($key) {
@@ -439,9 +439,9 @@ class ServiceOrderV extends Model
 
         $sql = '( pay_id <> 99999 ) ';
         $sql .= 'OR';
-        $sql .= ' ( pay_id = 99999 AND shop_confirm =2 AND order_time < ' . $shop_confirm_limit . ')';
+        $sql .= ' ( pay_id = 99999 AND shop_confirm =2 AND order_time > ' . $shop_confirm_limit . ')';
         $sql .= 'OR';
-        $sql .= ' ( pay_id = 99999 AND shop_confirm =1 AND order_time < ' . $pay_limit . ')';
+        $sql .= ' ( pay_id = 99999 AND shop_confirm =1 AND order_time > ' . $pay_limit . ')';
 
 
         $list = self::where('state', CommonEnum::STATE_IS_OK)

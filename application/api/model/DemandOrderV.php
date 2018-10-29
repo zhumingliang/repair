@@ -34,7 +34,7 @@ class DemandOrderV extends Model
             time()));
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
-        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
         $sql .= ' ( order_id = 0 )';
         $list = DemandUserV::where('u_id', $u_id)
@@ -64,9 +64,9 @@ class DemandOrderV extends Model
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
         $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
 
-        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
         $count = DemandUserV::where('id', '=', $id)
             ->where('state', CommonEnum::STATE_IS_OK)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
@@ -131,7 +131,7 @@ class DemandOrderV extends Model
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             // ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            ->whereTime('order_time', '<', $user_confirm_limit)
+            ->whereTime('order_time', '>', $user_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -183,9 +183,9 @@ class DemandOrderV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= ' OR ';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
 
         $list = self::where('u_id', $u_id)
@@ -241,7 +241,7 @@ class DemandOrderV extends Model
             ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
             ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            ->whereTime('order_time', '<', $user_confirm_limit)
+            ->whereTime('order_time', '>', $user_confirm_limit)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -271,9 +271,9 @@ class DemandOrderV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= ' OR ';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
 
         $list = self::where('shop_id', $s_id)
@@ -315,13 +315,13 @@ class DemandOrderV extends Model
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ' ) ';
+        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ' ) ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ' ) ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ' ) ';
         $sql .= ' OR ';
-        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time < ' . $user_confirm_limit . ' ) ';
+        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time > ' . $user_confirm_limit . ' ) ';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND order_time < ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND order_time > ' . $consult_limit . ')';
 
 
         $count = self::where('shop_id', $s_id)
@@ -361,13 +361,13 @@ class DemandOrderV extends Model
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ') ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time < ' . $user_confirm_limit . ') ';
+        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time > ' . $user_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND order_time < ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND order_time > ' . $consult_limit . ')';
 
         $count = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
@@ -405,9 +405,9 @@ class DemandOrderV extends Model
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
         $sql .= ' OR ';
         $sql .= ' ( pay_id <> 99999)';
 
@@ -448,9 +448,9 @@ class DemandOrderV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= ' OR ';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $list = self::whereRaw($sql)
             ->where(function ($query) use ($key) {
@@ -490,9 +490,9 @@ class DemandOrderV extends Model
 
         $sql = '( pay_id <> 99999 ) ';
         $sql .= ' OR ';
-        $sql .= ' ( pay_id = 99999 AND shop_confirm =2 AND  order_time < ' . $shop_confirm_limit . ')';
+        $sql .= ' ( pay_id = 99999 AND shop_confirm =2 AND  order_time > ' . $shop_confirm_limit . ')';
         $sql .= ' OR ';
-        $sql .= ' ( pay_id = 99999 AND shop_confirm =1 AND  order_time < ' . $pay_limit . ')';
+        $sql .= ' ( pay_id = 99999 AND shop_confirm =1 AND  order_time > ' . $pay_limit . ')';
 
         $list = self::where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
