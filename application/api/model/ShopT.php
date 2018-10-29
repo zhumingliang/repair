@@ -56,7 +56,7 @@ class ShopT extends BaseModel
                         ->where('state', '=', 1);
                 }
             ])
-            ->hidden([ 'update_time', 'frozen'])
+            ->hidden(['update_time', 'frozen'])
             ->find();
         return $info;
 
@@ -175,7 +175,7 @@ class ShopT extends BaseModel
      */
     public static function passList($page, $size, $key)
     {
-        $pagingData = self::whereIn('state', '2,4')
+        $pagingData = self::whereIn('state', [2, 4])
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('name', 'like', '%' . $key . '%');

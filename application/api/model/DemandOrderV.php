@@ -181,7 +181,6 @@ class DemandOrderV extends Model
         $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
-
         $sql = '( comment_id <> 99999 ) ';
         $sql .= 'OR';
         $sql .= '( pay_id <> 99999  AND  confirm_id = 99999  order_time > ' . $user_confirm_limit . ') ';
@@ -433,7 +432,7 @@ class DemandOrderV extends Model
      * @param $page
      * @param $size
      * @return \think\Paginator
-     * @return mixed
+     * @throws \think\exception\DbException
      */
     public static function completeForReport($key, $page, $size)
     {
@@ -463,4 +462,50 @@ class DemandOrderV extends Model
 
         return $list;
     }
+
+    /**
+     * 全部状态（有效订单）
+     * 1.用户已支付
+     * 2.用户未支付：商家未确定，规定时间内商家未确认
+     * 3.用户未支付：商家已确定，规定时间内商家未确认
+     * @param $key
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public static function allForReport($key, $page, $size)
+    {
+
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $shop_confirm = $orderTime['shop_confirm'];
+        $pay = $orderTime['pay'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( pay_id <> 99999 ) ';
+        $sql .= 'OR';
+        $sql .= ' ( pay_id = 99999 AND shop_confirm =2 order_time < ' . $shop_confirm_limit . ')';
+        $sql .= 'OR';
+        $sql .= ' ( pay_id = 99999 AND shop_confirm =1 order_time < ' . $pay_limit . ')';
+
+
+        $list = self::where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->where(function ($query) use ($key) {
+                if ($key) {
+                    $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
+                }
+            })
+            ->paginate($size, false, ['page' => $page]);
+
+        return $list;
+
+    }
+
 }

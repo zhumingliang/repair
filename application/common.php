@@ -135,7 +135,7 @@ OR (province = "' . $province . '" AND city="' . $city . '" AND area="' . $area 
 
 function preJoinSqlForGetDShops($province, $city, $area)
 {
-    $sql = '';
+    $sql = ' 1=1 AND ';
     if ($province == "全部") {
         return $sql;
     } else {
