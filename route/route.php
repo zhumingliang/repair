@@ -152,6 +152,7 @@ Route::rule('api/:version/pay/notify', 'api/:version.Pay/receiveNotify');
 
 Route::get('api/:version/bond/check', 'api/:version.Shop/checkBalanceForBond');
 Route::post('api/:version/bond/save', 'api/:version.Bond/save');
+Route::post('api/:version/bond/operation', 'api/:version.Bond/operation');
 
 Route::get('api/:version/withdraw/balance', 'api/:version.Withdraw/getBalance');
 Route::get('api/:version/withdraw/bond/check', 'api/:version.Withdraw/checkBond');
