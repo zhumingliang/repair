@@ -196,7 +196,7 @@ class OrderService
      */
     public static function getDemandList($order_type, $page, $size, $list_type)
     {
-        $shop_id = Token::getCurrentTokenVar('shop_id');
+        $shop_id =Token::getCurrentTokenVar('shop_id');
         if ($shop_id) {
             if ($list_type == 2) {
                 return self::getDemandListForShop($shop_id, $order_type, $page, $size);

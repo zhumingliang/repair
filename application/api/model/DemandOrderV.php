@@ -96,9 +96,9 @@ class DemandOrderV extends Model
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( shop_confirm = 2 AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql = '( shop_confirm = 2 AND  order_time > ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
@@ -501,7 +501,7 @@ class DemandOrderV extends Model
                     $query->where('order_num|user_phone', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 

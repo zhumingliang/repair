@@ -28,22 +28,24 @@ class OrderReport extends BaseController
      * @apiParam (请求参数说明) {int} order_type  用户订单类别 ： type=1 全部状态；type=2 未完成；type=3 已完成
      * 商铺订单类别：1 | 待服务；2 | 待确认；3 | 已完成
      * @apiSuccessExample {json} 返回样例:
-     * {"total":5,"per_page":"1","current_page":1,"last_page":5,"data":[{"order_id":33,"source_id":26,"shop_id":5,"source_name":"需要做饭和打扫卫生的阿姨","update_money":1,"phone_shop":2,"phone_user":2,"user_name":"朱明良","prepay_id":"","pay_money":0,"shop_name":"维修小家","time_begin":"2018-10-28 16:46:00","time_end":"2018-11-04 16:46:00","order_number":"BA26611961932221","shop_confirm":2,"order_time":"2018-10-26 21:39:56","area":"郊区","address":"铜陵市第十一中学(第十一中学铜井路北)","origin_money":1,"user_phone":"18956225238","shop_phone":"18956225230","comment_id":99999,"confirm_id":99999,"pay_id":99999,"refund_id":99999,"state":1,"u_id":15,"service_begin":2,"cover":"https:\/\/mengant.cn\/static\/imgs\/20181024\/339bbbfc439017646ab6fa4da01634b8.jpg"}]}
+     * {"total":5,"per_page":"1","current_page":1,"last_page":5,"data":[{"order_id":33,"source_id":26,"shop_id":5,"source_name":"需要做饭和打扫卫生的阿姨","update_money":1,"phone_shop":2,"phone_user":2,"user_name":"朱明良","prepay_id":"","pay_money":0,"shop_name":"维修小家","time_begin":"2018-10-28 16:46:00","time_end":"2018-11-04 16:46:00","order_number":"BA26611961932221","shop_confirm":2,"order_time":"2018-10-26 21:39:56","address":"铜陵市第十一中学(第十一中学铜井路北)","origin_money":1,"user_phone":"18956225238","shop_phone":"18956225230","comment_id":99999,"confirm_id":99999,"pay_id":99999,"refund_id":99999,"state":1,"u_id":15,"service_begin":2,"cover":"https:\/\/mengant.cn\/static\/imgs\/20181024\/339bbbfc439017646ab6fa4da01634b8.jpg","province":"安徽省","city":"铜陵市","area":"郊区","read_money":null,"order_state":"未完成"}]}
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {int} order_id 订单id
-     * @apiSuccess (返回参数说明) {String} source_name 需求名称
-     * @apiSuccess (返回参数说明) {String} time_begin 服务开始时间
-     * @apiSuccess (返回参数说明) {String} time_end 服务结束时间
-     * @apiSuccess (返回参数说明) {String} user_phone 用户手机号
-     * @apiSuccess (返回参数说明) {String} shop_phone 店铺手机号
-     * @apiSuccess (返回参数说明) {int} origin_money 订单原金额
-     * @apiSuccess (返回参数说明) {int} update_money 订单修改之后金额
-     * @apiSuccess (返回参数说明) {int} phone_user 商家是否联系用户：1 | 是；2 | 否
-     * @apiSuccess (返回参数说明) {int} phone_shop 用户是否联系商家：1 | 是；2 | 否
+     * @apiSuccess (返回参数说明) {String} order_number 订单号
+     * @apiSuccess (返回参数说明) {String} user_name 下单人
+     * @apiSuccess (返回参数说明) {String} user_phone 电话
+     * @apiSuccess (返回参数说明) {String} shop_name 商家
+     * @apiSuccess (返回参数说明) {String} source_name 服务名称
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} address 地址
+     * @apiSuccess (返回参数说明) {int} update_money 费用
+     * @apiSuccess (返回参数说明) {int} read_money 红包金额
+     * @apiSuccess (返回参数说明) {String} order_time 下单时间
+     * @apiSuccess (返回参数说明) {String}  order_state 状态
      *
      * @param $key
      * @param $order_type

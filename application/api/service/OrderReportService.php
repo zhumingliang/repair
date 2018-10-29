@@ -47,7 +47,7 @@ class OrderReportService
             $list['data'] = $this->prefixOrderState($data);
         }
 
-        //return $list;
+        return $list;
 
 
     }
