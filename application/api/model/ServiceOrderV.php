@@ -451,7 +451,7 @@ class ServiceOrderV extends Model
                     $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 

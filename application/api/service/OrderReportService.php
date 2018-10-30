@@ -44,43 +44,11 @@ class OrderReportService
 
             $list = DemandOrderV::allForReport($key, $page, $size);
             $data = $list['data'];
-            $list['data'] = $this->prefixOrderState($data);
+            $list['data'] = $this->prefixDemandOrderState($data);
         }
 
         return $list;
 
-
-    }
-
-    /**
-     * 处理订单状态
-     * @param $list
-     * @return mixed
-     */
-    private function prefixOrderState($list)
-    {
-        if (count($list)) {
-            foreach ($list as $k => $v) {
-                if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
-                    $list[$k]['order_state'] = "未完成";
-                } else {
-                    if ($this->checkComment($list)) {
-                        $list[$k]['order_state'] = "待评价";
-                        continue;
-                    }
-
-                    if ($this->checkComplete($list)) {
-                        $list[$k]['order_state'] = '已完成';
-                        continue;
-                    }
-
-                    $list[$k]['order_state'] = '未完成';
-
-                }
-            }
-
-        }
-        return $list;
 
     }
 
@@ -110,13 +78,80 @@ class OrderReportService
                 return ServiceOrderV::completeForReport($key, $page, $size);
                 break;
             case 4:
-                return ServiceOrderV::allForReport($key, $page, $size);
+                $list = ServiceOrderV::allForReport($key, $page, $size);
+                $data = $list['data'];
+                $list['data'] = $this->prefixServiceOrderState($data);
+                return $list;
                 break;
             default:
                 return $list;
 
         }
 
+
+    }
+
+    /**
+     * 处理需求订单状态
+     * @param $list
+     * @return mixed
+     */
+    private function prefixDemandOrderState($list)
+    {
+        if (count($list)) {
+            foreach ($list as $k => $v) {
+                if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
+                    $list[$k]['order_state'] = "未完成";
+                } else {
+                    if ($this->checkComment($list)) {
+                        $list[$k]['order_state'] = "待评价";
+                        continue;
+                    }
+
+                    if ($this->checkComplete($list)) {
+                        $list[$k]['order_state'] = '已完成';
+                        continue;
+                    }
+
+                    $list[$k]['order_state'] = '未完成';
+
+                }
+            }
+
+        }
+        return $list;
+
+    }
+
+    /**
+     * 处理服务订单状态
+     * @param $list
+     * @return mixed
+     */
+    private function prefixServiceOrderState($list)
+    {
+        if (count($list)) {
+            foreach ($list as $k => $v) {
+                if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
+                    $list[$k]['order_state'] = "未完成";
+                } else {
+                    if ($this->checkComment($list)) {
+                        $list[$k]['order_state'] = "待评价";
+                        continue;
+                    }
+
+                    if ($this->checkComplete($list)) {
+                        $list[$k]['order_state'] = '已完成';
+                        continue;
+                    }
+
+                    $list[$k]['order_state'] = '未完成';
+
+                }
+            }
+
+        }
+        return $list;
 
     }
 

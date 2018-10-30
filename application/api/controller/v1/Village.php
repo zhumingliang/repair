@@ -18,7 +18,7 @@ class Village extends BaseController
 {
     /**
      * @api {POST} /api/v1/village/confirm  96-小区管理员新增服务记录
-     * @apiGroup  CMS
+     * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription
      * @apiExample {post}  请求样例:
@@ -52,5 +52,6 @@ class Village extends BaseController
         return json(new SuccessMessage());
 
     }
+
 
 }

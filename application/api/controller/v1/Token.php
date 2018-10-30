@@ -35,7 +35,6 @@ class Token extends Controller
      *     }
      * @apiParam (请求参数说明) {String} phone    用户手机号
      * @apiParam (请求参数说明) {String} pwd   用户密码
-     *
      * @apiSuccessExample {json} 返回样例:
      * {"u_id":1,"username":"管理员","token":"bde274895aa23cff9462d5db49690452"}
      * @apiSuccess (返回参数说明) {int} u_id 用户id
