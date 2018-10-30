@@ -10,10 +10,13 @@ namespace app\api\service;
 
 
 use app\api\model\AdminT;
+use app\api\model\BehaviorLogT;
+use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
 use think\Exception;
 use think\facade\Cache;
+use think\Request;
 
 class AdminToken extends Token
 {
@@ -64,6 +67,7 @@ class AdminToken extends Token
                 ]);
             }
 
+            $this->saveLog($admin->id, $admin->username);
             /**
              * 获取缓存参数
              */
@@ -80,6 +84,20 @@ class AdminToken extends Token
 
     }
 
+    private function saveLog($u_id, $user_name)
+    {
+        $data = [
+            'u_id' => $u_id,
+            'user_name' => $user_name,
+            'name' => '用户登录',
+            'state' => CommonEnum::STATE_IS_OK,
+            'ip' => $_SERVER['REMOTE_ADDR'],
+            'remark' => $user_name . '在' . date('Y-m-d H:i') . '登录了后台'
+        ];
+
+        BehaviorLogT::create($data);
+
+    }
 
     /**
      * @param $key

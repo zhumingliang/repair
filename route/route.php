@@ -21,6 +21,10 @@ Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 Route::get('api/:version/token/user', 'api/:version.Token/getUserToken');
 Route::post('api/:version/user/info', 'api/:version.User/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
+Route::get('api/:version/user/list', 'api/:version.User/getUsers');
+
+Route::get('api/:version/behaviors', 'api/:version.Behavior/getList');
+Route::get('api/:version/behavior/handel', 'api/:version.Behavior/handel');
 
 Route::rule('api/:version/image/save', 'api/:version.Image/save');
 Route::rule('api/:version/image/upload', 'api/:version.Image/upload');
@@ -53,6 +57,8 @@ Route::get('api/:version/shop/frozen', 'api/:version.Shop/shopFrozen');
 
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
+Route::post('api/:version/message/handel', 'api/:version.Message/handel');
+Route::get('api/:version/message/list', 'api/:version.Message/getMessages');
 
 Route::post('api/:version/collection/save', 'api/:version.Collection/save');
 Route::post('api/:version/collection/handel', 'api/:version.Collection/handel');

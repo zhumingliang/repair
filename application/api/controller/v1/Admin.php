@@ -65,7 +65,7 @@ class Admin extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/circle/category/handel  145-小区账户/加盟商账户管理-用户状态操作
+     * @api {POST} /api/v1/admin/handel  145-小区账户/加盟商账户管理-用户状态操作
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  小区账户删除操作；加盟商账户删除/禁用/启用操作

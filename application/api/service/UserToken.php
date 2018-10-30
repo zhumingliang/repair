@@ -77,6 +77,10 @@ class UserToken extends Token
         if (!$user) {
             $u_id = $this->newUser($openid);
         }
+
+        UserT::where('openid', $openid)
+            ->inc('login_count', 1)->update();
+
         //将获取用户信息的session_key存储
         $this->session_keyToCache($wxResult);
         $cachedValue = $this->prepareCachedValue($wxResult, $u_id);

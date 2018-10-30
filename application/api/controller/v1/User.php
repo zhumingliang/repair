@@ -67,7 +67,6 @@ class User extends BaseController
                 echo $errCode;*/
     }
 
-
     /**
      * @api {POST} /api/v1/user/update  19-用户信息编辑
      * @apiGroup  MINI
@@ -116,6 +115,48 @@ class User extends BaseController
 
         }
         return json(new SuccessMessage());
+
+    }
+
+
+    /**
+     * @api {GET} /api/v1/user/list 148-管理员-用户信息列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  管理员反馈管理列表
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/user/list?page=1&size=20&key=''
+     * @apiParam (请求参数说明) {int} page  当前页码
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiParam (请求参数说明) {String} key  关键字
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":16,"per_page":"1","current_page":10,"last_page":16,"data":[{"id":15,"openid":"o3jy05CFV4WWXfylU_EYhF3st61g","nickName":"Hey","login_count":0,"update_time":"2018-10-23 13:33:49"}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 用户id
+     * @apiSuccess (返回参数说明) {String} openid 帐户名
+     * @apiSuccess (返回参数说明) {String} nickName  昵称
+     * @apiSuccess (返回参数说明) {int} login_count 登录次数
+     * @apiSuccess (返回参数说明) {String} update_time 最后登录时间
+     * @param int $page
+     * @param int $size
+     * @param string $key
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     */
+    public function getUsers($page = 1, $size = 20, $key = '')
+    {
+
+        $list = UserT::field('id,openid,nickName,login_count,update_time')
+            ->where(function ($query) use ($key) {
+                if ($key) {
+                    $query->where('id|nickName', 'like', '%' . $key . '%');
+                }
+            })
+            ->paginate($size, false, ['page' => $page]);
+        return json($list);
 
     }
 

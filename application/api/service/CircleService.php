@@ -161,7 +161,7 @@ class CircleService
     public static function getCircleForMini($id)
     {
         CircleT::where('id', $id)
-            ->inc('read_num', 1)->update();;
+            ->inc('read_num', 1)->update();
 
         $circle = CircleT::getCircleForMINI($id);
         return $circle;
