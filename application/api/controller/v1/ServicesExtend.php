@@ -10,9 +10,12 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\ServicesT;
+use app\api\model\ShopServiceV;
 use app\api\service\ExtendService;
 use app\api\validate\ExtendValidate;
 use app\api\validate\PagingParameter;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\SuccessMessage;
 
 class ServicesExtend extends BaseController
@@ -222,6 +225,43 @@ class ServicesExtend extends BaseController
     public function getServiceForMini($id)
     {
         return json(ExtendService::getServiceForMini($id));
+    }
+
+    /**
+     * @api {GET} /api/v1/services 149-管理员-商家服务列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  管理员-商家服务列表s
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/services?page=1&size=20&key=""
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {String} key 关键字
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":8,"per_page":"1","current_page":1,"last_page":8,"data":[{"shop_id":5,"u_id":12,"service_id":6,"type":2,"shop_name":"维修小家","service_name":"修电视","city":"铜陵市","extend":0}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} shop_id 商户id
+     * @apiSuccess (返回参数说明) {int} u_id 用户id
+     * @apiSuccess (返回参数说明) {int} type 服务类别:1 | 维修服务；2| 家政服务
+     * @apiSuccess (返回参数说明) {String} shop_name 店铺名称
+     * @apiSuccess (返回参数说明) {String} service_name 服务名称
+     * @apiSuccess (返回参数说明) {String} city 所在城市
+     * @apiSuccess (返回参数说明) {String} extend 是否推广: 1 | 推广；2 | 不推广
+     *
+     * @param int $page
+     * @param int $size
+     * @param string $key
+     * @return \think\response\Json
+     */
+    public function getServiceForCMS($page = 1, $size = 20, $key = '')
+    {
+        $list = ShopServiceV::services($page, $size, $key);
+        return json($list);
+
+
     }
 
 

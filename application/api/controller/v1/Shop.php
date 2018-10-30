@@ -486,10 +486,10 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/shop/service/delete  88-商铺删除服务
-     * @apiGroup  MINI
+     * @api {GET} /api/v1/shop/service/delete  88-删除服务
+     * @apiGroup  COMMON
      * @apiVersion 1.0.1
-     * @apiDescription
+     * @apiDescription 商家/管理员
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/shop/service/delete?id=1
      * @apiParam (请求参数说明) {int} id  服务id
@@ -689,5 +689,39 @@ class Shop extends BaseController
         return json(new SuccessMessage());
 
     }
+
+    /**
+     * @api {GET} /api/v1/shop/service  148-CMS获取指定商品信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  CMS获取指定商品信息
+     * http://mengant.cn/api/v1/shop/service?id=8
+     * @apiParam (请求参数说明) {int} id  服务id
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":8,"shop_id":5,"c_id":2,"area":"郊区","name":"来啦","price":18,"unit":"次","state":1,"cover":"https:\/\/mengant.cn\/static\/imgs\/20181024\/46cc115becfe587229b21244c008bc74.jpg","create_time":"2018-10-24 06:20:33","update_time":"2018-10-24 06:20:33","extend":2,"des":"咻咻咻","imgs":[{"img_id":198,"img_url":{"url":"https:\/\/mengant.cn\/static\/imgs\/20181024\/18e4c9e311a14e1b9d2c1fd4b625f6a7.jpg"}}],"shop":{"id":5,"address":"铜都大道北","phone":"18956225230","shop_name":"维修小家", "city": "铜陵市"}}
+     * @apiSuccess (返回参数说明) {string} address 商户地址
+     * @apiSuccess (返回参数说明) {string} phone 商户电话
+     * @apiSuccess (返回参数说明) {String} city 所在城市
+     * @apiSuccess (返回参数说明) {String} service_name 服务名称
+     * @apiSuccess (返回参数说明) {int} type 服务类型：1 | 家政服务；2 | 维修服务
+     * @apiSuccess (返回参数说明) {String} des 服务描述
+     * @apiSuccess (返回参数说明) {String} city 城市
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {int} price 价格
+     * @apiSuccess (返回参数说明) {String} phone 联系方式
+     * @apiSuccess (返回参数说明) {String} head_url 店铺头像
+     * @apiSuccess (返回参数说明) {String} create_time 发布时间
+     * @apiSuccess (返回参数说明) {String} imgs->img_url->url 服务图片地址
+     *
+     * @param $id
+     * @return \think\response\Json
+     */
+    public function getTheService($id)
+    {
+        $info = ServicesT::getServiceForCMS($id);
+        return json($info);
+
+    }
+
 
 }

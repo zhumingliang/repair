@@ -93,5 +93,23 @@ class ServicesT extends BaseModel
 
     }
 
+    public static function getServiceForCMS($id)
+    {
+        $service = self::where('id', '=', $id)
+            ->with([
+                'imgs' => function ($query) {
+                    $query->with(['imgUrl'])
+                        ->where('state', '=', 1);
+                }
+                , 'shop' => function ($query) {
+                    $query->field('id,address,phone,name as shop_name,city');
+                }
+            ])
+            //->field('id,shop_id,name,area,des,price,unit,des')
+            ->find();
+        return $service;
+
+    }
+
 
 }

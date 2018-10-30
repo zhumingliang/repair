@@ -54,6 +54,7 @@ Route::get('api/:version/shop/service/normal/list', 'api/:version.Shop/getServic
 Route::get('api/:version/shops/list/cms', 'api/:version.Shop/ShopsForCMS');
 Route::get('api/:version/shop/info/cms', 'api/:version.Shop/shopInfoForCMS');
 Route::get('api/:version/shop/frozen', 'api/:version.Shop/shopFrozen');
+Route::get('api/:version/shop/service', 'api/:version.Shop/getTheService');
 
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
@@ -103,6 +104,7 @@ Route::get('api/:version/extend/mini/service', 'api/:version.ServicesExtend/getS
 Route::get('api/:version/extend/house', 'api/:version.ServicesExtend/getHoursList');
 Route::get('api/:version/extend/repair', 'api/:version.ServicesExtend/getRepairList');
 Route::get('api/:version/service/index', 'api/:version.ServicesExtend/getServiceIndex');
+Route::get('api/:version/services', 'api/:version.ServicesExtend/getServiceForCMS');
 
 
 Route::post('api/:version/city/discount/save', 'api/:version.CityDiscount/save');
