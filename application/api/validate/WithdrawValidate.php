@@ -14,11 +14,16 @@ class WithdrawValidate extends BaseValidate
 
     protected $rule = [
         'type' => 'require|in:1,2',
-        'money' => 'require|isPositiveInteger'
+        'money' => 'require|isPositiveInteger',
+        'card_num' => 'require',
+        'bank' => 'require',
+        'username' => 'require',
+        'phone' => 'require',
     ];
 
     protected $scene = [
         'apply' => ['type', 'money'],
         'check' => ['type'],
+        'apply_join'=>['money','card_num','bank','username','phone']
     ];
 }

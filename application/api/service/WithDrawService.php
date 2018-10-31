@@ -11,11 +11,14 @@ namespace app\api\service;
 
 use app\api\model\BondBalanceV;
 use app\api\model\BusinessBalanceV;
+use app\api\model\JoinBalanceV;
 use app\api\model\PaymentsV;
 use app\api\model\SystemTimeT;
 use app\api\model\WithdrawMiniT;
+use app\api\model\WithdrawPcT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\WithdrawException;
+use think\Model;
 
 class WithDrawService
 {
@@ -54,7 +57,6 @@ class WithDrawService
      */
     public static function apply($type, $money)
     {
-
         if ($type == CommonEnum::WITHDRAW_BOND) {
             $balance = self::getBondBalance(Token::getCurrentUid());
             if ($balance - 500 < $money) {
@@ -67,7 +69,6 @@ class WithDrawService
             }
 
         }
-
         $res = WithdrawMiniT::create([
             'money' => $money,
             'u_id' => Token::getCurrentUid(),
@@ -81,6 +82,81 @@ class WithDrawService
             throw  new WithdrawException();
         }
     }
+
+
+    /**
+     * 保存提现申请
+     * @param $params
+     * @throws WithdrawException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function joinApply($params)
+    {
+        //检查有没有未处理的申请
+        if ($this->checkJoinApplying()) {
+            throw  new WithdrawException(
+                ['code' => 401,
+                    'msg' => '有待处理提现申请，不能发起提现',
+                    'errorCode' => 200008
+                ]
+            );
+        }
+        //检查余额是否充足
+        if (!$this->checkJoinBalance($params['money'])) {
+            throw  new WithdrawException(
+                ['code' => 401,
+                    'msg' => '加盟商余额不足',
+                    'errorCode' => 200007
+                ]
+            );
+        }
+
+
+        $params['admin_id'] = Token::getCurrentUid();
+        $params['state'] = CommonEnum::STATE_IS_OK;
+        $res = WithdrawPcT::create($params);
+        if (!$res) {
+            throw  new WithdrawException();
+        }
+    }
+
+    private function checkJoinBalance($money)
+    {
+        return $this->getJoinBalance() - $money;
+        //$params['admin_id'] = Token::getCurrentUid();
+    }
+
+
+    public function getJoinBalance()
+    {
+        $province = Token::getCurrentTokenVar('province');
+        $city = Token::getCurrentTokenVar('city');
+        $area = Token::getCurrentTokenVar('area');
+        $sql = preJoinSqlForGetDShops($province, $city, $area);
+
+        //获取余额
+        $balance = JoinBalanceV::where('pay_state', 2)
+            ->whereRaw($sql)->sum('join_money');
+
+        return $balance;
+    }
+
+    /**
+     * 检测是否有待处理的申请
+     * @return float|string
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    private function checkJoinApplying()
+    {
+        $admin_id = Token::getCurrentUid();
+        $count = WithdrawPcT::where('admin_id', $admin_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->count('id');
+        return $count;
+    }
+
 
     /**
      * 获取提现列表
@@ -128,7 +204,7 @@ class WithDrawService
 
     public static function getBusinessBalance($shop_id)
     {
-        
+
         $orderTime = SystemTimeT::getSystemOrderTime();
         $user_confirm = $orderTime['user_confirm'];
         $consult = $orderTime['consult'];

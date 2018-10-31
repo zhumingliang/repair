@@ -138,7 +138,7 @@ class CircleService
 
     public static function getCircleListForCMS($params)
     {
-        $list = CircleT::getListForCms($params['page'], $params['size'], $params['state']);
+        $list = CircleT::getListForCms($params['page'], $params['size'], $params['type']);
         return $list;
 
     }

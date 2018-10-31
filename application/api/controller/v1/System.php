@@ -369,7 +369,7 @@ class System extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/system/tip/update  122-平台修改发票设置
+     * @api {POST} /api/v1/system/tip/update  122-平台消息提示设置-修改
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription

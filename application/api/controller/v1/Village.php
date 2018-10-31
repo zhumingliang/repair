@@ -53,5 +53,17 @@ class Village extends BaseController
 
     }
 
+    /**
+     * 小区管理员获取列表
+     * @param $page
+     * @param $size
+     */
+    public function getList($page, $size)
+    {
+        $id = \app\api\service\Token::getCurrentUid();
+
+
+    }
+
 
 }

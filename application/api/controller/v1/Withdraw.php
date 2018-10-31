@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\BondT;
+use app\api\model\JoinBalanceV;
 use app\api\model\WithdrawMiniT;
 use app\api\service\WithDrawService;
 use app\api\validate\PagingParameter;
@@ -202,10 +203,86 @@ class Withdraw extends BaseController
     }
 
     /**
-     * 153-加盟商-资金信息-列表
+     * @api {POST} /api/v1/withdraw/apply/join  155-加盟商-提交提现申请
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "card_num": "62282832323232323",
+     *       "bank": "农业银行",
+     *       "username": 朱明良,
+     *       "phone": 18956225230,
+     *       "money": 500
+     *     }
+     * @apiParam (请求参数说明) {string} card_num  提现卡号
+     * @apiParam (请求参数说明) {string} bank  提现银行
+     * @apiParam (请求参数说明) {string} username  收款人姓名
+     * @apiParam (请求参数说明) {string} phone  联系电话
+     * @apiParam (请求参数说明) {string} money  金额
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \app\lib\exception\WithdrawException
+     * @throws \think\Exception
      */
-    public function getBalanceList()
+    public function joinApply()
     {
-        
+        (new WithdrawValidate())->scene('apply_join')->goCheck();
+        $params = $this->request->param();
+        (new WithDrawService())->joinApply($params);
+        return json(new SuccessMessage());
+    }
+
+    /**
+     * @api {GET} /api/v1/withdraw/balance/join  153-加盟商-资金信息-列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/withdraw/balance/join?&page=1&size=15
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":4,"per_page":"1","current_page":1,"last_page":4,"data":[{"order_time":"2018-10-31 22:58:56","join_money":-500,"des":"提现-待审核"}],"balance":0}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} balance 用户余额
+     * @apiSuccess (返回参数说明) {int} join_money 金额
+     * @apiSuccess (返回参数说明) {String} des 说明
+     * @apiSuccess (返回参数说明) {String} order_time 提现时间
+     * @param $page
+     * @param $size
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
+    public function getBalanceList($page, $size)
+    {
+
+        $province = TokenService::getCurrentTokenVar('province');
+        $city = TokenService::getCurrentTokenVar('city');
+        $area = TokenService::getCurrentTokenVar('area');
+        $sql = preJoinSqlForGetDShops($province, $city, $area);
+
+        //获取余额
+        $balance = JoinBalanceV::where('pay_state', 2)
+            ->whereRaw($sql)->sum('join_money');
+
+        $list = JoinBalanceV::order('order_time desc')
+            ->field('order_time,join_money,des')
+            ->whereRaw($sql)
+            ->paginate($size, false, ['page' => $page])->toArray();
+        $list['balance'] = $balance;
+        return json($list);
+
+
     }
 }
