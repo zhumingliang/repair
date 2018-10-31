@@ -46,6 +46,7 @@ class FaceService
         $imageType = "URL";
         // 调用人脸检测
         $detect_res = $client->detect($image, $imageType);
+        print_r($detect_res);
         if (isset($detect_res['error_code']) && $detect_res['error_code']) {
              throw  new FaceException();
            // return false;
