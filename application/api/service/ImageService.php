@@ -93,7 +93,7 @@ class ImageService
             }
             return [
                 'id' => $img->id,
-                'url' => config('setting.img_prefix') . $img->url
+                'url' => config('setting.img_prefix') . 'static/imgs' . '/' . $info->getSaveName()
             ];
 
         } else {
