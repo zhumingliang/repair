@@ -55,7 +55,7 @@ class Behavior extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/behavior/handel  150-删除行为日志
+     * @api {POST} /api/v1/behavior/handel  152-删除行为日志
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription

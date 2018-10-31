@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\BannerMiniV;
 use app\api\model\BannerT;
 use app\api\service\BannerService;
 use app\api\validate\BannerValidate;
@@ -171,9 +172,9 @@ class Banner extends BaseController
      * @api {GET} /api/v1/banner/cms/list 17-CMS获取轮播图列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  CMS获取轮播图列表（首页轮播图/家政/维修模块轮播图）
+     * @apiDescription  小程序获取轮播图列表（首页轮播图/家政/维修模块轮播图）
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/banner/mini/list?type=1&page=1&size=20
+     * http://mengant.cn/api/v1/banner/cms/list?type=1&page=1&size=20
      * @apiParam (请求参数说明) {int}  type 轮播图类别：1 | 首页轮播图；2 | 家政/维修模块轮播图
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
@@ -187,7 +188,6 @@ class Banner extends BaseController
      * @apiSuccess (返回参数说明) {int} id 轮播图id
      * @apiSuccess (返回参数说明) {String} title 标题
      * @apiSuccess (返回参数说明) {String} des 描述
-     * @apiSuccess (返回参数说明) {String} url 轮播图地址
      * @apiSuccess (返回参数说明) {String} url 轮播图地址
      * @apiSuccess (返回参数说明) {String} province 省
      * @apiSuccess (返回参数说明) {String} city 市
@@ -206,6 +206,44 @@ class Banner extends BaseController
         $list = BannerService::getListForCMS($params);
         return json($list);
 
+    }
+
+
+    /**
+     * @api {GET} /api/v1/banner/join/list 154-管理员-加盟商轮播图管理
+     * @apiVersion 1.0.1
+     * @apiDescription 获取待处理列表
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/banner/join/list?page=1&size=20
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":4,"per_page":"1","current_page":1,"last_page":4,"data":[{"id":4,"category":3,"title":"加盟商-1号轮播图","des":"加盟商-1号轮播图","url":"https:\/\/mengant.cn\/static\/imgs\/DB0D0420-2E9E-EC0B-95E7-2A141A0F4747.jpg","create_time":"2018-10-02 19:06:19","province":"安徽省","city":"铜陵市","area":"铜官区"}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 轮播图id
+     * @apiSuccess (返回参数说明) {int} category 类别：3 | 家政 ； 4 | 维修
+     * @apiSuccess (返回参数说明) {String} title 标题
+     * @apiSuccess (返回参数说明) {String} des 描述
+     * @apiSuccess (返回参数说明) {String} url 轮播图地址
+     * @apiSuccess (返回参数说明) {String} url 轮播图地址
+     * @apiSuccess (返回参数说明) {String} province 省
+     * @apiSuccess (返回参数说明) {String} city 市
+     * @apiSuccess (返回参数说明) {String} area 区
+     *
+     *
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     */
+    public function getBannersWithJoin($page = 1, $size = 20)
+    {
+        $list = BannerMiniV::where('state', 1)
+            ->hidden(['u_id', 'state'])
+            ->paginate($size, false, ['page' => $page]);
+        return json($list);
     }
 
     /**

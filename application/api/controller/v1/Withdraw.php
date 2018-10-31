@@ -200,4 +200,12 @@ class Withdraw extends BaseController
         return json($list);
 
     }
+
+    /**
+     * 153-加盟商-资金信息-列表
+     */
+    public function getBalanceList()
+    {
+        
+    }
 }

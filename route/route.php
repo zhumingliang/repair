@@ -79,6 +79,7 @@ Route::post('api/:version/banner/handel', 'api/:version.Banner/handel');
 Route::post('api/:version/banner/update', 'api/:version.Banner/update');
 Route::get('api/:version/banner/mini/list', 'api/:version.Banner/getListForMini');
 Route::get('api/:version/banner/cms/list', 'api/:version.Banner/getListForCms');
+Route::get('api/:version/banner/join/list', 'api/:version.Banner/getBannersWithJoin');
 Route::get('api/:version/banner', 'api/:version.Banner/getTheBanner');
 
 

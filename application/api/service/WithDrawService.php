@@ -12,6 +12,7 @@ namespace app\api\service;
 use app\api\model\BondBalanceV;
 use app\api\model\BusinessBalanceV;
 use app\api\model\PaymentsV;
+use app\api\model\SystemTimeT;
 use app\api\model\WithdrawMiniT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\WithdrawException;
@@ -127,14 +128,23 @@ class WithDrawService
 
     public static function getBusinessBalance($shop_id)
     {
-        $day = 7;
-        $time_limit = date('Y-m-d', strtotime('-' . $day . ' day',
+        
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
             time()));
-        $time_limit = 'date_format("' . $time_limit . '","%Y-%m-%d")';
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
 
-        $sql = '( confirm_id =2  AND   order_time < ' . $time_limit . ') ';
+        $sql = '( confirm_id = 1 ) ';
         $sql .= 'OR';
-        $sql .= ' (confirm_id = 1)';
+        $sql .= '(confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= 'OR';
+        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+
 
         $balance = BusinessBalanceV::where('shop_id', $shop_id)
             ->whereRaw($sql)

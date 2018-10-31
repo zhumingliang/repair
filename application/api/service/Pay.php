@@ -12,7 +12,10 @@ use app\api\controller\v1\Demand;
 use app\api\model\BondT;
 use app\api\model\DemandOrderT;
 use app\api\model\DemandT;
+use app\api\model\JoinCommissionT;
 use app\api\model\ServiceBookingT;
+use app\api\model\ServicesT;
+use app\api\model\ShopT;
 use app\api\model\UserRedT;
 use app\api\model\UserT;
 use app\api\model\WxPayT;
@@ -92,10 +95,14 @@ class Pay
             return true;
         }
 
-        print_r($order);
+        $money = $notify->getTotalFee();
         $pay_id = $this->savePayRecord($notify, $order);
         $order->pay_id = $pay_id;
-        $order->pay_money = $notify->getTotalFee();
+        $order->pay_money = $money;
+        if ($this->type == 1 || $this->type == 2) {
+            $discount = $this->getDiscount();
+            $order->join_money = $money * $discount;
+        }
 
         if (!$order->save()) {
             // LogService::Log('微信支付回调成功后修改订单状态出错，id：' . $this->orderID);
@@ -104,6 +111,42 @@ class Pay
         }
 
         return true;
+    }
+
+
+    private function getDiscount()
+    {
+
+        //获取店铺信息
+        $shop_id = 0;
+        if ($this->type == CommonEnum::ORDER_IS_DEMAND) {
+            $info = DemandOrderT::where('id', $this->orderID)
+                ->field('s_id')->find();
+            $shop_id = $info['s_id'];
+        } else if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
+            $info = ServiceBookingT::where('id', $this->orderID)->field('s_id')
+                ->find();
+            $service_id = $info['s_id'];
+            $service_info = ServicesT::where('id', $service_id)->field('shop_id')
+                ->find();
+            $shop_id = $service_info['shop_id'];
+        }
+        $shop_info = ShopT::where('id', $shop_id)->field('province,city,area')
+            ->find();
+
+        //获取该地区的加盟商佣金比例
+        $sql = preJoinSql($shop_info['province'], $shop_info['city'], $shop_info['area']);
+        $join = JoinCommissionT::where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->find();
+
+        if (!count($join)) {
+            return 0.1;
+        } else {
+            return $join['discount'] / 100;
+        }
+
+
     }
 
     /**
@@ -115,7 +158,8 @@ class Pay
      * @throws TokenException
      * @throws \wxpay\WxPayException
      */
-    private function makeWxPreOrder($totalPrice)
+    private
+    function makeWxPreOrder($totalPrice)
     {
 
         $openid = Token::getCurrentOpenid();
@@ -157,7 +201,8 @@ class Pay
      * @param $wxOrder
      * @throws PayException
      */
-    private function recordPreOrder($wxOrder)
+    private
+    function recordPreOrder($wxOrder)
     {
         $prepay_id = $wxOrder['prepay_id'];
         if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
@@ -185,7 +230,8 @@ class Pay
      * @throws PayException
      * @throws TokenException
      */
-    private function checkOrderValid()
+    private
+    function checkOrderValid()
     {
         $order = self::getOrder();
 
@@ -241,7 +287,8 @@ class Pay
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function getOrder()
+    private
+    function getOrder()
     {
         if ($this->type == CommonEnum::ORDER_IS_BOOKING) {
             $order = ServiceBookingT::where('id', '=', $this->orderID)->find();
@@ -259,7 +306,8 @@ class Pay
 
     }
 
-    private function getOpenidForDemand($id)
+    private
+    function getOpenidForDemand($id)
     {
 
         $demand = DemandT::where('id', $id)
@@ -275,7 +323,8 @@ class Pay
      * @param $order
      * @return mixed
      */
-    private function savePayRecord($notify, $order)
+    private
+    function savePayRecord($notify, $order)
     {
         $wpt = new WxPayT();
         $wpt->out_trade_no = $notify->getOutTradeNo();
@@ -304,7 +353,8 @@ class Pay
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function checkRed()
+    private
+    function checkRed()
     {
 
         if (!$this->r_id) {
