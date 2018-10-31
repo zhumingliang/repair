@@ -118,7 +118,7 @@ class OrderReportV extends Model
             time()));
         $list = self::where('shop_id', $shop_id)
             ->where('service_begin', 1)
-            ->field('shop_id,source_name as order_name,user_name as username,area,address,time_begin,time_end,b.id as order_id,order_type as type')
+            ->field('shop_id,source_name as order_name,user_name as username,area,address,time_begin,time_end, order_id,order_type as type')
             ->where('confirm_id', CommonEnum::ORDER_STATE_INIT)
             ->whereTime('order_time', '>', $user_confirm_limit)
             ->select();
