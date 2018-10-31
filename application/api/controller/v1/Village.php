@@ -42,7 +42,7 @@ class Village extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = \app\api\service\Token::getCurrentUid();
         $record = VillageRecordT::create($params);
-        if (!$record) {
+        if (!$record->id) {
             throw new ImageException(['code' => 401,
                 'msg' => '新增服务记录失败',
                 'errorCode' => 210001
