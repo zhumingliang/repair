@@ -47,33 +47,33 @@ class FaceService
         // 调用人脸检测
         $detect_res = $client->detect($image, $imageType);
         if (isset($detect_res['error_code']) && $detect_res['error_code']) {
-            // throw  new FaceException();
-            return false;
+             throw  new FaceException();
+           // return false;
         }
         $result = $detect_res['result'];
         if ($result['face_num'] = 1) {
             $list = $result['face_list'];
             $face_probability = $list[0]['face_probability'];
             if ($face_probability < 0.9) {
-                return false;
-                /*throw  new FaceException(
+                //return false;
+                throw  new FaceException(
                     ['code' => 401,
                         'msg' => '图片检测失败，面部特征识别度底',
                         'errorCode' => 99002
                     ]
-                );*/
+                );
 
             }
             return true;
 
         } else {
-            return false;
-            /*throw  new FaceException(
+            //return false;
+            throw  new FaceException(
                 ['code' => 401,
                     'msg' => '图片检测失败',
                     'errorCode' => 99003
                 ]
-            );*/
+            );
         }
 
 
