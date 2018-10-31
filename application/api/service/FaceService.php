@@ -38,6 +38,7 @@ class FaceService
      * 是否为有效面部图片
      * @param $image
      * @return bool
+     * @throws FaceException
      */
     public function detectFace($image)
     {
@@ -46,7 +47,6 @@ class FaceService
         $imageType = "URL";
         // 调用人脸检测
         $detect_res = $client->detect($image, $imageType);
-        echo $image;
         if (isset($detect_res['error_code']) && $detect_res['error_code']) {
             throw  new FaceException();
             // return false;
@@ -153,8 +153,10 @@ class FaceService
          $groupIdList = "3";*/
         $client = new AipFace($this->APP_ID, $this->API_KEY, $this->SECRET_KEY);
         $imageType = "URL";
+        echo $image;
         $res = $client->search($image, $imageType, $groupIdList);
 
+        print_r($res);
         if (isset($res['error_code']) && $res['error_code']) {
 
             throw  new FaceException();
