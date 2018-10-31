@@ -120,9 +120,9 @@ class ImageService
         //先检测图片是否合法
         $face = FaceService::instance();
         $face->detectFace($url);
-        $face_token = $face->searchFace($group_ids, $url);
+        $id = $face->searchFace($group_ids, $url);
         //获取店铺信息
-        $shop = ShopStaffImgT::where('face_token', $face_token)
+        $shop = ShopStaffImgT::where('id', $id)
             ->field('s_id')
             ->find();
         $shop_id = $shop['s_id'];

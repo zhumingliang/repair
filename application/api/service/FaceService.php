@@ -96,10 +96,7 @@ class FaceService
         $imageType = "URL";
         // 调用人脸注册
         $res = $client->addUser($image, $imageType, $groupId, $userId);
-
-        //print_r($res);
         if (isset($res['error_code']) && $res['error_code']) {
-
             return ['res' => false];
             // throw  new FaceException();
         }
@@ -153,10 +150,7 @@ class FaceService
          $groupIdList = "3";*/
         $client = new AipFace($this->APP_ID, $this->API_KEY, $this->SECRET_KEY);
         $imageType = "URL";
-        echo $image;
         $res = $client->search($image, $imageType, $groupIdList);
-
-        print_r($res);
         if (isset($res['error_code']) && $res['error_code']) {
 
             throw  new FaceException();
@@ -180,7 +174,7 @@ class FaceService
                 ]
             ]);
         }
-        return $result['face_token'];
+        return $user['user_id'];
     }
 
 
