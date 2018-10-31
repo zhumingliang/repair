@@ -46,10 +46,10 @@ class FaceService
         $imageType = "URL";
         // 调用人脸检测
         $detect_res = $client->detect($image, $imageType);
-        print_r($detect_res);
+        echo $image;
         if (isset($detect_res['error_code']) && $detect_res['error_code']) {
-             throw  new FaceException();
-           // return false;
+            throw  new FaceException();
+            // return false;
         }
         $result = $detect_res['result'];
         if ($result['face_num'] = 1) {
@@ -149,8 +149,8 @@ class FaceService
      */
     public function searchFace($groupIdList, $image)
     {
-       /* $image = "http://www.mxpcp.com/uploadfile/2014/1121/20141121011225192.jpg";
-        $groupIdList = "3";*/
+        /* $image = "http://www.mxpcp.com/uploadfile/2014/1121/20141121011225192.jpg";
+         $groupIdList = "3";*/
         $client = new AipFace($this->APP_ID, $this->API_KEY, $this->SECRET_KEY);
         $imageType = "URL";
         $res = $client->search($image, $imageType, $groupIdList);
