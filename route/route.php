@@ -211,4 +211,7 @@ Route::post('api/:version/admin/join/save', 'api/:version.Admin/addJoin');
 Route::post('api/:version/admin/handel', 'api/:version.Admin/handel');
 Route::get('api/:version/admin/villages', 'api/:version.Admin/getVillageList');
 Route::get('api/:version/admin/joins', 'api/:version.Admin/getJoinList');
+
 Route::post('api/:version/village/confirm', 'api/:version.Village/villageConfirm');
+Route::get('api/:version/village/list', 'api/:version.Village/getList');
+Route::get('api/:version/village/export', 'api/:version.Village/exportVillageRecord');

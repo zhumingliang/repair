@@ -357,6 +357,7 @@ class Circle extends BaseController
      * http://mengant.cn/api/v1/circle/category/list?page=1&size=20&type=1
      * @apiParam (请求参数说明) {int} page  页数
      * @apiParam (请求参数说明) {int} size   每页数据条数
+     * @apiParam (请求参数说明) {int} type   类别：1 | 待审核；2 | 已审核
      * @apiSuccessExample {json} 返回样例:
      * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":5,"create_time":"2018-10-09 22:55:23","state":1,"top":1,"city":"铜陵市","title":"睡觉2","category":{"id":1,"name":"保姆"}},{"id":4,"create_time":"2018-10-09 22:34:18","state":1,"top":1,"city":"铜陵市","title":"睡觉","category":{"id":1,"name":"保姆"}}]}     * [{"id":1,"name":"失物招领"}]
      * @apiSuccess (返回参数说明) {int} total 数据总数

@@ -136,7 +136,7 @@ class Token extends Controller
         $pwd = $this->request->param('pwd');
         (new TokenGet())->scene('pc')->goCheck();
         $at = new AdminToken($phone, $pwd);
-        $at->get();
+        $at->getVillage();
         return json(new SuccessMessage());
     }
 

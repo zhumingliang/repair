@@ -182,7 +182,7 @@ class OrderReport extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/report/service/admin 142-管理员导出平台订单/加盟商导出订单
+     * @api {GET} /api/v1/report/export 142-管理员导出平台订单/加盟商导出订单
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 直接访问连接下载数据

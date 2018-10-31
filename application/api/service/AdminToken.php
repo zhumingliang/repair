@@ -84,6 +84,59 @@ class AdminToken extends Token
 
     }
 
+    /**
+     * @return mixed
+     * @throws Exception
+     */
+    public function getVillage()
+    {
+        try {
+
+            $admin = AdminT::where('phone', '=', $this->phone)
+                ->with('adminJoin')
+                ->find();
+
+            if (is_null($admin)) {
+                throw new TokenException([
+                    'code' => 401,
+                    'msg' => '用户不存在',
+                    'errorCode' => 30000
+                ]);
+            }
+
+            if (sha1($this->pwd) != $admin->pwd) {
+                throw new TokenException([
+                    'code' => 401,
+                    'msg' => '密码不正确',
+                    'errorCode' => 30002
+                ]);
+            }
+
+            if ($admin->state > 1) {
+
+                throw new TokenException([
+                    'code' => 401,
+                    'msg' => '该账号已暂停使用，请联系管理员',
+                    'errorCode' => 30004
+                ]);
+            }
+
+            //获取缓存
+            $token = Request::header('token');
+            $cache = Cache::get($token);
+            $cache = json_decode($cache);
+            $cache['v_id'] = $admin->id;
+            $cache = json_encode($cache);
+            $expire_in = config('setting.token_expire_in');
+            Cache::set($token, $cache, $expire_in);
+            return $token;
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+    }
+
     private function saveLog($u_id, $user_name)
     {
         $data = [
