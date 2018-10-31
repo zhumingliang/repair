@@ -155,8 +155,8 @@ class ImageService
             foreach ($list as $k => $v) {
                 if ($v['type'] == 'service') {
                     $list[$k]['type'] = 1;
-                } else {
-                    $list[$k]['type'] = 1;
+                } else  if ($v['type'] == 'demand'){
+                    $list[$k]['type'] = 2;
                 }
             }
         }
