@@ -11,6 +11,7 @@ namespace app\api\model;
 
 use app\api\service\Token;
 use app\lib\enum\CommonEnum;
+use app\lib\enum\OrderEnum;
 use think\Model;
 
 class OrderReportV extends Model
@@ -100,6 +101,26 @@ class OrderReportV extends Model
                 }
             })
             ->paginate($size, false, ['page' => $page]);
+
+        return $list;
+
+    }
+
+    /**
+     * 获取正在服务的订单
+     */
+    public static function serviceIng($shop_id)
+    {
+
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $list = self::where('shop_id', $shop_id)
+            ->where('service_begin', 1)
+            ->where('confirm_id', CommonEnum::ORDER_STATE_INIT)
+            ->whereTime('order_time', '>', $user_confirm_limit)
+            ->select();
 
         return $list;
 

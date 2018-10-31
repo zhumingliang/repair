@@ -11,6 +11,7 @@ namespace app\api\service;
 
 use app\api\model\ImgT;
 use app\api\model\OrderListV;
+use app\api\model\OrderReportV;
 use app\api\model\ShopStaffImgT;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
@@ -134,6 +135,7 @@ class ImageService
 
     }
 
+
     /**
      * 获取店铺此时正在服务中服务订单和需求订单
      * @param $shop_id
@@ -144,9 +146,11 @@ class ImageService
      */
     private static function getOrderForShop($shop_id)
     {
-        $list = OrderListV::where('shop_id', $shop_id)
-            ->select();
-        return $list;
+        /*  $list = OrderListV::where('shop_id', $shop_id)
+              ->select();
+          return $list;*/
+
+        $list = OrderReportV::serviceIng($shop_id);
 
     }
 
