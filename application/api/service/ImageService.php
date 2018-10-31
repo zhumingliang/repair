@@ -153,9 +153,10 @@ class ImageService
         $list = OrderReportV::serviceIng($shop_id);
         if (count($list)) {
             foreach ($list as $k => $v) {
+                $list[$k]['state'] = 1;
                 if ($v['type'] == 'service') {
                     $list[$k]['type'] = 1;
-                } else  if ($v['type'] == 'demand'){
+                } else if ($v['type'] == 'demand') {
                     $list[$k]['type'] = 2;
                 }
             }
