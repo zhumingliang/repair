@@ -424,46 +424,51 @@ class ShopService
      * @param $city
      * @throws Exception
      */
-    public static function examineStaff($shop_img_id, $url, $city)
+    public static function examineStaff($shop_img_id)
     {
 
         Db::startTrans();
         try {
-            //检测图片是否合格
-            $face = FaceService::instance();
-            if (!$face->detectFace($url)) {
-                Db::rollback();
-                throw  new FaceException();
-            }
-            //添加图片到百度人脸库--检测合格
-            $groupId = md5($city);
-            $register_res = $face->register($url, $groupId, $shop_img_id);
-            if (!$register_res['res']) {
-                throw  new FaceException(
-                    ['code' => 401,
-                        'msg' => '上传图片到百度云人脸库失败',
-                        'errorCode' => 99004
-                    ]
-                );
-            }
-            //将face_token关联到ShopStaffImgT
-            //修改店铺关联状态
-            $res = ShopStaffImgT::update(
-                [
-                    'state' => CommonEnum::PASS,
-                    'face_token' => $register_res['face_token']
-                ],
-                ['id' => $shop_img_id]);
-            if (!$res) {
-                Db::rollback();
-                throw new ShopException(
-                    ['code' => 401,
-                        'msg' => '图片状态修改失败',
-                        'errorCode' => 50009
-                    ]
-                );
-            }
-            Db::commit();
+
+            //获取审核信息
+            $info = self::getExamineInfo($shop_img_id);
+            $url=$info['url'];
+            $city=$info['city'];
+             //检测图片是否合格
+             $face = FaceService::instance();
+             if (!$face->detectFace($url)) {
+                 Db::rollback();
+                 throw  new FaceException();
+             }
+             //添加图片到百度人脸库--检测合格
+             $groupId = md5($city);
+             $register_res = $face->register($url, $groupId, $shop_img_id);
+             if (!$register_res['res']) {
+                 throw  new FaceException(
+                     ['code' => 401,
+                         'msg' => '上传图片到百度云人脸库失败',
+                         'errorCode' => 99004
+                     ]
+                 );
+             }
+             //将face_token关联到ShopStaffImgT
+             //修改店铺关联状态
+             $res = ShopStaffImgT::update(
+                 [
+                     'state' => CommonEnum::PASS,
+                     'face_token' => $register_res['face_token']
+                 ],
+                 ['id' => $shop_img_id]);
+             if (!$res) {
+                 Db::rollback();
+                 throw new ShopException(
+                     ['code' => 401,
+                         'msg' => '图片状态修改失败',
+                         'errorCode' => 50009
+                     ]
+                 );
+             }
+             Db::commit();
         } catch (Exception $e) {
             Db::rollback();
             throw $e;
@@ -588,5 +593,15 @@ class ShopService
         return $list;
     }
 
+    private static function getExamineInfo($id)
+    {
 
+        $info = ShopStaffImgT::examineInfo($id);
+
+        return [
+            'url' => $info->imgUrl->url,
+            'city' => $info->shop->city
+        ];
+
+    }
 }

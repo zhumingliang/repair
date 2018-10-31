@@ -12,7 +12,9 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\ServiceListV;
 use app\api\model\ServicesT;
+use app\api\model\ShopStaffImgT;
 use app\api\model\ShopT;
+use app\api\model\StaffV;
 use app\api\service\ShopListService;
 use app\api\service\ShopService;
 use app\api\validate\PagingParameter;
@@ -345,34 +347,28 @@ class Shop extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/shop/staff/examine 75-后台审核店铺员工头像
+     * @api {POST} /api/v1/shop/staff/examine 75-加盟商-商家人脸审核-审核操作
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  通过操作
      * @apiExample {get}  请求样例:
      * {
-     * "id": 1,
-     * "url": "https://",
-     * "city": "广州市"
+     * "id": 1
      * }
      * @apiParam (请求参数说明) {int} id  店铺和与员工头像关联id
-     * @apiParam (请求参数说明) {String} url 头像url
-     * @apiParam (请求参数说明) {String} city 当前城市
-     *
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
      * @apiSuccess (返回参数说明) {String} msg 信息描述
      *
      * @return \think\response\Json
-     * @throws \app\lib\exception\ParameterException
      * @throws \think\Exception
      */
-    public function examineStaff()
+    public function examineStaff($id)
     {
-        (new ShopValidate())->scene('staff')->goCheck();
-        $params = $this->request->param();
-        ShopService::examineStaff($params['id'], $params['url'], $params['city']);
+       // (new ShopValidate())->scene('staff')->goCheck();
+        //$params = $this->request->param();
+        ShopService::examineStaff($id);
         return json(new SuccessMessage());
 
     }
@@ -681,10 +677,12 @@ class Shop extends BaseController
     {
         $res = ShopT::update(['frozen' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         if (!$res) {
-            ['code' => 401,
-                'msg' => '冻结操作失败',
-                'errorCode' => 600020
-            ];
+            throw new  ShopException(
+                ['code' => 401,
+                    'msg' => '冻结操作失败',
+                    'errorCode' => 600020
+                ]
+            );
         }
         return json(new SuccessMessage());
 
@@ -720,6 +718,76 @@ class Shop extends BaseController
     {
         $info = ServicesT::getServiceForCMS($id);
         return json($info);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/shop/staff/ready 150-加盟商-商家员工头像待审核列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription url用于点击用于查看操作显示内容
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/shop/staff/ready?page=1&size=1
+     * @apiParam (请求参数说明) {int} page  页码
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":11,"per_page":"1","current_page":10,"last_page":11,"data":[{"staff_id":4,"city":"广州市","shop_name":"福招","shop_type":2,"address":"广东省广州市越秀区地铁1号线,地铁2号线","phone":"15876297678","url":"https:\/\/mengant.cn\/static\/imgs\/20181023\/accb5832f7fa6344c66815d39920cb9a.jpg","shop_img_id":4,"create_time":"2018-10-23 23:29:34"}]}
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} staff_id 店铺和与员工头像关联id
+     * @apiSuccess (返回参数说明) {String} city 城市
+     * @apiSuccess (返回参数说明) {String} shop_name 店铺名称
+     * @apiSuccess (返回参数说明) {int} shop_type 店铺列别：1 | 维修服务；2| 家政服务
+     * @apiSuccess (返回参数说明) {String} address 地址
+     * @apiSuccess (返回参数说明) {String} phone 手机号
+     * @apiSuccess (返回参数说明) {String} url 头像地址
+     *
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getStaffsForJoin($page = 1, $size = 20)
+    {
+        $list = StaffV::getList($page, $size);
+        return json($list);
+    }
+
+    /**
+     * @api {POST} /api/v1/shop/staff/handel  151-加盟商-商家人脸审核-状态操作
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  加盟商-商家人脸审核-状态操：删除/拒绝
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * "state":3
+     * }
+     * @apiParam (请求参数说明) {int} id 用户id
+     * @apiParam (请求参数说明) {int} state  状态: 3 | 删除；4 | 拒绝
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $id
+     * @param $state
+     * @return \think\response\Json
+     * @throws ShopException
+     */
+    public function staffHandel($id, $state)
+    {
+        $res = ShopStaffImgT::update(['state' => $state], ['id' => $id]);
+        if (!$res) {
+            throw new  ShopException(
+                ['code' => 401,
+                    'msg' => '员工头像状态操作失败',
+                    'errorCode' => 600023
+                ]
+            );
+        }
+        return json(new SuccessMessage());
 
     }
 

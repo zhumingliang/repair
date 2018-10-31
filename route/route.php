@@ -55,6 +55,7 @@ Route::get('api/:version/shops/list/cms', 'api/:version.Shop/ShopsForCMS');
 Route::get('api/:version/shop/info/cms', 'api/:version.Shop/shopInfoForCMS');
 Route::get('api/:version/shop/frozen', 'api/:version.Shop/shopFrozen');
 Route::get('api/:version/shop/service', 'api/:version.Shop/getTheService');
+Route::get('api/:version/shop/staff/ready', 'api/:version.Shop/getStaffsForJoin');
 
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
