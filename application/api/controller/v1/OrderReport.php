@@ -106,12 +106,12 @@ class OrderReport extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/report/service/admin 140-加盟商-订单列表
+     * @api {GET} /api/v1/report/order/join 140-加盟商-订单列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/report/service/admin?page=1&size=10&order_type=2
+     * https://mengant.cn/api/v1/report/order/join?page=1&size=10&order_type=2
      * @apiParam (请求参数说明) {int} page  页码
      * @apiParam (请求参数说明) {int} size  每页条数
      * @apiParam (请求参数说明) {int} order_type  用户订单类别 ： order_type=1 未完成；order_type=2 已完成
