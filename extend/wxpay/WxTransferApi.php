@@ -33,7 +33,7 @@ class WxTransferApi extends ApiCommon
         $transfer->setSign();
         $xml = $transfer->toXml();
 
-        echo $xml;
+       // echo $xml;
         $response = ApiCommon::postXmlCurl($xml, $url, true, $timeOut);
         var_dump($response);
        // $result = WxPayResults::Init($response);

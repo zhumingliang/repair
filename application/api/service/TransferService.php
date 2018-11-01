@@ -38,9 +38,9 @@ class TransferService
     {
 
         $transfer = $this->makeWxPreOrder();
-        var_dump($transfer);
+        //var_dump($transfer);
         $result = WxTransferApi::unifiedOrder($transfer);
-        print_r($result);
+       // print_r($result);
     }
 
     /**
