@@ -38,6 +38,7 @@ class TransferService
     {
 
         $transfer = $this->makeWxPreOrder();
+        var_dump($transfer);
         $result = WxTransferApi::unifiedOrder($transfer);
         print_r($result);
     }
@@ -69,8 +70,6 @@ class TransferService
         $payTransfer->setOpenid($order->openid);
         $payTransfer->setPartnerTradeNo($order->order_number);
         $payTransfer->setReUserName($order->nickName);
-        var_dump($payTransfer);
-
         return $payTransfer;
 
     }
