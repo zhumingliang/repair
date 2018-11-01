@@ -14,4 +14,11 @@ use think\Model;
 class WithdrawPcT extends Model
 {
 
+    public function admin()
+    {
+        return $this->belongsTo('adminT',
+            'admin_id', 'id');
+    }
+
+
 }

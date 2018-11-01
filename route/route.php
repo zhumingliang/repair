@@ -174,6 +174,7 @@ Route::get('api/:version/withdraw/check', 'api/:version.Withdraw/checkWithdraw')
 Route::post('api/:version/withdraw/apply', 'api/:version.Withdraw/apply');
 Route::post('api/:version/withdraw/apply/join', 'api/:version.Withdraw/joinApply');
 Route::get('api/:version/withdraws', 'api/:version.Withdraw/getWithdrawList');
+Route::get('api/:version/withdraws/join', 'api/:version.Withdraw/getWithdrawsWithJoin');
 Route::get('api/:version/payments', 'api/:version.Withdraw/getPayments');
 Route::get('api/:version/withdraw/balance/join', 'api/:version.Withdraw/getBalanceList');
 

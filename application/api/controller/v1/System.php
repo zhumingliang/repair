@@ -461,11 +461,11 @@ class System extends BaseController
      *       "user_confirm": 1200,
      *       "consult": 1200
      *     }
-     * @apiSuccess (返回参数说明) {int} id  配置ID
-     * @apiSuccess (返回参数说明) {int} shop_confirm 注册提示
-     * @apiSuccess (返回参数说明) {int} pay  协商提示
-     * @apiSuccess (返回参数说明) {int} user_confirm 无加盟商提示
-     * @apiSuccess (返回参数说明) {int} consult 无加盟商提示
+     * @apiSuccess (返回参数说明) {int} id  接单超时时间 单位/分钟
+     * @apiSuccess (返回参数说明) {int} shop_confirm 注册提示 单位/分钟
+     * @apiSuccess (返回参数说明) {int} pay  报价取消时间 单位/分钟
+     * @apiSuccess (返回参数说明) {int} user_confirm 自动打款时间 单位/分钟
+     * @apiSuccess (返回参数说明) {int} consult 协商延迟时间 单位/分钟
      * @return Json
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException

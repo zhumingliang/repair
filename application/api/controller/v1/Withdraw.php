@@ -287,10 +287,39 @@ class Withdraw extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/withdraws/join  165-加盟商管理-提现列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/withdraw/balance/join?&page=1&size=15&state=1
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {int} state 列别类别：1 | 待处理；2 | 已完成
+     * @apiSuccessExample {json} 返回样例:
+     {"total":1,"per_page":"10","current_page":1,"last_page":1,"data":[{"id":36,"admin_id":2,"money":500,"state":1,"create_time":"2018-10-31 22:58:56","update_time":"2018-10-31 22:58:56","card_num":"62282832323232323","bank":"农业银行","username":"朱明良","phone":"13111111111","admin":{"id":2,"phone":"13711111111"}}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} balance 用户余额
+     * @apiSuccess (返回参数说明) {int} join_money 金额
+     * @apiSuccess (返回参数说明) {String} des 说明
+     * @apiSuccess (返回参数说明) {String} order_time 提现时间
+     *
+     * @param $page
+     * @param $size
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     */
     public function getWithdrawsWithJoin($page, $size)
     {
-        $list=WithdrawPcT::where('state',CommonEnum::STATE_IS_OK)
+        $list = WithdrawPcT::with(['admin' => function ($query) {
+            $query->field('id,phone');
+        }])
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->paginate($size, false, ['page' => $page])->toArray();
+        return json($list);
 
 
     }
