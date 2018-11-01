@@ -68,6 +68,7 @@ class TransferService
         $payTransfer->setOpenid($order->openid);
         $payTransfer->setPartnerTradeNo($order->order_number);
         $payTransfer->setReUserName($order->nickName);
+        var_dump($payTransfer);
 
         return $payTransfer;
 
