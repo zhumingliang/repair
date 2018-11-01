@@ -53,6 +53,7 @@ class TransferService
     private function makeWxPreOrder()
     {
         $order = WithdrawMiniV::where('id', $this->orderID)->find();
+        var_dump($order);
         if ($order->state == CommonEnum::PASS) {
             throw new PayException([
                 'code' => 401,
