@@ -38,9 +38,8 @@ class TransferService
     {
 
         $transfer = $this->makeWxPreOrder();
-        //var_dump($transfer);
         $result = WxTransferApi::unifiedOrder($transfer);
-       // print_r($result);
+        print_r($result);
     }
 
     /**
@@ -64,7 +63,7 @@ class TransferService
         }
         $payTransfer = new WxPayTransfer();
         // $payTransfer->setAccount($order->money);
-        $payTransfer->setAccount(100);
+        $payTransfer->setAccount(900);
         $payTransfer->setDesc("商户提现");
         $payTransfer->setOpenid($order->openid);
         $payTransfer->setPartnerTradeNo($order->order_number);
