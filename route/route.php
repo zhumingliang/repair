@@ -69,6 +69,7 @@ Route::get('api/:version/collection/list', 'api/:version.Collection/getList');
 
 Route::get('api/:version/red/list', 'api/:version.Red/getList');
 Route::get('api/:version/red/rule', 'api/:version.Red/redRule');
+Route::post('api/:version/red/rule/update', 'api/:version.Red/redRuleUpdate');
 Route::get('api/:version/red/strategy', 'api/:version.Red/getStrategyList');
 Route::post('api/:version/strategy/save', 'api/:version.Red/saveStrategy');
 Route::post('api/:version/strategy/update', 'api/:version.Red/updateStrategy');
