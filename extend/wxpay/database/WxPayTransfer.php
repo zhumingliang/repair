@@ -28,7 +28,7 @@ class WxPayTransfer extends WxPayDataBase
      **/
     public function setMchId($value)
     {
-        $this->values['mch_id'] = $value;
+        $this->values['mchid'] = $value;
     }
 
     /**
