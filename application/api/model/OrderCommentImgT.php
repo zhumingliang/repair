@@ -14,4 +14,10 @@ use think\Model;
 class OrderCommentImgT extends Model
 {
 
+
+    public function imgUrl()
+    {
+        return $this->belongsTo('ImgT',
+            'img_id', 'id');
+    }
 }

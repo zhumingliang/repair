@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\RedStrategyT;
+use app\api\model\RedT;
 use app\api\service\RedService;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\RedException;
@@ -237,4 +238,65 @@ class Red extends BaseController
 
     }
 
+
+    /**
+     * @api {GET} /api/v1/red/rule 161-CMS获取红包规则列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户获取红包列表
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/red/rule
+     * @apiSuccessExample {json} 返回样例:
+     * [{"id":4,"name":"分享红包","state":1,"money_min":2,"create_time":"2018-09-28 00:21:40","update_time":"2018-09-28 00:21:42","money_max":2,"type":4},{"id":3,"name":"店铺首次下单","state":1,"money_min":2,"create_time":"2018-09-28 00:21:03","update_time":"2018-09-28 00:21:05","money_max":5,"type":3},{"id":2,"name":"首次好评红包","state":1,"money_min":2,"create_time":"2018-09-28 00:20:32","update_time":"2018-09-28 00:20:34","money_max":2,"type":2},{"id":1,"name":"首次登录","state":1,"money_min":2,"create_time":"2018-09-28 00:20:16","update_time":"2018-09-28 00:20:18","money_max":5,"type":1}
+     * @apiSuccess (返回参数说明) {int} id 红包规则id
+     * @apiSuccess (返回参数说明) {String} name 红包规则名称
+     * @apiSuccess (返回参数说明) {int} money_min 红包金额最小值
+     * @apiSuccess (返回参数说明) {int} money_max 红包金额最大值
+     *
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function redRule()
+    {
+        $list = RedT::order('create_time desc')
+            ->select();
+        return json($list);
+    }
+
+    /**
+     * @api {POST} /api/v1/red/rule/update  162-修改红包规则
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  管理新增红包攻略
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "id":1,
+     *       "money_min":1,
+     *       "money_max":5
+     *     }
+     * @apiParam (请求参数说明) {String} id    规则id
+     * @apiParam (请求参数说明) {int} money_min   最小值
+     * @apiParam (请求参数说明) {int} money_max    最大值
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $money_min
+     * @param $money_max
+     * @param $id
+     * @return \think\response\Json
+     * @throws RedException
+     */
+    public function redRuleUpdate($money_min, $money_max, $id)
+    {
+        $res = RedT::update(['money_min' => $money_min, 'money_max' => $money_max], ['id' => $id]);
+        if (!$res) {
+            throw  new RedException(['code' => 401,
+                'msg' => '修改红包规则失败',
+                'errorCode' => 90009]);
+        }
+        return json(new SuccessMessage());
+
+    }
 }
