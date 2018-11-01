@@ -65,7 +65,7 @@ class WxPayTransfer extends WxPayDataBase
      **/
     public function setPartnerTradeNo($value)
     {
-        $this->values['account'] = $value;
+        $this->values['partner_trade_no'] = $value;
     }
 
     /**
