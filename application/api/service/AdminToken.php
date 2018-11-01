@@ -193,6 +193,7 @@ class AdminToken extends Token
         $cachedValue['province'] = '';
         $cachedValue['city'] = '';
         $cachedValue['area'] = '';
+        $cachedValue['rule'] = '';
         $admin_join = array();
 
         if ($admin->grade == UserEnum::USER_GRADE_ADMIN || $admin->grade == UserEnum::USER_GRADE_JOIN) {
@@ -213,6 +214,7 @@ class AdminToken extends Token
             $cachedValue['province'] = $admin_join->province;
             $cachedValue['city'] = $admin_join->city;
             $cachedValue['area'] = $admin_join->area;
+            $cachedValue['rule'] = $admin_join->rule;
         }
 
         return $cachedValue;

@@ -17,6 +17,7 @@ use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\AdminException;
 use app\lib\exception\SuccessMessage;
+use app\lib\exception\TokenException;
 use think\response\Json;
 
 class Admin extends BaseController
@@ -62,7 +63,6 @@ class Admin extends BaseController
         return json(new SuccessMessage());
 
     }
-
 
     /**
      * @api {POST} /api/v1/admin/handel  145-小区账户/加盟商账户管理-用户状态操作
@@ -165,6 +165,7 @@ class Admin extends BaseController
         $join['province'] = $params['province'];
         $join['city'] = $params['city'];
         $join['area'] = $params['area'];
+        $join['rule'] = '1,2,3,4,5,6';
         $join['email'] = isset($params['email']) ? $params['email'] : '';
         $join['state'] = CommonEnum::STATE_IS_OK;
         $join['admin_id'] = $adminT->id;
@@ -235,7 +236,7 @@ class Admin extends BaseController
      * @apiParam (请求参数说明) {int} size   每页数据条数
      * @apiParam (请求参数说明) {int} key   关键字
      * @apiSuccessExample {json} 返回样例:
-     * {"total":2,"per_page":20,"current_page":1,"last_page":1,"data":[{"id":5,"phone":"13111111111","username":"一号小区","province":"安徽省","city":"铜陵市","area":"\b铜官区","email":"","create_time":"2018-10-30 11:00:50","state":1},{"id":2,"phone":"13711111111","username":"朱明良-加盟商","province":"安徽省","city":"铜陵市","area":"铜官区","email":"","create_time":"2018-10-02 18:43:32","state":1}]}
+     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":5,"phone":"13111111111","username":"一号小区","province":"安徽省","city":"铜陵市","area":"\b铜官区","email":"","create_time":"2018-10-30 11:00:50","state":1,"rule":"1,2,3,4,5,6"},{"id":2,"phone":"13711111111","username":"朱明良-加盟商","province":"安徽省","city":"铜陵市","area":"铜官区","email":"","create_time":"2018-10-02 18:43:32","state":1,"rule":"1,2,3,4,5,6"}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
@@ -247,6 +248,7 @@ class Admin extends BaseController
      * @apiSuccess (返回参数说明) {String} province 省
      * @apiSuccess (返回参数说明) {String} city 市
      * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} rule 导航栏规则
      * @apiSuccess (返回参数说明) {int} state  状态：1 | 启用；2 | 停用
      * @param int $page
      * @param int $size
@@ -259,13 +261,151 @@ class Admin extends BaseController
         return json($list);
     }
 
-    public function getRule()
+    /**
+     * @api {POST} /api/v1/join/rule/update  171-加盟商管理-权限修改
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  后台用户修改账号密码
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "admin_id": 1,
+     *       "rule": "1,2,3"
+     *     }
+     * @apiParam (请求参数说明) {int} admin_id   用户id
+     * @apiParam (请求参数说明) {String} rule   加盟商导航栏规则
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $admin_id
+     * @param $rule
+     * @return Json
+     * @throws TokenException
+     */
+    public function updateRule($admin_id, $rule)
     {
+        $res = AdminJoinT::update(['rule' => $rule], ['admin_id' => $admin_id]);
+        if (!$res) {
+            throw new TokenException(
+                [
+                    'code' => 401,
+                    'msg' => '修改密码失败',
+                    'errorCode' => 30003
+
+                ]
+            );
+
+        }
+        return json(new SuccessMessage());
 
     }
 
-    public function updateRule()
+    /**
+     * @api {POST} /api/v1/admin/username/update  169-CMS-用户-修改用户名
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  后台用户修改用户名
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "pwd": "a123456",
+     *       "username": "修改名字"
+     *     }
+     * @apiParam (请求参数说明) {String} pwd   密码
+     * @apiParam (请求参数说明) {String} username  用户名
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $pwd
+     * @param $username
+     * @return Json
+     * @throws TokenException
+     * @throws \think\Exception
+     */
+    public function updateUserName($pwd, $username)
     {
+        $id = \app\api\service\Token::getCurrentUid();
+        $admin = AdminT::where('id', $id)->find();
+        if (sha1($pwd) != $admin->pwd) {
+            throw new TokenException([
+                'code' => 401,
+                'msg' => '密码不正确',
+                'errorCode' => 30002
+            ]);
+        }
+
+        $res = AdminT::update(['username' => $username], ['id' => $id]);
+        if (!$res) {
+            throw new TokenException(
+                [
+                    'code' => 401,
+                    'msg' => '修改密码失败',
+                    'errorCode' => 30003
+
+                ]
+            );
+
+        }
+
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {POST} /api/v1/admin/pwd/update  170-CMS-用户-修改密码
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  后台用户修改账号密码
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "new_pwd": "aaaaaa",
+     *       "old_pwd": "a123456"
+     *     }
+     * @apiParam (请求参数说明) {String} new_pwd   新密码
+     * @apiParam (请求参数说明) {String} old_pwd   旧密码
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $old_pwd
+     * @param $new_pwd
+     * @return Json
+     * @throws TokenException
+     * @throws \think\Exception
+     */
+    public function updatePwd($old_pwd, $new_pwd)
+    {
+        $id = \app\api\service\Token::getCurrentUid();
+        $admin = AdminT::where('id', $id)->find();
+
+        if (sha1($old_pwd) != $admin->pwd) {
+            throw new TokenException([
+                'code' => 401,
+                'msg' => '密码不正确',
+                'errorCode' => 30002
+            ]);
+        }
+
+        $res = AdminT::update(['pwd' => sha1($new_pwd)], ['id' => $id]);
+        if (!$res) {
+            throw new TokenException(
+                [
+                    'code' => 401,
+                    'msg' => '修改密码失败',
+                    'errorCode' => 30003
+
+                ]
+            );
+
+        }
+        return json(new SuccessMessage());
+
 
     }
 

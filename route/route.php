@@ -182,7 +182,6 @@ Route::get('api/:version/withdraws/join', 'api/:version.Withdraw/getWithdrawsWit
 Route::get('api/:version/withdraws/shop', 'api/:version.Withdraw/getWithdrawsWithShop');
 
 
-
 Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 
@@ -221,6 +220,9 @@ Route::post('api/:version/admin/join/save', 'api/:version.Admin/addJoin');
 Route::post('api/:version/admin/handel', 'api/:version.Admin/handel');
 Route::get('api/:version/admin/villages', 'api/:version.Admin/getVillageList');
 Route::get('api/:version/admin/joins', 'api/:version.Admin/getJoinList');
+Route::post('api/:version/admin/username/update', 'api/:version.Admin/updateUserName');
+Route::post('api/:version/admin/pwd/update', 'api/:version.Admin/updatePwd');
+Route::post('api/:version/join/rule/update', 'api/:version.Admin/updateRule');
 
 Route::post('api/:version/village/confirm', 'api/:version.Village/villageConfirm');
 Route::get('api/:version/village/list', 'api/:version.Village/getList');
