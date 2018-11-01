@@ -326,6 +326,7 @@ class Pay
     private
     function savePayRecord($notify, $order)
     {
+        $this->payRed($order->openid);
         $wpt = new WxPayT();
         $wpt->out_trade_no = $notify->getOutTradeNo();
         $wpt->openid = $order->openid;
@@ -342,6 +343,19 @@ class Pay
         }
 
         return $wpt->id;
+    }
+
+
+    private function payRed($openid)
+    {
+        $count = WxPayT::where('openid', $openid)
+            ->count();
+        if (!$count) {
+            $user = UserT::where('openid', $openid)->field('id')->find()->toArray();
+            RedService::addRed(RedEnum::FIRST_ORDER, $user['id']);
+        }
+
+
     }
 
     /**

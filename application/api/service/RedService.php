@@ -20,6 +20,7 @@ class RedService
     /**
      * 保存用户红包
      * @param $red_type
+     * @return array
      * @throws RedException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -27,9 +28,9 @@ class RedService
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function addRed($red_type)
+    public static function addRed($red_type,$u_id)
     {
-        $u_id = Token::getCurrentUid();
+        //$u_id = Token::getCurrentUid();
         $red = RedT::where('state', '=', CommonEnum::STATE_IS_OK)
             ->where('type', '=', $red_type)
             ->find();
@@ -43,6 +44,10 @@ class RedService
         if (!$res) {
             throw  new RedException();
 
+
+            return [
+                'money' => $money
+            ];
         }
 
 
@@ -99,7 +104,7 @@ class RedService
     public static function getStrategyList()
     {
         return RedStrategyT::where('state', '=', CommonEnum::STATE_IS_OK)
-            ->field('id,des')
+            ->field('id,des,create_time')
             ->select();
 
     }

@@ -20,6 +20,7 @@ use app\api\model\ServiceOrderV;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\OrderEnum;
+use app\lib\enum\RedEnum;
 use app\lib\exception\OrderException;
 use think\Db;
 use think\Exception;
@@ -196,7 +197,7 @@ class OrderService
      */
     public static function getDemandList($order_type, $page, $size, $list_type)
     {
-        $shop_id =Token::getCurrentTokenVar('shop_id');
+        $shop_id = Token::getCurrentTokenVar('shop_id');
         if ($shop_id) {
             if ($list_type == 2) {
                 return self::getDemandListForShop($shop_id, $order_type, $page, $size);
@@ -250,6 +251,10 @@ class OrderService
 
         Db::startTrans();
         try {
+            if ($params['score_type'] == 1) {
+                self::checkCommentRed();
+            }
+
             $imgs = $params['imgs'];
             unset($params['imgs']);
             $params['u_id'] = Token::getCurrentUid();
@@ -299,6 +304,16 @@ class OrderService
         }
 
 
+    }
+
+
+    private static function checkCommentRed()
+    {
+        $count = OrderCommentT::where('u_id', Token::getCurrentUid())
+            ->count();
+        if (!$count) {
+            RedService::addRed(RedEnum::FIRST_PRAISE, Token::getCurrentUid());
+        }
     }
 
     /**

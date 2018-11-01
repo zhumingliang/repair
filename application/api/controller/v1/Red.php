@@ -14,6 +14,7 @@ use app\api\model\RedStrategyT;
 use app\api\model\RedT;
 use app\api\service\RedService;
 use app\lib\enum\CommonEnum;
+use app\lib\enum\RedEnum;
 use app\lib\exception\RedException;
 use app\lib\exception\SuccessMessage;
 
@@ -160,10 +161,7 @@ class Red extends BaseController
         }
 
         return json(new SuccessMessage());
-
-
     }
-
 
     /**
      * @api {POST} /api/v1/strategy/update  21-后台修改红包攻略
@@ -297,6 +295,33 @@ class Red extends BaseController
                 'errorCode' => 90009]);
         }
         return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {GET} /api/v1/red/share 163-分享触发红包
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户分享获取红包
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/red/share
+     * @apiSuccessExample {json} 返回样例:
+     * {"money": 2}
+     * @apiSuccess (返回参数说明) {int} money 红包金额
+     *
+     * @return \think\response\Json
+     * @throws RedException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function redShare()
+    {
+        $money = RedService::addRed(RedEnum::SHARE, \app\api\service\Token::getCurrentUid());
+        return json($money);
+
 
     }
 }

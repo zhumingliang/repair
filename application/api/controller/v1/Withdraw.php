@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\model\BondT;
 use app\api\model\JoinBalanceV;
 use app\api\model\WithdrawMiniT;
+use app\api\model\WithdrawPcT;
 use app\api\service\WithDrawService;
 use app\api\validate\PagingParameter;
 use app\api\validate\WithdrawValidate;
@@ -282,6 +283,14 @@ class Withdraw extends BaseController
             ->paginate($size, false, ['page' => $page])->toArray();
         $list['balance'] = $balance;
         return json($list);
+
+
+    }
+
+    public function getWithdrawsWithJoin($page, $size)
+    {
+        $list=WithdrawPcT::where('state',CommonEnum::STATE_IS_OK)
+            ->paginate($size, false, ['page' => $page])->toArray();
 
 
     }

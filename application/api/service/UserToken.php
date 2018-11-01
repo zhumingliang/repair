@@ -5,6 +5,7 @@ namespace app\api\service;
 
 
 use app\api\model\UserT;
+use app\lib\enum\RedEnum;
 use app\lib\exception\TokenException;
 use app\lib\exception\WeChatException;
 use app\api\model\UserT as UserModel;
@@ -184,10 +185,17 @@ class UserToken extends Token
     /**
      * @param $openid
      * @return mixed
+     * @throws TokenException
+     * @throws \app\lib\exception\RedException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     private function newUser($openid)
     {
         $user = UserT::create(['openId' => $openid]);
+        RedService::addRed(RedEnum::FIRST_LOGIN, $user->id);
         return $user->id;
     }
 
