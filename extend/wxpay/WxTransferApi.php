@@ -36,8 +36,8 @@ class WxTransferApi extends ApiCommon
 
         $response = ApiCommon::postXmlCurl($xml, $url, true, $timeOut);
         var_dump($response);
-        $result = WxPayResults::Init($response);
-        return $result;
+        //$result = WxPayResults::Init($response);
+        //return $result;
 
 
     }
