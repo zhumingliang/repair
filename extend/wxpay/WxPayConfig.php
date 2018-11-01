@@ -28,10 +28,7 @@ class WxPayConfig
      */
     public static $APPID = 'wxd11ca80b97562519';
     public static $MCHID = '1501271281';
-    public static $KEY = 'qwertyuiopasdfghjklzxcvbnm123456证书使用说明.txt
-apiclient_key1.pem
-apiclient_cert1.pem
-apiclient_cert.p12';
+    public static $KEY = 'qwertyuiopasdfghjklzxcvbnm123456';
     public static $APPSECRET = '6a2fcc652491dee6c825e8a5cd178ee2';
     public static $NOTIFY_URL = 'https://mengant.cn/api/v1/pay/notify';
 
@@ -42,8 +39,8 @@ apiclient_cert.p12';
      * API证书下载地址：https://pay.weixin.qq.com/index.php/account/api_cert，下载之前需要安装商户操作证书）
      * @var string path
      */
-    public static $SSLCERT_PATH = './cert/apiclient_cert1.pem';
-    public static $SSLKEY_PATH = './cert/apiclient_key1.pem';
+    public static $SSLCERT_PATH = 'cert/apiclient_cert1.pem';
+    public static $SSLKEY_PATH = 'cert/apiclient_key1.pem';
     //=======【curl代理设置】===================================
     /**
      * 这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0
