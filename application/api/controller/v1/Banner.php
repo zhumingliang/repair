@@ -105,7 +105,7 @@ class Banner extends BaseController
      *       "des": "我是一号轮播图！"
      *       "url": "http://xxxxx"
      *       "category": 1
-     *       "img": "base64"
+     *       "img": 1
      *     }
      * @apiParam (请求参数说明) {String} id    轮播图id
      * @apiParam (请求参数说明) {String} title    标题

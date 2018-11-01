@@ -338,8 +338,8 @@ class Withdraw extends BaseController
     public function applyHandelForShop($id, $state)
     {
 
-        $res = WithdrawPcT::update(['state' => $state], ['id' => $id]);
-        WithDrawService::HandelForShop($id, $state);
+       // $res = WithdrawPcT::update(['state' => $state], ['id' => $id]);
+        $res=  WithDrawService::HandelForShop($id, $state);
         if (!$res) {
             throw new WithdrawException(['code' => 401,
                 'msg' => '提现申请操作状态失败',

@@ -228,8 +228,13 @@ class WithDrawService
 
     }
 
-    public function HandelForShop($id,$state)
+    public function HandelForShop($id, $state)
     {
+        if ($state == CommonEnum::DELETE) {
+            $res = WithdrawPcT::update(['state' => $state], ['id' => $id]);
+        } else {
+            $res = (new TransferService($id))->transferToUser();
+        }
 
 
     }

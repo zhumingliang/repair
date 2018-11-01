@@ -31,7 +31,6 @@ class Guid extends BaseController
      *     }
      * @apiParam (请求参数说明) {String} url    图片外链地址
      * @apiParam (请求参数说明) {String} img    上传图片base64，当category=1，3，4时，传入此参数，其余情况无需传入
-     *
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
