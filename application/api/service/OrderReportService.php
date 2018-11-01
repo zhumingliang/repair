@@ -56,7 +56,7 @@ class OrderReportService
      * report_type=1 未完成
      * report_type=2 待评价
      * report_type=3 已完成
-     * report_type=3 全部
+     * report_type=4 全部
      * @param $key
      * @param $report_type
      * @param $page
@@ -98,17 +98,18 @@ class OrderReportService
      */
     private function prefixDemandOrderState($list)
     {
+
         if (count($list)) {
             foreach ($list as $k => $v) {
                 if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
                     $list[$k]['order_state'] = "未完成";
                 } else {
-                    if ($this->checkComment($list)) {
+                    if ($this->checkComment($list[$k])) {
                         $list[$k]['order_state'] = "待评价";
                         continue;
                     }
 
-                    if ($this->checkComplete($list)) {
+                    if ($this->checkComplete($list[$k])) {
                         $list[$k]['order_state'] = '已完成';
                         continue;
                     }
@@ -135,12 +136,12 @@ class OrderReportService
                 if ($v['pay_id'] == CommonEnum::ORDER_STATE_INIT) {
                     $list[$k]['order_state'] = "未完成";
                 } else {
-                    if ($this->checkComment($list)) {
+                    if ($this->checkComment($list[$k])) {
                         $list[$k]['order_state'] = "待评价";
                         continue;
                     }
 
-                    if ($this->checkComplete($list)) {
+                    if ($this->checkComplete($list[$k])) {
                         $list[$k]['order_state'] = '已完成';
                         continue;
                     }
