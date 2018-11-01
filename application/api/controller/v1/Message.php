@@ -88,7 +88,7 @@ class Message extends BaseController
     public function getMessages($page = 1, $size = 20, $state = 1)
     {
         $list = MessageT::where('state', $state)
-            ->hidden('update_time')
+            //->hidden()
             ->paginate($size, false, ['page' => $page]);
         return json($list);
 

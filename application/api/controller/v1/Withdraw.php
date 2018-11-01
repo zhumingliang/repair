@@ -335,7 +335,7 @@ class Withdraw extends BaseController
     /**
      * 166-管理员-商户提现操作
      */
-    public function applyHandelForMini()
+    public function applyHandelForShop()
     {
 
     }
@@ -370,6 +370,12 @@ class Withdraw extends BaseController
                 'errorCode' => 200010
             ]);
         }
+
+    }
+
+
+    public function getWithdrawsWithShop()
+    {
 
     }
 }
