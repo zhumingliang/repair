@@ -177,6 +177,8 @@ Route::get('api/:version/withdraws', 'api/:version.Withdraw/getWithdrawList');
 Route::get('api/:version/withdraws/join', 'api/:version.Withdraw/getWithdrawsWithJoin');
 Route::get('api/:version/payments', 'api/:version.Withdraw/getPayments');
 Route::get('api/:version/withdraw/balance/join', 'api/:version.Withdraw/getBalanceList');
+Route::post('api/:version/withdraw/apply/handel/join', 'api/:version.Withdraw/applyHandelForJoin');
+Route::post('api/:version/withdraw/apply/apply/shop', 'api/:version.Withdraw/applyHandelForMini');
 
 Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');

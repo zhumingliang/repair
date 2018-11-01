@@ -20,6 +20,7 @@ use app\api\validate\WithdrawValidate;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\SuccessMessage;
 use app\api\service\Token as TokenService;
+use app\lib\exception\WithdrawException;
 
 class Withdraw extends BaseController
 {
@@ -314,14 +315,16 @@ class Withdraw extends BaseController
      *
      * @param $page
      * @param $size
+     * @param $state
      * @return \think\response\Json
      * @throws \think\exception\DbException
      */
-    public function getWithdrawsWithJoin($page, $size)
+    public function getWithdrawsWithJoin($page, $size, $state)
     {
-        $list = WithdrawPcT::with(['admin' => function ($query) {
-            $query->field('id,phone');
-        }])
+        $list = WithdrawPcT::where('state', $state)
+            ->with(['admin' => function ($query) {
+                $query->field('id,phone');
+            }])
             ->where('state', CommonEnum::STATE_IS_OK)
             ->paginate($size, false, ['page' => $page])->toArray();
         return json($list);
@@ -338,10 +341,35 @@ class Withdraw extends BaseController
     }
 
     /**
-     * 167-管理员-加盟商管理-提现申请处理
+     * @api {POST} /api/v1/apply/handel/join    167-管理员-加盟商管理-提现申请处理（通过/删除）
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  管理员审核提现审改/删除审核
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * "state": 2,
+     * }
+     * @apiParam (请求参数说明) {int} id 提现记录id
+     * @apiParam (请求参数说明) {int} state 状态：2 | 通过；4 | 删除
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $id
+     * @param $state
+     * @throws WithdrawException
      */
-    public function applyHandelForJoin()
+    public function applyHandelForJoin($id, $state)
     {
+        $res = WithdrawPcT::update(['state' => $state], ['id' => $id]);
+        if (!$res) {
+            throw new WithdrawException(['code' => 401,
+                'msg' => '提现申请操作状态失败',
+                'errorCode' => 200010
+            ]);
+        }
 
     }
 }
