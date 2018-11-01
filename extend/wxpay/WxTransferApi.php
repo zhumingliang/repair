@@ -25,19 +25,16 @@ class WxTransferApi extends ApiCommon
         $url = "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers";
 
         $transfer->setCheckName("NO_CHECK");
-        //$transfer->setAppid(WxPayConfig::$APPID);
         $transfer->setMchId(WxPayConfig::$MCHID);
         $transfer->setMchAppId(WxPayConfig::$APPID);
-        //$transfer->setSpbillCreateIp($_SERVER['REMOTE_ADDR']);
         $transfer->setSpbillCreateIp('192.168.0.1');
         $transfer->setNonceStr(ApiCommon::getNonceStr());
         $transfer->setSign();
         $xml = $transfer->toXml();
 
         $response = ApiCommon::postXmlCurl($xml, $url, true, $timeOut);
-        var_dump($response);
-        //$result = WxPayResults::Init($response);
-        //return $result;
+        $result = WxPayResults::Init($response);
+        return $result;
 
 
     }

@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\WithdrawMiniT;
 use app\api\model\WithdrawMiniV;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\PayException;
@@ -39,7 +40,20 @@ class TransferService
 
         $transfer = $this->makeWxPreOrder();
         $result = WxTransferApi::unifiedOrder($transfer);
-        print_r($result);
+        if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
+            //更新状态
+            WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
+
+        }else{
+
+            throw new PayException(
+              [
+                  'code' => 401,
+                  'msg' => '该提现申请处理失败，请稍后再试。',
+                  'errorCode' => 150011
+              ]
+            );
+        }
     }
 
     /**
@@ -62,8 +76,7 @@ class TransferService
 
         }
         $payTransfer = new WxPayTransfer();
-        // $payTransfer->setAccount($order->money);
-        $payTransfer->setAccount(100);
+        $payTransfer->setAmount($order->money);
         $payTransfer->setDesc("商户提现");
         $payTransfer->setOpenid($order->openid);
         $payTransfer->setPartnerTradeNo($order->order_number);

@@ -228,12 +228,30 @@ class WithDrawService
 
     }
 
-    public  static  function HandelForShop($id, $state)
+    /**
+     * @param $id
+     * @param $state
+     * @throws WithdrawException
+     * @throws \app\lib\exception\PayException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * @throws \wxpay\WxPayException
+     */
+    public static function HandelForShop($id, $state)
     {
         if ($state == CommonEnum::DELETE) {
             $res = WithdrawPcT::update(['state' => $state], ['id' => $id]);
+            if (!$res) {
+                throw  new WithdrawException(
+                    ['code' => 401,
+                        'msg' => '删除失败',
+                        'errorCode' => 200008
+                    ]
+                );
+            }
         } else {
-            $res = (new TransferService($id))->transferToUser();
+            (new TransferService($id))->transferToUser();
         }
 
 

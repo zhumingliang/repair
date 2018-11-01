@@ -206,7 +206,7 @@ class Guid extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/guid/initHandel  113-CMS设置小程序初始化时，引导图显示方式
+     * @api {POST} /api/v1/guid/init/handel  113-CMS设置小程序初始化时，引导图显示方式
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员删除引导图

@@ -54,7 +54,7 @@ class WxPayTransfer extends WxPayDataBase
      *设置转账金额
      * @param int $value
      **/
-    public function setAccount($value)
+    public function setAmount($value)
     {
         $this->values['amount'] = $value;
     }
