@@ -56,7 +56,7 @@ class WxPayTransfer extends WxPayDataBase
      **/
     public function setAccount($value)
     {
-        $this->values['account'] = $value;
+        $this->values['amount'] = $value;
     }
 
     /**
