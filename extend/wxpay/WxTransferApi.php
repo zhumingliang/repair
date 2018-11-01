@@ -27,7 +27,8 @@ class WxTransferApi extends ApiCommon
         $transfer->setCheckName("NO_CHECK");
         $transfer->setAppid(WxPayConfig::$APPID);
         $transfer->setMchId(WxPayConfig::$MCHID);
-        $transfer->setSpbillCreateIp($_SERVER['REMOTE_ADDR']);
+        //$transfer->setSpbillCreateIp($_SERVER['REMOTE_ADDR']);
+        $transfer->setSpbillCreateIp('192.168.0.1');
         $transfer->setNonceStr(ApiCommon::getNonceStr());
         $transfer->setSign();
         $xml = $transfer->toXml();

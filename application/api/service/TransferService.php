@@ -64,7 +64,7 @@ class TransferService
         }
         $payTransfer = new WxPayTransfer();
         // $payTransfer->setAccount($order->money);
-        $payTransfer->setAccount(1);
+        $payTransfer->setAccount(100);
         $payTransfer->setDesc("商户提现");
         $payTransfer->setOpenid($order->openid);
         $payTransfer->setPartnerTradeNo($order->order_number);
