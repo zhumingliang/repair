@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\model\BondT;
 use app\api\model\JoinBalanceV;
 use app\api\model\WithdrawMiniT;
+use app\api\model\WithdrawMiniV;
 use app\api\model\WithdrawPcT;
 use app\api\service\WithDrawService;
 use app\api\validate\PagingParameter;
@@ -27,7 +28,7 @@ class Withdraw extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/withdraw/apply  93-用户/店铺提交提现申请
+     * @api {POST}    93-用户/店铺提交提现申请
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription
@@ -294,7 +295,7 @@ class Withdraw extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription 查看操作-就用本接口返回的数据
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/withdraw/balance/join?&page=1&size=15&state=1
+     * http://mengant.cn/api/v1/shop/join?&page=1&size=15&state=1
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiParam (请求参数说明) {int} state 列别类别：1 | 待处理；2 | 已完成
@@ -325,7 +326,6 @@ class Withdraw extends BaseController
             ->with(['admin' => function ($query) {
                 $query->field('id,phone');
             }])
-            ->where('state', CommonEnum::STATE_IS_OK)
             ->paginate($size, false, ['page' => $page])->toArray();
         return json($list);
 
@@ -335,9 +335,17 @@ class Withdraw extends BaseController
     /**
      * 166-管理员-商户提现操作
      */
-    public function applyHandelForShop()
+    public function applyHandelForShop($id, $state)
     {
 
+        $res = WithdrawPcT::update(['state' => $state], ['id' => $id]);
+        WithDrawService::HandelForShop($id, $state);
+        if (!$res) {
+            throw new WithdrawException(['code' => 401,
+                'msg' => '提现申请操作状态失败',
+                'errorCode' => 200010
+            ]);
+        }
     }
 
     /**
@@ -374,8 +382,39 @@ class Withdraw extends BaseController
     }
 
 
-    public function getWithdrawsWithShop()
+    /**
+     * @api {GET} /api/v1/withdraws/shop  168-提现管理-提现列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription 查看操作-就用本接口返回的数据
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/withdraws/shop?&page=1&size=15&state=1
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {int} state 类别类别：1 | 待处理；2 | 已完成
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":"10","current_page":1,"last_page":1,"data":[{"id":36,"admin_id":2,"money":500,"state":1,"create_time":"2018-10-31 22:58:56","update_time":"2018-10-31 22:58:56","card_num":"62282832323232323","bank":"农业银行","username":"朱明良","phone":"13111111111","admin":{"id":2,"phone":"13711111111"}}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 提现申请id
+     * @apiSuccess (返回参数说明) {int} u_id 用户id
+     * @apiSuccess (返回参数说明) {string} nickName 昵称
+     * @apiSuccess (返回参数说明) {String} money 提现金额
+     * @apiSuccess (返回参数说明) {int} type  提现类别：1 | 保证金；2 | 服务费
+     * @apiSuccess (返回参数说明) {String} create_time 申请时间
+     * @apiSuccess (返回参数说明) {String} state 状态：1 | 等待处理；2 | 已完成
+     * @param $page
+     * @param $size
+     * @param $state
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     */
+    public function getWithdrawsWithShop($page, $size, $state)
     {
+        $list = WithdrawMiniV::where('state', $state)
+            ->paginate($size, false, ['page' => $page])->toArray();
+        return json($list);
 
     }
 }

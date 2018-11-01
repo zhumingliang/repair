@@ -25,7 +25,7 @@ class BannerValidate extends BaseValidate
 
     protected $scene = [
         'save' => ['title', 'des', 'category', 'category'],
-        'handel' => ['id', 'state'],
+        'handel' => ['id'],
         'update' => ['id'],
         'list_mini' => ['type'],
         'list_mini_join' => ['province', 'city', 'area'],

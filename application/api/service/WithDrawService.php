@@ -75,8 +75,7 @@ class WithDrawService
             'type' => $type,
             'pay_id' => CommonEnum::ORDER_STATE_INIT,
             'state' => CommonEnum::STATE_IS_OK,
-            'order_number' => makeOrderNo(),
-            'openid' => Token::getCurrentOpenid()
+            'order_number' => makeOrderNo()
         ]);
         if (!$res) {
             throw  new WithdrawException();
@@ -226,6 +225,12 @@ class WithDrawService
             ->whereRaw($sql)
             ->sum('money');
         return $balance;
+
+    }
+
+    public function HandelForShop($id,$state)
+    {
+
 
     }
 
