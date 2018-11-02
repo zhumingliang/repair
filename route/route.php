@@ -99,7 +99,7 @@ Route::post('api/:version/category/handel', 'api/:version.Category/handel');
 Route::post('api/:version/category/update', 'api/:version.Category/update');
 Route::get('api/:version/category/mini/list', 'api/:version.Category/getListForMini');
 Route::get('api/:version/category/cms/list', 'api/:version.Category/getListForCms');
-Route::get('api/:version/category', 'api/:version.Banner/getTheCategory');
+Route::get('api/:version/category', 'api/:version.Category/getTheCategory');
 
 Route::get('api/:version/extend/cms/list', 'api/:version.ServicesExtend/getListForCMS');
 Route::get('api/:version/extend/handel', 'api/:version.ServicesExtend/handel');
@@ -228,3 +228,6 @@ Route::post('api/:version/join/rule/update', 'api/:version.Admin/updateRule');
 Route::post('api/:version/village/confirm', 'api/:version.Village/villageConfirm');
 Route::get('api/:version/village/list', 'api/:version.Village/getList');
 Route::get('api/:version/village/export', 'api/:version.Village/exportVillageRecord');
+
+
+Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');

@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\AuthGroup;
+use app\api\model\AuthRule;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\AuthException;
 use app\lib\exception\SuccessMessage;
@@ -82,8 +83,26 @@ class Auth extends BaseController
 
     }
 
-    public function authRule()
+    public function authRules()
     {
+        //$list=
+        $a = [
+            '商家服务',
+            '商家管理',
+            '商家服务列表'
+        ];
+        $list[] = array();
+        foreach ($a as $k => $v) {
+            $list[] = [
+                'title' => $v,
+                'name' => $v,
+                'state' => 1,
+                'parent_id' => 1
+            ];
+        }
+        $au=new AuthRule();
+        $au->saveAll($list);
+
 
     }
 

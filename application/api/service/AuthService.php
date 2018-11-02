@@ -53,6 +53,10 @@ class AuthService
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;*/
 
 
+    public function authRules()
+    {
+
+    }
 
 
 }
