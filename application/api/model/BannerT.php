@@ -12,8 +12,8 @@ namespace app\api\model;
 
 class BannerT extends BaseModel
 {
-    public function getUrlAttr($value, $data){
+   /* public function getUrlAttr($value, $data){
         return $this->prefixImgUrl($value, $data);
-    }
+    }*/
 
 }

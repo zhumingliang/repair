@@ -80,7 +80,7 @@ class AdminToken extends Token
             $token = $this->saveToCache('', $cachedValue);
             AdminT::where('id', $admin->id)
                 ->inc('login_count', 1)->update();
-            $token['rules']=$this->getRules($admin);
+            $token['rules'] = $this->getRules($admin);
             return $token;
 
         } catch (Exception $e) {
@@ -92,7 +92,7 @@ class AdminToken extends Token
     private function getRules($admin)
     {
         if ($admin->parent_id = 0) {
-            return (new AuthService())->authRules();
+            return array();
         } else {
             $group = AuthGroupAccess::where('uid', $admin->id)->where('status', 1)
                 ->find();
