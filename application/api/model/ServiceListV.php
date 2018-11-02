@@ -11,10 +11,10 @@ namespace app\api\model;
 
 class ServiceListV extends BaseModel
 {
-     public function getCoverAttr($value, $data)
-     {
-         return $this->prefixImgUrl($value, $data);
-     }
+//     public function getCoverAttr($value, $data)
+//     {
+//         return $this->prefixImgUrl($value, $data);
+//     }
 
 
     public static function getList($area, $page, $size, $c_id, $type)

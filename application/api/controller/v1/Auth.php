@@ -287,16 +287,14 @@ class Auth extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * @param $phone
-     * @param $pwd
-     * @param string $email
      * @return \think\response\Json
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
-    public function addAdmin($phone, $pwd, $email = '')
+    public function addAdmin()
     {
         $params = $this->request->param();
+        $params['username'] = $params['phone'];
         $params['pwd'] = sha1($params['pwd']);
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['grade'] = UserEnum::USER_GRADE_ADMIN;

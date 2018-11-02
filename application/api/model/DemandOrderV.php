@@ -113,6 +113,7 @@ class DemandOrderV extends Model
     /**
      * 待确认
      * 用户已支付-未超出待确认时间设置
+     * 协商中-协商未超时
      * @param $u_id
      * @param $page
      * @param $size
@@ -122,16 +123,23 @@ class DemandOrderV extends Model
     {
         $orderTime = SystemTimeT::getSystemOrderTime();
         $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
         $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
             time()));
-        //$user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+
 
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
-            ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
-            // ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            ->whereTime('order_time', '>', $user_confirm_limit)
+            ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
@@ -231,17 +239,23 @@ class DemandOrderV extends Model
     {
         $orderTime = SystemTimeT::getSystemOrderTime();
         $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
         $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
             time()));
-       // $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
 
+
+        $sql = '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
 
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->where('pay_id', '<>', CommonEnum::ORDER_STATE_INIT)
-            ->where('confirm_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
-            ->whereTime('order_time', '>', $user_confirm_limit)
+            ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
