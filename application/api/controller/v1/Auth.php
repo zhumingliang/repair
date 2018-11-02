@@ -27,23 +27,25 @@ class Auth extends BaseController
      * @apiExample {post}  请求样例:
      * {
      * "title": "业务组",
-     * "des": "业务组的操作权限"
+     * "description": "业务组的操作权限"
      * }
      * @apiParam (请求参数说明) {String} title 分组名称
-     * @apiParam (请求参数说明) {String} des  描述名称
+     * @apiParam (请求参数说明) {String} description  描述名称
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     *
+     * @param $title
+     * @param $description
      * @return \think\response\Json
      * @throws AuthException
      */
-    public function addGroup()
+    public function addGroup($title, $description)
     {
-        $params=$this->request->param();
-        $params['state'] = CommonEnum::STATE_IS_OK;
-        $res = AuthGroup::create($params);
+        $res = AuthGroup::create([
+            'title' => $title,
+            'description' => $description
+        ]);
         if (!$res->id) {
             throw  new AuthException();
         }
@@ -65,13 +67,13 @@ class Auth extends BaseController
     /**
      * 174-权限管理-分组状态操作
      * @param $id
-     * @param $state
+     * @param $status
      * @return \think\response\Json
      * @throws AuthException
      */
-    public function groupHandel($id, $state)
+    public function groupHandel($id, $status)
     {
-        $res = AuthGroup::update(['state' => $state], ['id' => $id]);
+        $res = AuthGroup::update(['status' => $status], ['id' => $id]);
         if (!$res) {
             throw  new AuthException([
                 'code' => 401,
@@ -83,6 +85,10 @@ class Auth extends BaseController
 
     }
 
+    /**
+     * 175-权限管理-访问授权
+     * @return \think\response\Json
+     */
     public function authRules()
     {
         /*  //$list=
@@ -172,8 +178,23 @@ class Auth extends BaseController
 
     }
 
-    public function userRuleSave()
+    /**
+     * @param $id
+     * @param $rules
+     * @return \think\response\Json
+     * @throws AuthException
+     */
+    public function groupRuleSave($id, $rules)
     {
+        $res = AuthGroup::update(['rules' => $rules], ['id' => $id]);
+        if (!$res) {
+            throw  new AuthException([
+                'code' => 401,
+                'msg' => '分组授权失败',
+                'errorCode' => 250004
+            ]);
+        }
+        return json(new SuccessMessage());
 
     }
 

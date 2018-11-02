@@ -210,6 +210,7 @@ Route::post('api/:version/system/join/handel', 'api/:version.JoinCommission/hand
 Route::get('api/:version/system/join/list', 'api/:version.JoinCommission/getList');
 Route::get('api/:version/system/shop/grade', 'api/:version.System/shopGrade');
 Route::post('api/:version/system/shop/grade/update', 'api/:version.System/updateShopGrade');
+Route::post('api/:version/system/shop/grade/save', 'api/:version.System/saveShopGrade');
 
 
 Route::get('api/:version/report/export/city', 'api/:version.OrderReport/exportWithCity');
@@ -233,4 +234,6 @@ Route::get('api/:version/village/export', 'api/:version.Village/exportVillageRec
 
 
 Route::post('api/:version/auth/group/save', 'api/:version.Auth/addGroup');
+Route::post('api/:version/auth/group/rule/save', 'api/:version.Auth/groupRuleSave');
+Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');
 Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');
