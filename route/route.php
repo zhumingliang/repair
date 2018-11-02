@@ -230,6 +230,7 @@ Route::get('api/:version/admin/joins', 'api/:version.Admin/getJoinList');
 Route::post('api/:version/admin/username/update', 'api/:version.Admin/updateUserName');
 Route::post('api/:version/admin/pwd/update', 'api/:version.Admin/updatePwd');
 Route::post('api/:version/join/rule/update', 'api/:version.Admin/updateRule');
+Route::post('api/:version/admin/save', 'api/:version.Admin/addAdmin');
 
 Route::post('api/:version/village/confirm', 'api/:version.Village/villageConfirm');
 Route::get('api/:version/village/list', 'api/:version.Village/getList');
@@ -237,6 +238,11 @@ Route::get('api/:version/village/export', 'api/:version.Village/exportVillageRec
 
 
 Route::post('api/:version/auth/group/save', 'api/:version.Auth/addGroup');
+Route::get('api/:version/auth/groups', 'api/:version.Auth/groups');
+Route::get('api/:version/auth/group/handel', 'api/:version.Auth/groupHandel');
+Route::get('api/:version/group/user/handel', 'api/:version.Auth/deleteUserGroup');
 Route::post('api/:version/auth/group/rule/save', 'api/:version.Auth/groupRuleSave');
 Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');
 Route::get('api/:version/auth/group/rules', 'api/:version.Auth/groupRules');
+Route::get('api/:version/auth/group/users', 'api/:version.Auth/groupUsers');
+Route::post('api/:version/auth/group/user/save', 'api/:version.Auth/userGroup');

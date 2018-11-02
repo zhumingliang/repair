@@ -10,6 +10,8 @@ namespace app\api\service;
 
 
 use app\api\model\AdminT;
+use app\api\model\AuthGroup;
+use app\api\model\AuthGroupAccess;
 use app\api\model\BehaviorLogT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
@@ -76,12 +78,33 @@ class AdminToken extends Token
              * 缓存数据
              */
             $token = $this->saveToCache('', $cachedValue);
+            AdminT::where('id', $admin->id)
+                ->inc('login_count', 1)->update();
+            $token['rules']=$this->getRules($admin);
             return $token;
 
         } catch (Exception $e) {
             throw $e;
         }
 
+    }
+
+    private function getRules($admin)
+    {
+        if ($admin->parent_id = 0) {
+            return (new AuthService())->authRules();
+        } else {
+            $group = AuthGroupAccess::where('uid', $admin->id)->where('status', 1)
+                ->find();
+            if (count($group)) {
+                $g_id = $group['group_id'];
+                return (new AuthService())->getGroupRules($g_id);
+
+
+            }
+
+            return array();
+        }
     }
 
     /**

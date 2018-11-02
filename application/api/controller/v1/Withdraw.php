@@ -333,7 +333,7 @@ class Withdraw extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/apply/handel/shop   166-管理员-商户提现操作（通过/删除）
+     * @api {POST} /api/v1/withdraws/apply/handel/shop   166-管理员-商户提现操作（通过/删除）
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员审核提现审改/删除审核
@@ -368,7 +368,7 @@ class Withdraw extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/apply/handel/join    167-管理员-加盟商管理-提现申请处理（通过/删除）
+     * @api {POST} /api/v1/withdraws/apply/handel/join    167-管理员-加盟商管理-提现申请处理（通过/删除）
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员审核提现审改/删除审核

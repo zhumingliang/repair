@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 use app\api\model\ImgT;
 use app\api\model\UserT;
+use app\api\model\UserV;
 use app\api\service\ImageService;
 use app\api\validate\UserInfo;
 
@@ -140,6 +141,7 @@ class User extends BaseController
      * @apiSuccess (返回参数说明) {String} nickName  昵称
      * @apiSuccess (返回参数说明) {int} login_count 登录次数
      * @apiSuccess (返回参数说明) {String} update_time 最后登录时间
+     * @apiSuccess (返回参数说明) {int} type 用户类别 ：1 | 平台用户；2 | 小程序用户
      * @param int $page
      * @param int $size
      * @param string $key
@@ -149,7 +151,7 @@ class User extends BaseController
     public function getUsers($page = 1, $size = 20, $key = '')
     {
 
-        $list = UserT::field('id,openid,nickName,login_count,update_time')
+        $list = UserV::field('id,openid,nickName,login_count,update_time')
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('id|nickName', 'like', '%' . $key . '%');
