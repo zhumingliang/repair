@@ -310,6 +310,7 @@ class Circle extends BaseController
                 'errorCode' => 160005
             ]);
         }
+        return json(new SuccessMessage());
 
     }
 

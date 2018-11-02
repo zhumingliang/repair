@@ -174,6 +174,7 @@ class System extends BaseController
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      * @param $id
      * @param $count
+     * @return Json
      * @throws SystemException
      */
     public function updateDemand($id, $count)
@@ -188,6 +189,8 @@ class System extends BaseController
                 ]
             );
         }
+
+        return json(new SuccessMessage());
 
     }
 

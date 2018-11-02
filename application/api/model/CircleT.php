@@ -84,14 +84,14 @@ class CircleT extends BaseModel
      */
     public static function getCircle($id)
     {
-        $circle = self::with(['category' => function ($query) {
-            $query->field('id,name');
-        }, 'source' => function ($query) {
-            $query->field('id,grade');
-        }])
-            ->where('id', $id)
+        $circle = self::where('id', $id)
+            ->with(['category' => function ($query) {
+                $query->field('id,name');
+            }, 'source' => function ($query) {
+                $query->field('id,grade');
+            }])
             ->hidden(['c_id', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
-            ->find()->toArray();
+            ->find();
 
         return $circle;
     }

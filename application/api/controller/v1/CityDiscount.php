@@ -65,7 +65,7 @@ class CityDiscount extends BaseController
 
 
         $id = CityDiscountT::create($params);
-        if ($id) {
+        if (!$id) {
             throw  new SystemException();
         }
         return json(new SuccessMessage());
@@ -99,6 +99,7 @@ class CityDiscount extends BaseController
                 'errorCode' => 140002
             ]);
         }
+        return json(new SuccessMessage());
 
     }
 

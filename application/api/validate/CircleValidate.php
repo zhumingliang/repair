@@ -34,7 +34,7 @@ class CircleValidate extends BaseValidate
     protected $scene = [
         'category_save' => ['province', 'city', 'area', 'name'],
         'circle_list_mini' => ['province', 'city', 'area', 'page', 'size', 'c_id'],
-        'handel' => ['id', 'state'],
+        'handel' => ['id'],
         'top_handel' => ['id', 'top'],
         'id' => ['id'],
         'set' => ['id', 'state'],
