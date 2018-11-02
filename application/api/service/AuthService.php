@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\AuthGroup;
+use app\api\model\AuthRule;
 
 class AuthService
 {
@@ -55,6 +56,41 @@ class AuthService
 
     public function authRules()
     {
+        $rules = AuthRule::where('status', 1)
+            ->where('parent_id', 0)
+            ->field('id,name,condition')
+            ->select()->toArray();
+        if (count($rules))
+            foreach ($rules as $k => $v) {
+
+                $rules [$k]['child'] = $this->getChildren($v['id']);
+
+            }
+
+        return $rules;
+
+
+    }
+
+    private function getChildren($id)
+    {
+        $rules = AuthRule::where('status', 1)->where('parent_id', $id)
+            ->field('id,name,condition,parent_id')
+            ->select()->toArray();
+
+        if (count($rules)) {
+            foreach ($rules as $k => $v) {
+
+                $rules[$k]['child'] = AuthRule::where('status', 1)
+                    ->where('parent_id', $v['id'])
+                    ->field('id,name,condition,parent_id')
+                    ->select()->toArray();
+
+            }
+
+        }
+
+        return $rules;
 
     }
 

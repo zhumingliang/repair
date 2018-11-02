@@ -675,11 +675,11 @@ class System extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/system/phone  136-系统设置-获取店铺等级设置
+     * @api {GET} /api/v1/system/shop/grade  136-系统设置-获取店铺等级设置
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  获取店铺等级设置（返回数据为空时，点击确认按钮为新增操作/不为空则为修改操作）
-     * http://mengant.cn/api/v1/tip
+     * http://mengant.cn/system/shop/grade
      * @apiSuccessExample {json} 返回样例:
      *    [
      * {
