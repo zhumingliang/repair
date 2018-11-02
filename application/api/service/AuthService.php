@@ -53,6 +53,7 @@ class AuthService
     KEY `group_id` (`group_id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;*/
 
+    private $rules = '';
 
     public function authRules()
     {
@@ -74,13 +75,17 @@ class AuthService
 
     private function getChildren($id)
     {
+        //二级
         $rules = AuthRule::where('status', 1)->where('parent_id', $id)
             ->field('id,name,condition,parent_id')
             ->select()->toArray();
 
         if (count($rules)) {
             foreach ($rules as $k => $v) {
+                //三级
+                if (!$rules) {
 
+                }
                 $rules[$k]['child'] = AuthRule::where('status', 1)
                     ->where('parent_id', $v['id'])
                     ->field('id,name,condition,parent_id')
@@ -92,6 +97,27 @@ class AuthService
 
         return $rules;
 
+    }
+
+
+    public function getGroupRules($id)
+    {
+        //获取用户组权限
+        $group = AuthGroup::where('id', $id)->field('rules')->find();
+        $rules = $group->rules;
+        $this->rules = $rules;
+        $rules = AuthRule::where('status', 1)
+            ->where('parent_id', 0)
+            ->field('id,name,condition')
+            ->select()->toArray();
+        if (count($rules))
+            foreach ($rules as $k => $v) {
+
+                $rules [$k]['child'] = $this->getChildren($v['id']);
+
+            }
+
+        return $rules;
     }
 
 

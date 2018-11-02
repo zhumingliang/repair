@@ -85,8 +85,30 @@ class Auth extends BaseController
 
     }
 
+
     /**
      * 175-权限管理-访问授权
+     * @param $id
+     * @param $rules
+     * @return \think\response\Json
+     * @throws AuthException
+     */
+    public function groupRuleSave($id, $rules)
+    {
+        $res = AuthGroup::update(['rules' => $rules], ['id' => $id]);
+        if (!$res) {
+            throw  new AuthException([
+                'code' => 401,
+                'msg' => '分组授权失败',
+                'errorCode' => 250004
+            ]);
+        }
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     *176-权限管理-整体权限
      * @return \think\response\Json
      */
     public function authRules()
@@ -178,23 +200,10 @@ class Auth extends BaseController
 
     }
 
-    /**
-     * @param $id
-     * @param $rules
-     * @return \think\response\Json
-     * @throws AuthException
-     */
-    public function groupRuleSave($id, $rules)
+    public function groupRules($id)
     {
-        $res = AuthGroup::update(['rules' => $rules], ['id' => $id]);
-        if (!$res) {
-            throw  new AuthException([
-                'code' => 401,
-                'msg' => '分组授权失败',
-                'errorCode' => 250004
-            ]);
-        }
-        return json(new SuccessMessage());
+        $rules = (new AuthService())->getGroupRules($id);
+        return json($rules);
 
     }
 

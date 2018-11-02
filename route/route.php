@@ -187,6 +187,7 @@ Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 
 Route::get('api/:version/units/mini', 'api/:version.Unit/getUnitsForMini');
+Route::get('api/:version/units/list/cms', 'api/:version.Unit/getUnitsForCMS');
 
 Route::post('api/:version/system/file/save', 'api/:version.System/saveFile');
 Route::post('api/:version/system/file/update', 'api/:version.System/updateFile');
