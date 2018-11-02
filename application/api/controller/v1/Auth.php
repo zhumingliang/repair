@@ -10,11 +10,14 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\AdminT;
 use app\api\model\AuthGroup;
 use app\api\model\AuthGroupAccess;
 use app\api\model\AuthRule;
 use app\api\service\AuthService;
 use app\lib\enum\CommonEnum;
+use app\lib\enum\UserEnum;
+use app\lib\exception\AdminException;
 use app\lib\exception\AuthException;
 use app\lib\exception\SuccessMessage;
 
@@ -284,10 +287,10 @@ class Auth extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * 新增小区账户
+     * @param $phone
+     * @param $pwd
+     * @param string $email
      * @return \think\response\Json
-     * @throws AdminException
-     * @throws \app\lib\exception\ParameterException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
@@ -296,7 +299,7 @@ class Auth extends BaseController
         $params = $this->request->param();
         $params['pwd'] = sha1($params['pwd']);
         $params['state'] = CommonEnum::STATE_IS_OK;
-        $params['grade'] = UserEnum::USER_MINI_VILLAGE;
+        $params['grade'] = UserEnum::USER_GRADE_ADMIN;
         $params['parent_id'] = \app\api\service\Token::getCurrentUid();
         $admin = AdminT::create($params);
         if (!$admin) {

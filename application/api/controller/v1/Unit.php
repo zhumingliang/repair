@@ -65,7 +65,7 @@ class Unit extends BaseController
             'state' => CommonEnum::STATE_IS_OK
         ];
         $id = SystemUnitT::create($params);
-        if ($id) {
+        if (!$id) {
             throw  new SystemException();
         }
         return json(new SuccessMessage());
@@ -135,7 +135,7 @@ class Unit extends BaseController
      * @return \think\response\Json
      * @throws \think\exception\DbException
      */
-    public function getUnitsForCMS($page=1,$size=20)
+    public function getUnitsForCMS($page = 1, $size = 20)
     {
         $list = SystemUnitT::where('state', '=', CommonEnum::STATE_IS_OK)
             ->hidden(['state,create_time,update_time'])
