@@ -83,13 +83,20 @@ class AuthService
         if (count($rules)) {
             foreach ($rules as $k => $v) {
                 //三级
-                if (!$rules) {
+                if (!$this->rules) {
+                    $rules[$k]['child'] = AuthRule::where('status', 1)
+                        ->where('parent_id', $v['id'])
+                        ->field('id,name,condition,parent_id')
+                        ->select()->toArray();
 
+                } else {
+                    $rules[$k]['child'] = AuthRule::where('status', 1)
+                        ->where('parent_id', $v['id'])
+                        ->where('id','in',$this->rules)
+                        ->field('id,name,condition,parent_id')
+                        ->select()->toArray();
                 }
-                $rules[$k]['child'] = AuthRule::where('status', 1)
-                    ->where('parent_id', $v['id'])
-                    ->field('id,name,condition,parent_id')
-                    ->select()->toArray();
+
 
             }
 

@@ -188,6 +188,8 @@ Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
 
 Route::get('api/:version/units/mini', 'api/:version.Unit/getUnitsForMini');
 Route::get('api/:version/units/list/cms', 'api/:version.Unit/getUnitsForCMS');
+Route::post('api/:version/units/save', 'api/:version.Unit/save');
+Route::post('api/:version/units/handel', 'api/:version.Unit/handel');
 
 Route::post('api/:version/system/file/save', 'api/:version.System/saveFile');
 Route::post('api/:version/system/file/update', 'api/:version.System/updateFile');
@@ -237,4 +239,4 @@ Route::get('api/:version/village/export', 'api/:version.Village/exportVillageRec
 Route::post('api/:version/auth/group/save', 'api/:version.Auth/addGroup');
 Route::post('api/:version/auth/group/rule/save', 'api/:version.Auth/groupRuleSave');
 Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');
-Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');
+Route::get('api/:version/auth/group/rules', 'api/:version.Auth/groupRules');

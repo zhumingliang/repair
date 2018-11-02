@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\AuthGroup;
+use app\api\model\AuthGroupAccess;
 use app\api\model\AuthRule;
 use app\api\service\AuthService;
 use app\lib\enum\CommonEnum;
@@ -200,10 +201,109 @@ class Auth extends BaseController
 
     }
 
+    /**
+     * 177-权限管理-获取分组权限
+     * @param $id
+     * @return \think\response\Json
+     */
     public function groupRules($id)
     {
         $rules = (new AuthService())->getGroupRules($id);
         return json($rules);
+
+    }
+
+    /**
+     * 178-权限管理-成员授权-新增
+     * @param $u_id
+     * @param $group_id
+     * @return \think\response\Json
+     * @throws AuthException
+     */
+    public function userGroup($u_id, $group_id)
+    {
+        $u_id_arr = implode(',', $u_id);
+        $list[] = array();
+        foreach ($u_id_arr as $k => $v) {
+
+            $list[] = [
+                'u_id' => $v,
+                'group_id' => $group_id,
+                'status' => CommonEnum::STATE_IS_OK
+            ];
+        }
+
+        $access = new AuthGroupAccess();
+        $res = $access->saveAll($list);
+        if (!$res) {
+            throw  new AuthException([
+                'code' => 401,
+                'msg' => '成员授权失败',
+                'errorCode' => 250008
+            ]);
+        }
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * 179-权限管理-成员授权解除
+     * @param $id
+     * @return \think\response\Json
+     * @throws AuthException
+     */
+    public function deleteUserGroup($id)
+    {
+        $res = AuthGroupAccess::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$res) {
+            throw  new AuthException([
+                'code' => 401,
+                'msg' => '解除授权失败',
+                'errorCode' => 250008
+            ]);
+        }
+        return json(new SuccessMessage());
+    }
+
+
+    /**
+     * @api {POST} /api/v1/admin/village/save  180-权限管理-新增用户
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  管理员/加盟商-新增小区账号
+     * @apiExample {post}  请求样例:
+     * {
+     * "phone": "1311111111",
+     * "pwd": "a111111",
+     * "email": "a111111",
+     * }
+     * @apiParam (请求参数说明) {String} phone 用户名
+     * @apiParam (请求参数说明) {String} pwd 密码
+     * @apiParam (请求参数说明) {String} email 邮箱
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * 新增小区账户
+     * @return \think\response\Json
+     * @throws AdminException
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function addAdmin($phone, $pwd, $email = '')
+    {
+        $params = $this->request->param();
+        $params['pwd'] = sha1($params['pwd']);
+        $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['grade'] = UserEnum::USER_MINI_VILLAGE;
+        $params['parent_id'] = \app\api\service\Token::getCurrentUid();
+        $admin = AdminT::create($params);
+        if (!$admin) {
+            throw new AdminException();
+
+        }
+        return json(new SuccessMessage());
 
     }
 
