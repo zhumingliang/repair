@@ -390,13 +390,13 @@ class ServicesExtend extends BaseController
 
 
     /**
-     * @api {GET} /api/v1/index/services/list 185-首页服务设置-获取首页服务列表（维修/家政）
+     * @api {GET} /api/v1/index/service/list 185-首页服务设置-获取首页服务列表（维修/家政）
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  CMS获取推广商品列表（管理员/加盟商）
      *
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/index/services/list?page=1&size=20&type=1
+     * http://mengant.cn/api/v1/index/service/list?page=1&size=20&type=1
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiParam (请求参数说明) {int} type 服务类别：1 | 维修；2 | 家政

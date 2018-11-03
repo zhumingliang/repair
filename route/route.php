@@ -112,7 +112,7 @@ Route::get('api/:version/services', 'api/:version.ServicesExtend/getServiceForCM
 Route::get('api/:version/index/services/all', 'api/:version.ServicesExtend/getServicesForIndex');
 Route::post('api/:version/index/service/save', 'api/:version.ServicesExtend/indexServiceSave');
 Route::post('api/:version/index/service/handel', 'api/:version.ServicesExtend/indexHandel');
-Route::post('api/:version/index/service/list', 'api/:version.ServicesExtend/getIndexListForCMS');
+Route::get('api/:version/index/service/list', 'api/:version.ServicesExtend/getIndexListForCMS');
 
 
 
