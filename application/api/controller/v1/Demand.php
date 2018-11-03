@@ -74,6 +74,7 @@ class Demand extends BaseController
         $params = $this->request->param();
         $params['u_id'] = $u_id;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['money'] = $params['money'] * 100;
         $params['origin_money'] = $params['money'];
         DemandService::save($params);
         return json(new  SuccessMessage());

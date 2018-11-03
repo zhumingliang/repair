@@ -158,6 +158,7 @@ class Shop extends BaseController
         $params = $this->request->param();
         $shop_id = TokenService::getCurrentTokenVar('shop_id');
         $params['shop_id'] = $shop_id;
+        $params['price'] = $params['price'] * 100;
         ShopService::addService($params);
         return json(new SuccessMessage());
 
@@ -366,7 +367,7 @@ class Shop extends BaseController
      */
     public function examineStaff($id)
     {
-       // (new ShopValidate())->scene('staff')->goCheck();
+        // (new ShopValidate())->scene('staff')->goCheck();
         //$params = $this->request->param();
         ShopService::examineStaff($id);
         return json(new SuccessMessage());

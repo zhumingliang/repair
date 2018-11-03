@@ -387,7 +387,7 @@ class Pay
                  ]);*/
         }
 
-        return $red->money;
+        return ($red->money) * 100;
 
     }
 

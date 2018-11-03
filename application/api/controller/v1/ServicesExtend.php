@@ -10,13 +10,19 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\IndexCmsV;
+use app\api\model\IndexServiceT;
+use app\api\model\IndexServiceV;
 use app\api\model\ServicesT;
+use app\api\model\ServiceV;
 use app\api\model\ShopServiceV;
 use app\api\service\ExtendService;
 use app\api\validate\ExtendValidate;
 use app\api\validate\PagingParameter;
 use app\lib\enum\CommonEnum;
+use app\lib\exception\ExtendException;
 use app\lib\exception\SuccessMessage;
+use app\api\service\Token as TokenService;
 
 class ServicesExtend extends BaseController
 {
@@ -231,7 +237,7 @@ class ServicesExtend extends BaseController
      * @api {GET} /api/v1/services 149-管理员-商家服务列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  管理员-商家服务列表s
+     * @apiDescription  管理员-商家服务列表
      *
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/services?page=1&size=20&key=""
@@ -259,6 +265,171 @@ class ServicesExtend extends BaseController
     public function getServiceForCMS($page = 1, $size = 20, $key = '')
     {
         $list = ShopServiceV::services($page, $size, $key);
+        return json($list);
+
+
+    }
+
+    /**
+     * @api {GET} /api/v1/index/services/all   182-首页服务设置-获取所有服务
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * http://mengant.cn/api/v1/index/services/all?type=1
+     * @apiParam (请求参数说明) {int} type  服务类别：1 | 维修服务；2 家政服务
+     * @apiSuccessExample {json} 返回样例:
+     * [{"id":20,"service_name":"哈哈"}]
+     * @apiSuccess (返回参数说明) {int} id 服务id
+     * @apiSuccess (返回参数说明) {String} service_name 服务名称
+     *
+     * @param $type
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getServicesForIndex($type)
+    {
+        $sql_join = preJoinSqlForGetDShops(TokenService::getCurrentTokenVar('province'), TokenService::getCurrentTokenVar('city'),
+            TokenService::getCurrentTokenVar('area'));
+        $list = ServiceV::where('state', 1)
+            ->where('type', $type)
+            ->whereRaw($sql_join)
+            ->field('s_id as id,service_name')
+            ->order('create_time desc')
+            ->select();
+        return json($list);
+
+    }
+
+
+    /**
+     * @api {POST} /api/v1/index/service/save  183-首页服务设置-新增首页服务
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "id": 1,
+     *     }
+     * @apiParam (请求参数说明) {int} id  服务id
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $id
+     * @return \think\response\Json
+     * @throws ExtendException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function indexServiceSave($id)
+    {
+        $params = [
+            's_id' => $id,
+            'state' => CommonEnum::STATE_IS_OK,
+            'province' => TokenService::getCurrentTokenVar('province'),
+            'city' => TokenService::getCurrentTokenVar('city'),
+            'area' => TokenService::getCurrentTokenVar('area'),
+        ];
+
+        $res = IndexServiceT::create($params);
+        if (!$res->id) {
+            throw new ExtendException(
+                ['code' => 401,
+                    'msg' => '新增服务展示失败',
+                    'errorCode' => 130003
+                ]
+            );
+
+        }
+
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {POST} /api/v1/index/service/handel  184-首页服务设置-删除首页服务
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "id": 1,
+     *     }
+     * @apiParam (请求参数说明) {int} id  服务列表id
+     *
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     *
+     * @param $id
+     * @return \think\response\Json
+     * @throws ExtendException
+     */
+    public function indexHandel($id)
+    {
+        $res = IndexServiceT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$res) {
+            throw new ExtendException(
+                ['code' => 401,
+                    'msg' => '首页服务展示删除失败',
+                    'errorCode' => 130003
+                ]
+            );
+        }
+
+        return json(new SuccessMessage());
+    }
+
+
+    /**
+     * @api {GET} /api/v1/index/services/list 185-首页服务设置-获取首页服务列表（维修/家政）
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  CMS获取推广商品列表（管理员/加盟商）
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/index/services/list?page=1&size=20&type=1
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {int} type 服务类别：1 | 维修；2 | 家政
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":2,"per_page":20,"current_page":1,"last_page":1,"data":[{"id":4,"shop_id":5,"state":1,"name":"修电视","cover":"static\/imgs\/20181023\/4781690b9f11d05f691f7173a443e78d.jpg","type":2,"province":"安徽省","city":"铜陵市","area":"郊区","shop_name":"维修小家","c_id":1},{"id":5,"shop_id":5,"state":1,"name":"哈哈","cover":"https:\/\/mengant.cn\/static\/imgs\/20181103\/55cc695367853af39c139972b5c598d1.jpg","type":2,"province":"安徽省","city":"铜陵市","area":"郊区","shop_name":"维修小家","c_id":5}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 首页记录id
+     * @apiSuccess (返回参数说明) {int} shop_id 商家id
+     * @apiSuccess (返回参数说明) {String} name 服务名称
+     * @apiSuccess (返回参数说明) {String} province 省
+     * @apiSuccess (返回参数说明) {String} city 市
+     * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} shop_name 店铺名称
+     * @param $page
+     * @param $size
+     * @param $type
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
+    public function getIndexListForCMS($page = 1, $size = 20, $type)
+    {
+        $sql_join = preJoinSqlForGetDShops(TokenService::getCurrentTokenVar('province'), TokenService::getCurrentTokenVar('city'),
+            TokenService::getCurrentTokenVar('area'));
+
+        $list = IndexCmsV::where('state', CommonEnum::STATE_IS_OK)
+            ->where('type', $type)
+            ->whereRaw($sql_join)
+            ->paginate($size, false, ['page' => $page]);
+
         return json($list);
 
 

@@ -54,6 +54,7 @@ class Bond extends BaseController
         $params['order_number'] = makeOrderNo();
         $params['pay_id'] = CommonEnum::ORDER_STATE_INIT;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['money'] = $params['money'] * 100;
         $bond = BondT::create($params);
         if (!$bond) {
             throw new BondException();

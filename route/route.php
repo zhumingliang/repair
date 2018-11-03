@@ -109,6 +109,13 @@ Route::get('api/:version/extend/house', 'api/:version.ServicesExtend/getHoursLis
 Route::get('api/:version/extend/repair', 'api/:version.ServicesExtend/getRepairList');
 Route::get('api/:version/service/index', 'api/:version.ServicesExtend/getServiceIndex');
 Route::get('api/:version/services', 'api/:version.ServicesExtend/getServiceForCMS');
+Route::get('api/:version/index/services/all', 'api/:version.ServicesExtend/getServicesForIndex');
+Route::post('api/:version/index/service/save', 'api/:version.ServicesExtend/indexServiceSave');
+Route::post('api/:version/index/service/handel', 'api/:version.ServicesExtend/indexHandel');
+Route::post('api/:version/index/service/list', 'api/:version.ServicesExtend/getIndexListForCMS');
+
+
+
 
 
 Route::post('api/:version/city/discount/save', 'api/:version.CityDiscount/save');
