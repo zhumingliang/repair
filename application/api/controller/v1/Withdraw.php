@@ -400,7 +400,6 @@ class Withdraw extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/withdraws/shop  168-提现管理-提现列表
      * @apiGroup  MINI

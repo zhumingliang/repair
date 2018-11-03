@@ -59,16 +59,22 @@ class WithDrawService
     {
         if ($type == CommonEnum::WITHDRAW_BOND) {
             $balance = self::getBondBalance(Token::getCurrentUid());
-            if ($balance - 500 < $money) {
+            if ($balance < $money) {
                 throw  new WithdrawException(
                     ['code' => 401,
-                        'msg' => '保证金余额需要大于500',
+                        'msg' => '保证金余额不足',
                         'errorCode' => 200002
                     ]
                 );
             }
 
         }
+
+        //检测余额是否充足
+
+
+
+
         $res = WithdrawMiniT::create([
             'money' => $money,
             'u_id' => Token::getCurrentUid(),
@@ -201,6 +207,11 @@ class WithDrawService
     }
 
 
+    /**
+     * 获取商家可提现额度
+     * @param $shop_id
+     * @return float
+     */
     public static function getBusinessBalance($shop_id)
     {
 

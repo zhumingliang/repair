@@ -292,9 +292,10 @@ class Auth extends BaseController
      * @api {GET} /api/v1/auth/group/users 180-权限管理-获取分组成员
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  小程序获取轮播图列表（首页轮播图/家政/维修模块轮播图）
+     * @apiDescription
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/auth/group/users?page=1&size=20
+     * http://mengant.cn/api/v1/auth/group/users?page=1&size=20&id=1
+     * @apiParam (请求参数说明) {int} id 分组id
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json} 返回样例:
