@@ -56,7 +56,7 @@ class Token extends Controller
     }
 
     /**
-     * @api {GET} /api/v1/token/loginOut  4-CMS退出登陆
+     * @api {GET} /api/v1/token/login/out  4-CMS退出登陆
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription CMS退出当前账号登陆。
