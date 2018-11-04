@@ -416,6 +416,7 @@ class Order extends BaseController
         } else {
             $res = ServiceBookingT::update(['confirm_id' => $confirm], ['id' => $id]);
         }
+
         if (!$res) {
             throw  new OrderException(
                 ['code' => 401,

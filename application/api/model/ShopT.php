@@ -133,14 +133,6 @@ class ShopT extends BaseModel
 
     }
 
-
-    public static function getShopId($u_id)
-    {
-        $shop = self::where('u_id', $u_id)->find();
-        return $shop['id'];
-
-    }
-
     /**
      * 管理员获取店铺待审核列表（全部）
      * @param $page

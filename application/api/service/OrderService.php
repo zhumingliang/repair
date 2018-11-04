@@ -29,18 +29,40 @@ use think\Exception;
 class OrderService
 {
     /**
-     * 商家接单
      * @param $d_id
      * @param $u_id
      * @return mixed
+     * @throws Exception
      * @throws OrderException
      * @throws \app\lib\exception\OrderMsgException
+     * @throws \app\lib\exception\TokenException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
     public static function taking($d_id, $u_id)
     {
+        $shop_id = Token::getCurrentTokenVar('shop_id');
+        $shop_info = ShopT::where('id', $shop_id)->find();
+        $demand = DemandT::where('id', $d_id)->find();
+
+        if ($shop_info->frozen == 2) {
+            throw new OrderException(
+                ['code' => 401,
+                    'msg' => '店铺保已经被冻结，无法接单。',
+                    'errorCode' => 150004
+                ]
+            );
+        }
+
+        if ($shop_info->type != $demand->type) {
+            throw new OrderException(
+                ['code' => 401,
+                    'msg' => '需求不在服务范围内',
+                    'errorCode' => 150004
+                ]
+            );
+        }
 
         if (!self::checkTaking($d_id)) {
             throw new OrderException(
@@ -50,34 +72,7 @@ class OrderService
                 ]
             );
         }
-        $shop_id = ShopT::getShopId($u_id);
-        if (empty($shop_id)) {
-            throw new OrderException(
-                ['code' => 401,
-                    'msg' => '该用户店铺状态不正常',
-                    'errorCode' => 150002
-                ]
-            );
 
-        }
-        if (!self::checkShopBond($u_id)) {
-            throw new OrderException(
-                ['code' => 401,
-                    'msg' => '店铺保证金不足，请支付保证金',
-                    'errorCode' => 150003
-                ]
-            );
-        }
-        if (!self::checkShopFrozen($shop_id)) {
-            throw new OrderException(
-                ['code' => 401,
-                    'msg' => '店铺保已经被冻结，无法接单。',
-                    'errorCode' => 150004
-                ]
-            );
-        }
-
-        $demand = DemandT::where('id', $d_id)->find();
         if ($demand->state == CommonEnum::STATE_IS_FAIL) {
             throw new OrderException(
                 ['code' => 401,
@@ -86,7 +81,6 @@ class OrderService
                 ]
             );
         }
-
         if (strtotime($demand->time_begin) < time()) {
             throw new OrderException(
                 ['code' => 401,
@@ -119,7 +113,7 @@ class OrderService
             throw  new OrderException();
         }
         //添加用户消息提示
-        OrderMsgService::saveNormal($demand->u_id, $db->id, 1, 2);
+        OrderMsgService::saveNormal($demand->u_id, $db->id, 1, 1);
         return $db->id;
     }
 
@@ -529,7 +523,6 @@ class OrderService
 
     private static function checkShopBond($shop_id)
     {
-
 
         return true;
 

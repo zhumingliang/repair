@@ -75,9 +75,9 @@ class DemandOrderV extends Model
 
         $sql = 'order_id= 0 ';
         $sql .= ' OR ';
-        $sql .= '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql .= '( order_id > 0 AND shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time <' . $pay_limit . ')';
+        $sql .= ' ( order_id > 0 AND shop_confirm = 1 AND pay_id = 99999 AND order_time <' . $pay_limit . ')';
 
         $count = DemandUserV::where('id', '=', $id)
             ->where('state', CommonEnum::STATE_IS_OK)
