@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\ServiceCommentT;
+use app\api\model\ServiceCommentV;
 
 class CommentService
 {
@@ -22,7 +23,7 @@ class CommentService
      */
     public static function getCommentForService($id, $page, $size)
     {
-        return ServiceCommentT::getListForService($id, $page, $size);
+        return ServiceCommentV::getListForService($id, $page, $size);
 
 
     }
