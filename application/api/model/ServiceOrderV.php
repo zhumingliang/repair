@@ -291,7 +291,7 @@ class ServiceOrderV extends Model
         $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( comment_id <> 99999 ) ';
+        $sql = '( confirm_id = 1 ) ';
         $sql .= 'OR';
         $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= 'OR';
