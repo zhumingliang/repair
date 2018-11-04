@@ -59,7 +59,7 @@ class WithDrawService
     {
         if ($type == CommonEnum::WITHDRAW_BOND) {
             $balance = self::getBondBalance(Token::getCurrentUid());
-            if ($balance * 100 < $money) {
+            if ($balance < $money) {
                 throw  new WithdrawException(
                     ['code' => 401,
                         'msg' => '保证金余额不足',
@@ -74,7 +74,7 @@ class WithDrawService
 
 
         $res = WithdrawMiniT::create([
-            'money' => $money,
+            'money' => $money * 100,
             'u_id' => Token::getCurrentUid(),
             'type' => $type,
             'pay_id' => CommonEnum::ORDER_STATE_INIT,
