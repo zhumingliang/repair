@@ -287,7 +287,14 @@ class OrderService
             }
 
             //修改评论状态
-            $com_id = ServiceBookingT::update(['comment_id' => $obj->id], ['id' => $params['o_id']]);
+            $order_type = $params['order_type'];
+            if ($order_type == CommonEnum::ORDER_IS_BOOKING) {
+                $com_id = ServiceBookingT::update(['comment_id' => $obj->id], ['id' => $params['o_id']]);
+
+            } else {
+                $com_id = DemandOrderT::update(['comment_id' => $obj->id], ['id' => $params['o_id']]);
+            }
+
             if (!$com_id) {
                 Db::rollback();
                 throw new OrderException(
