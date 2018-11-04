@@ -13,7 +13,7 @@ class BondValidate extends BaseValidate
 {
     protected $rule = [
         'type' => 'require',
-        'money' => 'require|isPositiveInteger',
+        'money' => 'require',
     ];
 
 }

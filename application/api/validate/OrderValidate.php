@@ -15,7 +15,7 @@ class OrderValidate extends BaseValidate
         'id' => 'require|isPositiveInteger',
         'type' => 'require|isPositiveInteger|in:1,2',
         'confirm' => 'require|isPositiveInteger|in:1,2',
-        'money' => 'require|isPositiveInteger',
+        'money' => 'require',
         'order_type' => 'require|isPositiveInteger',
         'page' => 'require|isPositiveInteger',
         'size' => 'require|isPositiveInteger',

@@ -220,7 +220,9 @@ class DemandOrderV extends Model
 
     /**
      * 待服务
-     *商家没有去服务
+     *1.已经接单-未确认-未超时
+     *2.已接单-已确认-未支付-未超时
+     * 3.已接单-已支付-未去服务
      * @param $s_id
      * @param $page
      * @param $size
@@ -229,9 +231,28 @@ class DemandOrderV extends Model
      */
     public static function service($s_id, $page, $size)
     {
+
+
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $shop_confirm = $orderTime['shop_confirm'];
+        $pay = $orderTime['pay'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( shop_confirm =99999  AND  order_time > ' . $shop_confirm_limit . ' ) ';
+        $sql .= ' OR ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ' ) ';
+        $sql .= ' OR ';
+        $sql .= ' ( pay_id <> 99999 AND service_begin = 99999 ) ';
+
         $list = self::where('shop_id', $s_id)
-            ->where('state', CommonEnum::STATE_IS_OK)
-            ->where('service_begin', '=', CommonEnum::STATE_IS_FAIL)
+            ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
