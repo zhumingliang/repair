@@ -18,6 +18,7 @@ use app\api\model\OrderUserShopV;
 use app\api\model\ServiceBookingT;
 use app\api\model\ServiceOrderV;
 use app\api\model\ShopT;
+use app\api\model\SystemTimeT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\OrderEnum;
 use app\lib\enum\RedEnum;
@@ -169,7 +170,19 @@ class OrderService
     private static function getDemandInfo($o_id)
     {
         $info = DemandOrderV::where('order_id', $o_id)->hidden(['state'])->find();
+        if ($info['confirm_id'] == 2) {
+            $info['consult_time'] = self::getConsultTime($info['order_time']);
+        }
         return $info;
+    }
+
+    private static function getConsultTime($order_time)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $consult = $orderTime['consult'];
+        $consult_time = date('Y-m-d H:i', strtotime('+' . $consult . ' minute',
+            strtotime($order_time)));
+        return $consult_time;
     }
 
     /**
@@ -183,6 +196,9 @@ class OrderService
     private static function getServiceInfo($o_id)
     {
         $info = ServiceOrderV::where('order_id', $o_id)->hidden(['state'])->find();
+        if ($info['confirm_id'] == 2) {
+            $info['consult_time'] = self::getConsultTime($info['order_time']);
+        }
         return $info;
     }
 
