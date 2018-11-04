@@ -54,9 +54,10 @@ class DemandOrderV extends Model
 
     /**
      * 获取订单是否被接
-     * 1.商家未确认-未超时
+     * 1.商家未确认-超时
      * 2.商家已确认-在规定时间里未支付
-     * 肩擦好
+     * 3.未接
+     * 订单数据可被接单状态
      * @param $id
      * @return float|string
      */
@@ -74,13 +75,12 @@ class DemandOrderV extends Model
 
         $sql = 'order_id= 0 ';
         $sql .= ' OR ';
-        $sql .= '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
+        $sql .= '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time <' . $pay_limit . ')';
 
         $count = DemandUserV::where('id', '=', $id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            //->whereTime('time_begin', '>', date('Y-m-d H:i'))
             ->whereRaw($sql)
             ->count();
         return $count;

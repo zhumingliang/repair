@@ -131,9 +131,10 @@ class OrderService
     private static function checkTaking($id)
     {
         if (DemandOrderV::getOrderToCheck($id)) {
-            return false;
+            //订单未被接
+            return true;
         }
-        return true;
+        return false;
 
     }
 
