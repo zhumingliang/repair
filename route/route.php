@@ -194,6 +194,7 @@ Route::get('api/:version/withdraws/shop', 'api/:version.Withdraw/getWithdrawsWit
 
 Route::get('api/:version/center/info', 'api/:version.PersonalCenter/getInfo');
 Route::get('api/:version/center/msgs', 'api/:version.PersonalCenter/getMsgs');
+Route::get('api/:version/center/msg/handel', 'api/:version.PersonalCenter/handel');
 
 Route::get('api/:version/units/mini', 'api/:version.Unit/getUnitsForMini');
 Route::get('api/:version/units/list/cms', 'api/:version.Unit/getUnitsForCMS');

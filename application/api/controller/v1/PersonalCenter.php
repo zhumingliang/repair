@@ -82,7 +82,7 @@ class PersonalCenter extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/message/save  104-消息状态修改
+     * @api {POST} /api/v1/center/msg/handel 104-消息状态修改
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小程序用户-我的-信息
@@ -104,7 +104,7 @@ class PersonalCenter extends BaseController
      * @throws \think\Exception
      */
 
-    public function read($id)
+    public function handel($id)
     {
         $shop_id = \app\api\service\Token::getCurrentTokenVar('shop_id');
         if (!$shop_id) {
