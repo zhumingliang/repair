@@ -95,10 +95,12 @@ class Bond extends BaseController
      */
     public function operation($shop_id, $money, $type, $remark = '')
     {
+        $money = $type == 1 ? $money : (0 - $money);
+        $money = $money * 100;
         $res = BondRecordT::create([
             'shop_id' => $shop_id,
             'admin_id' => TokenService::getCurrentUid(),
-            'money' => $type == 1 ? $money : (0 - $money),
+            'money' => $money,
             'type' => $type,
             'remark' => $remark,
             'u_id' => $this->getShopUID($shop_id)

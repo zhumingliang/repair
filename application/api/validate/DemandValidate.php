@@ -22,7 +22,7 @@ class DemandValidate extends BaseValidate
         'latitude' => 'require',
         'time_begin' => 'require',
         'time_end' => 'require',
-        'money' => 'require|isPositiveInteger',
+        'money' => 'require',
         'page' => 'require|isPositiveInteger',
         'id' => 'require|isPositiveInteger',
         'size' => 'require|isPositiveInteger',

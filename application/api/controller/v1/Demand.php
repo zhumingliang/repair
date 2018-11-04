@@ -72,10 +72,11 @@ class Demand extends BaseController
         (new DemandValidate())->scene('save')->goCheck();
         $u_id = TokenService::getCurrentUid();
         $params = $this->request->param();
+        $money = $params['money'] * 100;
         $params['u_id'] = $u_id;
         $params['state'] = CommonEnum::STATE_IS_OK;
-        $params['money'] = $params['money'] * 100;
-        $params['origin_money'] = $params['money'];
+        $params['money'] = $money;
+        $params['origin_money'] = $money;
         DemandService::save($params);
         return json(new  SuccessMessage());
 
@@ -191,6 +192,10 @@ class Demand extends BaseController
             ->where('id', $id)
             ->hidden(['create_time', 'type', 'update_time', 'u_id', 'longitude', 'state', 'latitude', 'money'])
             ->find();
+
+        $demand['origin_money'] = $demand['origin_money'] / 100;
+
+
         return json($demand);
 
 
