@@ -14,7 +14,7 @@ class WithdrawValidate extends BaseValidate
 
     protected $rule = [
         'type' => 'require|in:1,2',
-        'money' => 'require|isPositiveInteger',
+        'money' => 'require',
         'card_num' => 'require',
         'bank' => 'require',
         'username' => 'require',
