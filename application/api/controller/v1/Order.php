@@ -22,6 +22,7 @@ use app\api\service\Token as TokenService;
 
 
 use app\lib\enum\CommonEnum;
+use app\lib\exception\DemandException;
 use app\lib\exception\OrderException;
 use app\lib\exception\SuccessMessage;
 
@@ -636,6 +637,55 @@ class Order extends BaseController
                 'errorCode' => 120002
             ]);
         }
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {POST} /api/v1/order/delete  186-订单删除（需求订单/服务订单）
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序删除订单
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * "type": 2,
+     * }
+     * @apiParam (请求参数说明) {int} id 订单id
+     * @apiParam (请求参数说明) {int} type 订单类别：1 | 服务订单；2 | 需求订单
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $id
+     * @param $type
+     * @return \think\response\Json
+     * @throws DemandException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function deleteCompleteOrder($id, $type)
+    {
+        $shop_id = \app\api\service\Token::getCurrentTokenVar('shop_id');
+        if ($shop_id) {
+            $field = 'shop_delete';
+        } else {
+            $field = 'normal_delete';
+        }
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+            $res = DemandOrderT::update([$field => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+
+        } else {
+            $res = ServiceBookingT::update([$field => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        }
+        if (!$res) {
+            throw new DemandException(['code' => 401,
+                'msg' => '删除订单失败',
+                'errorCode' => 120003
+            ]);
+        }
+
         return json(new SuccessMessage());
 
     }

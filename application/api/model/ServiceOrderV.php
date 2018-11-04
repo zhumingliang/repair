@@ -300,7 +300,6 @@ class ServiceOrderV extends Model
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
-            //  ->field('order_id, source_id,shop_id,source_name,time_begin,time_end,origin_money,update_money,phone_shop,phone_user,shop_phone,user_phone')
             ->paginate($size, false, ['page' => $page]);
 
 

@@ -82,15 +82,17 @@ class PersonalCenter extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/message/save  104-用户于阅读消息，修改消息状态
+     * @api {POST} /api/v1/message/save  104-消息状态修改
      * @apiGroup  MINI
      * @apiVersion 1.0.1
-     * @apiDescription  小程序用户阅读我的-信息
+     * @apiDescription  小程序用户-我的-信息
      * @apiExample {POST}  请求样例:
      * {
-     * "id": 1
+     * "id": 1,
+     * "state":2
      * }
      * @apiParam (请求参数说明) {int} id  消息id
+     * @apiParam (请求参数说明) {int} state  状态：2 | 阅读；3 | 删除
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误

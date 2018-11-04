@@ -168,6 +168,7 @@ Route::get('api/:version/index/search', 'api/:version.Order/indexSearch');
 Route::post('api/:version/order/pay/check', 'api/:version.Order/checkPay');
 Route::post('api/:version/order/phone/check', 'api/:version.Order/checkPhone');
 Route::post('api/:version/order/service/handel', 'api/:version.Order/serviceHandel');
+Route::post('api/:version/order/delete', 'api/:version.Order/deleteCompleteOrder');
 
 
 Route::get('api/:version/pay/getPreOrder', 'api/:version.Pay/getPreOrder');
