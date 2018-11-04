@@ -40,9 +40,9 @@ class DemandOrderV extends Model
 
         $sql = 'order_id= 0 ';
         $sql .= ' OR ';
-        $sql .= '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
+        $sql .= '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
-        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
 
         $list = DemandUserV::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
