@@ -276,6 +276,7 @@ class Order extends BaseController
         $id = $this->request->param('id');
         $remark = $this->request->param('remark');
         $money = $this->request->param('money');
+        $money = $money * 100;
         $type = $this->request->param('type');
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
             $res = DemandOrderT::update(['origin_money' => $money, 'price_remark' => $remark],
@@ -470,7 +471,6 @@ class Order extends BaseController
 
         //生成订单通知信息
         OrderMsgService::saveNormal(OrderService::getUID($id, $type), $id, $type, 2);
-
         return json(new SuccessMessage());
 
     }

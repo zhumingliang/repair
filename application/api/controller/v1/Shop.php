@@ -475,7 +475,7 @@ class Shop extends BaseController
         (new PagingParameter())->goCheck();
         $list = ServicesT::where('shop_id', TokenService::getCurrentTokenVar('shop_id'))
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->field('id, name,price,cover,unit')
+            ->field('id, name,price/100 as price,cover,unit')
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
         return json($list);

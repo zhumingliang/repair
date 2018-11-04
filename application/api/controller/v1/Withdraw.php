@@ -54,7 +54,7 @@ class Withdraw extends BaseController
     {
         (new WithdrawValidate())->scene('apply')->goCheck();
         $params = $this->request->param();
-        WithDrawService::apply($params['type'], $params['money']);
+        WithDrawService::apply($params['type'], $params['money'] * 100);
         return json(new SuccessMessage());
 
     }
@@ -327,6 +327,9 @@ class Withdraw extends BaseController
                 $query->field('id,phone');
             }])
             ->paginate($size, false, ['page' => $page])->toArray();
+
+
+
         return json($list);
 
 
@@ -348,7 +351,6 @@ class Withdraw extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-
      * @param $id
      * @param $state
      * @return \think\response\Json

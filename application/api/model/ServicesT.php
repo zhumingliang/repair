@@ -107,6 +107,7 @@ class ServicesT extends BaseModel
             ])
             //->field('id,shop_id,name,area,des,price,unit,des')
             ->find();
+        $service['price'] = $service['price'] / 100;
         return $service;
 
     }

@@ -177,12 +177,11 @@ class WithDrawService
         return WithdrawMiniT::getList($u_id, $page, $size);
     }
 
-
     /**
      * 收支明细列表
      * @param $page
      * @param $size
-     * @return array|\think\Paginator|void
+     * @return array|\think\Paginator
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */

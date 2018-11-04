@@ -14,6 +14,13 @@ use think\Model;
 class WithdrawPcT extends Model
 {
 
+
+    public function getMoneyAttr($value, $data)
+    {
+        return $value / 100;
+
+    }
+
     public function admin()
     {
         return $this->belongsTo('adminT',

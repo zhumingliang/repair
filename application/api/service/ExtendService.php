@@ -211,6 +211,7 @@ class ExtendService
     public static function getServiceForMini($id)
     {
         $service = ServicesT::getService($id);
+        $service['price'] = $service['price'] / 100;
         $service['collection'] = self::checkCollection($id);
         return $service;
 

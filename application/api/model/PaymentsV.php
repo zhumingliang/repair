@@ -31,6 +31,8 @@ class PaymentsV extends Model
         }
         $list['data'] = $data;
 
+        return $list;
+
     }
 
     private static function preShopList($list)
@@ -58,6 +60,7 @@ class PaymentsV extends Model
             $data = self::preNormalList($data);
         }
         $list['data'] = $data;
+
         return $list;
 
     }

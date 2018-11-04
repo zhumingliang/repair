@@ -12,8 +12,6 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\IndexCmsV;
 use app\api\model\IndexServiceT;
-use app\api\model\IndexServiceV;
-use app\api\model\ServicesT;
 use app\api\model\ServiceV;
 use app\api\model\ShopServiceV;
 use app\api\service\ExtendService;
