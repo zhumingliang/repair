@@ -32,7 +32,7 @@ class Comment extends BaseController
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiParam (请求参数说明) {int} id 服务id
      * @apiSuccessExample {json} 返回样例:
-     * {"total":1,"per_page":"15","current_page":1,"last_page":1,"data":[{"content":"这次服务很满意","create_time":"2018-10-08 00:11:56","imgs":[{"c_id":1,"img_id":1,"img_url":{"url":"http:\/\/repair.com\/1212"}},{"c_id":1,"img_id":2,"img_url":{"url":"http:\/\/repair.com\/121"}}],"user":{"id":1,"nickName":"盟蚁","avatarUrl":""}}]}
+     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"nickName":"浅笑`微凉&颖儿","content":"还不错","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/jmPSt8PLJxPNmSaxIAGrFiapDqNtibmZZUt7hr9nTQ9TamDuakNNJBLSLtpB92Y6GraCxY21CGicO9JicS5k4188WQ\/132","create_time":"2018-11-04 16:06:23","imgs":[{"o_id":23,"img_id":486,"img_url":{"url":"https:\/\/mengant.cn\/static\/imgs\/20181104\/b406713c6e1a1f682fab7ac8c480e908.jpg"}}]},{"nickName":"浅笑`微凉&颖儿","content":"非常好","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/jmPSt8PLJxPNmSaxIAGrFiapDqNtibmZZUt7hr9nTQ9TamDuakNNJBLSLtpB92Y6GraCxY21CGicO9JicS5k4188WQ\/132","create_time":"2018-11-04 09:46:04","imgs":[]}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
@@ -40,7 +40,6 @@ class Comment extends BaseController
      * @apiSuccess (返回参数说明) {String} create_time 创建时间
      * @apiSuccess (返回参数说明) {Obj} imgs 评论图片对象
      * @apiSuccess (返回参数说明) {String} url 图片地址
-     * @apiSuccess (返回参数说明) {Obj} user 评论用户对象
      * @apiSuccess (返回参数说明) {String} nickName 用户昵称
      * @apiSuccess (返回参数说明) {String} avatarUrl 用户头像
      * @return \think\response\Json

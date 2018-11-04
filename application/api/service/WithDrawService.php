@@ -67,9 +67,19 @@ class WithDrawService
                 );
             }
 
+        } else {
+            //检测余额是否充足
+            $shop_id = Token::getCurrentTokenVar('shop_id');
+            $balance = self::getBusinessBalance($shop_id);
+            if ($balance < $money) {
+                throw  new WithdrawException(
+                    ['code' => 401,
+                        'msg' => '余额不足',
+                        'errorCode' => 200002
+                    ]
+                );
+            }
         }
-
-        //检测余额是否充足
 
 
         $res = WithdrawMiniT::create([
@@ -80,6 +90,7 @@ class WithDrawService
             'state' => CommonEnum::STATE_IS_OK,
             'order_number' => makeOrderNo()
         ]);
+
         if (!$res) {
             throw  new WithdrawException();
         }
@@ -223,9 +234,9 @@ class WithDrawService
 
         $sql = '( confirm_id = 1 ) ';
         $sql .= 'OR';
-        $sql .= '(confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '(pay_id <> 99999 AND confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= 'OR';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
 
         $balance = BusinessBalanceV::where('shop_id', $shop_id)

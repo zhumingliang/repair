@@ -9,7 +9,6 @@
 namespace app\api\service;
 
 
-use app\api\model\ServiceCommentT;
 use app\api\model\ServiceCommentV;
 
 class CommentService

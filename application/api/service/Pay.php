@@ -99,9 +99,10 @@ class Pay
         $pay_id = $this->savePayRecord($notify, $order);
         $order->pay_id = $pay_id;
         $order->pay_money = $money;
+
         if ($this->type == 1 || $this->type == 2) {
             $discount = $this->getDiscount();
-            $order->join_money = $money * $discount;
+            $order->join_money = ($order->origin_money) * $discount;
         }
 
         if (!$order->save()) {
