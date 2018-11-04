@@ -30,13 +30,20 @@ class DemandOrderV extends Model
     {
         $orderTime = SystemTimeT::getSystemOrderTime();
         $shop_confirm = $orderTime['shop_confirm'];
+        $pay = $orderTime['pay'];
         $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
             time()));
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
 
-        $sql = '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql = 'order_id= 0 ';
         $sql .= ' OR ';
-        $sql .= ' ( order_id = 0 )';
+        $sql .= '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
+
         $list = DemandUserV::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
@@ -70,6 +77,7 @@ class DemandOrderV extends Model
         $sql .= '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
         $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
+
         $count = DemandUserV::where('id', '=', $id)
             ->where('state', CommonEnum::STATE_IS_OK)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
