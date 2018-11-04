@@ -54,7 +54,7 @@ class Withdraw extends BaseController
     {
         (new WithdrawValidate())->scene('apply')->goCheck();
         $params = $this->request->param();
-        WithDrawService::apply($params['type'], $params['money'] * 100);
+        WithDrawService::apply($params['type'], $params['money']);
         return json(new SuccessMessage());
 
     }
