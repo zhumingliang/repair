@@ -249,7 +249,7 @@ class DemandOrderV extends Model
         $sql .= ' OR ';
         $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ' ) ';
         $sql .= ' OR ';
-        $sql .= ' ( pay_id <> 99999 AND service_begin = 99999 ) ';
+        $sql .= ' ( pay_id <> 99999 AND service_begin = 2 ) ';
 
         $list = self::where('shop_id', $s_id)
             ->whereRaw($sql)
