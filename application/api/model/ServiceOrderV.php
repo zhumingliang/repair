@@ -162,7 +162,7 @@ class ServiceOrderV extends Model
         $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $list = self::where('u_id', $u_id)
-            ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('normal_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 
@@ -298,7 +298,7 @@ class ServiceOrderV extends Model
         $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $list = self::where('shop_id', $s_id)
-            ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('shop_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 

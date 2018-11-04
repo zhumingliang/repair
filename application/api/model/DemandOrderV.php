@@ -208,7 +208,7 @@ class DemandOrderV extends Model
 
 
         $list = self::where('u_id', $u_id)
-            ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('normal_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 
@@ -323,7 +323,7 @@ class DemandOrderV extends Model
 
 
         $list = self::where('shop_id', $s_id)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('shop_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
 
@@ -500,7 +500,7 @@ class DemandOrderV extends Model
         $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $list = self::whereRaw($sql)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('order_num|user_phone', 'like', '%' . $key . '%');
