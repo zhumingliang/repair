@@ -59,7 +59,7 @@ class WithDrawService
     {
         if ($type == CommonEnum::WITHDRAW_BOND) {
             $balance = self::getBondBalance(Token::getCurrentUid());
-            if ($balance < $money) {
+            if ($balance * 100 < $money) {
                 throw  new WithdrawException(
                     ['code' => 401,
                         'msg' => '保证金余额不足',
@@ -71,8 +71,6 @@ class WithDrawService
         }
 
         //检测余额是否充足
-
-
 
 
         $res = WithdrawMiniT::create([
