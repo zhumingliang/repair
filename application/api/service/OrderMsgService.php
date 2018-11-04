@@ -55,8 +55,10 @@ class OrderMsgService
     public static function getList($page, $size)
     {
 
+        $shop_id = Token::getCurrentTokenVar('shop_id');
+        $id = $shop_id ? $shop_id : Token::getCurrentUid();
         $list = OrderMsgV::where('state', CommonEnum::STATE_IS_OK)
-            ->where('u_id', Token::getCurrentUid())
+            ->where('u_id', $id)
             ->paginate($size, false, ['page' => $page]);
         return $list;
     }
