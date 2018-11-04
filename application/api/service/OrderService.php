@@ -114,7 +114,7 @@ class OrderService
             throw  new OrderException();
         }
         //添加用户消息提示
-        OrderMsgService::saveNormal($demand->u_id, $db->id, 1, 1);
+        OrderMsgService::saveNormal($demand->u_id, $db->id, 1, 2);
         return $db->id;
     }
 
