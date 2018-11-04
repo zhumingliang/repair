@@ -55,14 +55,15 @@ class OrderService
             );
         }
 
-        if ($shop_info->type != $demand->type) {
+
+       /* if ($shop_info->type != $demand->type) {
             throw new OrderException(
                 ['code' => 401,
                     'msg' => '需求不在服务范围内',
                     'errorCode' => 150004
                 ]
             );
-        }
+        }*/
 
         if (!self::checkTaking($d_id)) {
             throw new OrderException(
