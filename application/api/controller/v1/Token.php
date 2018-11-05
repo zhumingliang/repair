@@ -110,7 +110,7 @@ class Token extends Controller
     }
 
     /**
-     * @api {GET} /api/v1/token/admin  68-小程序用户登录小区管理员
+     * @api {GET} /api/v1/token/village  68-小程序用户登录小区管理员
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  小程序用户登录小区管理员
