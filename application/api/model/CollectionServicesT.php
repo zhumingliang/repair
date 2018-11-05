@@ -20,6 +20,10 @@ class CollectionServicesT extends Model
         return $this->prefixImgUrl($value, $data);
     }
 
+    public function getPriceAttr($value, $data){
+        return $value/100;
+    }
+
     public function service()
     {
         return $this->belongsTo('ServicesT',
