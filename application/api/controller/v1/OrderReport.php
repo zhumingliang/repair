@@ -139,14 +139,14 @@ class OrderReport extends BaseController
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public function getOrderReportForJoin($order_type, $page, $size, $key = '',$token)
+    public function getOrderReportForJoin($order_type, $page, $size, $key = '')
     {
         $list = array();
         if ($order_type == 1) {
-            $list = OrderReportV::noCompleteForJoin($key, $page, $size,$token);
+            $list = OrderReportV::noCompleteForJoin($key, $page, $size);
         } else
             if ($order_type == 2) {
-                $list = OrderReportV::completeForJoin($key, $page, $size,$token);
+                $list = OrderReportV::completeForJoin($key, $page, $size);
             }
 
         return json($list);

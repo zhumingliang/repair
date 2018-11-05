@@ -26,7 +26,7 @@ class OrderReportV extends Model
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public static function noCompleteForJoin($key, $page, $size, $token)
+    public static function noCompleteForJoin($key, $page, $size)
     {
         $orderTime = SystemTimeT::getSystemOrderTime();
         $shop_confirm = $orderTime['shop_confirm'];
@@ -45,9 +45,9 @@ class OrderReportV extends Model
         $sql .= ' OR ';
         $sql .= ' ( pay_id <> 99999)';
 
-        $province = Token::getCurrentTokenVarWithToken('province', $token);
-        $city = Token::getCurrentTokenVarWithToken('city', $token);
-        $area = Token::getCurrentTokenVarWithToken('area', $token);
+        $province = Token::getCurrentTokenVar('province');
+        $city = Token::getCurrentTokenVar('city');
+        $area = Token::getCurrentTokenVar('area');
         $sql_join = preJoinSqlForGetDShops($province, $city, $area);
 
         $list = self::where('state', CommonEnum::STATE_IS_OK)
