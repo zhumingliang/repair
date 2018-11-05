@@ -173,7 +173,7 @@ class ShopT extends BaseModel
                     $query->where('name', 'like', '%' . $key . '%');
                 }
             })
-            ->field('id as shop_id,u_id,type,name,city,state')
+            ->field('id as shop_id,u_id,type,name,city,state,frozen')
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
         return $pagingData;
