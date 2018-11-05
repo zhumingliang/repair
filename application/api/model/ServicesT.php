@@ -53,7 +53,7 @@ class ServicesT extends BaseModel
                     $query->field('id,address,phone');
                 }
             ])
-            ->field('id,shop_id,name,area,des,price,unit,des')
+            ->field('id,shop_id,name,area,des,price/100 as price,unit,des')
             ->find();
         return $service;
 
@@ -85,7 +85,7 @@ class ServicesT extends BaseModel
                     $query->where('name', 'like', '%' . $key . '%');
                 }
             })
-            ->field('id,cover,name,price')
+            ->field('id,cover,name,price/100 as price')
             ->order($order)
             ->paginate($size, false, ['page' => $page]);
         return $pagingData;
