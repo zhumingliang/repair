@@ -14,6 +14,7 @@ use app\api\model\DemandOrderT;
 use app\api\model\OrderCommentV;
 use app\api\model\OrderNormalMsgT;
 use app\api\model\ServiceBookingT;
+use app\api\model\SystemTimeT;
 use app\api\service\OrderMsgService;
 use app\api\service\OrderService;
 use app\api\service\ShopService;
@@ -413,10 +414,23 @@ class Order extends BaseController
         $id = $this->request->param('id');
         $type = $this->request->param('type');
         $confirm = $this->request->param('confirm');
-        if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $res = DemandOrderT::update(['confirm_id' => $confirm], ['id' => $id]);
+
+        if ($confirm == 2) {
+            $consult_time = date('Y-m-d H:i', time());
+            $data = [
+                'confirm_id' => $confirm,
+                'consult_time' => $consult_time
+            ];
         } else {
-            $res = ServiceBookingT::update(['confirm_id' => $confirm], ['id' => $id]);
+
+            $data = ['confirm_id' => $confirm];
+        }
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+
+            $res = DemandOrderT::update($data, ['id' => $id]);
+
+        } else {
+            $res = ServiceBookingT::update($data, ['id' => $id]);
         }
 
         if (!$res) {
