@@ -333,7 +333,7 @@ class ShopService
         }
 
         //添加服务记录
-       //OrderMsgService::saveShop(self::getShopID($params['s_id']), $booking->id, 2, 1);
+       OrderMsgService::saveShop(self::getShopID($params['s_id']), $booking->id, 2, 1);
 
         return [
             'id' => $booking->id,

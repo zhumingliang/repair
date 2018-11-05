@@ -31,7 +31,6 @@ class WithDrawService
     public static function getBalance()
     {
         //获取佣金设置-加盟商设置
-
         $shop_id = Token::getCurrentTokenVar('shop_id');
         if (!$shop_id) {
             return ['balance' => 0];
