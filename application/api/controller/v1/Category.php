@@ -28,7 +28,7 @@ class Category extends BaseController
      *       "name": "钢筋工瓦工"
      *       "order": 50
      *     }
-     * @apiParam (请求参数说明) {int} type    分类上级：1 | 家政；2| 维修
+     * @apiParam (请求参数说明) {int} type    分类上级：1 | 维修；2| 家政
      * @apiParam (请求参数说明) {String} name    分类名称
      * @apiParam (请求参数说明) {int} order    排序，最大值100
      * @apiSuccessExample {json} 返回样例:
@@ -100,7 +100,7 @@ class Category extends BaseController
      *       "order": 40
      *     }
      * @apiParam (请求参数说明) {int} id    分类id
-     * @apiParam (请求参数说明) {int} type    分类上级：1 | 家政；2| 维修
+     * @apiParam (请求参数说明) {int} type    分类上级：1 | 维修；2| 家政
      * @apiParam (请求参数说明) {String} name    分类名称
      * @apiParam (请求参数说明) {String} order    排序，最大值100
      * @apiSuccessExample {json} 返回样例:
@@ -136,7 +136,7 @@ class Category extends BaseController
      *
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/category/mini/list?type=1
-     * @apiParam (请求参数说明) {int} type    分类类别：1 | 家政；2 | 维修
+     * @apiParam (请求参数说明) {int} type    分类上级：1 | 维修；2| 家政
      * @apiSuccessExample {json} 返回样例:
      * [{"id":1,"name":"钢筋工瓦工"},{"id":2,"name":"跑腿服务"},{"id":3,"name":"少儿培训"}]
      * @apiSuccess (返回参数说明) {int} id 分类id
@@ -189,7 +189,7 @@ class Category extends BaseController
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} id 分类id
      * @apiSuccess (返回参数说明) {String} name 分类名称
-     * @apiSuccess (返回参数说明) {int} type 分类类别 1 | 家政；2 | 维修
+     * @apiSuccess (返回参数说明) {int}  type 分类上级：1 | 维修；2| 家政
      * @apiSuccess (返回参数说明) {int} order 排序
      * @param $page
      * @param $size
@@ -217,7 +217,7 @@ class Category extends BaseController
      * {"id":1,"name":"钢筋工瓦工","type":1,"order":30}
      * @apiSuccess (返回参数说明) {int} id 分类id
      * @apiSuccess (返回参数说明) {String} name 分类名称
-     * @apiSuccess (返回参数说明) {int} type 分类类别 1 | 家政；2 | 维修
+     * @apiSuccess (返回参数说明) {int}  type  分类类别：1 | 维修；2| 家政
      * @apiSuccess (返回参数说明) {int} order 排序
      * @param $id
      * @return \think\response\Json
