@@ -166,7 +166,7 @@ class OrderService
     {
         $info = DemandOrderV::where('order_id', $o_id)->hidden(['state'])->find();
         if ($info['confirm_id'] == 2) {
-            $info['consult_time'] = self::getConsultTime($info['order_time']);
+            $info['consult_time'] = self::getConsultTime($info['consult_time']);
         }
         return $info;
     }
@@ -192,7 +192,7 @@ class OrderService
     {
         $info = ServiceOrderV::where('order_id', $o_id)->hidden(['state'])->find();
         if ($info['confirm_id'] == 2) {
-            $info['consult_time'] = self::getConsultTime($info['order_time']);
+            $info['consult_time'] = self::getConsultTime($info['consult_time']);
         }
         return $info;
     }
