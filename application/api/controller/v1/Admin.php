@@ -89,7 +89,7 @@ class Admin extends BaseController
     public function handel()
     {
 
-        (new AdminValidate())->scene('handel')->goCheck();
+        //(new AdminValidate())->scene('handel')->goCheck();
         $id = $this->request->param('id');
         $state = $this->request->param('state');
         $res = AdminT::update(['state' => $state], ['id' => $id]);

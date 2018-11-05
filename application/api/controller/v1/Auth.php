@@ -324,7 +324,7 @@ class Auth extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/admin/save  181-用户管理-新增用户
+     * @api {POST} /api/v1/auth/user/save  181-用户管理-新增用户
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员/加盟商-新增小区账号

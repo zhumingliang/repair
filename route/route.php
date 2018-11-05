@@ -256,3 +256,4 @@ Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');
 Route::get('api/:version/auth/group/rules', 'api/:version.Auth/groupRules');
 Route::get('api/:version/auth/group/users', 'api/:version.Auth/groupUsers');
 Route::post('api/:version/auth/group/user/save', 'api/:version.Auth/userGroup');
+Route::post('api/:version/auth/user/save', 'api/:version.Auth/addAdmin');
