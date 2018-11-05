@@ -55,8 +55,6 @@ class OrderService
             );
         }
 
-        echo $shop_info->type;
-        echo $demand->type;
 
         if ($shop_info->type != $demand->type) {
             throw new OrderException(
