@@ -665,18 +665,22 @@ class Shop extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/shop/frozen?id=1
+     * http://mengant.cn/api/v1/shop/frozen?id=1&state
      * @apiParam (请求参数说明) {int} id  商家id
+     * @apiParam (请求参数说明) {int} state  商家id
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
      * @apiSuccess (返回参数说明) {String} msg 信息描述
      * @param $id
+     * @param $state
      * @return \think\response\Json
+     * @return \think\response\Json
+     * @throws ShopException
      */
-    public function shopFrozen($id)
+    public function shopFrozen($id,$state)
     {
-        $res = ShopT::update(['frozen' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        $res = ShopT::update(['frozen' => $state], ['id' => $id]);
         if (!$res) {
             throw new  ShopException(
                 ['code' => 401,
