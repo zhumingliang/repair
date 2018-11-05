@@ -52,6 +52,7 @@ class DemandV extends Model
             ->where('type', $type)
             ->where('area', $area)
             ->field('id,des,money,latitude,longitude,area')
+            ->group('id')
             ->paginate($size, false, ['page' => $page])
             ->toArray();
         return $list;
