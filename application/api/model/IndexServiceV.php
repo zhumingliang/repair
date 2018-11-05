@@ -14,10 +14,10 @@ use app\lib\enum\CommonEnum;
 class IndexServiceV extends BaseModel
 {
 
-    public function getCoverAttr($value, $data)
+   /* public function getCoverAttr($value, $data)
     {
         return $this->prefixImgUrl($value, $data);
-    }
+    }*/
 
 
     /**
