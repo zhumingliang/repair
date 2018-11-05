@@ -26,7 +26,7 @@ class OrderReportV extends Model
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public static function noCompleteForJoin($key, $page, $size)
+    public static function noCompleteForJoin($key, $page, $size, $token)
     {
         $orderTime = SystemTimeT::getSystemOrderTime();
         $shop_confirm = $orderTime['shop_confirm'];
@@ -45,8 +45,10 @@ class OrderReportV extends Model
         $sql .= ' OR ';
         $sql .= ' ( pay_id <> 99999)';
 
-        $sql_join = preJoinSqlForGetDShops(Token::getCurrentTokenVar('province'), Token::getCurrentTokenVar('city'),
-            Token::getCurrentTokenVar('area'));
+        $province = Token::getCurrentTokenVarWithToken('province', $token);
+        $city = Token::getCurrentTokenVarWithToken('city', $token);
+        $area = Token::getCurrentTokenVarWithToken('area', $token);
+        $sql_join = preJoinSqlForGetDShops($province, $city, $area);
 
         $list = self::where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
@@ -72,7 +74,7 @@ class OrderReportV extends Model
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public static function completeForJoin($key, $page, $size)
+    public static function completeForJoin($key, $page, $size,$token)
     {
         $orderTime = SystemTimeT::getSystemOrderTime();
         $user_confirm = $orderTime['user_confirm'];
@@ -90,8 +92,10 @@ class OrderReportV extends Model
         $sql .= 'OR';
         $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
 
-        $sql_join = preJoinSqlForGetDShops(Token::getCurrentTokenVar('province'), Token::getCurrentTokenVar('city'),
-            Token::getCurrentTokenVar('area'));
+        $province = Token::getCurrentTokenVarWithToken('province', $token);
+        $city = Token::getCurrentTokenVarWithToken('city', $token);
+        $area = Token::getCurrentTokenVarWithToken('area', $token);
+        $sql_join = preJoinSqlForGetDShops($province, $city, $area);
 
         $list = self::whereRaw($sql)
             ->whereRaw($sql_join)

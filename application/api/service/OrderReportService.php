@@ -195,15 +195,15 @@ class OrderReportService
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
-    public function exportReport($time_begin, $time_end)
+    public function exportReport($time_begin, $time_end,$token)
     {
-        if (Token::getCurrentTokenVar('grade') == UserEnum::USER_GRADE_ADMIN) {
+        if (Token::getCurrentTokenVarWithToken('grade',$token) == UserEnum::USER_GRADE_ADMIN) {
             $list = OrderReportV::reportWithoutCity($time_begin, $time_end);
 
         } else {
-            $province = Token::getCurrentTokenVar('province');
-            $city = Token::getCurrentTokenVar('city');
-            $area = Token::getCurrentTokenVar('area');
+            $province = Token::getCurrentTokenVarWithToken('province',$token);
+            $city = Token::getCurrentTokenVarWithToken('city',$token);
+            $area = Token::getCurrentTokenVarWithToken('area',$token);
             $list = OrderReportV::reportForJoin($province, $city, $area, $time_begin, $time_end);
 
         }
