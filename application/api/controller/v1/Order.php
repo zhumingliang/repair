@@ -275,15 +275,17 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('price')->goCheck();
         $id = $this->request->param('id');
-        $remark = $this->request->param('remark');
+        $remark = $this->request->param('price_remark');
         $money = $this->request->param('money');
         $money = $money * 100;
         $type = $this->request->param('type');
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $res = DemandOrderT::update(['origin_money' => $money, 'price_remark' => $remark],
+            $res = DemandOrderT::update(['origin_money' => $money,
+                'price_remark' => $remark],
                 ['id' => $id]);
         } else {
-            $res = ServiceBookingT::update(['origin_money' => $money, 'price_remark' => $remark],
+            $res = ServiceBookingT::update(['origin_money' => $money,
+                'price_remark' => $remark],
                 ['id' => $id]);
         }
 
