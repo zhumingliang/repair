@@ -83,7 +83,8 @@ class CenterService
             return DemandOrderV::getCountForNormal($this->u_id);
         }
 
-        return DemandOrderV::getCountForShop($this->shop_id);
+        return 0;
+        //return DemandOrderV::getCountForShop($this->shop_id);
 
     }
 
