@@ -41,8 +41,9 @@ class ExtendService
         $list = array();
         // $u_id = Token::getCurrentUid();
         $grade = Token::getCurrentTokenVar('grade');
+        $state = $type == 1 ? 1 : 2;
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
-            $list = ServicesExtendV::where('state', '=', $type)
+            $list = ServicesExtendV::where('state', '=', $state)
                 ->where(function ($query) use ($keyW) {
                     if ($keyW) {
                         $query->where('service_name', 'like', '%' . $keyW . '%');
@@ -53,7 +54,7 @@ class ExtendService
         } else if ($grade == UserEnum::USER_GRADE_JOIN) {
             $list_where = self::getListWhereJoin();
 
-            $list = ServicesExtendV::where('state', '=', $type)
+            $list = ServicesExtendV::where('state', '=', $state)
                 ->where($list_where['key'], '=', $list_where['value'])
                 ->where(function ($query) use ($keyW) {
                     if ($keyW) {
