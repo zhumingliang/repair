@@ -149,7 +149,7 @@ class ShopT extends BaseModel
                     $query->where('name', 'like', '%' . $key . '%');
                 }
             })
-            ->field('id as shop_id,u_id,type,name,city')
+            ->field('id as shop_id,u_id,type,name,city,state')
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
         return $pagingData;
@@ -173,7 +173,7 @@ class ShopT extends BaseModel
                     $query->where('name', 'like', '%' . $key . '%');
                 }
             })
-            ->field('id as shop_id,u_id,type,name,city')
+            ->field('id as shop_id,u_id,type,name,city,state')
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
         return $pagingData;
@@ -202,7 +202,7 @@ class ShopT extends BaseModel
                     $query->where('name', 'like', '%' . $key . '%');
                 }
             })
-            ->field('id as shop_id,u_id,type,name,area,state')
+            ->field('id as shop_id,u_id,type,name,area,state,frozen')
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
         return $pagingData;
