@@ -229,8 +229,7 @@ class ExtendService
      */
     private static function checkCollection($id)
     {
-        $col = CollectionServicesT::
-        where('u_id', '=', Token::getCurrentUid())
+        $col = CollectionServicesT::where('u_id', '=', Token::getCurrentUid())
             ->where('s_id', '=', $id)
             //->where('state', CommonEnum::STATE_IS_OK)
             ->find();
