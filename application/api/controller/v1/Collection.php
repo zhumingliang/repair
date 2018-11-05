@@ -61,7 +61,7 @@ class Collection extends BaseController
      * "id": 1,
      * "type":1
      * }
-     * @apiParam (请求参数说明) {String} id  收藏 id
+     * @apiParam (请求参数说明) {String} id  服务/店铺 id
      * @apiParam (请求参数说明) {String} type   收藏类别：1 服务；2| 店铺
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}

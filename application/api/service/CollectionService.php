@@ -71,11 +71,11 @@ class CollectionService
         if ($type === self::COLLECTION_HOUSE) {
             //收藏服务
             $save_id = CollectionServicesT::update(['state' => CommonEnum::STATE_IS_FAIL],
-                ['id' => $id]);
+                ['s_id' => $id, 'u_id' => Token::getCurrentUid()]);
         } else if ($type == self::COLLECTION_REPAIR) {
             //收藏店铺
             $save_id = CollectionShopT::update(['state' => CommonEnum::STATE_IS_FAIL],
-                ['id' => $id]);
+                ['s_id' => $id, 'u_id' => Token::getCurrentUid()]);
         }
         if (!$save_id) {
             throw  new  CollectionException(
