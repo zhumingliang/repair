@@ -42,15 +42,13 @@ class AdminT extends Model
     {
         $sql_join = preJoinSqlForGetDShops(Token::getCurrentTokenVar('province'), Token::getCurrentTokenVar('city'),
             Token::getCurrentTokenVar('area'));
-        $pagingData = self::where('state', CommonEnum::STATE_IS_OK)
-            ->where('grade', UserEnum::USER_GRADE_VILLAGE)
-            ->whereRaw($sql_join)
+
+        $pagingData = VillageV::whereRaw($sql_join)
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('username', 'like', '%' . $key . '%');
                 }
             })
-            ->hidden(['state', 'create_time', 'pwd', 'parent_id', 'grade'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])->toArray();
         return $pagingData;
