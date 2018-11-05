@@ -74,7 +74,7 @@ class OrderReportV extends Model
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public static function completeForJoin($key, $page, $size,$token)
+    public static function completeForJoin($key, $page, $size)
     {
         $orderTime = SystemTimeT::getSystemOrderTime();
         $user_confirm = $orderTime['user_confirm'];
@@ -92,9 +92,9 @@ class OrderReportV extends Model
         $sql .= 'OR';
         $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
 
-        $province = Token::getCurrentTokenVarWithToken('province', $token);
-        $city = Token::getCurrentTokenVarWithToken('city', $token);
-        $area = Token::getCurrentTokenVarWithToken('area', $token);
+        $province = Token::getCurrentTokenVar('province');
+        $city = Token::getCurrentTokenVar('city');
+        $area = Token::getCurrentTokenVar('area');
         $sql_join = preJoinSqlForGetDShops($province, $city, $area);
 
         $list = self::whereRaw($sql)
