@@ -43,7 +43,7 @@ class PersonalCenter extends BaseController
      */
     public function getInfo()
     {
-        $info = (new CenterService)->getCenterInfo();
+        $info = (new CenterService())->getCenterInfo();
         return json($info);
     }
 
@@ -108,9 +108,9 @@ class PersonalCenter extends BaseController
     {
         $shop_id = \app\api\service\Token::getCurrentTokenVar('shop_id');
         if (!$shop_id) {
-            $res = OrderNormalMsgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id'=> $id]);
+            $res = OrderNormalMsgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         } else {
-            $res = OrderShopMsgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id'=> $id]);
+            $res = OrderShopMsgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         }
         if (!$res) {
             throw new OrderMsgException(['code' => 401,
