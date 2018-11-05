@@ -57,6 +57,35 @@ class Token
 
 
     /**
+     * @param string $key
+     * @param $token
+     * @return mixed
+     * @throws Exception
+     * @throws TokenException
+     */
+    public static function getCurrentTokenVarWithToken($key = '', $token)
+    {
+
+        $vars = \think\facade\Cache::get($token);
+        if (!$vars) {
+            throw new TokenException();
+        } else {
+            if ($key == '') {
+                return $vars;
+            }
+            if (!is_array($vars)) {
+                $vars = json_decode($vars, true);
+            }
+            if (array_key_exists($key, $vars)) {
+                return $vars[$key];
+            } else {
+                throw new Exception('尝试获取的Token变量并不存在');
+            }
+        }
+    }
+
+
+    /**
      * @return mixed
      * @throws Exception
      * @throws TokenException

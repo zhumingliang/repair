@@ -16,6 +16,8 @@ use app\api\service\OrderReportService;
 use app\lib\enum\UserEnum;
 use app\lib\exception\ImageException;
 use app\lib\exception\SuccessMessage;
+use \app\api\service\Token as TokenService;
+use think\Request;
 
 class Village extends BaseController
 {
@@ -111,14 +113,18 @@ class Village extends BaseController
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function exportVillageRecord($time_begin, $time_end)
+    public function exportVillageRecord()
     {
-        $grade = \app\api\service\Token::getCurrentTokenVar('grade');
+        $token = $this->request->param('token');
+        $time_begin = $this->request->param('time_begin');
+        $time_end = $this->request->param('time_end');
+
+        $grade = TokenService::getCurrentTokenVarWithToken('grade', $token);
         if ($grade == UserEnum::USER_GRADE_JOIN) {
 
-            $province = TokenService::getCurrentTokenVar('province');
-            $city = TokenService::getCurrentTokenVar('city');
-            $area = TokenService::getCurrentTokenVar('area');
+            $province = TokenService::getCurrentTokenVarWithToken('province', $token);
+            $city = TokenService::getCurrentTokenVarWithToken('city', $token);
+            $area = TokenService::getCurrentTokenVarWithToken('area', $token);
             $sql = preJoinSqlForGetDShops($province, $city, $area);
 
             $list = VillageRecordV:: whereRaw($sql)
@@ -127,7 +133,7 @@ class Village extends BaseController
                 ->select();
 
         } else {
-            $list = VillageRecordV::where('admin_id', \app\api\service\Token::getCurrentUid())
+            $list = VillageRecordV::where('admin_id', TokenService::getCurrentTokenVarWithToken('u_id', $token))
                 ->whereTime('create_time', 'between', [$time_begin, $time_end])
                 ->field('shop_id,shop_name,order_type,phone,money,create_time')
                 ->select()->toArray();
