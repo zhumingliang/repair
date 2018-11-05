@@ -88,14 +88,16 @@ class OrderReportV extends Model
 
         $sql = '( comment_id <> 99999 ) ';
         $sql .= 'OR';
-        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= 'OR';
-        $sql .= ' ( confirm_id = 2 AND  order_time > ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  order_time < ' . $consult_limit . ')';
 
         $province = Token::getCurrentTokenVar('province');
         $city = Token::getCurrentTokenVar('city');
         $area = Token::getCurrentTokenVar('area');
         $sql_join = preJoinSqlForGetDShops($province, $city, $area);
+
+
 
         $list = self::whereRaw($sql)
             ->whereRaw($sql_join)
