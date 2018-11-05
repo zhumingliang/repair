@@ -249,7 +249,7 @@ Route::get('api/:version/village/export', 'api/:version.Village/exportVillageRec
 
 Route::post('api/:version/auth/group/save', 'api/:version.Auth/addGroup');
 Route::get('api/:version/auth/groups', 'api/:version.Auth/groups');
-Route::get('api/:version/auth/group/handel', 'api/:version.Auth/groupHandel');
+Route::post('api/:version/auth/group/handel', 'api/:version.Auth/groupHandel');
 Route::get('api/:version/group/user/handel', 'api/:version.Auth/deleteUserGroup');
 Route::post('api/:version/auth/group/rule/save', 'api/:version.Auth/groupRuleSave');
 Route::get('api/:version/auth/rules', 'api/:version.Auth/authRules');

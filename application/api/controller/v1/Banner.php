@@ -251,7 +251,7 @@ class Banner extends BaseController
      * @api {GET} /api/v1/banner  18-CMS获取指定banner信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  CMS获取指定banner信息:首页轮博徒/家政/维修
+     * @apiDescription  CMS获取指定banner信息:首页轮图/家政/维修
      * @apiDescription  CMS获取指定分类信息
      * http://mengant.cn/api/v1/banner?id=1
      * @apiParam (请求参数说明) {int} id  轮播图id
