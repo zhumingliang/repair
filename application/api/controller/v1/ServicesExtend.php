@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\IndexCmsV;
 use app\api\model\IndexServiceT;
+use app\api\model\ServiceAllV;
 use app\api\model\ServiceV;
 use app\api\model\ShopServiceV;
 use app\api\service\ExtendService;
@@ -91,7 +92,7 @@ class ServicesExtend extends BaseController
      */
     public function handel()
     {
-       // (new ExtendValidate())->scene('handel')->goCheck();
+        // (new ExtendValidate())->scene('handel')->goCheck();
         $params = $this->request->param();
         ExtendService::handel($params['id'], $params['type']);
         return json(new  SuccessMessage());
@@ -270,7 +271,7 @@ class ServicesExtend extends BaseController
 
     /**
      * @api {GET} /api/v1/index/services/all   182-首页服务设置-获取所有服务
-     * @apiGroup  MINI
+     * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription
      * http://mengant.cn/api/v1/index/services/all?type=1
@@ -292,10 +293,9 @@ class ServicesExtend extends BaseController
     {
         $sql_join = preJoinSqlForGetDShops(TokenService::getCurrentTokenVar('province'), TokenService::getCurrentTokenVar('city'),
             TokenService::getCurrentTokenVar('area'));
-        $list = ServiceV::where('state', 1)
-            ->where('type', $type)
+        $list = ServiceAllV::where('type', $type)
             ->whereRaw($sql_join)
-            ->field('s_id as id,service_name')
+            ->field('id,service_name')
             ->order('create_time desc')
             ->select();
         return json($list);
