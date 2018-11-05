@@ -20,9 +20,6 @@ class CollectionServicesT extends Model
         return $this->prefixImgUrl($value, $data);
     }
 
-    public function getPriceAttr($value, $data){
-        return $value/100;
-    }
 
     public function service()
     {
@@ -33,7 +30,7 @@ class CollectionServicesT extends Model
     public static function getList($page, $size)
     {
         $pagingData = self::with(['service' => function ($query) {
-            $query->field('id,cover,name,price');
+            $query->field('id,cover,name,price/100 as price');
         }])->where('state', '=', CommonEnum::STATE_IS_OK)
             ->where('u_id', '=', Token::getCurrentUid())
             ->field('id,s_id')
