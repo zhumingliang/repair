@@ -27,6 +27,14 @@ class CollectionServicesT extends Model
             's_id', 'id');
     }
 
+    /**
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
     public static function getList($page, $size)
     {
         $pagingData = self::with(['service' => function ($query) {
