@@ -105,6 +105,10 @@ class Pay
             $order->join_money = ($order->origin_money) * $discount;
         }
 
+        if ($order->r_id) {
+            UserRedT::update(['state' => 2], ['id' => $order->r_id]);
+        }
+
         if (!$order->save()) {
             // LogService::Log('微信支付回调成功后修改订单状态出错，id：' . $this->orderID);
             //修改信息失败
@@ -273,6 +277,10 @@ class Pay
                 ]);
         }
         $this->orderNumber = $order->order_number;
+        if ($this->r_id) {
+            $order->r_id = $this->r_id;
+            $order->save();
+        }
         $status = [
             'pass' => true,
             'orderPrice' => $order->origin_money
