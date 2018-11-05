@@ -103,7 +103,7 @@ Route::get('api/:version/category/cms/list', 'api/:version.Category/getListForCm
 Route::get('api/:version/category', 'api/:version.Category/getTheCategory');
 
 Route::get('api/:version/extend/cms/list', 'api/:version.ServicesExtend/getListForCMS');
-Route::post('api/:version/extend/handel', 'api/:version.Services/Extend/handel');
+Route::post('api/:version/extend/handel', 'api/:version.ServicesExtend/handel');
 Route::get('api/:version/extend/service', 'api/:version.ServicesExtend/getTheService');
 Route::get('api/:version/extend/mini/service', 'api/:version.ServicesExtend/getServiceForMini');
 Route::get('api/:version/extend/house', 'api/:version.ServicesExtend/getHoursList');
