@@ -91,7 +91,7 @@ class ServicesExtend extends BaseController
      */
     public function handel()
     {
-        (new ExtendValidate())->scene('handel')->goCheck();
+       // (new ExtendValidate())->scene('handel')->goCheck();
         $params = $this->request->param();
         ExtendService::handel($params['id'], $params['type']);
         return json(new  SuccessMessage());

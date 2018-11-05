@@ -85,6 +85,7 @@ class Guid extends BaseController
                 'errorCode' => 110002
             ]);
         }
+        return json(new SuccessMessage());
 
     }
 

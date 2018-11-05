@@ -329,7 +329,6 @@ class Withdraw extends BaseController
             ->paginate($size, false, ['page' => $page])->toArray();
 
 
-
         return json($list);
 
 
@@ -399,6 +398,8 @@ class Withdraw extends BaseController
                 'errorCode' => 200010
             ]);
         }
+
+        return json(new SuccessMessage());
 
     }
 
