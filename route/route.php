@@ -25,7 +25,7 @@ Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 Route::get('api/:version/user/list', 'api/:version.User/getUsers');
 
 Route::get('api/:version/behaviors', 'api/:version.Behavior/getList');
-Route::get('api/:version/behavior/handel', 'api/:version.Behavior/handel');
+Route::post('api/:version/behavior/handel', 'api/:version.Behavior/handel');
 
 Route::rule('api/:version/image/save', 'api/:version.Image/save');
 Route::rule('api/:version/image/upload', 'api/:version.Image/upload');
