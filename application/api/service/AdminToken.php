@@ -13,6 +13,7 @@ use app\api\model\AdminT;
 use app\api\model\AuthGroup;
 use app\api\model\AuthGroupAccess;
 use app\api\model\BehaviorLogT;
+use app\api\model\LogT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
@@ -149,8 +150,10 @@ class AdminToken extends Token
             $cache = Cache::get($token);
             $cache = json_decode($cache);
             $cache['v_id'] = $admin->id;
-            var_dump($cache);
             $cache = json_encode($cache);
+            LogT::create([
+                'msg'=>$cache
+            ]);
             $expire_in = config('setting.token_expire_in');
             Cache::set($token, $cache, $expire_in);
             return $token;
