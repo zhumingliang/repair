@@ -88,7 +88,7 @@ class CollectionService
     }
 
     /**
-     * 获取手残列表
+     * 获取收藏列表
      * @param $type
      * @param $page
      * @param $size

@@ -41,22 +41,22 @@ class CollectionServicesT extends Model
         $pagingData = self::with(['service' => function ($query) {
             $query->field('id,cover,name,price/100 as price');
         }])->where('state', '=', CommonEnum::STATE_IS_OK)
-            ->where('u_id', '=',12)
+            ->where('u_id', '=', Token::getCurrentUid())
             ->field('id,s_id')
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])->toArray();
 
 
-       /* if (isset($pagingData['data'])) {
-            $data = $pagingData['data'];
-            if (count($data)) {
-                foreach ($data as $k => $v) {
-                    $data[$k]['service']['price'] =  $data[$k]['service']['price'] / 100;
-                }
-            }
-            $pagingData['data'] = $data;
+        /* if (isset($pagingData['data'])) {
+             $data = $pagingData['data'];
+             if (count($data)) {
+                 foreach ($data as $k => $v) {
+                     $data[$k]['service']['price'] =  $data[$k]['service']['price'] / 100;
+                 }
+             }
+             $pagingData['data'] = $data;
 
-        }*/
+         }*/
 
         return $pagingData;
     }

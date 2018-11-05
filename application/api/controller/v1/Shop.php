@@ -665,9 +665,9 @@ class Shop extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/shop/frozen?id=1&state
+     * http://mengant.cn/api/v1/shop/frozen?id=1&state=1
      * @apiParam (请求参数说明) {int} id  商家id
-     * @apiParam (请求参数说明) {int} state  商家id
+     * @apiParam (请求参数说明) {int} state   状态 1 | 开启； 2| 禁用
      * @apiSuccessExample {json} 返回样例:
      *{"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
