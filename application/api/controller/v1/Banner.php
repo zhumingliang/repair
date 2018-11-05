@@ -90,6 +90,7 @@ class Banner extends BaseController
                 'errorCode' => 100002
             ]);
         }
+        return json(new SuccessMessage());
 
     }
 
