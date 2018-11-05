@@ -209,7 +209,7 @@ class Guid extends BaseController
      * @api {POST} /api/v1/guid/init/handel  113-CMS设置小程序初始化时，引导图显示方式
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  管理员删除引导图
+     * @apiDescription
      * @apiExample {POST}  请求样例:
      * {
      * "id": 1,
@@ -228,7 +228,7 @@ class Guid extends BaseController
      */
     public function initHandel($id, $type)
     {
-        $id = GuidT::update(['state' => $type], ['id' => $id]);
+        $id = GuidInitT::update(['type' => $type], ['id' => $id]);
         if (!$id) {
             throw new GuidException(['code' => 401,
                 'msg' => '操作引导图初始化状态失败',
