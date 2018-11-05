@@ -50,7 +50,7 @@ Route::get('api/:version/shop/staff', 'api/:version.Shop/shopStaff');
 Route::get('api/:version/shop/service/list', 'api/:version.Shop/getServiceList');
 Route::post('api/:version/shop/staff/examine', 'api/:version.Shop/examineStaff');
 Route::post('api/:version/shop/staff/delete', 'api/:version.Shop/deleteStaff');
-Route::post('api/:version/shop/service/delete', 'api/:version.Shop/deleteService');
+Route::get('api/:version/shop/service/delete', 'api/:version.Shop/deleteService');
 Route::get('api/:version/shop/service/normal/list', 'api/:version.Shop/getServiceListForNormal');
 Route::get('api/:version/shops/list/cms', 'api/:version.Shop/ShopsForCMS');
 Route::get('api/:version/shop/info/cms', 'api/:version.Shop/shopInfoForCMS');
