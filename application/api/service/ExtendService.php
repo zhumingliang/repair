@@ -14,6 +14,7 @@ use app\api\model\ExtendRecordT;
 use app\api\model\ExtendV;
 use app\api\model\IndexServiceV;
 use app\api\model\ServiceExtendT;
+use app\api\model\ServiceListV;
 use app\api\model\ServicesExtendV;
 use app\api\model\ServicesT;
 use app\api\model\ServiceV;
@@ -186,16 +187,29 @@ class ExtendService
     }
 
     /**
-     * 首页维修服务推广
+     * 首页服务点击更多
      * @param $area
-     * @param $size
      * @param $page
+     * @param $size
      * @param $c_id
      * @return \think\Paginator
+     * @throws \think\exception\DbException
      */
-    public static function getRepairList($area, $page, $size, $c_id)
+    public static function getRepairList($area, $page, $size, $c_id,$type)
     {
-        return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_REPAIR);
+
+        $pagingData = ServiceListV::where('area', '=', $area)
+            ->where('type', '=', $type)
+            ->where(function ($query) use ($c_id) {
+                if ($c_id) {
+                    $query->where('c_id', '=', $c_id);
+                }
+            })
+            ->hidden(['type', 'province', 'city', 'c_id', 'shop_name'])
+            ->paginate($size, false, ['page' => $page]);
+
+        return $pagingData;
+
 
     }
 
