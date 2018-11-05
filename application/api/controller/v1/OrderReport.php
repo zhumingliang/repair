@@ -174,9 +174,9 @@ class OrderReport extends BaseController
      * @throws \think\exception\DbException
      */
     public
-    function exportWithCity($province, $city, $time_begin, $time_end)
+    function exportWithCity($province, $city, $time_begin, $time_end,$token)
     {
-        (new OrderReportService())->exportReportForCity($province, $city, $time_begin, $time_end);
+        (new OrderReportService())->exportReportForCity($province, $city, $time_begin, $time_end,$token);
 
     }
 

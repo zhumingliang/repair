@@ -149,6 +149,7 @@ class AdminToken extends Token
             $cache = Cache::get($token);
             $cache = json_decode($cache);
             $cache['v_id'] = $admin->id;
+            print_r($cache);
             $cache = json_encode($cache);
             $expire_in = config('setting.token_expire_in');
             Cache::set($token, $cache, $expire_in);
