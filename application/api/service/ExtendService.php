@@ -211,7 +211,6 @@ class ExtendService
     public static function getServiceForMini($id)
     {
         $service = ServicesT::getService($id);
-        $service['price'] = $service['price'] / 100;
         $service['collection'] = self::checkCollection($id);
         return $service;
 
@@ -230,8 +229,10 @@ class ExtendService
      */
     private static function checkCollection($id)
     {
-        $col = CollectionServicesT::where('u_id', '=', Token::getCurrentUid())
+        $col = CollectionServicesT::
+        where('u_id', '=', Token::getCurrentUid())
             ->where('s_id', '=', $id)
+            //->where('state', CommonEnum::STATE_IS_OK)
             ->find();
 
         if (!$col) {
