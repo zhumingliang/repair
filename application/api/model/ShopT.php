@@ -199,7 +199,7 @@ class ShopT extends BaseModel
     {
         $sql = preJoinSqlForGetDShops($province, $city, $area);
 
-        $pagingData = self::whereIn('state', '2,4')
+        $pagingData = self::whereIn('state', [2,4])
             ->whereRaw($sql)
             ->where(function ($query) use ($key) {
                 if ($key) {
