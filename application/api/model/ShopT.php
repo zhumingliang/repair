@@ -43,7 +43,7 @@ class ShopT extends BaseModel
                         ->where('state', '=', 1);
                 }
             ])
-            ->hidden(['u_id', 'create_time', 'update_time', 'frozen'])
+            ->hidden(['u_id', 'create_time', 'update_time'])
             ->find();
         return $info;
 
