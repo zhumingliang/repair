@@ -15,10 +15,10 @@ use app\lib\enum\UserEnum;
 
 class CircleT extends BaseModel
 {
-    public function getHeadImgAttr($value, $data)
+   /* public function getHeadImgAttr($value, $data)
     {
         return $this->prefixImgUrl($value, $data);
-    }
+    }*/
 
     public function category()
     {

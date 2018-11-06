@@ -424,7 +424,7 @@ class Circle extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/circle/save  61-CMS修改圈子文章
+     * @api {POST} /api/v1/circle/update  61-CMS修改圈子文章
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  CMS修改圈子文章
