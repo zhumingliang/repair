@@ -103,11 +103,13 @@ class Pay
         if ($this->type == 1 || $this->type == 2) {
             $discount = $this->getDiscount();
             $order->join_money = ($order->origin_money) * $discount;
+
+            if (isset($order->r_id)) {
+                UserRedT::update(['state' => 2], ['id' => $order->r_id]);
+            }
         }
 
-        if ($order->r_id) {
-            UserRedT::update(['state' => 2], ['id' => $order->r_id]);
-        }
+
 
         if (!$order->save()) {
             // LogService::Log('微信支付回调成功后修改订单状态出错，id：' . $this->orderID);
