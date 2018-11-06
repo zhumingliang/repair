@@ -19,7 +19,7 @@ use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
 use think\Exception;
 use think\facade\Cache;
-use think\Request;
+use think\facade\Request;
 
 class AdminToken extends Token
 {
