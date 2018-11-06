@@ -37,7 +37,6 @@ class ShopT extends BaseModel
         $info = self::where('u_id', '=', $u_id)
             ->where('frozen', CommonEnum::STATE_IS_OK)
             ->whereIn('state',[1,2,4])
-            ->whereRaw('')
             ->with([
                 'imgs' => function ($query) {
                     $query->with(['imgUrl'])
