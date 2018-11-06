@@ -160,7 +160,7 @@ class Demand extends BaseController
      * http://mengant.cn/api/v1/demand?id=1
      * @apiParam (请求参数说明) {int} id 需求id
      * @apiSuccessExample {json} 返回样例:
-     * {"id":1,"name":"朱明良","phone":"18956225230","des":"修马桶","province":"安徽省","city":"铜陵市","area":"铜官山区","address":"高速","time_begin":"2018-10-01 08:00:00","time_end":"2018-10-01 12:00:00","origin_money":800,"imgs":[{"d_id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"d_id":1,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"d_id":1,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]}
+     * {"id":1,"name":"朱明良","phone":"18956225230","des":"修马桶","province":"安徽省","city":"铜陵市","area":"铜官山区","address":"高速","time_begin":"2018-10-01 08:00:00","time_end":"2018-10-01 12:00:00","cancel":1,"origin_money":800,"imgs":[{"d_id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"d_id":1,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"d_id":1,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]}
      * @apiSuccess (返回参数说明) {String} name 发布人
      * @apiSuccess (返回参数说明) {String} phone 联系方式
      * @apiSuccess (返回参数说明) {String} des 需求描述
@@ -171,11 +171,14 @@ class Demand extends BaseController
      * @apiSuccess (返回参数说明) {int} origin_money 酬金
      * @apiSuccess (返回参数说明) {String} time_begin 开始时间
      * @apiSuccess (返回参数说明) {String} time_end 结束时间
+     * @apiSuccess (返回参数说明) {int} cancel 是否可以取消需求订单 1 |  可以；0 | 不可以
      * @apiSuccess (返回参数说明) {Obj} imgs 图片对象
      * @apiSuccess (返回参数说明) {String} url 图片地址
      *
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -190,11 +193,15 @@ class Demand extends BaseController
                     ->where('state', '=', 1);
             }])
             ->where('id', $id)
-            ->hidden(['create_time', 'type', 'update_time', 'u_id', 'longitude', 'state', 'latitude', 'money'])
+            ->hidden(['create_time', 'type', 'update_time', 'longitude', 'state', 'latitude', 'money'])
             ->find();
 
         $demand['origin_money'] = $demand['origin_money'] / 100;
-
+        if (\app\api\service\Token::getCurrentUid() == $demand->u_id) {
+            $demand['cancel'] = 1;
+        } else {
+            $demand['cancel'] = 0;
+        }
 
         return json($demand);
 
