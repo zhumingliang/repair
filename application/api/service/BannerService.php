@@ -90,13 +90,13 @@ class BannerService
                 ->order('create_time desc')
                 ->select();
         } else if ($type == self::JOIN) {
-            //$province = $params['province'];
+            $province = $params['province'];
             $city = $params['city'];
             $area = $params['area'];
+            $sql = preJoinSql($province, $city, $area);
             $list = BannerMiniV::where('state', '=', CommonEnum::PASS)
                 ->where('category', '=', $params['category'])
-                ->where('city', '=', $city)
-                ->whereIn('area', [$area, '全部'], 'or')
+                ->whereRaw($sql)
                 ->field('id,title,des,url')
                 ->select();
         }

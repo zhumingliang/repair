@@ -84,6 +84,8 @@ class ShopT extends BaseModel
     public static function getShopInfoForEdit($u_id)
     {
         $info = self::where('u_id', '=', $u_id)
+            ->where('frozen', CommonEnum::STATE_IS_OK)
+            ->where('state',4)
             ->with([
                 'staffs' => function ($query) {
                     $query->with(['imgUrl'])
