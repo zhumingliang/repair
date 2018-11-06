@@ -4,6 +4,7 @@
 namespace app\api\service;
 
 
+use app\api\model\LogT;
 use app\api\model\UserT;
 use app\lib\enum\RedEnum;
 use app\lib\exception\TokenException;
@@ -166,7 +167,9 @@ class UserToken extends Token
         $user = UserModel::with('shop')
             ->where('id', $u_id)
             ->find();
+        print_r($user);
         if (isset($user->shop) && ($user->shop->state == 2 || $user->shop->state == 4)) {
+            LogT::create(['msg'=>'error']);
             $cachedValue['shop_id'] = $user->shop->id;
             $cachedValue['province'] = $user->shop->province;
             $cachedValue['city'] = $user->shop->city;
