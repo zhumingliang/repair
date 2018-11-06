@@ -117,7 +117,7 @@ class AdminToken extends Token
         try {
 
             $admin = AdminT::where('phone', '=', $this->phone)
-                ->with('adminJoin')
+                ->where('grade', 3)
                 ->find();
 
             if (is_null($admin)) {
