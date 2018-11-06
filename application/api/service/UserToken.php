@@ -5,7 +5,9 @@ namespace app\api\service;
 
 
 use app\api\model\LogT;
+use app\api\model\ShopT;
 use app\api\model\UserT;
+use app\lib\enum\CommonEnum;
 use app\lib\enum\RedEnum;
 use app\lib\exception\TokenException;
 use app\lib\exception\WeChatException;
@@ -164,15 +166,18 @@ class UserToken extends Token
         $cachedValue['province'] = '';
         $cachedValue['city'] = '';
         $cachedValue['area'] = '';
-        $user = UserModel::with('shop')
-            ->where('id', $u_id)
+        $user = UserModel::where('id', $u_id)
             ->find();
-        if (isset($user->shop) && ($user->shop->frozen == 1) && ($user->shop->state == 2 || $user->shop->state == 4)) {
-            LogT::create(['msg' => $user->shop->frozen.'/'.$user->shop->state]);
-            $cachedValue['shop_id'] = $user->shop->id;
-            $cachedValue['province'] = $user->shop->province;
-            $cachedValue['city'] = $user->shop->city;
-            $cachedValue['area'] = $user->shop->area;
+
+        $shop_info = ShopT::where('u_id', $u_id)
+            ->where('frozen', CommonEnum::STATE_IS_OK)
+            ->whereIn('state', [2, 4])
+            ->find();
+        if ($shop_info) {
+            $cachedValue['shop_id'] = $shop_info->id;
+            $cachedValue['province'] = $shop_info->province;
+            $cachedValue['city'] = $shop_info->city;
+            $cachedValue['area'] = $shop_info->area;
         }
         $cachedValue['u_id'] = $u_id;
         $cachedValue['phone'] = $user['phone'];
