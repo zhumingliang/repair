@@ -92,6 +92,7 @@ class Admin extends BaseController
         //(new AdminValidate())->scene('handel')->goCheck();
         $id = $this->request->param('id');
         $state = $this->request->param('state');
+        $admin = AdminT::where('id', $id)->find();
         $res = AdminT::update(['state' => $state], ['id' => $id]);
         if (!$res) {
             throw new AdminException(
@@ -101,6 +102,10 @@ class Admin extends BaseController
                 ]
             );
         }
+        if ($admin->grade == 2) {
+            AdminJoinT::update(['state' => $state], ['admin_id' => $id]);
+        }
+
         return json(new  SuccessMessage());
 
 

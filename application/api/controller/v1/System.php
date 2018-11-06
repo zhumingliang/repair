@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\AdminJoinT;
 use app\api\model\SystemDemandT;
 use app\api\model\SystemInvoiceT;
 use app\api\model\SystemMsgT;
@@ -17,6 +18,7 @@ use app\api\model\SystemPhoneT;
 use app\api\model\SystemShopGradeT;
 use app\api\model\SystemTimeT;
 use app\api\model\SystemTipT;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\SystemException;
 use app\lib\exception\SuccessMessage;
 use think\response\Json;
@@ -760,6 +762,47 @@ class System extends BaseController
         }
 
         return json(new SuccessMessage());
+    }
+
+    /**
+     * @api {GET} /api/v1/check/join  187-检测当前地区是否有加盟商
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * http://mengant.cn/api/v1/check/join?province=安徽省&city=铜陵市&area=郊区
+     * @apiParam (请求参数说明) {String} province  省
+     * @apiParam (请求参数说明) {String} city   市
+     * @apiParam (请求参数说明) {String} area   区
+     * @apiSuccessExample {json} 返回样例:
+     * {"join_msg":"本地区无加盟商，加盟热线：400-1352766"}
+     * @apiSuccess (返回参数说明) {String} join_msg  无加盟商显示语：为空则不用显示
+     *
+     * @param $province
+     * @param $city
+     * @param $area
+     * @return Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function checkJoin($province, $city, $area)
+    {
+        $sql = preJoinSql($province, $city, $area);
+        $count = AdminJoinT::where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
+        if ($count) {
+            return \json(['join_msg' => '']);
+        }
+
+        $info = SystemTipT::find();
+        if ($info) {
+            return \json(['join_msg' => $info->no_join]);
+
+        } else {
+            return \json(['join_msg' => '']);
+        }
+
     }
 
 
