@@ -167,7 +167,6 @@ class UserToken extends Token
         $user = UserModel::with('shop')
             ->where('id', $u_id)
             ->find();
-        print_r($user);
         if (isset($user->shop) && ($user->shop->state == 2 || $user->shop->state == 4)) {
             LogT::create(['msg'=>'error']);
             $cachedValue['shop_id'] = $user->shop->id;
