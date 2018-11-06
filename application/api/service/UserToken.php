@@ -168,7 +168,7 @@ class UserToken extends Token
             ->where('id', $u_id)
             ->find();
         if (isset($user->shop) && ($user->shop->frozen == 1) && ($user->shop->state == 2 || $user->shop->state == 4)) {
-            LogT::create(['msg' => 'error']);
+            LogT::create(['msg' => $user->shop->frozen.'/'.$user->shop->state]);
             $cachedValue['shop_id'] = $user->shop->id;
             $cachedValue['province'] = $user->shop->province;
             $cachedValue['city'] = $user->shop->city;
