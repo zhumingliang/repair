@@ -105,8 +105,6 @@ class Village extends BaseController
      * https://mengant.cn/api/v1/village/export?time_begin=2018-08-01&time_end=2018-10-30
      * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {String} time_end 结束时间
-     * @param $time_begin
-     * @param $time_end
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
@@ -117,6 +115,7 @@ class Village extends BaseController
     {
         $token = $this->request->param('token');
         $time_begin = $this->request->param('time_begin');
+        echo $time_begin;
         $time_end = $this->request->param('time_end');
 
         $grade = TokenService::getCurrentTokenVarWithToken('grade', $token);
@@ -131,7 +130,6 @@ class Village extends BaseController
                 ->whereTime('create_time', 'between', [$time_begin, $time_end])
                 ->field('shop_id,shop_name,order_type,phone,money,create_time')
                 ->select();
-
         } else {
             $list = VillageRecordV::where('admin_id', TokenService::getCurrentTokenVarWithToken('u_id', $token))
                 ->whereTime('create_time', 'between', [$time_begin, $time_end])
