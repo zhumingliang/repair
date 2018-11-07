@@ -91,7 +91,7 @@ class CircleT extends BaseModel
         $pagingData = self::with(['category' => function ($query) {
             $query->field('id,name');
         }])->where('state', '<', 4)
-            ->where('area', $area)
+            ->where('parent_id', Token::getCurrentUid())
             ->hidden(['c_id', 'update_time', 'u_id', 'head_img', 'content', 'parent_id', 'province', 'area'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);

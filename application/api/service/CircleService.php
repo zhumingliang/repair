@@ -121,11 +121,11 @@ class CircleService
         $params['province'] = Token::getCurrentTokenVar('province');
         $params['city'] = $grade == Token::getCurrentTokenVar('city');
         $params['area'] = $grade == Token::getCurrentTokenVar('area');
-        $params['parent_id'] = Token::getCurrentTokenVar('grade') == UserEnum::USER_GRADE_JOIN ? Token::getCurrentUid() : Token::getCurrentTokenVar('parent_id');
+        $params['parent_id'] = Token::getCurrentUid();
 
-        if (isset($params['head_img'] )&& (!empty($params['head_img']))){
+        if (isset($params['head_img']) && (!empty($params['head_img']))) {
             $params['head_img'] = ImageService::getImageUrl($params['head_img']);
-    }
+        }
 
         $id = CircleT::create($params);
         if (!$id) {
