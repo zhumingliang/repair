@@ -113,14 +113,13 @@ class CircleService
     public static function saveCircle($params)
     {
         $u_id = Token::getCurrentUid();
-        $grade = Token::getCurrentTokenVar('grade');
         $params['u_id'] = $u_id;
         $params['state'] = self::checkCircleDefault() == self::CIRCLE_NEED_EXAMINE ? CommonEnum::READY : CommonEnum::PASS;
         $params['top'] = self::CIRCLE_NOT_TOP;
         $params['read_num'] = 0;
         $params['province'] = Token::getCurrentTokenVar('province');
-        $params['city'] = $grade == Token::getCurrentTokenVar('city');
-        $params['area'] = $grade == Token::getCurrentTokenVar('area');
+        $params['city'] =Token::getCurrentTokenVar('city');
+        $params['area'] =Token::getCurrentTokenVar('area');
         $params['parent_id'] = Token::getCurrentUid();
 
         if (isset($params['head_img']) && (!empty($params['head_img']))) {
