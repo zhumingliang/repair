@@ -19,6 +19,7 @@ use app\lib\exception\AdminException;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
 use think\response\Json;
+use app\api\service\Token as TokenService;
 
 class Admin extends BaseController
 {
@@ -54,10 +55,33 @@ class Admin extends BaseController
         $params['pwd'] = sha1($params['pwd']);
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['grade'] = UserEnum::USER_MINI_VILLAGE;
-        $params['parent_id'] = \app\api\service\Token::getCurrentUid();
+        $params['parent_id'] = TokenService::getCurrentUid();
         $admin = AdminT::create($params);
         if (!$admin) {
             throw new AdminException();
+        }
+
+        $grade = TokenService::getCurrentTokenVar('grade');
+        if ($grade == UserEnum::USER_GRADE_ADMIN) {
+            $join['province'] = $params['province'];
+            $join['city'] = $params['city'];
+            $join['area'] = $params['area'];
+        } else {
+            $join['province'] = TokenService::getCurrentTokenVar('province');
+            $join['city'] = TokenService::getCurrentTokenVar('city');
+            $join['area'] = TokenService::getCurrentTokenVar('area');
+
+        }
+        $join['state'] = CommonEnum::STATE_IS_OK;
+        $join['admin_id'] = $admin->id;
+        $joinT = AdminJoinT::create($join);
+        if (!$joinT) {
+            throw new AdminException(
+                ['code' => 401,
+                    'msg' => '新增小区关联关系失败',
+                    'errorCode' => 24002
+                ]
+            );
 
         }
         return json(new SuccessMessage());
@@ -80,11 +104,11 @@ class Admin extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     *
-     * 小区账户 状态修改
      * @return Json
      * @throws AdminException
-     * @throws \app\lib\exception\ParameterException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function handel()
     {
@@ -154,7 +178,7 @@ class Admin extends BaseController
         $admin['pwd'] = sha1($params['pwd']);
         $admin['state'] = CommonEnum::STATE_IS_OK;
         $admin['grade'] = UserEnum::USER_GRADE_JOIN;
-        $admin['parent_id'] = \app\api\service\Token::getCurrentUid();
+        $admin['parent_id'] = TokenService::getCurrentUid();
         $adminT = AdminT::create($admin);
         if (!$adminT) {
             throw new AdminException(
