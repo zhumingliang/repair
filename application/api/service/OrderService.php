@@ -325,7 +325,6 @@ class OrderService
 
     }
 
-
     private static function checkCommentRed()
     {
         $count = OrderCommentT::where('u_id', Token::getCurrentUid())
@@ -547,6 +546,12 @@ class OrderService
             ->field('u_id')
             ->find();
         return $info['u_id'];
+    }
+
+    public function ordersToBanner($province, $city, $area, $types)
+    {
+        $sql = preJoinSql($province, $city, $area);
+
     }
 
 }

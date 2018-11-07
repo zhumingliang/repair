@@ -142,6 +142,7 @@ class User extends BaseController
      * @apiSuccess (返回参数说明) {int} login_count 登录次数
      * @apiSuccess (返回参数说明) {String} update_time 最后登录时间
      * @apiSuccess (返回参数说明) {int} type 用户类别 ：1 | 平台用户；2 | 小程序用户
+     * @apiSuccess (返回参数说明) {String} phone 用户手机号
      * @param int $page
      * @param int $size
      * @param string $key
@@ -151,7 +152,7 @@ class User extends BaseController
     public function getUsers($page = 1, $size = 20, $key = '')
     {
 
-        $list = UserV::field('id,openid,nickName,login_count,update_time,state')
+        $list = UserV::field('id,openid,nickName,login_count,update_time,state,phone')
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('id|nickName', 'like', '%' . $key . '%');

@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\OrderReportV;
 use app\api\service\OrderReportService;
+use app\api\service\OrderService;
 
 class OrderReport extends BaseController
 {
@@ -175,9 +176,9 @@ class OrderReport extends BaseController
      * @throws \think\exception\DbException
      */
     public
-    function exportWithCity($province, $city, $time_begin, $time_end,$token)
+    function exportWithCity($province, $city, $time_begin, $time_end, $token)
     {
-        (new OrderReportService())->exportReportForCity($province, $city, $time_begin, $time_end,$token);
+        (new OrderReportService())->exportReportForCity($province, $city, $time_begin, $time_end, $token);
 
     }
 
@@ -197,9 +198,17 @@ class OrderReport extends BaseController
      * @throws \think\Exception
      */
     public
-    function exportWithoutCity($time_begin, $time_end,$token)
+    function exportWithoutCity($time_begin, $time_end, $token)
     {
-        (new OrderReportService())->exportReport($time_begin, $time_end,$token);
+        (new OrderReportService())->exportReport($time_begin, $time_end, $token);
+
+    }
+
+
+    public function getOrdersToBanner($province, $city, $area, $types)
+    {
+        $list=(new OrderService())->ordersToBanner($province, $city, $area, $types);
+
 
     }
 

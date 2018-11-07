@@ -388,7 +388,6 @@ class ServicesExtend extends BaseController
         return json(new SuccessMessage());
     }
 
-
     /**
      * @api {GET} /api/v1/index/service/list 185-首页服务设置-获取首页服务列表（维修/家政）
      * @apiGroup  CMS
@@ -434,6 +433,8 @@ class ServicesExtend extends BaseController
 
 
     }
+
+
 
 
 }
