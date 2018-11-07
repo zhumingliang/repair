@@ -130,7 +130,7 @@ Route::get('api/:version/city/discount/list', 'api/:version.CityDiscount/getList
 Route::get('api/:version/comment/service', 'api/:version.Comment/getCommentForService');
 Route::get('api/:version/comment/list', 'api/:version.Comment/getCommentsForCMS');
 Route::get('api/:version/comment', 'api/:version.Comment/getTheComment');
-Route::get('api/:version/comment/handel', 'api/:version.Comment/commentHandel');
+Route::post('api/:version/comment/handel', 'api/:version.Comment/commentHandel');
 
 
 Route::post('api/:version/rank/save', 'api/:version.Rank/save');
