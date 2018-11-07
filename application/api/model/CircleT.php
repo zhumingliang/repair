@@ -99,7 +99,6 @@ class CircleT extends BaseModel
         return $pagingData;
     }
 
-
     public static function getListForMINI($page, $size, $province, $city, $area, $c_id)
     {
         $pagingData = self::where('state', '=', CommonEnum::PASS)
@@ -112,7 +111,6 @@ class CircleT extends BaseModel
         return $pagingData;
 
     }
-
 
     /**
      * @param $id

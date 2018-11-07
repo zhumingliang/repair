@@ -18,6 +18,7 @@ use app\api\model\CommentZanT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\CircleException;
+use function PHPSTORM_META\elementType;
 
 class CircleService
 {
@@ -47,18 +48,33 @@ class CircleService
                 ->paginate($size, false, ['page' => $page]);
 
         } else if ($grade == UserEnum::USER_GRADE_JOIN) {
-            $province = Token::getCurrentTokenVar('province');
-            $city = Token::getCurrentTokenVar('city');
-            $area = Token::getCurrentTokenVar('area');
-            $sql = preJoinSql($province, $city, $area);
+            $list = CircleCategoryT::where('state', CommonEnum::STATE_IS_OK)
+                ->whereRaw(self::getSql())
+                ->hidden(['state', 'create_time', 'update_time', 'province', 'city', 'area'])
+                ->select();
+        } else if ($grade == UserEnum::USER_GRADE_VILLAGE) {
             $list = CircleCategoryT::where('state', '=', CommonEnum::STATE_IS_OK)
-                ->whereRaw($sql)
+                ->whereRaw(self::getSql())
+                ->whereIn('name', ["失物招领", "物业通知"])
                 ->hidden(['state', 'create_time', 'update_time', 'province', 'city', 'area'])
                 ->select();
         }
 
-
         return $list;
+    }
+
+    /**
+     * @return string
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    private static function getSql()
+    {
+        $province = Token::getCurrentTokenVar('province');
+        $city = Token::getCurrentTokenVar('city');
+        $area = Token::getCurrentTokenVar('area');
+        $sql = preJoinSqlForGetDShops($province, $city, $area);
+        return $sql;
     }
 
     /**
@@ -102,14 +118,14 @@ class CircleService
         $params['state'] = self::checkCircleDefault() == self::CIRCLE_NEED_EXAMINE ? CommonEnum::READY : CommonEnum::PASS;
         $params['top'] = self::CIRCLE_NOT_TOP;
         $params['read_num'] = 0;
-        $params['province'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('province');
-        $params['city'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('city');
-        $params['area'] = $grade == UserEnum::USER_GRADE_ADMIN ? "全部" : Token::getCurrentTokenVar('area');
+        $params['province'] = Token::getCurrentTokenVar('province');
+        $params['city'] = $grade == Token::getCurrentTokenVar('city');
+        $params['area'] = $grade == Token::getCurrentTokenVar('area');
         $params['parent_id'] = Token::getCurrentTokenVar('grade') == UserEnum::USER_GRADE_JOIN ? Token::getCurrentUid() : Token::getCurrentTokenVar('parent_id');
 
-        if (isset($params['head_img'])) {
+        if (isset($params['head_img'] )&& (!empty($params['head_img']))){
             $params['head_img'] = ImageService::getImageUrl($params['head_img']);
-        }
+    }
 
         $id = CircleT::create($params);
         if (!$id) {
