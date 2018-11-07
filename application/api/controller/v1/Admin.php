@@ -18,6 +18,8 @@ use app\lib\enum\UserEnum;
 use app\lib\exception\AdminException;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
+use think\Db;
+use think\Exception;
 use think\response\Json;
 use app\api\service\Token as TokenService;
 
@@ -50,41 +52,51 @@ class Admin extends BaseController
      */
     public function addVillage()
     {
-        (new AdminValidate())->scene('village')->goCheck();
-        $params = $this->request->param();
-        $params['pwd'] = sha1($params['pwd']);
-        $params['state'] = CommonEnum::STATE_IS_OK;
-        $params['grade'] = UserEnum::USER_MINI_VILLAGE;
-        $params['parent_id'] = TokenService::getCurrentUid();
-        $admin = AdminT::create($params);
-        if (!$admin) {
-            throw new AdminException();
+        Db::startTrans();
+        try {
+            (new AdminValidate())->scene('village')->goCheck();
+            $params = $this->request->param();
+            $params['pwd'] = sha1($params['pwd']);
+            $params['state'] = CommonEnum::STATE_IS_OK;
+            $params['grade'] = UserEnum::USER_MINI_VILLAGE;
+            $params['parent_id'] = TokenService::getCurrentUid();
+            $admin = AdminT::create($params);
+            if (!$admin) {
+                Db::rollback();
+                throw new AdminException();
+            }
+
+            $grade = TokenService::getCurrentTokenVar('grade');
+            if ($grade == UserEnum::USER_GRADE_ADMIN) {
+                $join['province'] = $params['province'];
+                $join['city'] = $params['city'];
+                $join['area'] = $params['area'];
+            } else {
+                $join['province'] = TokenService::getCurrentTokenVar('province');
+                $join['city'] = TokenService::getCurrentTokenVar('city');
+                $join['area'] = TokenService::getCurrentTokenVar('area');
+
+            }
+            $join['state'] = CommonEnum::STATE_IS_OK;
+            $join['admin_id'] = $admin->id;
+            $joinT = AdminJoinT::create($join);
+            if (!$joinT) {
+                Db::rollback();
+                throw new AdminException(
+                    ['code' => 401,
+                        'msg' => '新增小区关联关系失败',
+                        'errorCode' => 24002
+                    ]
+                );
+
+            }
+            Db::commit();
+            return json(new SuccessMessage());
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
         }
 
-        $grade = TokenService::getCurrentTokenVar('grade');
-        if ($grade == UserEnum::USER_GRADE_ADMIN) {
-            $join['province'] = $params['province'];
-            $join['city'] = $params['city'];
-            $join['area'] = $params['area'];
-        } else {
-            $join['province'] = TokenService::getCurrentTokenVar('province');
-            $join['city'] = TokenService::getCurrentTokenVar('city');
-            $join['area'] = TokenService::getCurrentTokenVar('area');
-
-        }
-        $join['state'] = CommonEnum::STATE_IS_OK;
-        $join['admin_id'] = $admin->id;
-        $joinT = AdminJoinT::create($join);
-        if (!$joinT) {
-            throw new AdminException(
-                ['code' => 401,
-                    'msg' => '新增小区关联关系失败',
-                    'errorCode' => 24002
-                ]
-            );
-
-        }
-        return json(new SuccessMessage());
 
     }
 
@@ -162,56 +174,60 @@ class Admin extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * 新增加盟商
-     * @return \think\response\Json
-     * @throws AdminException
-     * @throws \app\lib\exception\ParameterException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
+     * @return Json
+     * @throws Exception
      */
     public function addJoin()
     {
-        (new AdminValidate())->scene('join')->goCheck();
-        $params = $this->request->param();
-        $admin['phone'] = $params['phone'];
-        $admin['username'] = $params['username'];
-        $admin['pwd'] = sha1($params['pwd']);
-        $admin['state'] = CommonEnum::STATE_IS_OK;
-        $admin['grade'] = UserEnum::USER_GRADE_JOIN;
-        $admin['parent_id'] = TokenService::getCurrentUid();
-        $adminT = AdminT::create($admin);
-        if (!$adminT) {
-            throw new AdminException(
-                ['code' => 401,
-                    'msg' => '新增加盟商失败',
-                    'errorCode' => 24002
-                ]
-            );
+        Db::startTrans();
+        try {
+            (new AdminValidate())->scene('join')->goCheck();
+            $params = $this->request->param();
+            $admin['phone'] = $params['phone'];
+            $admin['username'] = $params['username'];
+            $admin['pwd'] = sha1($params['pwd']);
+            $admin['state'] = CommonEnum::STATE_IS_OK;
+            $admin['grade'] = UserEnum::USER_GRADE_JOIN;
+            $admin['parent_id'] = TokenService::getCurrentUid();
+            $adminT = AdminT::create($admin);
+            if (!$adminT) {
+                Db::rollback();
+                throw new AdminException(
+                    ['code' => 401,
+                        'msg' => '新增加盟商失败',
+                        'errorCode' => 24002
+                    ]
+                );
 
+            }
+
+
+            $join['province'] = $params['province'];
+            $join['city'] = $params['city'];
+            $join['area'] = $params['area'];
+            $join['rule'] = '1,2,3,4,5,6';
+            $join['email'] = isset($params['email']) ? $params['email'] : '';
+            $join['state'] = CommonEnum::STATE_IS_OK;
+            $join['admin_id'] = $adminT->id;
+            $joinT = AdminJoinT::create($join);
+
+            if (!$joinT) {
+                Db::rollback();
+                throw new AdminException(
+                    ['code' => 401,
+                        'msg' => '新增加盟商关联关系失败',
+                        'errorCode' => 24002
+                    ]
+                );
+
+            }
+
+            Db::commit();
+            return json(new SuccessMessage());
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
         }
-
-
-        $join['province'] = $params['province'];
-        $join['city'] = $params['city'];
-        $join['area'] = $params['area'];
-        $join['rule'] = '1,2,3,4,5,6';
-        $join['email'] = isset($params['email']) ? $params['email'] : '';
-        $join['state'] = CommonEnum::STATE_IS_OK;
-        $join['admin_id'] = $adminT->id;
-        $joinT = AdminJoinT::create($join);
-
-        if (!$joinT) {
-            throw new AdminException(
-                ['code' => 401,
-                    'msg' => '新增加盟商关联关系失败',
-                    'errorCode' => 24002
-                ]
-            );
-
-        }
-
-
-        return json(new SuccessMessage());
 
     }
 
