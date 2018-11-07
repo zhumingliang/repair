@@ -105,6 +105,13 @@ class BannerService
     }
 
 
+    /**
+     * @param $params
+     * @return array|\think\Paginator
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
     public static function getListForCMS($params)
     {
         $type = $params['type'];
