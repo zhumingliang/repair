@@ -15,10 +15,10 @@ use app\lib\enum\UserEnum;
 
 class CircleT extends BaseModel
 {
-   /* public function getHeadImgAttr($value, $data)
-    {
-        return $this->prefixImgUrl($value, $data);
-    }*/
+    /* public function getHeadImgAttr($value, $data)
+     {
+         return $this->prefixImgUrl($value, $data);
+     }*/
 
     public function category()
     {
@@ -58,6 +58,45 @@ class CircleT extends BaseModel
 
         return $pagingData;
 
+    }
+
+    public static function getCirclesForAdmin($page, $size, $state)
+    {
+        $pagingData = self::with(['category' => function ($query) {
+            $query->field('id,name');
+        }])->where('state', '=', $state)
+            ->hidden(['c_id', 'update_time', 'u_id', 'head_img', 'content', 'parent_id', 'province', 'area'])
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+
+        return $pagingData;
+    }
+
+    public static function getCirclesForJoin($page, $size, $state, $province, $city, $area)
+    {
+        $sql = preJoinSqlForGetDShops($province, $city, $area);
+        $pagingData = self::with(['category' => function ($query) {
+            $query->field('id,name');
+        }])->where('state', '=', $state)
+            ->whereRaw($sql)
+            ->hidden(['c_id', 'update_time', 'u_id', 'head_img', 'content', 'parent_id', 'province', 'area'])
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+
+        return $pagingData;
+    }
+
+    public static function getCirclesForVillage($page, $size, $area)
+    {
+        $pagingData = self::with(['category' => function ($query) {
+            $query->field('id,name');
+        }])->where('state', '<', 4)
+            ->where('area', $area)
+            ->hidden(['c_id', 'update_time', 'u_id', 'head_img', 'content', 'parent_id', 'province', 'area'])
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+
+        return $pagingData;
     }
 
 

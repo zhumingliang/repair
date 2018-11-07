@@ -136,9 +136,29 @@ class CircleService
     }
 
 
+    /**
+     * @param $params
+     * @return array|\think\Paginator
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
     public static function getCircleListForCMS($params)
     {
-        $list = CircleT::getListForCms($params['page'], $params['size'], $params['type']);
+        $grade = Token::getCurrentTokenVar('grade');
+        $list = array();
+        if ($grade == UserEnum::USER_GRADE_ADMIN) {
+            $list = CircleT::getCirclesForAdmin($params['page'], $params['size'], $params['type']);
+        } else if ($grade == UserEnum::USER_GRADE_JOIN) {
+            $list = CircleT::getCirclesForJoin($params['page'], $params['size'],
+                $params['type'], Token::getCurrentTokenVar('province'),
+                Token::getCurrentTokenVar('city'),
+                Token::getCurrentTokenVar('area'));
+
+        } else if ($grade == UserEnum::USER_GRADE_VILLAGE) {
+            $list = CircleT::getCirclesForVillage($params['page'],
+                $params['size'], Token::getCurrentTokenVar('area'));
+
+        }
         return $list;
 
     }

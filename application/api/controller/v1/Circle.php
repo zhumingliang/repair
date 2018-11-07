@@ -292,7 +292,7 @@ class Circle extends BaseController
      * "state":2
      * }
      * @apiParam (请求参数说明) {int} id  圈子id
-     * @apiParam (请求参数说明) {String} state   状态类别：2 审核通过；3|删除
+     * @apiParam (请求参数说明) {String} state   状态类别：2 审核通过；3 | 拒绝；4 删除
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -374,10 +374,11 @@ class Circle extends BaseController
      * @apiSuccess (返回参数说明) {int} top 是否置顶
      * @apiSuccess (返回参数说明) {Obj} category 圈子类别对象
      * @apiSuccess (返回参数说明) {String} name 类别名称
-     *
-     *
+     * @apiSuccess (返回参数说明) {int} state 圈子状态：1 | 待审核| 2 审核通过
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      */
     public function getCircleListForCMS()
     {
