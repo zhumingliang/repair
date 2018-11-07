@@ -153,9 +153,36 @@ class Guid extends BaseController
      */
     public function getList()
     {
-        $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
-            ->select();
+        $list = array();
+        if ($this->check()) {
+            $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
+                ->select();
+            return json($list);
+
+        }
         return json($list);
+    }
+
+    private function check()
+    {
+        $system = GuidInitT::find();
+        if ($system->type == 1) {
+            return true;
+        } else if ($system->type == 2) {
+            $nickName = \app\api\service\Token::getCurrentTokenVar('nickName');
+            if (empty($nickName)) {
+                return true;
+            }
+            return false;
+        } else if ($system->type == 3) {
+            $nickName = \app\api\service\Token::getCurrentTokenVar('nickName');
+            if (empty($nickName)) {
+                return false;
+            }
+            return true;
+        }
+
+
     }
 
 

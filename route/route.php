@@ -234,6 +234,8 @@ Route::get('api/:version/report/export', 'api/:version.OrderReport/exportWithout
 Route::get('api/:version/report/demand/admin', 'api/:version.OrderReport/getDemandReportForAdmin');
 Route::get('api/:version/report/service/admin', 'api/:version.OrderReport/getServiceReportForAdmin');
 Route::get('api/:version/report/order/join', 'api/:version.OrderReport/getOrderReportForJoin');
+Route::get('api/:version/order/banner', 'api/:version.OrderReport/getOrdersToBanner');
+
 
 Route::post('api/:version/admin/village/save', 'api/:version.Admin/addVillage');
 Route::post('api/:version/admin/join/save', 'api/:version.Admin/addJoin');

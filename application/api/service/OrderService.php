@@ -14,10 +14,12 @@ use app\api\model\DemandOrderV;
 use app\api\model\DemandT;
 use app\api\model\OrderCommentImgT;
 use app\api\model\OrderCommentT;
+use app\api\model\OrderReportV;
 use app\api\model\OrderUserShopV;
 use app\api\model\ServiceBookingT;
 use app\api\model\ServiceOrderV;
 use app\api\model\ShopT;
+use app\api\model\SystemDemandT;
 use app\api\model\SystemTimeT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\OrderEnum;
@@ -548,9 +550,50 @@ class OrderService
         return $info['u_id'];
     }
 
-    public function ordersToBanner($province, $city, $area, $types)
+    /**
+     *  获取轮播信息
+     * @param $province
+     * @param $city
+     * @param $area
+     * @param $type
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function ordersToBanner($province, $city, $area, $type)
     {
         $sql = preJoinSql($province, $city, $area);
+        $system = SystemDemandT::where('id', $type)->find();
+        if ($system) {
+            $time_begin = date('Y-m-d H:i', strtotime('-' . $system->count . ' day',
+                time()));
+
+        } else {
+            $time_begin = date('Y-m-d H:i', strtotime('-' . 30 . ' day',
+                time()));
+
+        }
+        if ($type == 3) {
+            $list = OrderReportV::whereRaw($sql)
+                ->whereTime('order_time', '>', $time_begin)
+                ->field('user_name,source_name')
+                ->order('order_time desc')
+                ->limit(0, 30)
+                ->select();
+            return $list;
+
+
+        } else {
+            $list = OrderReportV::where('shop_type', $type)->whereRaw($sql)
+                ->whereTime('order_time', '>', $time_begin)
+                ->field('user_name,source_name')
+                ->order('order_time desc')
+                ->limit(0, 30)
+                ->select();
+            return $list;
+
+        }
 
     }
 

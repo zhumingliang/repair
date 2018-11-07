@@ -205,11 +205,36 @@ class OrderReport extends BaseController
     }
 
 
-    public function getOrdersToBanner($province, $city, $area, $types)
+    /**
+     * @api {GET} /api/v1/order/banner 188-小程序获取服务轮播数据
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/order/banner?province=安徽省&city=铜陵市&area&type=3
+     * @apiParam (请求参数说明) {String} province  省
+     * @apiParam (请求参数说明) {String} city  市
+     * @apiParam (请求参数说明) {String} area 区
+     * @apiParam (请求参数说明) {int} type  数据类别 ： 1 | 维修服务轮播；type=2 家政服务轮播；type=3 全部轮播
+     * 商铺订单类别：1 | 待服务；2 | 待确认；3 | 已完成
+     * @apiSuccessExample {json} 返回样例:
+     * [{"user_name":"测试2222","source_name":"测试222"},{"user_name":"家政需求","source_name":"测试"},{"user_name":"颖儿","source_name":"航空"},{"user_name":"测试保姆","source_name":"测试保姆"},{"user_name":"颖儿","source_name":"航空"},{"user_name":"颖儿","source_name":"航空"},{"user_name":"@敬超","source_name":"打酱油"},{"user_name":"@敬超","source_name":"打酱油"},{"user_name":"@敬超","source_name":"打酱油"}]
+     * @apiSuccess (返回参数说明) {String} user_name 用户名
+     * @apiSuccess (返回参数说明) {String} source_name 服务名称
+     *
+     * @param $province
+     * @param $city
+     * @param $area
+     * @param $type
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getOrdersToBanner($province, $city, $area, $type)
     {
-        $list=(new OrderService())->ordersToBanner($province, $city, $area, $types);
-
-
+        $list = (new OrderService())->ordersToBanner($province, $city, $area, $type);
+        return json($list);
     }
 
 
