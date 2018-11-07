@@ -26,10 +26,10 @@ class WxPayConfig
      * 获取地址：https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=2005451881&lang=zh_CN
      * @var string
      */
-    public static $APPID = 'wxd11ca80b97562519';
-    public static $MCHID = '1501271281';
-    public static $KEY = 'qwertyuiopasdfghjklzxcvbnm123456';
-    public static $APPSECRET = '6a2fcc652491dee6c825e8a5cd178ee2';
+    public static $APPID = 'wx21b17ce43511ef1a';
+    public static $MCHID = '1354265502';
+    public static $KEY = '3ec28ec0ac7d564f0dc4e1c795a07d0d';
+    public static $APPSECRET = '5ac02999448781b31bb72528f8b8ceef';
     public static $NOTIFY_URL = 'https://mengant.cn/api/v1/pay/notify';
 
     //=======【证书路径设置】=====================================

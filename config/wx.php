@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'app_id' => 'wxd11ca80b97562519',
+    'app_id' => 'wx21b17ce43511ef1a',
 
-    'app_secret' => '6a2fcc652491dee6c825e8a5cd178ee2',
+    'app_secret' => '5ac02999448781b31bb72528f8b8ceef',
 
     'login_url' => "https://api.weixin.qq.com/sns/jscode2session?" .
         "appid=%s&secret=%s&js_code=%s&grant_type=authorization_code",
