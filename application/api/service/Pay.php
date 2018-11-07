@@ -170,6 +170,7 @@ class Pay
     {
 
         $openid = Token::getCurrentOpenid();
+        //$openid = "osEM-5c9sROCOjGtciBQ1I18stJQ";//Token::getCurrentOpenid();
         if (!$openid) {
             throw new TokenException();
         }
@@ -186,14 +187,13 @@ class Pay
         $input->setTradeType("JSAPI");
         $input->setOpenid($openid);
         $wxOrder = WxPayApi::unifiedOrder($input);
-        print_r($wxOrder);
         if ($wxOrder['return_code'] != 'SUCCESS' ||
             $wxOrder['result_code'] != 'SUCCESS'
         ) {
             throw new PayException(
                 [
                     'code' => 401,
-                    'msg' => '获取微信预支付信息出错',
+                    'msg' => '获取微信预支付信息出错:'.$wxOrder['return_msg'],
                     'errorCode' => 150006
                 ]
             );
