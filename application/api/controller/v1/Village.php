@@ -10,9 +10,11 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\ShopT;
 use app\api\model\VillageRecordT;
 use app\api\model\VillageRecordV;
 use app\api\service\OrderReportService;
+use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\ImageException;
 use app\lib\exception\SuccessMessage;
@@ -59,7 +61,7 @@ class Village extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/village/list 156-小区管理员获取列表
+     * @api {GET} /api/v1/village/list 156-小区管理员-获取进入小区记录列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  小区管理员获取列表

@@ -257,8 +257,8 @@ class WithDrawService
      */
     public static function HandelForShop($id, $state)
     {
-        if ($state == CommonEnum::DELETE) {
-            $res = WithdrawPcT::update(['state' => $state], ['id' => $id]);
+        if ($state == CommonEnum::REFUSE) {
+            $res = WithdrawMiniT::update(['state' => $state], ['id' => $id]);
             if (!$res) {
                 throw  new WithdrawException(
                     ['code' => 401,

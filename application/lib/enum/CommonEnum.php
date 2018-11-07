@@ -21,6 +21,8 @@ class CommonEnum
 
     const PASS = 2;
 
+    const REFUSE = 3;
+
     const DELETE = 3;
 
     const ORDER_STATE_INIT = 99999;
