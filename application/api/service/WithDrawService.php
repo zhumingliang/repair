@@ -292,7 +292,7 @@ class WithDrawService
             ->whereRaw($sql['join_sql'])
             ->paginate($size, false, ['page' => $page])->toArray();
         $list['balance'] = $balance;
-        return json($list);
+        return $list;
     }
 
     /**
