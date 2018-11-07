@@ -260,7 +260,7 @@ class Admin extends BaseController
      */
     public function getVillageList($page = 1, $size = 20, $key = '')
     {
-        $grade = \app\api\service\Token::getCurrentTokenVar('grade');
+        $grade =TokenService::getCurrentTokenVar('grade');
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
             $list = AdminT::getVillagesForAdmin($page, $size, $key);
         } else {

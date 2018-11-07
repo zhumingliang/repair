@@ -38,6 +38,15 @@ class AdminT extends Model
 
     }
 
+    /**
+     * @param $page
+     * @param $size
+     * @param $key
+     * @return array
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
     public static function getVillagesForJoin($page, $size, $key)
     {
         $sql_join = preJoinSqlForGetDShops(Token::getCurrentTokenVar('province'), Token::getCurrentTokenVar('city'),

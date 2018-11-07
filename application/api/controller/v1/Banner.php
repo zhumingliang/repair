@@ -173,7 +173,7 @@ class Banner extends BaseController
      * @api {GET} /api/v1/banner/cms/list 17-CMS获取轮播图列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  小程序获取轮播图列表（首页轮播图/家政/维修模块轮播图）
+     * @apiDescription
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/banner/cms/list?type=1&page=1&size=20
      * @apiParam (请求参数说明) {int}  type 轮播图类别：1 | 平台轮播图；2 | 加盟商轮播图

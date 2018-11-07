@@ -10,16 +10,13 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
-use app\api\model\ShopT;
 use app\api\model\VillageRecordT;
 use app\api\model\VillageRecordV;
 use app\api\service\OrderReportService;
-use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\ImageException;
 use app\lib\exception\SuccessMessage;
 use \app\api\service\Token as TokenService;
-use think\Request;
 
 class Village extends BaseController
 {
@@ -47,7 +44,7 @@ class Village extends BaseController
     public function villageConfirm()
     {
         $params = $this->request->param();
-        $params['admin_id'] = \app\api\service\Token::getCurrentTokenVar('v_id');
+        $params['admin_id'] = TokenService::getCurrentTokenVar('v_id');
         $record = VillageRecordT::create($params);
         if (!$record->id) {
             throw new ImageException(['code' => 401,
@@ -90,7 +87,7 @@ class Village extends BaseController
      */
     public function getList($page, $size)
     {
-        $id = \app\api\service\Token::getCurrentUid();
+        $id = TokenService::getCurrentUid();
         $list = VillageRecordV::where('admin_id', $id)
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
