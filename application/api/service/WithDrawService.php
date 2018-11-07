@@ -274,4 +274,70 @@ class WithDrawService
 
     }
 
+
+    /**
+     * 获取加盟商-资金信息
+     * @param $page
+     * @param $size
+     * @return \think\response\Json
+     * @throws \think\exception\DbException
+     */
+    public function getBalanceListForJoin($page, $size)
+    {
+
+        $sql = $this->getJoinSql();
+        $balance = $this->getBalanceForJoin($sql);
+        $list = JoinBalanceV::order('order_time desc')
+            ->field('order_time,join_money,des')
+            ->whereRaw($sql['join_sql'])
+            ->paginate($size, false, ['page' => $page])->toArray();
+        $list['balance'] = $balance;
+        return json($list);
+    }
+
+    /**
+     * @param $sql
+     * @return float
+     */
+    private function getBalanceForJoin($sql)
+    {
+        //获取余额
+        $balance = JoinBalanceV::where('pay_state', '<', 3)
+            ->whereRaw($sql['order_sql'])
+            ->whereRaw($sql['join_sql'])
+            ->sum('join_money');
+        return $balance;
+
+    }
+
+
+    private function getJoinSql()
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+        $sql = '( comment_id <> 99999 ) ';
+        $sql .= 'OR';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
+        $sql .= 'OR';
+        $sql .= ' ( confirm_id = 2 AND  consult_limit < ' . $consult_limit . ')';
+
+        $province = Token::getCurrentTokenVar('province');
+        $city = Token::getCurrentTokenVar('city');
+        $area = Token::getCurrentTokenVar('area');
+        $sql_join = preJoinSqlForGetDShops($province, $city, $area);
+
+        return [
+            'order_sql' => $sql,
+            'join_sql' => $sql_join
+        ];
+    }
+
 }

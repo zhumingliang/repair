@@ -269,21 +269,7 @@ class Withdraw extends BaseController
      */
     public function getBalanceList($page, $size)
     {
-
-        $province = TokenService::getCurrentTokenVar('province');
-        $city = TokenService::getCurrentTokenVar('city');
-        $area = TokenService::getCurrentTokenVar('area');
-        $sql = preJoinSqlForGetDShops($province, $city, $area);
-
-        //获取余额
-        $balance = JoinBalanceV::where('pay_state', 2)
-            ->whereRaw($sql)->sum('join_money');
-
-        $list = JoinBalanceV::order('order_time desc')
-            ->field('order_time,join_money,des')
-            ->whereRaw($sql)
-            ->paginate($size, false, ['page' => $page])->toArray();
-        $list['balance'] = $balance;
+        $list=(new WithDrawService())->getBalanceListForJoin($page, $size);
         return json($list);
 
 
@@ -369,7 +355,7 @@ class Withdraw extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/withdraw/apply/handel/join    167-管理员-加盟商管理-提现申请处理（通过/删除）
+     * @api {POST} /api/v1/withdraw/apply/handel/join    167-管理员-加盟商管理-提现申请处理（通过/拒绝）
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  管理员审核提现审改/删除审核
