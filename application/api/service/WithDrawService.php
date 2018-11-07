@@ -135,24 +135,11 @@ class WithDrawService
 
     private function checkJoinBalance($money)
     {
-        return $this->getJoinBalance() - $money;
+        $balance = $this->getBalanceForJoin($this->getJoinSql());
+        return $balance - $money;
         //$params['admin_id'] = Token::getCurrentUid();
     }
 
-
-    public function getJoinBalance()
-    {
-        $province = Token::getCurrentTokenVar('province');
-        $city = Token::getCurrentTokenVar('city');
-        $area = Token::getCurrentTokenVar('area');
-        $sql = preJoinSqlForGetDShops($province, $city, $area);
-
-        //获取余额
-        $balance = JoinBalanceV::where('pay_state', 2)
-            ->whereRaw($sql)->sum('join_money');
-
-        return $balance;
-    }
 
     /**
      * 检测是否有待处理的申请
