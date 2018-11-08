@@ -86,7 +86,7 @@ class CircleT extends BaseModel
         return $pagingData;
     }
 
-    public static function getCirclesForVillage($page, $size, $area)
+    public static function getCirclesForVillage($page, $size,$area)
     {
         $pagingData = self::with(['category' => function ($query) {
             $query->field('id,name');
