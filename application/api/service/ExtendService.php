@@ -177,7 +177,7 @@ class ExtendService
     }
 
 
-    private function getExtendPrice($s_id)
+    private  static function getExtendPrice($s_id)
     {
         $res = [
             'extend' => 0,
@@ -221,7 +221,7 @@ class ExtendService
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function getExtendDiscount($city)
+    private static function getExtendDiscount($city)
     {
         $extend = CityDiscountT::where('city', $city)
             ->where('state', CommonEnum::STATE_IS_OK)
