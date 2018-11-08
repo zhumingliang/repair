@@ -166,6 +166,31 @@ class Guid extends BaseController
         return json($list);
     }
 
+
+
+    /**
+     * @api {GET} /api/v1/guids/cms 27-管理员-引导图列表
+     * @apiGroup  COMMON
+     * @apiVersion 1.0.1
+     *
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/guids/cms
+     * @apiSuccessExample {json} 返回样例:
+     * [{"id":1,"url":"http:\/\/repair.com\/static\/imgs\/35626BD6-0641-FBF3-8076-F50A3278BD35.jpg"},{"id":2,"url":"http:\/\/repair.com\/static\/imgs\/B524F6BF-4A5A-2BC0-25C6-7D417F7210FF.jpg"},{"id":1,"url":"http:\/\/repair.com\/static\/imgs\/7CDCF0B5-A028-297D-C8A9-D10B97B8ADD6.jpg"}]
+     * @apiSuccess (返回参数说明) {int} id 引导图id
+     * @apiSuccess (返回参数说明) {String} url 引导图地址
+     *
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function guidForCMS(){
+        $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
+            ->select();
+        return json($list);
+    }
+
     private function check()
     {
 
