@@ -28,7 +28,7 @@ class WxPayConfig
      */
     public static $APPID = 'wx21b17ce43511ef1a';
     public static $MCHID = '1354265502';
-    public static $KEY = '5ac02999448781b31bb72528f8b8ceef';
+    public static $KEY = '7d4f58145e1760f2d586aee87ed8e668';
     public static $APPSECRET = '5ac02999448781b31bb72528f8b8ceef';
     public static $NOTIFY_URL = 'https://mengant.cn/api/v1/pay/notify';
 
