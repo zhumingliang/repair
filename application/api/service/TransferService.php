@@ -75,7 +75,7 @@ class TransferService
             ]);
 
         }
-        $money = floatval($order->money);
+        $money = floatval($order->money)*100;
         $payTransfer = new WxPayTransfer();
         $payTransfer->setAmount($money);
         $payTransfer->setDesc("商户提现");
