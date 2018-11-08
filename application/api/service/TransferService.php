@@ -76,8 +76,8 @@ class TransferService
 
         }
         $money = floatval($order->money);
-        $payTransfer = new WxPayTransfer($money);
-        $payTransfer->setAmount();
+        $payTransfer = new WxPayTransfer();
+        $payTransfer->setAmount($money);
         $payTransfer->setDesc("商户提现");
         $payTransfer->setOpenid($order->openid);
         $payTransfer->setPartnerTradeNo($order->order_number);
