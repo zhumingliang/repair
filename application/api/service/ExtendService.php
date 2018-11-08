@@ -177,34 +177,39 @@ class ExtendService
     }
 
 
+    private function getExtendPrice($s_id)
+    {
+        $res = [
+            'extend' => 0,
+            'extend_price' => 0
+        ];
+
+        //判断商品是否推广
+        if (self::checkExtend($s_id)) {
+            //获取商品信息-获取折扣-处理价格
+            $service_ino = ServicesT::where('id', $s_id)->with('shop')->find();
+            $discount = self::getExtendDiscount($service_ino->shop->city);
+            $price = (1 - $discount / 100) * ($service_ino->price) / 100;
+            $res = [
+                'extend' => 1,
+                'extend_price' => $price
+            ];
+
+            return $res;
+
+        }
+
+
+        return $res;
+
+    }
+
     public static function checkExtend($s_id)
     {
         $count = ServiceExtendT::where('s_id', $s_id)
             ->where('state', 2)
             ->count();
         return $count ? 1 : 2;
-    }
-
-    private function getExtendPrice($list)
-    {
-        $res = [
-            'extend' => 0,
-            'extend_price' => 0
-        ];
-        if (count($list)) {
-            $service_id = $list['s_id'];
-            //查看是否推广
-            $count = ServiceExtendT::where('s_id', $service_id)
-                ->where('state', 2)
-                ->count();
-            if (!$count) {
-                return $res;
-            }
-
-        }
-
-        return $res;
-
     }
 
 
@@ -302,6 +307,8 @@ class ExtendService
     public static function getServiceForMini($id)
     {
         $service = ServicesT::getService($id);
+        $extend = ExtendService::getExtendPrice($id);
+        $service['extend'] = $extend;
         $service['collection'] = self::checkCollection($id);
         return $service;
 
