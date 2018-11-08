@@ -9,6 +9,8 @@
 namespace app\api\model;
 
 
+use app\api\service\ExtendService;
+
 class ServiceListV extends BaseModel
 {
 //     public function getCoverAttr($value, $data)
@@ -28,7 +30,15 @@ class ServiceListV extends BaseModel
             })
             ->hidden(['type', 'province', 'city', 'c_id', 'shop_name'])
             ->order('sell_num desc,sell_money desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
+
+        $data = $pagingData['data'];
+        if (count($data)) {
+            foreach ($data as $k => $v) {
+                $data[$k]['extend'] = ExtendService::checkExtend($v['s_id']);
+            }
+            $pagingData['data'] = $data;
+        }
         return $pagingData;
 
     }

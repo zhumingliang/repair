@@ -169,7 +169,6 @@ class ExtendService
         if (count($list)) {
             foreach ($list as $k => $v) {
                 $list[$k]['extend'] = self::checkExtend($v['s_id']);
-
             }
 
         }
@@ -275,7 +274,15 @@ class ExtendService
                 }
             })
             ->hidden(['type', 'province', 'city', 'c_id', 'shop_name'])
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
+
+        $data = $pagingData['data'];
+        if (count($data)) {
+            foreach ($data as $k => $v) {
+                $data[$k]['extend'] = self::checkExtend($v['s_id']);
+            }
+            $pagingData['data'] = $data;
+        }
 
         return $pagingData;
 

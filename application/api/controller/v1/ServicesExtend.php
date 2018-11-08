@@ -232,7 +232,8 @@ class ServicesExtend extends BaseController
      */
     public function getServiceForMini($id)
     {
-        return json(ExtendService::getServiceForMini($id));
+        $info=ExtendService::getServiceForMini($id);
+        return json($info);
     }
 
     /**

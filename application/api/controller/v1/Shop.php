@@ -269,8 +269,9 @@ class Shop extends BaseController
     {
         (new ShopValidate())->scene('service')->goCheck();
         $params = $this->request->param();
-        return json(ServiceListV::getList($params['area'], $params['page'],
-            $params['size'], $params['c_id'], $params['type']));
+        $list = ServiceListV::getList($params['area'], $params['page'],
+            $params['size'], $params['c_id'], $params['type']);
+        return json($list);
     }
 
     /**
@@ -678,7 +679,7 @@ class Shop extends BaseController
      * @return \think\response\Json
      * @throws ShopException
      */
-    public function shopFrozen($id,$state)
+    public function shopFrozen($id, $state)
     {
         $res = ShopT::update(['frozen' => $state], ['id' => $id]);
         if (!$res) {
