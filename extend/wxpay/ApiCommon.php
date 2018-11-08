@@ -9,6 +9,8 @@
 namespace wxpay;
 
 
+use app\api\model\LogT;
+
 class ApiCommon
 {
 
@@ -74,6 +76,8 @@ class ApiCommon
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
         //运行curl
         $data = curl_exec($ch);
+        LogT::create(['msg' => $data]);
+
         //返回结果
         if ($data) {
             curl_close($ch);

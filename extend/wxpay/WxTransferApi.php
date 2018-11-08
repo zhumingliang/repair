@@ -32,12 +32,11 @@ class WxTransferApi extends ApiCommon
         $transfer->setNonceStr(ApiCommon::getNonceStr());
         $transfer->setSign();
         $xml = $transfer->toXml();
-        LogT::create(['msg' => $xml]);
         $response = ApiCommon::postXmlCurl($xml, $url, true, $timeOut);
         $result = WxPayResults::Init($response);
         return $result;
 
-
+       // <xml><amount>1.0000</amount><check_name><![CDATA[NO_CHECK]]></check_name><desc><![CDATA[商户提现]]></desc><mch_appid><![CDATA[wx21b17ce43511ef1a]]></mch_appid><mchid>1354265502</mchid><nonce_str><![CDATA[rqd50kx5mfkeavc6su3lzav7exx78prx]]></nonce_str><openid><![CDATA[osEM-5eqzFwX5eUXgse0aaAS680Q]]></openid><partner_trade_no><![CDATA[BB09951195487279]]></partner_trade_no><re_user_name><![CDATA[盟蚁网络科技～朱明良]]></re_user_name><spbill_create_ip><![CDATA[192.168.0.1]]></spbill_create_ip><sign><![CDATA[E3F2C181E4AB32E8A7D8D2FEEF053B63]]></sign></xml>
     }
 
 }
