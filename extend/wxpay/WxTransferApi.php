@@ -31,9 +31,8 @@ class WxTransferApi extends ApiCommon
         $transfer->setNonceStr(ApiCommon::getNonceStr());
         $transfer->setSign();
         $xml = $transfer->toXml();
-
+        print_r($xml);
         $response = ApiCommon::postXmlCurl($xml, $url, true, $timeOut);
-        print_r($response);
         $result = WxPayResults::Init($response);
         return $result;
 
