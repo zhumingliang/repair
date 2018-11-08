@@ -73,7 +73,7 @@ class CircleService
         $province = Token::getCurrentTokenVar('province');
         $city = Token::getCurrentTokenVar('city');
         $area = Token::getCurrentTokenVar('area');
-        $sql = preJoinSqlForGetDShops($province, $city, $area);
+        $sql = preJoinSql($province, $city, $area);
         return $sql;
     }
 
