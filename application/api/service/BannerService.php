@@ -121,7 +121,7 @@ class BannerService
         $list = array();
         if ($type == self::PLATFORM) {
             $list = BannerT::where('type', '=', $type)
-                ->where('state', '=', CommonEnum::PASS)
+                ->where('state', '<', CommonEnum::DELETE)
                 ->field('id,title,des,url')
                 ->order('create_time desc')
                 ->paginate($size, false, ['page' => $page]);
@@ -147,7 +147,6 @@ class BannerService
     {
         $list = array();
         $grade = Token::getCurrentTokenVar('grade');
-        echo $grade;
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
             $list = BannerMiniV::where('state',  CommonEnum::READY)
                 ->paginate($size, false, ['page' => $page]);
