@@ -152,7 +152,7 @@ class Guid extends BaseController
      * @throws \think\exception\DbException
      */
     public function getList()
-    {
+    {/*
         $list = array();
         if ($this->check()) {
             $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
@@ -160,11 +160,15 @@ class Guid extends BaseController
             return json($list);
 
         }
+        return json($list);*/
+        $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
+            ->select();
         return json($list);
     }
 
     private function check()
     {
+
         $system = GuidInitT::find();
         if ($system->type == 1) {
             return true;
