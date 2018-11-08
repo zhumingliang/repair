@@ -147,6 +147,7 @@ class ServicesExtend extends BaseController
      * @apiSuccess (返回参数说明) {int} sell_num 成交额
      * @apiSuccess (返回参数说明) {String} name 服务名称
      * @apiSuccess (返回参数说明) {String} cover 服务封面
+     * @apiSuccess (返回参数说明) {int} extend 是否推广 1 | 是；2 | 否
      * @apiSuccess (返回参数说明) {int} type 服务类别：1 | 家政；2 | 维修
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException

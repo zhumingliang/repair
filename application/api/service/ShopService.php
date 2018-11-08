@@ -364,7 +364,8 @@ class ShopService
             return $service->price;
         }
 
-        $discount = CityDiscountT::where('state', '=', CommonEnum::STATE_IS_OK)
+        $discount = CityDiscountT::where('state', '=',
+            CommonEnum::STATE_IS_OK)
             ->where('city', '=', $service->city)
             ->whereOr('type', '=', 1)
             ->select();

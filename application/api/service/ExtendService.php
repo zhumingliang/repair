@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\CityDiscountT;
 use app\api\model\CollectionServicesT;
 use app\api\model\ExtendRecordT;
 use app\api\model\ExtendV;
@@ -164,8 +165,76 @@ class ExtendService
     public static function getIndexServiceList($area)
     {
         //return ExtendV::getList($area, $size, $page, $c_id, CommonEnum::EXTEND_HOUSE);
-        return IndexServiceV::getList($area);
+        $list = IndexServiceV::getList($area);
+        if (count($list)) {
+            foreach ($list as $k => $v) {
+                $list[$k]['extend'] = self::checkExtend($v['s_id']);
 
+            }
+
+        }
+        return $list;
+
+    }
+
+
+    public static function checkExtend($s_id)
+    {
+        $count = ServiceExtendT::where('s_id', $s_id)
+            ->where('state', 2)
+            ->count();
+        return $count ? 1 : 2;
+    }
+
+    private function getExtendPrice($list)
+    {
+        $res = [
+            'extend' => 0,
+            'extend_price' => 0
+        ];
+        if (count($list)) {
+            $service_id = $list['s_id'];
+            //查看是否推广
+            $count = ServiceExtendT::where('s_id', $service_id)
+                ->where('state', 2)
+                ->count();
+            if (!$count) {
+                return $res;
+            }
+
+        }
+
+        return $res;
+
+    }
+
+
+    /**
+     * 获取城市优惠折扣
+     * @param $city
+     * @return int|mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function getExtendDiscount($city)
+    {
+        $extend = CityDiscountT::where('city', $city)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->find();
+        if (!$extend) {
+
+            $extend = CityDiscountT::where('type', 1)
+                ->where('state', CommonEnum::STATE_IS_OK)
+                ->find();
+
+            if (!$extend) {
+                return 0;
+            }
+
+            return $extend->discount;
+        }
+        return $extend->discount;
     }
 
 
@@ -195,7 +264,7 @@ class ExtendService
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public static function getRepairList($area, $page, $size, $c_id,$type)
+    public static function getRepairList($area, $page, $size, $c_id, $type)
     {
 
         $pagingData = ServiceListV::where('area', '=', $area)
