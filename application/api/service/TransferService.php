@@ -44,14 +44,14 @@ class TransferService
             //更新状态
             WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
 
-        }else{
+        } else {
 
             throw new PayException(
-              [
-                  'code' => 401,
-                  'msg' => '该提现申请处理失败，请稍后再试。',
-                  'errorCode' => 150011
-              ]
+                [
+                    'code' => 401,
+                    'msg' => '该提现申请处理失败，请稍后再试。',
+                    'errorCode' => 150011
+                ]
             );
         }
     }
@@ -75,8 +75,9 @@ class TransferService
             ]);
 
         }
-        $payTransfer = new WxPayTransfer();
-        $payTransfer->setAmount($order->money);
+        $money = floatval($order->money);
+        $payTransfer = new WxPayTransfer($money);
+        $payTransfer->setAmount();
         $payTransfer->setDesc("商户提现");
         $payTransfer->setOpenid($order->openid);
         $payTransfer->setPartnerTradeNo($order->order_number);
