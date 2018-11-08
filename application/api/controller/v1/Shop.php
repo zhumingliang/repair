@@ -757,6 +757,7 @@ class Shop extends BaseController
     public function getStaffsForJoin($page = 1, $size = 20)
     {
         $list = StaffV::getList($page, $size);
+
         return json($list);
     }
 

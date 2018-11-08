@@ -208,7 +208,6 @@ class Banner extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/banner/join/list 154-管理员-加盟商轮播图管理
      * @apiVersion 1.0.1

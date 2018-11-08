@@ -563,7 +563,7 @@ class OrderService
      */
     public function ordersToBanner($province, $city, $area, $type)
     {
-        $sql = preJoinSql($province, $city, $area);
+        $sql = preJoinSqlForGetDShops($province, $city, $area);
         $system = SystemDemandT::where('id', $type)->find();
         if ($system) {
             $time_begin = date('Y-m-d H:i', strtotime('-' . $system->count . ' day',
