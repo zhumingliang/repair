@@ -9,6 +9,7 @@
 namespace wxpay;
 
 
+use app\api\model\LogT;
 use wxpay\database\WxPayResults;
 
 class WxTransferApi extends ApiCommon
@@ -31,7 +32,7 @@ class WxTransferApi extends ApiCommon
         $transfer->setNonceStr(ApiCommon::getNonceStr());
         $transfer->setSign();
         $xml = $transfer->toXml();
-        print_r($xml);
+        LogT::create(['msg' => $xml]);
         $response = ApiCommon::postXmlCurl($xml, $url, true, $timeOut);
         $result = WxPayResults::Init($response);
         return $result;
