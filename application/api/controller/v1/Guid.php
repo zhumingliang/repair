@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\GuidInitT;
 use app\api\model\GuidT;
+use app\api\model\UserT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\GuidException;
 use app\lib\exception\SuccessMessage;
@@ -152,7 +153,7 @@ class Guid extends BaseController
      * @throws \think\exception\DbException
      */
     public function getList()
-    {/*
+    {
         $list = array();
         if ($this->check()) {
             $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
@@ -160,12 +161,9 @@ class Guid extends BaseController
             return json($list);
 
         }
-        return json($list);*/
-        $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
-            ->select();
         return json($list);
-    }
 
+    }
 
 
     /**
@@ -185,7 +183,8 @@ class Guid extends BaseController
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function guidForCMS(){
+    public function guidForCMS()
+    {
         $list = GuidT::where('state', '=', CommonEnum::STATE_IS_OK)
             ->select();
         return json($list);
@@ -195,20 +194,31 @@ class Guid extends BaseController
     {
 
         $system = GuidInitT::find();
+        $openid = \app\api\service\Token::getCurrentOpenid();
+        $user = UserT::where('openId', $openid)->find();
         if ($system->type == 1) {
             return true;
         } else if ($system->type == 2) {
-            $nickName = \app\api\service\Token::getCurrentTokenVar('nickName');
-            if (empty($nickName)) {
+            if (!$user) {
                 return true;
             }
-            return false;
-        } else if ($system->type == 3) {
-            $nickName = \app\api\service\Token::getCurrentTokenVar('nickName');
-            if (empty($nickName)) {
+            if ($user->count < 2) {
+                return true;
+            } else {
                 return false;
             }
-            return true;
+
+            return false;
+        } else if ($system->type == 3) {
+            if (!$user) {
+                return false;
+            }
+            if ($user->count > 1) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
 
 
