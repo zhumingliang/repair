@@ -148,7 +148,7 @@ class BannerService
         $list = array();
         $grade = Token::getCurrentTokenVar('grade');
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
-            $list = BannerMiniV::where('state', '<', CommonEnum::DELETE)
+            $list = BannerMiniV::where('state',  CommonEnum::READY)
                 ->paginate($size, false, ['page' => $page]);
 
         } else if ($grade == UserEnum::USER_GRADE_JOIN) {
