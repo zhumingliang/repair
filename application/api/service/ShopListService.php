@@ -39,7 +39,7 @@ class ShopListService
             $city = Token::getCurrentTokenVar('city');
             $area = Token::getCurrentTokenVar('area');
             //获取加盟商所有店铺
-            return self::shopsForJoin($province, $city, $area, $page, $size, $key);
+            return self::shopsForJoin($province, $city, $area, $page, $size, $key,$type);
         }
     }
 
@@ -79,10 +79,10 @@ class ShopListService
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    private function shopsForJoin($province, $city, $area, $page, $size, $key)
+    private function shopsForJoin($province, $city, $area, $page, $size, $key,$type)
     {
 
-        return ShopT::shopsForJoin($province, $city, $area, $page, $size, $key);
+        return ShopT::shopsForJoin($province, $city, $area, $page, $size, $key,$type);
     }
 
 }

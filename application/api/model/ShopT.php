@@ -36,7 +36,7 @@ class ShopT extends BaseModel
     {
         $info = self::where('u_id', '=', $u_id)
             ->where('frozen', CommonEnum::STATE_IS_OK)
-            ->whereIn('state',[1,2,4])
+            ->whereIn('state', [1, 2, 4])
             ->with([
                 'imgs' => function ($query) {
                     $query->with(['imgUrl'])
@@ -85,7 +85,7 @@ class ShopT extends BaseModel
     {
         $info = self::where('u_id', '=', $u_id)
             ->where('frozen', CommonEnum::STATE_IS_OK)
-            ->where('state',4)
+            ->where('state', 4)
             ->with([
                 'staffs' => function ($query) {
                     $query->with(['imgUrl'])
@@ -195,21 +195,39 @@ class ShopT extends BaseModel
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public static function shopsForJoin($province, $city, $area, $page, $size, $key)
+    public static function shopsForJoin($province, $city, $area, $page, $size, $key, $type)
     {
         $sql = preJoinSqlForGetDShops($province, $city, $area);
 
-        $pagingData = self::whereIn('state', [2,4])
-            ->whereRaw($sql)
-            ->where(function ($query) use ($key) {
-                if ($key) {
-                    $query->where('name', 'like', '%' . $key . '%');
-                }
-            })
-            ->field('id as shop_id,u_id,type,name,area,state,frozen')
-            ->order('create_time desc')
-            ->paginate($size, false, ['page' => $page]);
-        return $pagingData;
+        if ($type == 1) {
+            $pagingData = self::where('state', 1)
+                ->whereRaw($sql)
+                ->where(function ($query) use ($key) {
+                    if ($key) {
+                        $query->where('name', 'like', '%' . $key . '%');
+                    }
+                })
+                ->field('id as shop_id,u_id,type,name,area,state,frozen')
+                ->order('create_time desc')
+                ->paginate($size, false, ['page' => $page]);
+            return $pagingData;
+
+
+        } else {
+            $pagingData = self::whereIn('state', [2, 4])
+                ->whereRaw($sql)
+                ->where(function ($query) use ($key) {
+                    if ($key) {
+                        $query->where('name', 'like', '%' . $key . '%');
+                    }
+                })
+                ->field('id as shop_id,u_id,type,name,area,state,frozen')
+                ->order('create_time desc')
+                ->paginate($size, false, ['page' => $page]);
+            return $pagingData;
+
+
+        }
 
 
     }
