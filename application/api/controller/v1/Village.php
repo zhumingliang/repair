@@ -114,7 +114,6 @@ class Village extends BaseController
     {
         $token = $this->request->param('token');
         $time_begin = $this->request->param('time_begin');
-        echo $time_begin;
         $time_end = $this->request->param('time_end');
 
         $grade = TokenService::getCurrentTokenVarWithToken('grade', $token);

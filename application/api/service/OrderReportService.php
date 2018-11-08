@@ -173,7 +173,7 @@ class OrderReportService
         $list = OrderReportV::reportForCity($province, $city, $time_begin, $time_end);
 
         $header = array(
-            '下单人id',
+            '下单人ID',
             '下单时间',
             '电话',
             '价格',
