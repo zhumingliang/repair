@@ -177,7 +177,7 @@ class ExtendService
     }
 
 
-    private  static function getExtendPrice($s_id)
+    public  static function getExtendPrice($s_id)
     {
         $res = [
             'extend' => 0,

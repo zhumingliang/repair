@@ -333,7 +333,7 @@ class ShopService
         }
 
         //添加服务记录
-       OrderMsgService::saveShop(self::getShopID($params['s_id']), $booking->id, 2, 1);
+        OrderMsgService::saveShop(self::getShopID($params['s_id']), $booking->id, 2, 1);
 
         return [
             'id' => $booking->id,
@@ -350,42 +350,22 @@ class ShopService
     }
 
     /**
-     *  获取服务金额
      * @param $id
-     * @return float|int|mixed
+     * @return mixed
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
     private static function getServiceMoney($id)
     {
-        $service = ExtendMoneyV::get($id);
-        if ($service->state != self::SERVICE_EXTEND_PASS) {
-            return $service->price;
+        $extend = ExtendService::getExtendPrice($id);
+        if ($extend['extend']==2){
+            $service_ino = ServicesT::where('id', $id)->find();
+            return $service_ino->price;
+
         }
+        return $extend['extend_price'];
 
-        $discount = CityDiscountT::where('state', '=',
-            CommonEnum::STATE_IS_OK)
-            ->where('city', '=', $service->city)
-            ->whereOr('type', '=', 1)
-            ->select();
-
-        if (!$discount) {
-            return $service->price;
-        }
-
-
-        $city_dis = 0;
-        $plate_dis = 0;
-        foreach ($discount as $k => $v) {
-            if ($v->city == $service->city) {
-                $city_dis = $v->discount;
-            } else {
-                $plate_dis = $v->discount;
-            }
-        }
-        $dis = $city_dis ? $city_dis : $plate_dis;
-        return ($service->price) * (1 - $dis / 100);
 
     }
 
