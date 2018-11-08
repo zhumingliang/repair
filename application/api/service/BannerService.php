@@ -147,6 +147,7 @@ class BannerService
     {
         $list = array();
         $grade = Token::getCurrentTokenVar('grade');
+        echo $grade;
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
             $list = BannerMiniV::where('state',  CommonEnum::READY)
                 ->paginate($size, false, ['page' => $page]);
