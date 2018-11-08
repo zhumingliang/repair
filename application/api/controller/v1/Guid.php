@@ -202,7 +202,7 @@ class Guid extends BaseController
             if (!$user) {
                 return true;
             }
-            if ($user->count < 2) {
+            if ($user->login_count < 2) {
                 return true;
             } else {
                 return false;
@@ -213,7 +213,7 @@ class Guid extends BaseController
             if (!$user) {
                 return false;
             }
-            if ($user->count > 1) {
+            if ($user->login_count > 1) {
                 return true;
             } else {
                 return false;
