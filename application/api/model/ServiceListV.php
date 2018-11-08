@@ -35,7 +35,7 @@ class ServiceListV extends BaseModel
         $data = $pagingData['data'];
         if (count($data)) {
             foreach ($data as $k => $v) {
-                $data[$k]['extend'] = ExtendService::checkExtend($v['s_id']);
+                $data[$k]['extend'] = ExtendService::checkExtend($v['id']);
             }
             $pagingData['data'] = $data;
         }
