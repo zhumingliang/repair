@@ -364,7 +364,7 @@ class ShopService
             return $service_ino->price;
 
         }
-        return $extend['extend_price'];
+        return $extend['extend_price']*100;
 
 
     }
