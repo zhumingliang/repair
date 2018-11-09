@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
+      <change afterPath="$PROJECT_DIR$/public/file/static.2a2726a6.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/file/static.7beedbb8.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/file/static.c6f1acd6.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/file/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/ionicons.833af680.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/ionicons.a0aa6dcf.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/ionicons.a31f6612.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/static.03e4ed1e.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/static.5f5e8be7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/static.d865a27d.map" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1646244533">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="9" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.1" value="4" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dummy" value="45" />
+          <entry key="php" value="69940" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PHP" value="69940" />
+          <entry key="PLAIN_TEXT" value="45" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="htaccess" value="1" />
+          <entry key="html" value="2" />
+          <entry key="map" value="2" />
+          <entry key="pem" value="4" />
+          <entry key="php" value="2126" />
+          <entry key="txt" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="2" />
+          <entry key="PHP" value="2126" />
+          <entry key="PLAIN_TEXT" value="9" />
+          <entry key="SourceMap" value="2" />
+          <entry key="htaccess" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.php.new.class">
+        <counts>
+          <entry key="PHP Class.type" value="110" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/service/AuthService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="136" column="30" selection-start-line="136" selection-start-column="30" selection-end-line="136" selection-end-column="30" />
+              <folding>
+                <element signature="e#123#148#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/file/wx-sdk.77381c6b.map">
+          <provider editor-type-id="sourcemapFileViewerProvider" />
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Auth.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="978">
+              <caret line="261" column="28" selection-start-line="261" selection-start-column="28" selection-end-line="261" selection-end-column="28" />
+              <folding>
+                <element signature="e#129#167#0#PHP" expanded="true" />
+                <element signature="e#565#1221#0#PHP" />
+                <element signature="e#1226#1522#0#PHP" />
+                <element signature="e#1528#2648#0#PHP" />
+                <element signature="e#2653#2797#0#PHP" />
+                <element signature="e#2803#3442#0#PHP" />
+                <element signature="e#3447#3808#0#PHP" />
+                <element signature="e#3815#4449#0#PHP" />
+                <element signature="e#4454#4812#0#PHP" />
+                <element signature="e#4818#10487#0#PHP" />
+                <element signature="e#10492#10611#0#PHP" />
+                <element signature="e#10617#16318#0#PHP" />
+                <element signature="e#16323#16454#0#PHP" />
+                <element signature="e#16460#17116#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>admin/villages</find>
+      <find>apply/handel/shop</find>
+      <find>getDiscount</find>
+      <find>msgCount</find>
+      <find>extend/mini/service</find>
+      <find>rou</find>
+      <find>shop/staff/handel</find>
+      <find>getOrder</find>
+      <find>$token</find>
+      <find>reportForCity</find>
+      <find>reportForJoin</find>
+      <find>village</find>
+      <find>villa</find>
+      <find>withdr</find>
+      <find>comment/handel</find>
+      <find>prepareCachedValue</find>
+      <find>saveLog</find>
+      <find>checkRed</find>
+      <find>getRepairList</find>
+      <find>gui</find>
+      <find>getExtendDiscount</find>
+      <find>getExtendPrice</find>
+      <find>postXmlCurl</find>
+      <find>makeWxPreOrder</find>
+      <find>unifiedOrder</find>
+      <find>exportWithCity</find>
+      <find>getS</find>
+      <find>group/user/handel</find>
+      <find>confirm_id</find>
+      <find>comment_id</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/application/api/service/Token.php" />
+        <option value="$PROJECT_DIR$/application/api/model/DemandV.php" />
+        <option value="$PROJECT_DIR$/application/api/model/ServiceAllV.php" />
+        <option value="$PROJECT_DIR$/application/api/model/IndexServiceV.php" />
+        <option value="$PROJECT_DIR$/application/api/model/VillageV.php" />
+        <option value="$PROJECT_DIR$/application/api/service/FaceService.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Token.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/System.php" />
+        <option value="$PROJECT_DIR$/application/common.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Demand.php" />
+        <option value="$PROJECT_DIR$/application/lib/enum/CommonEnum.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Withdraw.php" />
+        <option value="$PROJECT_DIR$/application/api/model/AdminT.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Circle.php" />
+        <option value="$PROJECT_DIR$/application/api/service/Pay.php" />
+        <option value="$PROJECT_DIR$/config/wx.php" />
+        <option value="$PROJECT_DIR$/application/api/model/CircleT.php" />
+        <option value="$PROJECT_DIR$/extend/wxpay/WxPayConfig.php" />
+        <option value="$PROJECT_DIR$/application/api/service/CircleService.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Banner.php" />
+        <option value="$PROJECT_DIR$/application/api/service/OrderService.php" />
+        <option value="$PROJECT_DIR$/application/api/model/StaffV.php" />
+        <option value="$PROJECT_DIR$/application/api/service/BannerService.php" />
+        <option value="$PROJECT_DIR$/application/api/service/ShopListService.php" />
+        <option value="$PROJECT_DIR$/application/api/model/ShopT.php" />
+        <option value="$PROJECT_DIR$/route/route.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Guid.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/ServicesExtend.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
+        <option value="$PROJECT_DIR$/application/api/model/ServiceListV.php" />
+        <option value="$PROJECT_DIR$/application/api/service/ExtendService.php" />
+        <option value="$PROJECT_DIR$/application/api/service/CenterService.php" />
+        <option value="$PROJECT_DIR$/application/api/service/ShopService.php" />
+        <option value="$PROJECT_DIR$/extend/wxpay/ApiCommon.php" />
+        <option value="$PROJECT_DIR$/application/api/service/OrderReportService.php" />
+        <option value="$PROJECT_DIR$/application/api/service/AdminToken.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/User.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Admin.php" />
+        <option value="$PROJECT_DIR$/application/api/service/UserToken.php" />
+        <option value="$PROJECT_DIR$/extend/wxpay/database/WxPayResults.php" />
+        <option value="$PROJECT_DIR$/extend/wxpay/WxTransferApi.php" />
+        <option value="$PROJECT_DIR$/application/api/service/TransferService.php" />
+        <option value="$PROJECT_DIR$/application/api/validate/TokenGet.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Village.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/OrderReport.php" />
+        <option value="$PROJECT_DIR$/application/api/model/OrderReportV.php" />
+        <option value="$PROJECT_DIR$/application/api/model/DemandOrderV.php" />
+        <option value="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" />
+        <option value="$PROJECT_DIR$/application/api/service/WithDrawService.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Auth.php" />
+        <option value="$PROJECT_DIR$/application/api/service/AuthService.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpDebugGeneral" xdebug_debug_port="8000" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="e59f4176-b022-4580-bc5c-08769fe3c54c" name="nginx" />
+    </servers>
+  </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="$PROJECT_DIR$" selected_validation_type="LOCAL" web_path_to_validation_script="http://localhost:80" />
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/topthink/think-installer" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="v1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
+              <item name="wx-sdk.77381c6b.js" type="620a8d5e:NestingTreeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/apple/www/repair/application/api/validate/BannerValidate.php" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.buildTools.grunt.grunt-cli.package" value="" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs.jest.jest_package" value="" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="" />
+    <property name="nodejs.protractor.protractor_package" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/file" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/extend/wxpay/cert" />
+      <recent name="$PROJECT_DIR$/application/lib/exception" />
+      <recent name="$PROJECT_DIR$/application/lib/enum" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="nginx" start_url="/tp/public/index.php">
+      <method v="2" />
+    </configuration>
+    <configuration name="tp" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" browser="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" server_name="nginx" start_url="/tp/public/index.php/api/v1/index">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt" factoryName="Grunt.js">
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="" />
+      <created>1533913827358</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1533913827358</updated>
+      <workItem from="1533913828855" duration="2501000" />
+      <workItem from="1534128871334" duration="2925000" />
+      <workItem from="1534402463038" duration="1436000" />
+      <workItem from="1537170104184" duration="19240000" />
+      <workItem from="1537321046859" duration="9544000" />
+      <workItem from="1537844754870" duration="498000" />
+      <workItem from="1537942232283" duration="9810000" />
+      <workItem from="1538008736401" duration="28042000" />
+      <workItem from="1538316558173" duration="22596000" />
+      <workItem from="1538551188583" duration="33245000" />
+      <workItem from="1538840837360" duration="95006000" />
+      <workItem from="1539433367595" duration="479000" />
+      <workItem from="1539434028329" duration="27778000" />
+      <workItem from="1539535313683" duration="73359000" />
+      <workItem from="1539823500824" duration="51475000" />
+      <workItem from="1540054705657" duration="8715000" />
+      <workItem from="1540107217787" duration="10445000" />
+      <workItem from="1540207077566" duration="78267000" />
+      <workItem from="1540694554740" duration="72478000" />
+      <workItem from="1540994992394" duration="41067000" />
+      <workItem from="1541097506188" duration="185861000" />
+    </task>
+    <task id="LOCAL-00372" summary="项目初始化">
+      <created>1541610885360</created>
+      <option name="number" value="00372" />
+      <option name="presentableId" value="LOCAL-00372" />
+      <option name="project" value="LOCAL" />
+      <updated>1541610885360</updated>
+    </task>
+    <task id="LOCAL-00373" summary="项目初始化">
+      <created>1541613561376</created>
+      <option name="number" value="00373" />
+      <option name="presentableId" value="LOCAL-00373" />
+      <option name="project" value="LOCAL" />
+      <updated>1541613561376</updated>
+    </task>
+    <task id="LOCAL-00374" summary="项目初始化">
+      <created>1541614606342</created>
+      <option name="number" value="00374" />
+      <option name="presentableId" value="LOCAL-00374" />
+      <option name="project" value="LOCAL" />
+      <updated>1541614606342</updated>
+    </task>
+    <task id="LOCAL-00375" summary="项目初始化">
+      <created>1541615844975</created>
+      <option name="number" value="00375" />
+      <option name="presentableId" value="LOCAL-00375" />
+      <option name="project" value="LOCAL" />
+      <updated>1541615844975</updated>
+    </task>
+    <task id="LOCAL-00376" summary="项目初始化">
+      <created>1541616117132</created>
+      <option name="number" value="00376" />
+      <option name="presentableId" value="LOCAL-00376" />
+      <option name="project" value="LOCAL" />
+      <updated>1541616117132</updated>
+    </task>
+    <task id="LOCAL-00377" summary="项目初始化">
+      <created>1541616853291</created>
+      <option name="number" value="00377" />
+      <option name="presentableId" value="LOCAL-00377" />
+      <option name="project" value="LOCAL" />
+      <updated>1541616853291</updated>
+    </task>
+    <task id="LOCAL-00378" summary="项目初始化">
+      <created>1541617415344</created>
+      <option name="number" value="00378" />
+      <option name="presentableId" value="LOCAL-00378" />
+      <option name="project" value="LOCAL" />
+      <updated>1541617415344</updated>
+    </task>
+    <task id="LOCAL-00379" summary="项目初始化">
+      <created>1541638129944</created>
+      <option name="number" value="00379" />
+      <option name="presentableId" value="LOCAL-00379" />
+      <option name="project" value="LOCAL" />
+      <updated>1541638129944</updated>
+    </task>
+    <task id="LOCAL-00380" summary="项目初始化">
+      <created>1541638225033</created>
+      <option name="number" value="00380" />
+      <option name="presentableId" value="LOCAL-00380" />
+      <option name="project" value="LOCAL" />
+      <updated>1541638225033</updated>
+    </task>
+    <task id="LOCAL-00381" summary="项目初始化">
+      <created>1541638366561</created>
+      <option name="number" value="00381" />
+      <option name="presentableId" value="LOCAL-00381" />
+      <option name="project" value="LOCAL" />
+      <updated>1541638366561</updated>
+    </task>
+    <task id="LOCAL-00382" summary="项目初始化">
+      <created>1541638645414</created>
+      <option name="number" value="00382" />
+      <option name="presentableId" value="LOCAL-00382" />
+      <option name="project" value="LOCAL" />
+      <updated>1541638645414</updated>
+    </task>
+    <task id="LOCAL-00383" summary="项目初始化">
+      <created>1541660136466</created>
+      <option name="number" value="00383" />
+      <option name="presentableId" value="LOCAL-00383" />
+      <option name="project" value="LOCAL" />
+      <updated>1541660136466</updated>
+    </task>
+    <task id="LOCAL-00384" summary="项目初始化">
+      <created>1541661685312</created>
+      <option name="number" value="00384" />
+      <option name="presentableId" value="LOCAL-00384" />
+      <option name="project" value="LOCAL" />
+      <updated>1541661685312</updated>
+    </task>
+    <task id="LOCAL-00385" summary="项目初始化">
+      <created>1541662080350</created>
+      <option name="number" value="00385" />
+      <option name="presentableId" value="LOCAL-00385" />
+      <option name="project" value="LOCAL" />
+      <updated>1541662080350</updated>
+    </task>
+    <task id="LOCAL-00386" summary="项目初始化">
+      <created>1541665672928</created>
+      <option name="number" value="00386" />
+      <option name="presentableId" value="LOCAL-00386" />
+      <option name="project" value="LOCAL" />
+      <updated>1541665672928</updated>
+    </task>
+    <task id="LOCAL-00387" summary="项目初始化">
+      <created>1541666705280</created>
+      <option name="number" value="00387" />
+      <option name="presentableId" value="LOCAL-00387" />
+      <option name="project" value="LOCAL" />
+      <updated>1541666705280</updated>
+    </task>
+    <task id="LOCAL-00388" summary="项目初始化">
+      <created>1541670718096</created>
+      <option name="number" value="00388" />
+      <option name="presentableId" value="LOCAL-00388" />
+      <option name="project" value="LOCAL" />
+      <updated>1541670718096</updated>
+    </task>
+    <task id="LOCAL-00389" summary="项目初始化">
+      <created>1541671047238</created>
+      <option name="number" value="00389" />
+      <option name="presentableId" value="LOCAL-00389" />
+      <option name="project" value="LOCAL" />
+      <updated>1541671047238</updated>
+    </task>
+    <task id="LOCAL-00390" summary="项目初始化">
+      <created>1541671923441</created>
+      <option name="number" value="00390" />
+      <option name="presentableId" value="LOCAL-00390" />
+      <option name="project" value="LOCAL" />
+      <updated>1541671923441</updated>
+    </task>
+    <task id="LOCAL-00391" summary="项目初始化">
+      <created>1541672991599</created>
+      <option name="number" value="00391" />
+      <option name="presentableId" value="LOCAL-00391" />
+      <option name="project" value="LOCAL" />
+      <updated>1541672991599</updated>
+    </task>
+    <task id="LOCAL-00392" summary="项目初始化">
+      <created>1541673583316</created>
+      <option name="number" value="00392" />
+      <option name="presentableId" value="LOCAL-00392" />
+      <option name="project" value="LOCAL" />
+      <updated>1541673583316</updated>
+    </task>
+    <task id="LOCAL-00393" summary="项目初始化">
+      <created>1541674237247</created>
+      <option name="number" value="00393" />
+      <option name="presentableId" value="LOCAL-00393" />
+      <option name="project" value="LOCAL" />
+      <updated>1541674237247</updated>
+    </task>
+    <task id="LOCAL-00394" summary="项目初始化">
+      <created>1541684874086</created>
+      <option name="number" value="00394" />
+      <option name="presentableId" value="LOCAL-00394" />
+      <option name="project" value="LOCAL" />
+      <updated>1541684874086</updated>
+    </task>
+    <task id="LOCAL-00395" summary="项目初始化">
+      <created>1541686150446</created>
+      <option name="number" value="00395" />
+      <option name="presentableId" value="LOCAL-00395" />
+      <option name="project" value="LOCAL" />
+      <updated>1541686150446</updated>
+    </task>
+    <task id="LOCAL-00396" summary="项目初始化">
+      <created>1541686799414</created>
+      <option name="number" value="00396" />
+      <option name="presentableId" value="LOCAL-00396" />
+      <option name="project" value="LOCAL" />
+      <updated>1541686799414</updated>
+    </task>
+    <task id="LOCAL-00397" summary="项目初始化">
+      <created>1541687163250</created>
+      <option name="number" value="00397" />
+      <option name="presentableId" value="LOCAL-00397" />
+      <option name="project" value="LOCAL" />
+      <updated>1541687163250</updated>
+    </task>
+    <task id="LOCAL-00398" summary="项目初始化">
+      <created>1541689414205</created>
+      <option name="number" value="00398" />
+      <option name="presentableId" value="LOCAL-00398" />
+      <option name="project" value="LOCAL" />
+      <updated>1541689414205</updated>
+    </task>
+    <task id="LOCAL-00399" summary="项目初始化">
+      <created>1541691301737</created>
+      <option name="number" value="00399" />
+      <option name="presentableId" value="LOCAL-00399" />
+      <option name="project" value="LOCAL" />
+      <updated>1541691301737</updated>
+    </task>
+    <task id="LOCAL-00400" summary="项目初始化">
+      <created>1541692490495</created>
+      <option name="number" value="00400" />
+      <option name="presentableId" value="LOCAL-00400" />
+      <option name="project" value="LOCAL" />
+      <updated>1541692490495</updated>
+    </task>
+    <task id="LOCAL-00401" summary="项目初始化">
+      <created>1541694951526</created>
+      <option name="number" value="00401" />
+      <option name="presentableId" value="LOCAL-00401" />
+      <option name="project" value="LOCAL" />
+      <updated>1541694951526</updated>
+    </task>
+    <task id="LOCAL-00402" summary="项目初始化">
+      <created>1541695211701</created>
+      <option name="number" value="00402" />
+      <option name="presentableId" value="LOCAL-00402" />
+      <option name="project" value="LOCAL" />
+      <updated>1541695211701</updated>
+    </task>
+    <task id="LOCAL-00403" summary="项目初始化">
+      <created>1541695485272</created>
+      <option name="number" value="00403" />
+      <option name="presentableId" value="LOCAL-00403" />
+      <option name="project" value="LOCAL" />
+      <updated>1541695485272</updated>
+    </task>
+    <task id="LOCAL-00404" summary="项目初始化">
+      <created>1541695588190</created>
+      <option name="number" value="00404" />
+      <option name="presentableId" value="LOCAL-00404" />
+      <option name="project" value="LOCAL" />
+      <updated>1541695588190</updated>
+    </task>
+    <task id="LOCAL-00405" summary="项目初始化">
+      <created>1541695771415</created>
+      <option name="number" value="00405" />
+      <option name="presentableId" value="LOCAL-00405" />
+      <option name="project" value="LOCAL" />
+      <updated>1541695771415</updated>
+    </task>
+    <task id="LOCAL-00406" summary="项目初始化">
+      <created>1541696109894</created>
+      <option name="number" value="00406" />
+      <option name="presentableId" value="LOCAL-00406" />
+      <option name="project" value="LOCAL" />
+      <updated>1541696109894</updated>
+    </task>
+    <task id="LOCAL-00407" summary="项目初始化">
+      <created>1541696216838</created>
+      <option name="number" value="00407" />
+      <option name="presentableId" value="LOCAL-00407" />
+      <option name="project" value="LOCAL" />
+      <updated>1541696216839</updated>
+    </task>
+    <task id="LOCAL-00408" summary="项目初始化">
+      <created>1541696350760</created>
+      <option name="number" value="00408" />
+      <option name="presentableId" value="LOCAL-00408" />
+      <option name="project" value="LOCAL" />
+      <updated>1541696350760</updated>
+    </task>
+    <task id="LOCAL-00409" summary="项目初始化">
+      <created>1541698757381</created>
+      <option name="number" value="00409" />
+      <option name="presentableId" value="LOCAL-00409" />
+      <option name="project" value="LOCAL" />
+      <updated>1541698757381</updated>
+    </task>
+    <task id="LOCAL-00410" summary="项目初始化">
+      <created>1541699047383</created>
+      <option name="number" value="00410" />
+      <option name="presentableId" value="LOCAL-00410" />
+      <option name="project" value="LOCAL" />
+      <updated>1541699047383</updated>
+    </task>
+    <task id="LOCAL-00411" summary="项目初始化">
+      <created>1541726580187</created>
+      <option name="number" value="00411" />
+      <option name="presentableId" value="LOCAL-00411" />
+      <option name="project" value="LOCAL" />
+      <updated>1541726580187</updated>
+    </task>
+    <task id="LOCAL-00412" summary="项目初始化">
+      <created>1541727300469</created>
+      <option name="number" value="00412" />
+      <option name="presentableId" value="LOCAL-00412" />
+      <option name="project" value="LOCAL" />
+      <updated>1541727300469</updated>
+    </task>
+    <task id="LOCAL-00413" summary="项目初始化">
+      <created>1541727381851</created>
+      <option name="number" value="00413" />
+      <option name="presentableId" value="LOCAL-00413" />
+      <option name="project" value="LOCAL" />
+      <updated>1541727381852</updated>
+    </task>
+    <task id="LOCAL-00414" summary="项目初始化">
+      <created>1541732667496</created>
+      <option name="number" value="00414" />
+      <option name="presentableId" value="LOCAL-00414" />
+      <option name="project" value="LOCAL" />
+      <updated>1541732667496</updated>
+    </task>
+    <task id="LOCAL-00415" summary="项目初始化">
+      <created>1541735575828</created>
+      <option name="number" value="00415" />
+      <option name="presentableId" value="LOCAL-00415" />
+      <option name="project" value="LOCAL" />
+      <updated>1541735575828</updated>
+    </task>
+    <task id="LOCAL-00416" summary="项目初始化">
+      <created>1541735897398</created>
+      <option name="number" value="00416" />
+      <option name="presentableId" value="LOCAL-00416" />
+      <option name="project" value="LOCAL" />
+      <updated>1541735897398</updated>
+    </task>
+    <task id="LOCAL-00417" summary="项目初始化">
+      <created>1541739666550</created>
+      <option name="number" value="00417" />
+      <option name="presentableId" value="LOCAL-00417" />
+      <option name="project" value="LOCAL" />
+      <updated>1541739666550</updated>
+    </task>
+    <task id="LOCAL-00418" summary="项目初始化">
+      <created>1541739852523</created>
+      <option name="number" value="00418" />
+      <option name="presentableId" value="LOCAL-00418" />
+      <option name="project" value="LOCAL" />
+      <updated>1541739852523</updated>
+    </task>
+    <task id="LOCAL-00419" summary="项目初始化">
+      <created>1541740471484</created>
+      <option name="number" value="00419" />
+      <option name="presentableId" value="LOCAL-00419" />
+      <option name="project" value="LOCAL" />
+      <updated>1541740471484</updated>
+    </task>
+    <task id="LOCAL-00420" summary="项目初始化">
+      <created>1541740727933</created>
+      <option name="number" value="00420" />
+      <option name="presentableId" value="LOCAL-00420" />
+      <option name="project" value="LOCAL" />
+      <updated>1541740727933</updated>
+    </task>
+    <option name="localTasksCounter" value="421" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="774767000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22297297" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3298647" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39854318" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3298647" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32914045" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3298647" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="项目初始化" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目初始化" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/application/api/model/StaffV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+          <folding>
+            <element signature="e#123#149#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/CityDiscount.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3414">
+          <folding>
+            <element signature="e#357#1174#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/lib/enum/CommonEnum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/lib/enum/UserEnum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/BannerService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="87" column="44" selection-start-line="87" selection-start-column="44" selection-end-line="87" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Banner.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="165" column="38" lean-forward="true" selection-start-line="165" selection-start-column="38" selection-end-line="165" selection-end-column="38" />
+          <folding>
+            <element signature="e#418#1537#0#PHP" />
+            <element signature="e#1542#1761#0#PHP" />
+            <element signature="e#1767#2405#0#PHP" />
+            <element signature="e#2410#2856#0#PHP" />
+            <element signature="e#2862#3763#0#PHP" />
+            <element signature="e#3768#3993#0#PHP" />
+            <element signature="e#3999#5547#0#PHP" />
+            <element signature="e#5930#8080#0#PHP" />
+            <element signature="e#8085#8321#0#PHP" />
+            <element signature="e#8327#9689#0#PHP" />
+            <element signature="e#9694#9935#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ShopT.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="202" column="48" selection-start-line="202" selection-start-column="48" selection-end-line="202" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/ShopListService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Guid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="215" column="34" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
+          <folding>
+            <element signature="e#367#1100#0#PHP" />
+            <element signature="e#1105#1534#0#PHP" />
+            <element signature="e#1541#2011#0#PHP" />
+            <element signature="e#2016#2407#0#PHP" />
+            <element signature="e#2414#3106#0#PHP" />
+            <element signature="e#3111#3578#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/IndexServiceV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceListV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="37" column="69" selection-start-line="37" selection-start-column="69" selection-end-line="37" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/ServicesExtend.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="269" column="33" lean-forward="true" selection-start-line="269" selection-start-column="33" selection-end-line="269" selection-end-column="33" />
+          <folding>
+            <element signature="e#129#167#0#PHP" expanded="true" />
+            <element signature="e#631#2190#0#PHP" />
+            <element signature="e#2195#2582#0#PHP" />
+            <element signature="e#2588#3187#0#PHP" />
+            <element signature="e#3192#3442#0#PHP" />
+            <element signature="e#3448#4731#0#PHP" />
+            <element signature="e#4736#4867#0#PHP" />
+            <element signature="e#9961#11197#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ShopServiceV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="236" column="32" selection-start-line="236" selection-start-column="32" selection-end-line="236" selection-end-column="32" />
+          <folding>
+            <element signature="e#682#2013#0#PHP" />
+            <element signature="e#2018#2370#0#PHP" />
+            <element signature="e#2376#3152#0#PHP" />
+            <element signature="e#3157#3587#0#PHP" />
+            <element signature="e#3593#4759#0#PHP" />
+            <element signature="e#4764#5132#0#PHP" />
+            <element signature="e#5138#5690#0#PHP" />
+            <element signature="e#5695#5948#0#PHP" />
+            <element signature="e#5954#7204#0#PHP" />
+            <element signature="e#7436#9233#0#PHP" />
+            <element signature="e#9238#9555#0#PHP" />
+            <element signature="e#9561#10922#0#PHP" />
+            <element signature="e#10927#11038#0#PHP" />
+            <element signature="e#11044#12066#0#PHP" />
+            <element signature="e#12071#12241#0#PHP" />
+            <element signature="e#12247#12767#0#PHP" />
+            <element signature="e#12772#13006#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServicesT.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1361">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/ExtendService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="189" column="33" lean-forward="true" selection-start-line="189" selection-start-column="33" selection-end-line="189" selection-end-column="33" />
+          <folding>
+            <element signature="e#123#155#0#PHP" expanded="true" />
+            <element signature="e#881#2053#0#PHP" />
+            <element signature="e#5531#5724#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/CenterService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1514">
+          <caret line="76" column="12" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="366" column="16" selection-start-line="366" selection-start-column="16" selection-end-line="366" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/wxpay/database/WxPayTransfer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/wxpay/ApiCommon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-438">
+          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/UserToken.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="81" column="29" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
+          <folding>
+            <element signature="e#37#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/wxpay/database/WxPayDataBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="147" column="20" selection-start-line="147" selection-start-column="20" selection-end-line="147" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/wxpay/database/WxPayResults.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="582">
+          <caret line="92" column="32" selection-start-line="92" selection-start-column="27" selection-end-line="92" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/wxpay/WxTransferApi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="721">
+          <caret line="38" column="34" lean-forward="true" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
+          <folding>
+            <element signature="e#116#139#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/TransferService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="45" column="27" lean-forward="true" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+          <folding>
+            <element signature="e#123#155#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/AdminToken.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding>
+            <element signature="e#110#135#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/validate/TokenGet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
+          <folding>
+            <element signature="e#476#1291#0#PHP" />
+            <element signature="e#1591#2044#0#PHP" />
+            <element signature="e#2049#2214#0#PHP" />
+            <element signature="e#2220#3144#0#PHP" />
+            <element signature="e#3149#3346#0#PHP" />
+            <element signature="e#3352#4032#0#PHP" />
+            <element signature="e#4037#4340#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/AdminT.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1566">
+          <caret line="66" column="27" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Village.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2215">
+          <caret line="106" column="38" selection-start-line="106" selection-start-column="38" selection-end-line="106" selection-end-column="38" />
+          <folding>
+            <element signature="e#131#169#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/PersonalCenter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="79" column="37" selection-start-line="79" selection-start-column="37" selection-end-line="79" selection-end-column="37" />
+          <folding>
+            <element signature="e#468#1413#0#PHP" />
+            <element signature="e#1418#1539#0#PHP" />
+            <element signature="e#1545#2869#0#PHP" />
+            <element signature="e#3702#4284#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/OrderMsgService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="54" column="27" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/route/route.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="258" column="42" selection-start-line="258" selection-start-column="25" selection-end-line="258" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/DemandUserV.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceBookingV.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceOrderV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="366" column="18" lean-forward="true" selection-start-line="366" selection-start-column="18" selection-end-line="366" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/WithdrawMiniV.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Withdraw.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="113" column="37" lean-forward="true" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
+          <folding>
+            <element signature="e#130#168#0#PHP" expanded="true" />
+            <element signature="e#635#1377#0#PHP" />
+            <element signature="e#1382#1632#0#PHP" />
+            <element signature="e#1638#2232#0#PHP" />
+            <element signature="e#2237#2684#0#PHP" />
+            <element signature="e#2690#3352#0#PHP" />
+            <element signature="e#3478#3878#0#PHP" />
+            <element signature="e#3883#4156#0#PHP" />
+            <element signature="e#4162#5378#0#PHP" />
+            <element signature="e#5383#5621#0#PHP" />
+            <element signature="e#5627#6531#0#PHP" />
+            <element signature="e#6536#6770#0#PHP" />
+            <element signature="e#6776#7795#0#PHP" />
+            <element signature="e#8050#9122#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/WithDrawService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-77">
+          <caret line="300" column="21" selection-start-line="300" selection-start-column="21" selection-end-line="300" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/OrderReportV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-843">
+          <caret line="145" column="27" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2803">
+          <caret line="126" column="37" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
+          <folding>
+            <element signature="e#130#168#0#PHP" expanded="true" />
+            <element signature="e#601#1427#0#PHP" />
+            <element signature="e#1432#3160#0#PHP" />
+            <element signature="e#3942#4786#0#PHP" />
+            <element signature="e#5721#7432#0#PHP" />
+            <element signature="e#7438#8670#0#PHP" />
+            <element signature="e#8675#9056#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="151" column="62" selection-start-line="151" selection-start-column="62" selection-end-line="151" selection-end-column="62" />
+          <folding>
+            <element signature="e#520#1375#0#PHP" />
+            <element signature="e#1380#2518#0#PHP" />
+            <element signature="e#2524#3403#0#PHP" />
+            <element signature="e#3408#4120#0#PHP" />
+            <element signature="e#4127#5442#0#PHP" />
+            <element signature="e#5447#5884#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="105" column="37" selection-start-line="105" selection-start-column="37" selection-end-line="105" selection-end-column="37" />
+          <folding>
+            <element signature="e#708#1257#0#PHP" />
+            <element signature="e#1262#1559#0#PHP" />
+            <element signature="e#1565#3714#0#PHP" />
+            <element signature="e#4001#6071#0#PHP" />
+            <element signature="e#6076#6373#0#PHP" />
+            <element signature="e#6379#8136#0#PHP" />
+            <element signature="e#8141#8439#0#PHP" />
+            <element signature="e#8445#9194#0#PHP" />
+            <element signature="e#9199#10034#0#PHP" />
+            <element signature="e#10040#10869#0#PHP" />
+            <element signature="e#10874#11832#0#PHP" />
+            <element signature="e#11838#12938#0#PHP" />
+            <element signature="e#12943#13172#0#PHP" />
+            <element signature="e#13178#13728#0#PHP" />
+            <element signature="e#13733#14496#0#PHP" />
+            <element signature="e#14502#15152#0#PHP" />
+            <element signature="e#15157#16160#0#PHP" />
+            <element signature="e#16166#16835#0#PHP" />
+            <element signature="e#16841#17689#0#PHP" />
+            <element signature="e#17695#18851#0#PHP" />
+            <element signature="e#18856#19061#0#PHP" />
+            <element signature="e#19067#20563#0#PHP" />
+            <element signature="e#20568#20831#0#PHP" />
+            <element signature="e#20837#21606#0#PHP" />
+            <element signature="e#21611#21757#0#PHP" />
+            <element signature="e#21763#22620#0#PHP" />
+            <element signature="e#22625#22770#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/OrderReport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="59" column="53" selection-start-line="59" selection-start-column="53" selection-end-line="59" selection-end-column="53" />
+          <folding>
+            <element signature="e#2911#5287#0#PHP" />
+            <element signature="e#5292#5510#0#PHP" />
+            <element signature="e#5516#7684#0#PHP" />
+            <element signature="e#7689#8076#0#PHP" />
+            <element signature="e#8082#8920#0#PHP" />
+            <element signature="e#8925#9129#0#PHP" />
+            <element signature="e#9135#9738#0#PHP" />
+            <element signature="e#9743#9907#0#PHP" />
+            <element signature="e#9913#11214#0#PHP" />
+            <element signature="e#11219#11410#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/OrderReportService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/DemandOrderV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-83">
+          <caret line="441" column="27" selection-start-line="441" selection-start-column="27" selection-end-line="441" selection-end-column="27" />
+          <folding>
+            <element signature="e#289#485#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/YaYW3pq71c.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="978">
+          <caret line="261" column="28" selection-start-line="261" selection-start-column="28" selection-end-line="261" selection-end-column="28" />
+          <folding>
+            <element signature="e#129#167#0#PHP" expanded="true" />
+            <element signature="e#565#1221#0#PHP" />
+            <element signature="e#1226#1522#0#PHP" />
+            <element signature="e#1528#2648#0#PHP" />
+            <element signature="e#2653#2797#0#PHP" />
+            <element signature="e#2803#3442#0#PHP" />
+            <element signature="e#3447#3808#0#PHP" />
+            <element signature="e#3815#4449#0#PHP" />
+            <element signature="e#4454#4812#0#PHP" />
+            <element signature="e#4818#10487#0#PHP" />
+            <element signature="e#10492#10611#0#PHP" />
+            <element signature="e#10617#16318#0#PHP" />
+            <element signature="e#16323#16454#0#PHP" />
+            <element signature="e#16460#17116#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/file/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/AuthService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="136" column="30" selection-start-line="136" selection-start-column="30" selection-end-line="136" selection-end-column="30" />
+          <folding>
+            <element signature="e#123#148#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/file/wx-sdk.77381c6b.map">
+      <provider editor-type-id="sourcemapFileViewerProvider" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>
