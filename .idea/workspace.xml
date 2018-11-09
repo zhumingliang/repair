@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
-      <change afterPath="$PROJECT_DIR$/public/file/static.30745be9.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/file/static.5a920329.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/file/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/file/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/file/static.3badbbd9.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/file/static.8a8cd496.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/file/static.9942f917.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/file/static.9942f917.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/file/static.79b36812.css" afterDir="false" />
-    </list>
+    <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +118,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/file/static.30745be9.map">
           <provider editor-type-id="sourcemapFileViewerProvider" />
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret column="385" lean-forward="true" selection-start-column="385" selection-end-column="385" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -418,7 +414,7 @@
       <workItem from="1540207077566" duration="78267000" />
       <workItem from="1540694554740" duration="72478000" />
       <workItem from="1540994992394" duration="41067000" />
-      <workItem from="1541097506188" duration="187998000" />
+      <workItem from="1541097506188" duration="188209000" />
     </task>
     <task id="LOCAL-00379" summary="项目初始化">
       <created>1541638129944</created>
@@ -767,7 +763,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="776904000" />
+    <option name="totallyTimeSpent" value="777115000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1317,7 +1313,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/file/static.30745be9.map">
       <provider editor-type-id="sourcemapFileViewerProvider" />
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret column="385" lean-forward="true" selection-start-column="385" selection-end-column="385" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
