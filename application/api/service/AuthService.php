@@ -134,6 +134,7 @@ class AuthService
     {
         //检测用户是否存在
         $admin = AdminT::where('id', $uid)
+            ->where('grade', 1)
             ->find();
         if (!$admin) {
             return [
