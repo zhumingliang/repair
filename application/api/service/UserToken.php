@@ -77,7 +77,7 @@ class UserToken extends Token
 
         $openid = $wxResult['openid'];
         $user = UserModel::getByOpenID($openid);
-        if ($user->state == 2 || $user->state == 3) {
+        if ($user->state == 2) {
             throw new TokenException([
                 'msg' => '小程序用户被禁用，请联系平台',
                 'errorCode' => 20010
