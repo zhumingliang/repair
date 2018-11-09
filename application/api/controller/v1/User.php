@@ -153,6 +153,7 @@ class User extends BaseController
     {
 
         $list = UserV::field('id,openid,nickName,login_count,update_time,state,phone,type')
+            ->where('state', '<', 3)
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('id|nickName', 'like', '%' . $key . '%');
