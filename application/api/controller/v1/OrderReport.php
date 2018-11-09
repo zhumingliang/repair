@@ -26,7 +26,8 @@ class OrderReport extends BaseController
      * https://mengant.cn/api/v1/report/demand/admin?page=1&size=10&order_type=3
      * @apiParam (请求参数说明) {int} page  页码
      * @apiParam (请求参数说明) {int} size  每页条数
-     * @apiParam (请求参数说明) {int} order_type  用户订单类别 ： order_type=1 全部状态；order_type=2 未完成；order_type=3 已完成
+     * @apiParam (请求参数说明) {int} order_type  用户订单类别 ： order_type=1 全部状态；
+     * order_type=2 未完成；order_type=3 已完成
      * 商铺订单类别：1 | 待服务；2 | 待确认；3 | 已完成
      * @apiSuccessExample {json} 返回样例:
      * {"total":5,"per_page":"1","current_page":1,"last_page":5,"data":[{"order_id":33,"source_id":26,"shop_id":5,"source_name":"需要做饭和打扫卫生的阿姨","update_money":1,"phone_shop":2,"phone_user":2,"user_name":"朱明良","prepay_id":"","pay_money":0,"shop_name":"维修小家","time_begin":"2018-10-28 16:46:00","time_end":"2018-11-04 16:46:00","order_number":"BA26611961932221","shop_confirm":2,"order_time":"2018-10-26 21:39:56","address":"铜陵市第十一中学(第十一中学铜井路北)","origin_money":1,"user_phone":"18956225238","shop_phone":"18956225230","comment_id":99999,"confirm_id":99999,"pay_id":99999,"refund_id":99999,"state":1,"u_id":15,"service_begin":2,"cover":"https:\/\/mengant.cn\/static\/imgs\/20181024\/339bbbfc439017646ab6fa4da01634b8.jpg","province":"安徽省","city":"铜陵市","area":"郊区","read_money":null,"order_state":"未完成"}]}

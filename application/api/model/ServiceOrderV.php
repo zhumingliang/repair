@@ -349,14 +349,16 @@ class ServiceOrderV extends Model
         $sql .= ' OR ';
         $sql .= ' ( confirm_id = 2 AND consult_time > ' . $consult_limit . ')';
 
-        $list = self::where('state', CommonEnum::STATE_IS_OK)
-            ->whereRaw($sql)
+        $list = self::whereRaw($sql)
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page]);
+            ->fetchSql(true)
+            ->select();
+        echo $list;
+            //->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
@@ -420,7 +422,10 @@ class ServiceOrderV extends Model
                     $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page]);
+            ->fetchSql(true)
+            ->select();
+        echo $list;
+            //->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
@@ -464,7 +469,10 @@ class ServiceOrderV extends Model
                     $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page])->toArray();
+            ->fetchSql(true)
+            ->select();
+        echo $list;
+            //->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
