@@ -46,6 +46,7 @@ class UserT extends Model
     public static function getByOpenID($openId)
     {
         $user = self::where('openId', '=', $openId)
+            ->where('state','<',3)
             ->find();
         return $user;
     }

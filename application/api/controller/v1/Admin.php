@@ -137,12 +137,14 @@ class Admin extends BaseController
                 AdminJoinT::update(['state' => $state], ['admin_id' => $id]);
             }
         } else {
-            if ($state == 2 || $state == 1) {
+            $res = UserT::update(['state' => $state], ['id' => $id]);
+
+           /* if ($state == 2 || $state == 1) {
                 $res = UserT::update(['state' => $state], ['id' => $id]);
 
             } else {
                 $res = UserT::destroy($id);
-            }
+            }*/
         }
 
         if (!$res) {
