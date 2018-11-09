@@ -277,7 +277,7 @@ class Auth extends BaseController
     public
     function deleteUserGroup($id)
     {
-        $res = AuthGroupAccess::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        $res = AuthGroupAccess::update(['status' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         if (!$res) {
             throw  new AuthException([
                 'code' => 401,
