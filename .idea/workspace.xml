@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Admin.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,12 +30,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="45" />
-          <entry key="php" value="69959" />
+          <entry key="php" value="69990" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PHP" value="69959" />
+          <entry key="PHP" value="69990" />
           <entry key="PLAIN_TEXT" value="45" />
         </counts>
       </usages-collector>
@@ -43,18 +43,18 @@
         <counts>
           <entry key="htaccess" value="1" />
           <entry key="html" value="2" />
-          <entry key="map" value="2" />
+          <entry key="map" value="3" />
           <entry key="pem" value="4" />
-          <entry key="php" value="2129" />
+          <entry key="php" value="2130" />
           <entry key="txt" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="2" />
-          <entry key="PHP" value="2129" />
+          <entry key="PHP" value="2130" />
           <entry key="PLAIN_TEXT" value="9" />
-          <entry key="SourceMap" value="2" />
+          <entry key="SourceMap" value="3" />
           <entry key="htaccess" value="1" />
         </counts>
       </usages-collector>
@@ -85,6 +85,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="568">
+              <caret line="143" column="22" selection-start-line="143" selection-start-column="22" selection-end-line="143" selection-end-column="22" />
+              <folding>
+                <element signature="e#130#168#0#PHP" expanded="true" />
+                <element signature="e#601#1427#0#PHP" />
+                <element signature="e#1432#3160#0#PHP" />
+                <element signature="e#5721#7432#0#PHP" />
+                <element signature="e#7438#8670#0#PHP" />
+                <element signature="e#8675#9056#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/service/UserToken.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="276">
@@ -94,6 +111,12 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/file/wx-sdk.77381c6b.map">
+          <provider editor-type-id="sourcemapFileViewerProvider" />
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -174,7 +197,6 @@
         <option value="$PROJECT_DIR$/extend/wxpay/ApiCommon.php" />
         <option value="$PROJECT_DIR$/application/api/service/OrderReportService.php" />
         <option value="$PROJECT_DIR$/application/api/service/AdminToken.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Admin.php" />
         <option value="$PROJECT_DIR$/application/api/service/UserToken.php" />
         <option value="$PROJECT_DIR$/extend/wxpay/database/WxPayResults.php" />
         <option value="$PROJECT_DIR$/extend/wxpay/WxTransferApi.php" />
@@ -189,6 +211,7 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/Auth.php" />
         <option value="$PROJECT_DIR$/application/api/service/AuthService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/User.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Admin.php" />
       </list>
     </option>
   </component>
@@ -374,7 +397,7 @@
       <workItem from="1540207077566" duration="78267000" />
       <workItem from="1540694554740" duration="72478000" />
       <workItem from="1540994992394" duration="41067000" />
-      <workItem from="1541097506188" duration="186581000" />
+      <workItem from="1541097506188" duration="186867000" />
     </task>
     <task id="LOCAL-00373" summary="项目初始化">
       <created>1541613561376</created>
@@ -723,7 +746,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="775487000" />
+    <option name="totallyTimeSpent" value="775773000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1118,22 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2803">
-          <caret line="126" column="37" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
-          <folding>
-            <element signature="e#130#168#0#PHP" expanded="true" />
-            <element signature="e#601#1427#0#PHP" />
-            <element signature="e#1432#3160#0#PHP" />
-            <element signature="e#3942#4786#0#PHP" />
-            <element signature="e#5721#7432#0#PHP" />
-            <element signature="e#7438#8670#0#PHP" />
-            <element signature="e#8675#9056#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Order.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="452">
@@ -1245,10 +1252,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/file/wx-sdk.77381c6b.map">
-      <provider editor-type-id="sourcemapFileViewerProvider" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
@@ -1284,6 +1287,25 @@
           <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
           <folding>
             <element signature="e#37#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/file/wx-sdk.77381c6b.map">
+      <provider editor-type-id="sourcemapFileViewerProvider" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="143" column="22" selection-start-line="143" selection-start-column="22" selection-end-line="143" selection-end-column="22" />
+          <folding>
+            <element signature="e#130#168#0#PHP" expanded="true" />
+            <element signature="e#601#1427#0#PHP" />
+            <element signature="e#1432#3160#0#PHP" />
+            <element signature="e#5721#7432#0#PHP" />
+            <element signature="e#7438#8670#0#PHP" />
+            <element signature="e#8675#9056#0#PHP" />
           </folding>
         </state>
       </provider>
