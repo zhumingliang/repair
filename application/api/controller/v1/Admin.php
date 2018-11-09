@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\AdminJoinT;
 use app\api\model\AdminT;
+use app\api\model\UserT;
 use app\api\validate\AdminValidate;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
@@ -104,11 +105,12 @@ class Admin extends BaseController
      * @api {POST} /api/v1/admin/handel  145-小区账户/加盟商账户管理-用户状态操作
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  小区账户删除操作；加盟商账户删除/禁用/启用操作
+     * @apiDescription  小区账户删除操作；加盟商账户删除/禁用/启用操作;
      * @apiExample {POST}  请求样例:
      * {
      * "id": 1,
      * "state":2
+     * "type":1
      * }
      * @apiParam (请求参数说明) {int} id 用户id
      * @apiParam (请求参数说明) {int} state  用户状态: 1 | 启用；2 | 禁用；3 | 删除
@@ -122,14 +124,22 @@ class Admin extends BaseController
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function handel()
+    public function handel($type = 1)
     {
 
         //(new AdminValidate())->scene('handel')->goCheck();
         $id = $this->request->param('id');
         $state = $this->request->param('state');
-        $admin = AdminT::where('id', $id)->find();
-        $res = AdminT::update(['state' => $state], ['id' => $id]);
+        if ($type == 1) {
+            $admin = AdminT::where('id', $id)->find();
+            $res = AdminT::update(['state' => $state], ['id' => $id]);
+            if ($admin->grade == 2) {
+                AdminJoinT::update(['state' => $state], ['admin_id' => $id]);
+            }
+        } else {
+            $res = UserT::update(['state' => $state], ['id' => $id]);
+        }
+
         if (!$res) {
             throw new AdminException(
                 ['code' => 401,
@@ -138,9 +148,7 @@ class Admin extends BaseController
                 ]
             );
         }
-        if ($admin->grade == 2) {
-            AdminJoinT::update(['state' => $state], ['admin_id' => $id]);
-        }
+
 
         return json(new  SuccessMessage());
 
@@ -260,7 +268,7 @@ class Admin extends BaseController
      */
     public function getVillageList($page = 1, $size = 20, $key = '')
     {
-        $grade =TokenService::getCurrentTokenVar('grade');
+        $grade = TokenService::getCurrentTokenVar('grade');
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
             $list = AdminT::getVillagesForAdmin($page, $size, $key);
         } else {

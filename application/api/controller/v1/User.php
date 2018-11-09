@@ -152,7 +152,7 @@ class User extends BaseController
     public function getUsers($page = 1, $size = 20, $key = '')
     {
 
-        $list = UserV::field('id,openid,nickName,login_count,update_time,state,phone')
+        $list = UserV::field('id,openid,nickName,login_count,update_time,state,phone,type')
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('id|nickName', 'like', '%' . $key . '%');
