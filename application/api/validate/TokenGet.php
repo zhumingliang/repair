@@ -19,8 +19,8 @@ class TokenGet extends BaseValidate
 
     protected $message = [
         'code' => '微信端获取Token，需要code',
-        'phone' => '手机端获取Token，需要手机号',
-        'pwd' => '手机端获取Token，需要密码'
+        'phone' => '登录操作，需要手机号',
+        'pwd' => '登录操作，需要密码'
     ];
 
     protected $scene = [

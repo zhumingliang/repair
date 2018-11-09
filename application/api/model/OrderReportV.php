@@ -98,7 +98,6 @@ class OrderReportV extends Model
         $sql_join = preJoinSqlForGetDShops($province, $city, $area);
 
 
-
         $list = self::whereRaw($sql)
             ->whereRaw($sql_join)
             ->where(function ($query) use ($key) {
@@ -134,7 +133,7 @@ class OrderReportV extends Model
     }
 
     /**
-     * 按城市导出数据
+     * 管理员-按城市导出数据
      * @param $province
      * @param $city
      * @param $time_begin
@@ -146,8 +145,19 @@ class OrderReportV extends Model
      */
     public static function reportForCity($province, $city, $time_begin, $time_end)
     {
-        $list = self::where('province', $province)
-            ->where('city', $city)
+
+        $sql = '';
+        if ($city != "全部") {
+            $sql .= "city = " . $city;
+        } else {
+            if ($province != "全部") {
+                $sql .= "province = " . $province;
+            }else{
+                $sql.="1 =1 ";
+            }
+        }
+
+        $list = self::whereRaw($sql)
             ->whereTime('order_time', 'between', [$time_begin, $time_end])
             ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,area')
             ->select()

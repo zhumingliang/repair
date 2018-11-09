@@ -156,7 +156,7 @@ class OrderReport extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/report/service/admin 141-管理员导出城市订单
+     * @api {GET} /api/v1/report/service/admin 141-管理员-订单管理-城市订单导出
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 直接访问连接下载数据
@@ -166,10 +166,12 @@ class OrderReport extends BaseController
      * @apiParam (请求参数说明) {String} city  市
      * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {String} time_end 结束时间
+     * @apiParam (请求参数说明) {String} token 授权token
      *
      * @param $province
      * @param $city
      * @param $time_begin
+     * @param $token
      * @param $time_end
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -183,15 +185,17 @@ class OrderReport extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/report/export 142-管理员导出平台订单/加盟商导出订单
+     * @api {GET} /api/v1/report/export 142-管理员-订单管理-平台订单管理/加盟商-导出订单
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 直接访问连接下载数据
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/report/export?time_begin=2018-08-01&time_end=2018-10-30
+     * https://mengant.cn/api/v1/report/export?time_begin=2018-08-01&time_end=2018-10-30&token=sdadas
      * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {String} time_end 结束时间
+     * @apiParam (请求参数说明) {String} token 授权token
      *
+     * @param $token
      * @param $time_begin
      * @param $time_end
      * @throws \app\lib\exception\TokenException
@@ -203,7 +207,6 @@ class OrderReport extends BaseController
         (new OrderReportService())->exportReport($time_begin, $time_end, $token);
 
     }
-
 
     /**
      * @api {GET} /api/v1/order/banner 188-小程序获取服务轮播数据

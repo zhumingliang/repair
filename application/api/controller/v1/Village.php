@@ -101,9 +101,10 @@ class Village extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription 直接访问连接下载数据
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/village/export?time_begin=2018-08-01&time_end=2018-10-30
+     * https://mengant.cn/api/v1/village/export?time_begin=2018-08-01&time_end=2018-10-30&token=dssd
      * @apiParam (请求参数说明) {String} time_begin 开始时间
      * @apiParam (请求参数说明) {String} time_end 结束时间
+     * @apiParam (请求参数说明) {String} token 授权token
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
