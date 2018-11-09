@@ -152,14 +152,33 @@ class OrderReportV extends Model
         } else {
             if ($province != "全部") {
                 $sql .= "province = " . $province;
-            }else{
-                $sql.="1 =1 ";
+            } else {
+                $sql .= "1 =1 ";
             }
         }
 
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql_order = '( confirm_id = 1  ) ';
+        $sql_order .= ' OR ';
+        $sql_order .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
+        $sql_order .= ' OR ';
+        $sql_order .= ' ( confirm_id = 2 AND  consult_time < ' . $consult_limit . ')';
+
+
         $list = self::whereRaw($sql)
+            ->whereRaw($sql_order)
             ->whereTime('order_time', 'between', [$time_begin, $time_end])
-            ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,area')
+            ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,concat_ws("-",province,city,area) as area')
             ->select()
             ->toArray();
         return $list;
@@ -169,7 +188,27 @@ class OrderReportV extends Model
 
     public static function reportWithoutCity($time_begin, $time_end)
     {
+
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql_order = '( confirm_id = 1  ) ';
+        $sql_order .= ' OR ';
+        $sql_order .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
+        $sql_order .= ' OR ';
+        $sql_order .= ' ( confirm_id = 2 AND  consult_time < ' . $consult_limit . ')';
+
+
         $list = self::where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql_order)
             ->whereTime('order_time', 'between', [$time_begin, $time_end])
             ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,city')
             ->select()
@@ -181,10 +220,29 @@ class OrderReportV extends Model
 
     public static function reportForJoin($province, $city, $area, $time_begin, $time_end)
     {
+
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql_order = '( confirm_id = 1  ) ';
+        $sql_order .= ' OR ';
+        $sql_order .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
+        $sql_order .= ' OR ';
+        $sql_order .= ' ( confirm_id = 2 AND  consult_time < ' . $consult_limit . ')';
+
         $sql = preJoinSqlForGetDShops($province, $city, $area);
         $list = self::where('state', CommonEnum::STATE_IS_OK)
             ->whereTime('order_time', 'between', [$time_begin, $time_end])
             ->whereRaw($sql)
+            ->whereRaw($sql_order)
             ->field('u_id,order_time,user_phone,update_money,source_name,order_number,read_money,city')
             ->select()
             ->toArray();

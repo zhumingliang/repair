@@ -156,12 +156,12 @@ class OrderReport extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/report/service/admin 141-管理员-订单管理-城市订单导出
+     * @api {GET} /api/v1/report/export/city 141-管理员-订单管理-城市订单导出
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 直接访问连接下载数据
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/report/export/city?province=安徽省&city=铜陵市&time_begin=2018-08-01&time_end=2018-10-30
+     * https://mengant.cn/api/v1/report/export/city?province=安徽省&city=铜陵市&time_begin=2018-08-01&time_end=2018-10-30&token=sdadas
      * @apiParam (请求参数说明) {String} province  省
      * @apiParam (请求参数说明) {String} city  市
      * @apiParam (请求参数说明) {String} time_begin 开始时间
