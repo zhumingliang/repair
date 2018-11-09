@@ -43,7 +43,16 @@ class TransferService
 
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             //更新状态
-            WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
+          $up_id=  WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
+          if (!$up_id){
+              throw new PayException(
+                  [
+                      'code' => 401,
+                      'msg' => '提现状态修改失败。',
+                      'errorCode' => 150012
+                  ]
+              );
+          }
 
         } else {
 
