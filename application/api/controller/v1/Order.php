@@ -488,7 +488,7 @@ class Order extends BaseController
         }
 
         //生成订单通知信息
-        OrderMsgService::saveNormal(OrderService::getUID($id, $type), $id, $type, 2);
+       // OrderMsgService::saveNormal(OrderService::getUID($id, $type), $id, $type, 2);
         return json(new SuccessMessage());
 
     }
