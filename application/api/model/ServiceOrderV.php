@@ -355,10 +355,7 @@ class ServiceOrderV extends Model
                     $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
                 }
             })
-            ->fetchSql(true)
-            ->select();
-        echo $list;
-            //->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
@@ -422,10 +419,7 @@ class ServiceOrderV extends Model
                     $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
                 }
             })
-            ->fetchSql(true)
-            ->select();
-        echo $list;
-            //->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
@@ -469,10 +463,7 @@ class ServiceOrderV extends Model
                     $query->where('order_num|user_phone|', 'like', '%' . $key . '%');
                 }
             })
-            ->fetchSql(true)
-            ->select();
-        echo $list;
-            //->paginate($size, false, ['page' => $page])->toArray();
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 

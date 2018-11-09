@@ -465,7 +465,10 @@ class DemandOrderV extends Model
                     $query->where('order_num|user_phone', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page]);
+            ->fetchSql(true)
+            ->select();
+        echo $list;
+            //->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
@@ -506,7 +509,10 @@ class DemandOrderV extends Model
                     $query->where('order_num|user_phone', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page]);
+            ->fetchSql(true)
+            ->select();
+        echo $list;
+            //->paginate($size, false, ['page' => $page]);
 
         return $list;
     }
@@ -549,7 +555,10 @@ class DemandOrderV extends Model
                     $query->where('order_num|user_phone', 'like', '%' . $key . '%');
                 }
             })
-            ->paginate($size, false, ['page' => $page])->toArray();
+            ->fetchSql(true)
+            ->select();
+        echo $list;
+            //->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
