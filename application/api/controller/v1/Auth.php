@@ -234,13 +234,19 @@ class Auth extends BaseController
     {
         $u_id_arr = explode(',', $u_id);
         $list[] = array();
+        $error = '';
         for ($i = 0; $i < count($u_id_arr); $i++) {
 
-            $list[$i] = [
-                'uid' => $u_id_arr[$i],
-                'group_id' => $group_id,
-                'status' => CommonEnum::STATE_IS_OK
-            ];
+            $check = AuthService::checkUser($u_id_arr[$i]);
+            if ($check['res']) {
+                $list[] = [
+                    'uid' => $u_id_arr[$i],
+                    'group_id' => $group_id,
+                    'status' => CommonEnum::STATE_IS_OK
+                ];
+            } else {
+                $error .= $check['msg'];
+            }
         }
 
         $access = new AuthGroupAccess();
@@ -251,10 +257,15 @@ class Auth extends BaseController
                 'errorCode' => 250008]);
         }
 
+        if (strlen($error) > 0) {
+            throw  new AuthException(['code' => 401,
+                'msg' => '部分成员授权失败:' . $error,
+                'errorCode' => 250008]);
+        }
+
         return json(new SuccessMessage());
 
     }
-
 
 
     /**

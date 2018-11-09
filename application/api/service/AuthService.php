@@ -11,7 +11,9 @@ namespace app\api\service;
 
 use app\api\model\AdminT;
 use app\api\model\AuthGroup;
+use app\api\model\AuthGroupAccess;
 use app\api\model\AuthRule;
+use app\lib\enum\CommonEnum;
 
 class AuthService
 {
@@ -128,14 +130,33 @@ class AuthService
         return $rules;
     }
 
-    public function checkUser($uid)
+    public static function checkUser($uid)
     {
         //检测用户是否存在
-        $admin = AdminT::where('id', $uid)->find();
+        $admin = AdminT::where('id', $uid)
+            ->find();
         if (!$admin) {
-            return false;
+            return [
+                'res' => false,
+                'msg' => '用户(' . $uid . ')不存在'
+            ];
         }
         //检测用户有没有授权分组
+
+        $access = AuthGroupAccess::where('status', CommonEnum::STATE_IS_OK)
+            ->where('uid', $uid)
+            ->find();
+        if ($access) {
+            return [
+                'res' => false,
+                'msg' => '用户(' . $uid . ')已添加分组，不能重复添加'
+            ];
+        }
+
+        return [
+            'res' => true,
+            'msg' => 'ok'
+        ];
 
     }
 
