@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\AdminT;
 use app\api\model\AuthGroup;
 use app\api\model\AuthRule;
 
@@ -92,7 +93,7 @@ class AuthService
                 } else {
                     $rules[$k]['child'] = AuthRule::where('status', 1)
                         ->where('parent_id', $v['id'])
-                        ->where('id','in',$this->rules)
+                        ->where('id', 'in', $this->rules)
                         ->field('id,name,condition,parent_id')
                         ->select()->toArray();
                 }
@@ -125,6 +126,17 @@ class AuthService
             }
 
         return $rules;
+    }
+
+    public function checkUser($uid)
+    {
+        //检测用户是否存在
+        $admin = AdminT::where('id', $uid)->find();
+        if (!$admin) {
+            return false;
+        }
+        //检测用户有没有授权分组
+
     }
 
 
