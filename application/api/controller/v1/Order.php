@@ -524,6 +524,7 @@ class Order extends BaseController
     public function getCommentsForShop($id, $page, $size)
     {
         $list = OrderCommentV::where('shop_id', $id)
+            ->with('imgs')
             ->paginate($size, false, ['page' => $page]);
         return json($list);
 

@@ -13,5 +13,11 @@ use think\Model;
 
 class OrderCommentV extends Model
 {
+    public function imgs()
+    {
+        return $this->hasMany('OrderCommentImgT',
+            'o_id', 'id');
+    }
+
 
 }
