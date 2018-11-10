@@ -18,8 +18,7 @@ class ServiceValidate extends BaseValidate
         'price' => 'require',
         'unit' => 'require',
         'cover' => 'require',
-        'extend' => 'require|in:1,2',
-        'imgs' => 'require'
+        'extend' => 'require|in:1,2'
     ];
 
 }

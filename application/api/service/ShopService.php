@@ -196,6 +196,15 @@ class ShopService
                     ]);
                 }
 
+            } else {
+                Db::rollback();
+                throw new ShopException([
+                    ['code' => 401,
+                        'msg' => '新增服务，至少上传两张图片',
+                        'errorCode' => 60006
+                    ]
+                ]);
+
             }
             //商品需要推广
             if ($extend == self::SERVICE_EXTEND) {
@@ -359,12 +368,12 @@ class ShopService
     private static function getServiceMoney($id)
     {
         $extend = ExtendService::getExtendPrice($id);
-        if ($extend['extend']==2){
+        if ($extend['extend'] == 2) {
             $service_ino = ServicesT::where('id', $id)->find();
             return $service_ino->price;
 
         }
-        return ($extend['extend_price'])*100;
+        return ($extend['extend_price']) * 100;
 
 
     }
