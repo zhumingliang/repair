@@ -102,7 +102,7 @@ class Pay
 
         if ($this->type == 1 || $this->type == 2) {
             $discount = $this->getDiscount();
-            $order->join_money = ($order->origin_money) * $discount;
+            $order->join_money = ($order->update_money) * $discount;
 
             if (isset($order->r_id)) {
                 UserRedT::update(['state' => 2], ['id' => $order->r_id]);
@@ -286,7 +286,7 @@ class Pay
         }
         $status = [
             'pass' => true,
-            'orderPrice' => $order->origin_money
+            'orderPrice' => $order->update_money
         ];
 
         return $status;
@@ -309,7 +309,7 @@ class Pay
             $order['openid'] = $this->getOpenidForDemand($order->d_id);
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
             $order = BondT::where('id', '=', $this->orderID)
-                ->field('id,u_id,1 as state,money as origin_money,pay_id,openid,order_number')
+                ->field('id,u_id,1 as state,money as update_money,pay_id,openid,order_number')
                 ->find();
         } else {
             throw new PayException();
