@@ -281,11 +281,11 @@ class Order extends BaseController
         $money = $money * 100;
         $type = $this->request->param('type');
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
-            $res = DemandOrderT::update(['origin_money' => $money,
+            $res = DemandOrderT::update(['update_money' => $money,
                 'price_remark' => $remark],
                 ['id' => $id]);
         } else {
-            $res = ServiceBookingT::update(['origin_money' => $money,
+            $res = ServiceBookingT::update(['update_money' => $money,
                 'price_remark' => $remark],
                 ['id' => $id]);
         }
