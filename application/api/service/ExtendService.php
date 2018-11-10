@@ -177,7 +177,7 @@ class ExtendService
     }
 
 
-    public  static function getExtendPrice($s_id)
+    public static function getExtendPrice($s_id)
     {
         $res = [
             'extend' => 0,
@@ -185,7 +185,7 @@ class ExtendService
         ];
 
         //判断商品是否推广
-        if (self::checkExtend($s_id)) {
+        if (self::checkExtend($s_id) - 1) {
             //获取商品信息-获取折扣-处理价格
             $service_ino = ServicesT::where('id', $s_id)->with('shop')->find();
             $discount = self::getExtendDiscount($service_ino->shop->city);
