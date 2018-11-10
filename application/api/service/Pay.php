@@ -110,7 +110,6 @@ class Pay
         }
 
 
-
         if (!$order->save()) {
             // LogService::Log('微信支付回调成功后修改订单状态出错，id：' . $this->orderID);
             //修改信息失败
@@ -180,7 +179,7 @@ class Pay
         $input->setAttach($attend);//添加附加数据
         $input->setOutTradeNo($this->orderNumber);
         //$input->setTotalFee($totalPrice * 100);
-        $input->setTotalFee(1);
+        $input->setTotalFee($totalPrice);
         $input->setTimeStart(date("YmdHis"));
         $input->setTimeExpire(date("YmdHis", time() + 600));
         $input->setNotifyUrl(config('secure.pay_back_url'));
@@ -193,7 +192,7 @@ class Pay
             throw new PayException(
                 [
                     'code' => 401,
-                    'msg' => '获取微信预支付信息出错:'.$wxOrder['return_msg'],
+                    'msg' => '获取微信预支付信息出错:' . $wxOrder['return_msg'],
                     'errorCode' => 150006
                 ]
             );

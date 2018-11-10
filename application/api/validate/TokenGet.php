@@ -13,7 +13,6 @@ class TokenGet extends BaseValidate
 {
     protected $rule = [
         'code' => 'require|isNotEmpty',
-        'phone' => 'require|isMobile',
         'pwd' => 'require|isNotEmpty'
     ];
 
