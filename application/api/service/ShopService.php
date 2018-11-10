@@ -500,7 +500,12 @@ class ShopService
                 $face = FaceService::instance();
                 if (!$face->deleteFace($shop_img_id, $city, $face_token)) {
                     Db::rollback();
-                    throw  new FaceException();
+                    throw  new FaceException([
+                        ['code' => 401,
+                            'msg' => '删除人脸库数据失败',
+                            'errorCode' => 50013
+                        ]
+                    ]);
                 }
             }
 

@@ -129,6 +129,7 @@ class FaceService
         /* $userId = "user1";
          $groupId = "group1";
          $faceToken = "face_token_23123";*/
+        $groupId=md5($groupId);
         $res = $client->faceDelete($userId, $groupId, $faceToken);
         if (isset($res['error_code']) && $res['error_code']) {
             return false;

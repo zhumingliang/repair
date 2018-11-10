@@ -115,7 +115,8 @@ class WithDrawService
             );
         }
         //检查余额是否充足
-        if (!$this->checkJoinBalance($params['money'])) {
+        $check = $this->checkJoinBalance($params['money']);
+        if ($check < 0) {
             throw  new WithdrawException(
                 ['code' => 401,
                     'msg' => '加盟商余额不足',
@@ -127,6 +128,7 @@ class WithDrawService
 
         $params['admin_id'] = Token::getCurrentUid();
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['money'] = $params['money'] * 100;
         $res = WithdrawPcT::create($params);
         if (!$res) {
             throw  new WithdrawException();

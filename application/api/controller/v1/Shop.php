@@ -382,7 +382,7 @@ class Shop extends BaseController
      * @apiDescription  删除操作
      * @apiExample {get}  请求样例:
      * {
-     * "id": 1,
+     * "id": 69,
      * "face_token": "a104e76591417d746c754dfd37113331",
      * "city": "广州市"
      * }
