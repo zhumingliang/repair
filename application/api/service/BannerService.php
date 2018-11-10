@@ -94,8 +94,9 @@ class BannerService
             $city = $params['city'];
             $area = $params['area'];
             $sql = preJoinSql($province, $city, $area);
+            $category = $params['category'] == 3 ? 4 : 3;
             $list = BannerMiniV::where('state', '=', CommonEnum::PASS)
-                ->where('category', '=', $params['category'])
+                ->where('category', $category)
                 ->whereRaw($sql)
                 ->field('id,title,des,url')
                 ->select();
@@ -148,7 +149,7 @@ class BannerService
         $list = array();
         $grade = Token::getCurrentTokenVar('grade');
         if ($grade == UserEnum::USER_GRADE_ADMIN) {
-            $list = BannerMiniV::where('state',  CommonEnum::READY)
+            $list = BannerMiniV::where('state', CommonEnum::READY)
                 ->paginate($size, false, ['page' => $page]);
 
         } else if ($grade == UserEnum::USER_GRADE_JOIN) {
