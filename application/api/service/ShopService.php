@@ -360,6 +360,7 @@ class ShopService
     private static function getServiceMoney($id)
     {
         $extend = ExtendService::getExtendPrice($id);
+
         if ($extend['extend'] == 2) {
             $service_ino = ServicesT::where('id', $id)->find();
             return $service_ino->price;

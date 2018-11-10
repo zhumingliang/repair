@@ -180,7 +180,7 @@ class ExtendService
     public static function getExtendPrice($s_id)
     {
         $res = [
-            'extend' => 0,
+            'extend' => 2,
             'extend_price' => 0
         ];
 
