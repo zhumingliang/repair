@@ -90,7 +90,7 @@ class OrderReportV extends Model
         $sql .= 'OR';
         $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
         $sql .= 'OR';
-        $sql .= ' ( confirm_id = 2 AND  consult_limit < ' . $consult_limit . ')';
+        $sql .= ' ( confirm_id = 2 AND  consult_time < ' . $consult_limit . ')';
 
         $province = Token::getCurrentTokenVar('province');
         $city = Token::getCurrentTokenVar('city');

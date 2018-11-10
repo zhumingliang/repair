@@ -183,7 +183,7 @@ class ShopService
                 ]);
             }
             //处理服务图片
-            if (strlen($imgs)) {
+            if (strlen($imgs)>0) {
 
                 if (!self::addServiceImage($imgs, $s_id)) {
 
@@ -199,7 +199,7 @@ class ShopService
             } else {
                 Db::rollback();
                 throw new ShopException([
-                    ['code' => 401,
+                    [   'code' => 401,
                         'msg' => '新增服务，至少上传两张图片',
                         'errorCode' => 60006
                     ]
