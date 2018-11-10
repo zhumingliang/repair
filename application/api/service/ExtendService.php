@@ -185,7 +185,7 @@ class ExtendService
         ];
 
         //判断商品是否推广
-        if (self::checkExtend($s_id) - 1) {
+        if (self::checkExtend($s_id)) {
             //获取商品信息-获取折扣-处理价格
             $service_ino = ServicesT::where('id', $s_id)->with('shop')->find();
             $discount = self::getExtendDiscount($service_ino->shop->city);
@@ -209,7 +209,7 @@ class ExtendService
         $count = ServiceExtendT::where('s_id', $s_id)
             ->where('state', 2)
             ->count();
-        return $count ? 1 : 2;
+        return $count;
     }
 
 
