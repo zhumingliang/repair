@@ -204,6 +204,22 @@ class ExtendService
 
     }
 
+
+    public static function preExpendPrice($s_id, $money)
+    {
+
+        if (self::checkExtend($s_id)) {
+            //获取商品信息-获取折扣-处理价格
+            $service_ino = ServicesT::where('id', $s_id)->with('shop')->find();
+            $discount = self::getExtendDiscount($service_ino->shop->city);
+            $money = (1 - $discount / 100) * $money;
+            return $money;
+
+        }
+
+        return $money;
+    }
+
     public static function checkExtend($s_id)
     {
         $count = ServiceExtendT::where('s_id', $s_id)

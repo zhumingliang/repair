@@ -15,6 +15,7 @@ use app\api\model\OrderCommentV;
 use app\api\model\OrderNormalMsgT;
 use app\api\model\ServiceBookingT;
 use app\api\model\SystemTimeT;
+use app\api\service\ExtendService;
 use app\api\service\OrderMsgService;
 use app\api\service\OrderService;
 use app\api\service\ShopService;
@@ -285,6 +286,10 @@ class Order extends BaseController
                 'price_remark' => $remark],
                 ['id' => $id]);
         } else {
+
+            $order_info = ServiceBookingT::where('id', $id)->find();
+            $s_id = $order_info->s_id;
+            $money = ExtendService::preExpendPrice($s_id, $money);
             $res = ServiceBookingT::update(['update_money' => $money,
                 'price_remark' => $remark],
                 ['id' => $id]);
@@ -488,7 +493,7 @@ class Order extends BaseController
         }
 
         //生成订单通知信息
-       // OrderMsgService::saveNormal(OrderService::getUID($id, $type), $id, $type, 2);
+        // OrderMsgService::saveNormal(OrderService::getUID($id, $type), $id, $type, 2);
         return json(new SuccessMessage());
 
     }
