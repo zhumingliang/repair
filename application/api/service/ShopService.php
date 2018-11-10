@@ -196,15 +196,6 @@ class ShopService
                     ]);
                 }
 
-            } else {
-                Db::rollback();
-                throw new ShopException([
-                    [   'code' => 401,
-                        'msg' => '新增服务，至少上传两张图片',
-                        'errorCode' => 60006
-                    ]
-                ]);
-
             }
             //商品需要推广
             if ($extend == self::SERVICE_EXTEND) {
@@ -320,6 +311,7 @@ class ShopService
         $params['openid'] = $openid;
         $params['order_number'] = makeOrderNo();
         $params['origin_money'] = $money;
+        $params['update_money'] = $money;
         $params['pay_id'] = $init_state;
         $params['refund_id'] = $init_state;
         $params['comment_id'] = $init_state;

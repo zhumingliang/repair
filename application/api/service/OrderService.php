@@ -100,6 +100,7 @@ class OrderService
             'order_number' => makeOrderNo(),
             'pay_money' => 0,
             'origin_money' => $demand->money,
+            'update_money' => $demand->money,
             'pay_id' => CommonEnum::ORDER_STATE_INIT,
             'confirm_id' => CommonEnum::ORDER_STATE_INIT,
             'refund_id' => CommonEnum::ORDER_STATE_INIT,
