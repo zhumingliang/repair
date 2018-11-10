@@ -22,6 +22,7 @@ class PaymentsV extends Model
 
         $list = self::where('shop_id', $shop_id)
             ->whereOrRaw($sql)
+            ->field('shop_id,u_id,order_name,order_time,type,shop_money as money')
             ->order('order_time desc')
             ->paginate($size, false, ['page' => $page]);
         $list = $list->toArray();
