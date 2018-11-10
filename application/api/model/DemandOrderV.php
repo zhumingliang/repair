@@ -46,7 +46,7 @@ class DemandOrderV extends Model
 
         $list = DemandUserV::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
-            //->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
             ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
         return $list;
