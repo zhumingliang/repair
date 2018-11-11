@@ -145,26 +145,18 @@ class OrderReportV extends Model
      */
     public static function reportForCity($province, $city, $time_begin, $time_end)
     {
-
         $sql = '';
-        if ($city != "全部") {
-            $sql .= "city = " . $city;
-        } else {
-            if ($province != "全部") {
-                if (!strlen($sql)) {
-                    $sql .= "province = " . $province;
-                } else {
-                    $sql .= " AND province = " . $province;
-                }
 
-            } else {
+        if ($province != "全部") {
+            $sql .= "province = " . $province;
 
-                if (!strlen($sql)) {
-                    $sql .= "1 =1";
-                }
-
-
+            if ($city != "全部") {
+                $sql .= " AND ";
+                $sql .= "city = " . $city;
             }
+        } else {
+            $sql = '1=1';
+
         }
 
         $orderTime = SystemTimeT::getSystemOrderTime();

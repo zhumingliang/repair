@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/System.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/System.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/DemandOrderV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/DemandOrderV.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/model/OrderReportV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/OrderReportV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/OrderService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/route/route.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,13 +32,13 @@
         <counts>
           <entry key="dummy" value="45" />
           <entry key="html" value="4" />
-          <entry key="php" value="71186" />
+          <entry key="php" value="71229" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="PHP" value="71186" />
+          <entry key="PHP" value="71229" />
           <entry key="PLAIN_TEXT" value="45" />
         </counts>
       </usages-collector>
@@ -141,8 +137,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/model/OrderReportV.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
+            <state relative-caret-position="603">
+              <caret line="159" column="9" selection-start-line="159" selection-start-column="9" selection-end-line="159" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -458,21 +454,7 @@
       <workItem from="1540207077566" duration="78267000" />
       <workItem from="1540694554740" duration="72478000" />
       <workItem from="1540994992394" duration="41067000" />
-      <workItem from="1541097506188" duration="207324000" />
-    </task>
-    <task id="LOCAL-00401" summary="项目初始化">
-      <created>1541694951526</created>
-      <option name="number" value="00401" />
-      <option name="presentableId" value="LOCAL-00401" />
-      <option name="project" value="LOCAL" />
-      <updated>1541694951526</updated>
-    </task>
-    <task id="LOCAL-00402" summary="项目初始化">
-      <created>1541695211701</created>
-      <option name="number" value="00402" />
-      <option name="presentableId" value="LOCAL-00402" />
-      <option name="project" value="LOCAL" />
-      <updated>1541695211701</updated>
+      <workItem from="1541097506188" duration="207608000" />
     </task>
     <task id="LOCAL-00403" summary="项目初始化">
       <created>1541695485272</created>
@@ -803,11 +785,25 @@
       <option name="project" value="LOCAL" />
       <updated>1541903942069</updated>
     </task>
-    <option name="localTasksCounter" value="450" />
+    <task id="LOCAL-00450" summary="项目初始化">
+      <created>1541919557686</created>
+      <option name="number" value="00450" />
+      <option name="presentableId" value="LOCAL-00450" />
+      <option name="project" value="LOCAL" />
+      <updated>1541919557686</updated>
+    </task>
+    <task id="LOCAL-00451" summary="项目初始化">
+      <created>1541919627198</created>
+      <option name="number" value="00451" />
+      <option name="presentableId" value="LOCAL-00451" />
+      <option name="project" value="LOCAL" />
+      <updated>1541919627198</updated>
+    </task>
+    <option name="localTasksCounter" value="452" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="796230000" />
+    <option name="totallyTimeSpent" value="796514000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1367,8 +1363,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/OrderReportV.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
+        <state relative-caret-position="603">
+          <caret line="159" column="9" selection-start-line="159" selection-start-column="9" selection-end-line="159" selection-end-column="9" />
         </state>
       </provider>
     </entry>
