@@ -146,7 +146,6 @@ class OrderReportV extends Model
     public static function reportForCity($province, $city, $time_begin, $time_end)
     {
         $sql = '';
-
         if ($province != "全部") {
             $sql .= 'province="' . $province . '"';
 

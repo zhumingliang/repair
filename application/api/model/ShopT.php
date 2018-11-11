@@ -71,7 +71,8 @@ class ShopT extends BaseModel
             ->with([
                 'imgs' => function ($query) {
                     $query->with(['imgUrl'])
-                        ->where('state', '=', 1);
+                        ->where('state', '=', 1)
+                        ->limit(0, 1);
                 }
             ])
             ->field('id,name,area,address,phone')

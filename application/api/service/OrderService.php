@@ -215,13 +215,16 @@ class OrderService
         $shop_id = Token::getCurrentTokenVar('shop_id');
         if ($shop_id) {
             if ($list_type == 2) {
-                return self::getDemandListForShop($shop_id, $order_type, $page, $size);
+                $list = self::getDemandListForShop($shop_id, $order_type, $page, $size);
+                $list['count'] = self::getDemandOrderCountForShop();
+                return $list;
             } else {
                 return array();
             }
         } else {
-            return self::getDemandListForNormal($order_type, $page, $size);
-
+            $list = self::getDemandListForNormal($order_type, $page, $size);
+            $list['count'] = self::getDemandOrderCountForNormal();
+            return $list;
         }
 
     }
@@ -243,15 +246,18 @@ class OrderService
         $shop_id = Token::getCurrentTokenVar('shop_id');
         if ($shop_id) {
             if ($list_type == 2) {
-                return self::getServiceListForShop($shop_id, $order_type, $page, $size);
-
+                $list = self::getServiceListForShop($shop_id, $order_type, $page, $size);
+                $list['count'] = self::getServiceOrderCountForShop();
+                return $list;
             } else {
                 return array();//self::getServiceListForShop($shop_id, $order_type, $page, $size);
 
             }
         } else {
-            return self::getServiceListForNormal($order_type, $page, $size);
 
+            $list = self::getServiceListForNormal($order_type, $page, $size);
+            $list['count'] = self::getServiceOrderCountForNormal();
+            return $list;
         }
 
     }
@@ -599,7 +605,7 @@ class OrderService
     }
 
 
-    private function getDemandOrderCountForNormal()
+    private static function getDemandOrderCountForNormal()
     {
         $u_id = Token::getCurrentUid();
         $count_arr = [
@@ -613,7 +619,7 @@ class OrderService
 
     }
 
-    private function getDemandOrderCountForShop()
+    private static function getDemandOrderCountForShop()
     {
         $shop_id = Token::getCurrentTokenVar('shop_id');
         $count_arr = [
@@ -627,19 +633,32 @@ class OrderService
     }
 
 
-    private function getServiceOrderCountForNormal()
+    private static function getServiceOrderCountForNormal()
     {
+        $u_id = Token::getCurrentUid();
         $count_arr = [
-
-
+            'booking' => ServiceOrderV::bookingCount($u_id),
+            'pay' => ServiceOrderV::payListCount($u_id),
+            'confirm' => ServiceOrderV::confirmCount($u_id),
+            'comment' => ServiceOrderV::commentListCount($u_id),
+            'complete' => ServiceOrderV::completeListCount($u_id)
         ];
 
         return $count_arr;
 
     }
 
-    private function getServiceOrderCountForShop()
+    private static function getServiceOrderCountForShop()
     {
+        $shop_id = Token::getCurrentTokenVar('shop_id');
+        $count_arr = [
+            'shopConfirm,' => ServiceOrderV::shopConfirmCount($shop_id),
+            'service' => ServiceOrderV::serviceCount($shop_id),
+            'serviceIng' => ServiceOrderV::serviceIngCount($shop_id),
+            'shopComplete' => ServiceOrderV::shopCompleteCount($shop_id)
+        ];
+
+        return $count_arr;
 
     }
 

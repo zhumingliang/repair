@@ -531,6 +531,7 @@ class ShopService
         $info = ShopT::getShopInfoForNormal($id);
 
         $comment_count = OrderCommentT::where('s_id', $id)
+            ->where('state',CommonEnum::STATE_IS_OK)
             ->count();
 
 
