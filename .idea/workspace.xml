@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/OrderReportV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/OrderReportV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/ShopT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/ShopT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/OrderService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/ShopService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/ShopService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,13 +32,13 @@
         <counts>
           <entry key="dummy" value="45" />
           <entry key="html" value="4" />
-          <entry key="php" value="71669" />
+          <entry key="php" value="71671" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="PHP" value="71669" />
+          <entry key="PHP" value="71671" />
           <entry key="PLAIN_TEXT" value="45" />
         </counts>
       </usages-collector>
@@ -99,8 +95,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="743">
-              <caret line="584" column="37" lean-forward="true" selection-start-line="584" selection-start-column="37" selection-end-line="584" selection-end-column="37" />
+            <state relative-caret-position="493">
+              <caret line="584" column="39" selection-start-line="584" selection-start-column="39" selection-end-line="584" selection-end-column="39" />
               <folding>
                 <element signature="e#2018#2370#0#PHP" />
                 <element signature="e#2376#3152#0#PHP" />
@@ -132,20 +128,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="530" column="35" selection-start-line="530" selection-start-column="35" selection-end-line="530" selection-end-column="35" />
+            <state relative-caret-position="413">
+              <caret line="537" column="75" selection-start-line="537" selection-start-column="75" selection-end-line="537" selection-end-column="75" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/model/ShopT.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
+            <state relative-caret-position="464">
+              <caret line="73" column="48" lean-forward="true" selection-start-line="73" selection-start-column="48" selection-end-line="74" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -330,8 +326,8 @@
         <option value="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" />
         <option value="$PROJECT_DIR$/application/api/service/OrderService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Order.php" />
-        <option value="$PROJECT_DIR$/application/api/service/ShopService.php" />
         <option value="$PROJECT_DIR$/application/api/model/ShopT.php" />
+        <option value="$PROJECT_DIR$/application/api/service/ShopService.php" />
       </list>
     </option>
   </component>
@@ -515,14 +511,7 @@
       <workItem from="1540207077566" duration="78267000" />
       <workItem from="1540694554740" duration="72478000" />
       <workItem from="1540994992394" duration="41067000" />
-      <workItem from="1541097506188" duration="209764000" />
-    </task>
-    <task id="LOCAL-00405" summary="项目初始化">
-      <created>1541695771415</created>
-      <option name="number" value="00405" />
-      <option name="presentableId" value="LOCAL-00405" />
-      <option name="project" value="LOCAL" />
-      <updated>1541695771415</updated>
+      <workItem from="1541097506188" duration="209974000" />
     </task>
     <task id="LOCAL-00406" summary="项目初始化">
       <created>1541696109894</created>
@@ -860,11 +849,18 @@
       <option name="project" value="LOCAL" />
       <updated>1541920006264</updated>
     </task>
-    <option name="localTasksCounter" value="454" />
+    <task id="LOCAL-00454" summary="项目初始化">
+      <created>1541922358362</created>
+      <option name="number" value="00454" />
+      <option name="presentableId" value="LOCAL-00454" />
+      <option name="project" value="LOCAL" />
+      <updated>1541922358362</updated>
+    </task>
+    <option name="localTasksCounter" value="455" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="798670000" />
+    <option name="totallyTimeSpent" value="798880000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1403,8 +1399,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="743">
-          <caret line="584" column="37" lean-forward="true" selection-start-line="584" selection-start-column="37" selection-end-line="584" selection-end-column="37" />
+        <state relative-caret-position="493">
+          <caret line="584" column="39" selection-start-line="584" selection-start-column="39" selection-end-line="584" selection-end-column="39" />
           <folding>
             <element signature="e#2018#2370#0#PHP" />
             <element signature="e#2376#3152#0#PHP" />
@@ -1435,17 +1431,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
+    <entry file="file://$PROJECT_DIR$/application/api/model/ShopT.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="530" column="35" selection-start-line="530" selection-start-column="35" selection-end-line="530" selection-end-column="35" />
+        <state relative-caret-position="464">
+          <caret line="73" column="48" lean-forward="true" selection-start-line="73" selection-start-column="48" selection-end-line="74" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/ShopT.php">
+    <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
+        <state relative-caret-position="413">
+          <caret line="537" column="75" selection-start-line="537" selection-start-column="75" selection-end-line="537" selection-end-column="75" />
         </state>
       </provider>
     </entry>
