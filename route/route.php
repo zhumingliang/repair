@@ -228,6 +228,7 @@ Route::get('api/:version/system/shop/grade', 'api/:version.System/shopGrade');
 Route::post('api/:version/system/shop/grade/update', 'api/:version.System/updateShopGrade');
 Route::post('api/:version/system/shop/grade/save', 'api/:version.System/saveShopGrade');
 Route::get('api/:version/check/join', 'api/:version.System/checkJoin');
+Route::get('api/:version/file/time', 'api/:version.System/fileUpdateTime');
 
 
 Route::get('api/:version/report/export/city', 'api/:version.OrderReport/exportWithCity');

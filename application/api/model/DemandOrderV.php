@@ -52,6 +52,33 @@ class DemandOrderV extends Model
         return $list;
     }
 
+
+    public static function takingCount($u_id)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $shop_confirm = $orderTime['shop_confirm'];
+        $pay = $orderTime['pay'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+
+        $sql = 'order_id= 0 ';
+        $sql .= ' OR ';
+        $sql .= '( shop_confirm =2  AND  order_time < ' . $shop_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time < ' . $pay_limit . ')';
+
+        $count = DemandUserV::where('u_id', $u_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->whereTime('time_begin', '>', date('Y-m-d H:i'))
+            ->whereRaw($sql)
+            ->count();
+        return $count;
+    }
+
     /**
      * 获取订单是否被接
      * 1.商家未确认-超时
@@ -121,6 +148,32 @@ class DemandOrderV extends Model
 
     }
 
+    public static function payCount($u_id)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $pay = $orderTime['pay'];
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+        $shop_confirm = $orderTime['shop_confirm'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( shop_confirm = 2 AND  order_time > ' . $shop_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
+
+        $count = self::where('u_id', $u_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
+
+        return $count;
+
+    }
+
     /**
      * 待确认
      * 用户已支付-未超出待确认时间设置
@@ -128,7 +181,8 @@ class DemandOrderV extends Model
      * @param $u_id
      * @param $page
      * @param $size
-     * @return mixed
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
      */
     public static function confirmList($u_id, $page, $size)
     {
@@ -157,6 +211,33 @@ class DemandOrderV extends Model
 
     }
 
+    public static function confirmCount($u_id)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND  consult_time > ' . $consult_limit . ')';
+
+
+        $list = self::where('u_id', $u_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
+        return $list;
+
+    }
+
+
     /**
      * 待评价
      * @param $u_id
@@ -176,6 +257,19 @@ class DemandOrderV extends Model
         return $list;
 
     }
+
+    public static function commentCount($u_id)
+    {
+
+        $count = self::where('u_id', $u_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('confirm_id', '=', 1)
+            ->where('comment_id', '=', CommonEnum::ORDER_STATE_INIT)
+            ->count();
+        return $count;
+
+    }
+
 
     /**
      * 已完成订单
@@ -213,6 +307,34 @@ class DemandOrderV extends Model
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
+
+    }
+
+    public static function completeCount($u_id)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( confirm_id = 1 ) ';
+        $sql .= ' OR ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND  consult_time < ' . $consult_limit . ')';
+
+
+        $count = self::where('u_id', $u_id)
+            ->where('normal_delete', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
+        return $count;
 
     }
 
@@ -258,6 +380,36 @@ class DemandOrderV extends Model
         return $list;
     }
 
+
+    public static function serviceCount($s_id)
+    {
+
+
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $shop_confirm = $orderTime['shop_confirm'];
+        $pay = $orderTime['pay'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ' ) ';
+        $sql .= ' OR ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ' ) ';
+        $sql .= ' OR ';
+        $sql .= ' ( pay_id <> 99999 AND service_begin = 2 ) ';
+
+        $count = self::where('shop_id', $s_id)
+            ->whereRaw($sql)
+            ->count();
+
+        return $count;
+    }
+
     /**
      * 商家待确认
      * 1.商家在规定时间内没有确认订单
@@ -289,6 +441,33 @@ class DemandOrderV extends Model
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->paginate($size, false, ['page' => $page]);
+
+        return $list;
+    }
+
+
+    public static function shopConfirmCount($s_id)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time > ' . $user_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND  consult_time > ' . $consult_limit . ')';
+
+        $list = self::where('shop_id', $s_id)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
 
         return $list;
     }
@@ -328,6 +507,34 @@ class DemandOrderV extends Model
             ->paginate($size, false, ['page' => $page]);
 
         return $list;
+    }
+
+
+    public static function shopCompleteCount($s_id)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+
+        $sql = '( confirm_id = 1 ) ';
+        $sql .= ' OR ';
+        $sql .= '( pay_id <> 99999  AND  confirm_id = 99999 AND  order_time < ' . $user_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND  consult_time < ' . $consult_limit . ')';
+
+
+        $count = self::where('shop_id', $s_id)
+            ->where('shop_delete', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->count();
+
+        return $count;
     }
 
     /**
@@ -559,7 +766,7 @@ class DemandOrderV extends Model
                     $query->where('order_num|user_phone', 'like', '%' . $key . '%');
                 }
             })
-        ->paginate($size, false, ['page' => $page])->toArray();
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 

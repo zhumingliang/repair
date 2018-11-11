@@ -806,4 +806,29 @@ class System extends BaseController
     }
 
 
+    /**
+     * @api {GET} /api/v1/file/time  188-获取服务条款更新时间
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * http://mengant.cn/api/v1/file/time
+     * @apiSuccessExample {json} 返回样例:
+     * {"update_time":"2018-11-09 08:32:12"}
+     * @apiSuccess (返回参数说明) {String} update_time  更新时间
+     * @return Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function fileUpdateTime()
+    {
+        $info = SystemMsgT::where('type', 3)
+            ->field('update_time')
+            ->find();
+        return json([
+            'update_time' => $info['update_time']
+        ]);
+    }
+
+
 }

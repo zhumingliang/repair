@@ -598,4 +598,49 @@ class OrderService
 
     }
 
+
+    private function getDemandOrderCountForNormal()
+    {
+        $u_id = Token::getCurrentUid();
+        $count_arr = [
+            'taking' => DemandOrderV::takingCount($u_id),
+            'pay' => DemandOrderV::payCount($u_id),
+            'confirm' => DemandOrderV::confirmCount($u_id),
+            'comment' => DemandOrderV::commentCount($u_id),
+            'complete' => DemandOrderV::completeCount($u_id)
+        ];
+        return $count_arr;
+
+    }
+
+    private function getDemandOrderCountForShop()
+    {
+        $shop_id = Token::getCurrentTokenVar('shop_id');
+        $count_arr = [
+            'service' => DemandOrderV::serviceCount($shop_id),
+            'shopConfirm' => DemandOrderV::shopConfirmCount($shop_id),
+            'shopComplete' => DemandOrderV::shopCompleteCount($shop_id)
+        ];
+
+        return $count_arr;
+
+    }
+
+
+    private function getServiceOrderCountForNormal()
+    {
+        $count_arr = [
+
+
+        ];
+
+        return $count_arr;
+
+    }
+
+    private function getServiceOrderCountForShop()
+    {
+
+    }
+
 }

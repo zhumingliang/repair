@@ -151,9 +151,19 @@ class OrderReportV extends Model
             $sql .= "city = " . $city;
         } else {
             if ($province != "全部") {
-                $sql .= "province = " . $province;
+                if (strlen($sql)) {
+                    $sql .= "province = " . $province;
+                } else {
+                    $sql .= " AND province = " . $province;
+                }
+
             } else {
-                $sql .= "1 =1 ";
+
+                if (!strlen($sql)) {
+                    $sql .= "1 =1";
+                }
+
+
             }
         }
 
