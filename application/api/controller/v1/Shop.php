@@ -754,6 +754,9 @@ class Shop extends BaseController
      * @param int $page
      * @param int $size
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
      */
     public function getStaffsForJoin($page = 1, $size = 20)
     {

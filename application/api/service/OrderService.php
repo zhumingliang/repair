@@ -652,7 +652,7 @@ class OrderService
     {
         $shop_id = Token::getCurrentTokenVar('shop_id');
         $count_arr = [
-            'shopConfirm,' => ServiceOrderV::shopConfirmCount($shop_id),
+            'shopConfirm' => ServiceOrderV::shopConfirmCount($shop_id),
             'service' => ServiceOrderV::serviceCount($shop_id),
             'serviceIng' => ServiceOrderV::serviceIngCount($shop_id),
             'shopComplete' => ServiceOrderV::shopCompleteCount($shop_id)
