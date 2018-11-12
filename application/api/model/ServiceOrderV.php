@@ -300,7 +300,7 @@ class ServiceOrderV extends Model
             ->where('shop_confirm', '=', CommonEnum::STATE_IS_FAIL)
             // ->whereTime('time_begin', '>', date('Y-m-d H:i'))
             ->whereTime('order_time', '>', $shop_confirm_limit)
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
