@@ -89,6 +89,7 @@ class ShopService
 
         Db::startTrans();
         try {
+            $params['id'] = Token::getCurrentTokenVar('shop_id');
             if (isset($params['staffs'])) {
                 $staffs = $params['staffs'];
                 unset($params['staffs']);
