@@ -337,7 +337,7 @@ class Pay
     private
     function savePayRecord($notify, $order)
     {
-        $this->payRed($order->openid);
+        //$this->payRed($order->openid);
         $wpt = new WxPayT();
         $wpt->out_trade_no = $notify->getOutTradeNo();
         $wpt->openid = $order->openid;

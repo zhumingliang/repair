@@ -70,6 +70,7 @@ Route::post('api/:version/collection/handel', 'api/:version.Collection/handel');
 Route::get('api/:version/collection/list', 'api/:version.Collection/getList');
 
 
+Route::get('api/:version/red/order', 'api/:version.Red/redOrder');
 Route::get('api/:version/red/list', 'api/:version.Red/getList');
 Route::get('api/:version/red/rule', 'api/:version.Red/redRule');
 Route::post('api/:version/red/rule/update', 'api/:version.Red/redRuleUpdate');

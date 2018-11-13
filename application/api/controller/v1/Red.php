@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\RedStrategyT;
 use app\api\model\RedT;
+use app\api\model\WxPayT;
 use app\api\service\RedService;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\RedEnum;
@@ -299,15 +300,15 @@ class Red extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/red/share 163-分享触发红包
+     * @api {GET} /api/v1/red/order 163-小程序用户首次下单触发红包
      * @apiGroup  MINI
      * @apiVersion 1.0.1
-     * @apiDescription  小程序用户分享获取红包
+     * @apiDescription  小程序用户首次下单
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/red/share
+     * http://mengant.cn/api/v1/red/order
      * @apiSuccessExample {json} 返回样例:
-     * {"money": 2}
-     * @apiSuccess (返回参数说明) {int} money 红包金额
+     * {"red_money": 2}
+     * @apiSuccess (返回参数说明) {int} red_money 红包金额
      *
      * @return \think\response\Json
      * @throws RedException
@@ -317,10 +318,17 @@ class Red extends BaseController
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function redShare()
+    public function redOrder()
     {
-        $money = RedService::addRed(RedEnum::SHARE, \app\api\service\Token::getCurrentUid());
-        return json($money);
+        $count = WxPayT::where('openid', \app\api\service\Token::getCurrentOpenid())
+            ->count();
+        $money = 0;
+        if (!$count) {
+            $money = RedService::addRed(RedEnum::FIRST_ORDER, \app\api\service\Token::getCurrentUid());
+        }
+        return json([
+            'red_money' => $money
+        ]);
 
 
     }
