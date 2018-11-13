@@ -82,10 +82,10 @@ class ServicesT extends BaseModel
             //->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($key) {
                 if ($key) {
-                    $query->where('name', 'like', '%' . $key . '%');
+                    $query->where('service_name', 'like', '%' . $key . '%');
                 }
             })
-            ->field('id,cover,name,price/100 as price')
+            ->field('id,cover,service_name as name,price/100 as price')
             ->order($order)
             ->paginate($size, false, ['page' => $page]);
         return $pagingData;
