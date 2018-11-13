@@ -263,8 +263,8 @@ class OrderService
     }
 
     /**
-     * 保存订单评论
      * @param $params
+     * @return array|int
      * @throws Exception
      */
     public static function saveComment($params)
@@ -272,8 +272,9 @@ class OrderService
 
         Db::startTrans();
         try {
+            $red_money = 0;
             if ($params['score_type'] == 1) {
-                self::checkCommentRed();
+                $red_money = self::checkCommentRed();
             }
 
             $imgs = $params['imgs'];
@@ -326,6 +327,7 @@ class OrderService
             }
 
             Db::commit();
+            return $red_money;
         } catch (Exception $e) {
             Db::rollback();
             throw $e;
@@ -339,8 +341,9 @@ class OrderService
         $count = OrderCommentT::where('u_id', Token::getCurrentUid())
             ->count();
         if (!$count) {
-            RedService::addRed(RedEnum::FIRST_PRAISE, Token::getCurrentUid());
+            return RedService::addRed(RedEnum::FIRST_PRAISE, Token::getCurrentUid());
         }
+        return 0;
     }
 
     /**

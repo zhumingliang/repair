@@ -344,8 +344,10 @@ class Order extends BaseController
     {
         (new OrderValidate())->scene('comment')->goCheck();
         $params = $this->request->param();
-        OrderService::saveComment($params);
-        return json(new SuccessMessage());
+        $red_money = OrderService::saveComment($params);
+        return json([
+            'red_money' => $red_money
+        ]);
 
 
     }

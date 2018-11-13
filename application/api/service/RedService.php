@@ -18,17 +18,15 @@ use app\lib\exception\RedException;
 class RedService
 {
     /**
-     * 保存用户红包
      * @param $red_type
+     * @param $u_id
      * @return array
      * @throws RedException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function addRed($red_type,$u_id)
+    public static function addRed($red_type, $u_id)
     {
         //$u_id = Token::getCurrentUid();
         $red = RedT::where('state', '=', CommonEnum::STATE_IS_OK)
@@ -44,11 +42,10 @@ class RedService
         if (!$res) {
             throw  new RedException();
 
-
-            return [
-                'money' => $money
-            ];
         }
+
+
+        return $money;
 
 
     }

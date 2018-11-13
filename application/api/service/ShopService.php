@@ -53,7 +53,7 @@ class ShopService
             $params['head_url'] = ImageService::getImageUrl($params['head_url']);
             unset($params['imgs']);
 
-            if (self::checkShopName($params['name'])){
+            if (self::checkShopName($params['name'])) {
                 throw new ShopException(
                     ['code' => 401,
                         'msg' => '店铺名称已存在，请重新输入',

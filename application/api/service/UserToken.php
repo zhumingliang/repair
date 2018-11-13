@@ -62,12 +62,12 @@ class UserToken extends Token
         }
     }
 
-
     /**
      * 获取token并缓存数据
      * @param $wxResult
      * @return array
      * @throws TokenException
+     * @throws \app\lib\exception\RedException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -77,8 +77,10 @@ class UserToken extends Token
 
         $openid = $wxResult['openid'];
         $user = UserModel::getByOpenID($openid);
+        $red_money = 0;
         if (!$user) {
             $u_id = $this->newUser($openid);
+            $red_money= RedService::addRed(RedEnum::FIRST_LOGIN, $u_id);
         } else {
             $u_id = $user['id'];
             if ($user && $user->state == 2) {
@@ -108,6 +110,8 @@ class UserToken extends Token
             ];
 
         }
+
+
         return [
             'token' => $token,
             'type' => $this->USER_MSG_IS_OK,
@@ -115,6 +119,7 @@ class UserToken extends Token
             'city' => $cachedValue['city'],
             'province' => $cachedValue['province'],
             'area' => $cachedValue['area'],
+            'red_money' => $red_money
         ];
     }
 
@@ -200,17 +205,10 @@ class UserToken extends Token
     /**
      * @param $openid
      * @return mixed
-     * @throws TokenException
-     * @throws \app\lib\exception\RedException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     private function newUser($openid)
     {
         $user = UserT::create(['openId' => $openid]);
-        RedService::addRed(RedEnum::FIRST_LOGIN, $user->id);
         return $user->id;
     }
 
