@@ -78,7 +78,7 @@ class ServicesT extends BaseModel
         } else if ($type == 3) {
             $order = 'price';
         }
-        $pagingData = self::where('area', $area)
+        $pagingData = ServiceAllV::where('area', $area)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($key) {
                 if ($key) {
