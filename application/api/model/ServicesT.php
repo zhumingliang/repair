@@ -79,7 +79,7 @@ class ServicesT extends BaseModel
             $order = 'price';
         }
         $pagingData = ServiceAllV::where('area', $area)
-            ->where('state', CommonEnum::STATE_IS_OK)
+            //->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($key) {
                 if ($key) {
                     $query->where('name', 'like', '%' . $key . '%');
