@@ -107,6 +107,7 @@ class UserToken extends Token
                 'city' => $cachedValue['city'],
                 'province' => $cachedValue['province'],
                 'area' => $cachedValue['area'],
+                'red_money' => $red_money,
             ];
 
         }
