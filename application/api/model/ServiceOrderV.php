@@ -36,7 +36,7 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('shop_confirm', CommonEnum::STATE_IS_FAIL)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '>', $shop_confirm_limit)
+           // ->whereTime('order_time', '>', $shop_confirm_limit)
             ->paginate($size, false, ['page' => $page])->toArray();
         return $list;
 
@@ -53,7 +53,7 @@ class ServiceOrderV extends Model
         $count = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('shop_confirm', CommonEnum::STATE_IS_FAIL)
-            ->whereTime('order_time', '>', $shop_confirm_limit)
+         //   ->whereTime('order_time', '>', $shop_confirm_limit)
             ->count();
         return $count;
 
@@ -80,7 +80,7 @@ class ServiceOrderV extends Model
         $list = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '>', $pay_limit)
+           // ->whereTime('order_time', '>', $pay_limit)
             ->where('shop_confirm', CommonEnum::STATE_IS_OK)
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
             ->paginate($size, false, ['page' => $page])->toArray();
@@ -101,7 +101,7 @@ class ServiceOrderV extends Model
         $count = self::where('u_id', $u_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '>', $pay_limit)
+          //  ->whereTime('order_time', '>', $pay_limit)
             ->where('shop_confirm', CommonEnum::STATE_IS_OK)
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
             ->count();
@@ -292,14 +292,11 @@ class ServiceOrderV extends Model
         $shop_confirm = $orderTime['shop_confirm'];
         $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
             time()));
-        // $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
-
-
         $list = self::where('shop_id', $s_id)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('shop_confirm', '=', CommonEnum::STATE_IS_FAIL)
             // ->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '>', $shop_confirm_limit)
+            //->whereTime('order_time', '>', $shop_confirm_limit)
             ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
@@ -317,7 +314,7 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->where('shop_confirm', '=', CommonEnum::STATE_IS_FAIL)
             // ->whereTime('time_begin', '>', date('Y-m-d H:i'))
-            ->whereTime('order_time', '>', $shop_confirm_limit)
+            //->whereTime('order_time', '>', $shop_confirm_limit)
             ->count();
 
         return $count;
@@ -541,13 +538,22 @@ class ServiceOrderV extends Model
         $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
 
 
-        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
+  /*      $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
         $sql .= ' OR ';
         $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
         $sql .= ' OR ';
         $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time > ' . $user_confirm_limit . ')';
         $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND consult_time > ' . $consult_limit . ')';*/
+
+        $sql = '( shop_confirm =2 ) ';
+        $sql .= ' OR ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 )';
+        $sql .= ' OR ';
+        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time > ' . $user_confirm_limit . ')';
+        $sql .= ' OR ';
         $sql .= ' ( confirm_id = 2 AND consult_time > ' . $consult_limit . ')';
+
 
         $list = self::whereRaw($sql)
             ->where(function ($query) use ($key) {
