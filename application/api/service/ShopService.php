@@ -599,6 +599,8 @@ class ShopService
         $list = array();
         if ($search_type == self::SEARCH_SHOP) {
             $list = ShopListV::getList($type, $area, $key, $page, $size);
+            $data = $list['data'];
+            $list['data'] = self::shopHeader($data);
 
         } else if ($search_type == self::SEARCH_SERVICE) {
             if ($type < 4) {
@@ -611,6 +613,21 @@ class ShopService
         }
 
         return $list;
+    }
+
+
+    private static function shopHeader($list)
+    {
+        if (count($list)) {
+            foreach ($list as $k => $v) {
+                $imgs = $v['imgs'][0];
+                $head = $imgs['img_url']['url'];
+                $list[$k]['cover'] = $head;
+            }
+        }
+
+        return $list;
+
     }
 
     private static function getExamineInfo($id)

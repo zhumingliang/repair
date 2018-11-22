@@ -13,6 +13,13 @@ use think\Model;
 
 class ShopListV extends Model
 {
+
+    public function imgs()
+    {
+        return $this->hasMany('ShopImgT',
+            's_id', 'id');
+    }
+
     public static function getList($type, $area, $key, $page, $size)
     {
         $order = 'shop_id';
@@ -27,10 +34,17 @@ class ShopListV extends Model
                     $query->where('name', 'like', '%' . $key . '%');
                 }
             })
+            ->with([
+                'imgs' => function ($query) {
+                    $query->with(['imgUrl'])
+                        ->where('state', '=', 1);
+                }
+            ])
             ->field('shop_id as id,cover,name,sell_money as price')
             ->order($order)
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
         return $pagingData;
+
     }
 
 }
