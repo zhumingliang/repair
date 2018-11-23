@@ -15,7 +15,7 @@ class JoinCommissionValidate extends BaseValidate
         'province' => 'require',
         'city' => 'require',
         'area' => 'require',
-        'discount' => 'require|isPositiveInteger',
+        'discount' => 'require',
         'id' => 'require|isPositiveInteger'
     ];
 

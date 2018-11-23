@@ -169,7 +169,7 @@ class Pay
     {
 
         $openid = Token::getCurrentOpenid();
-        //$openid = "osEM-5c9sROCOjGtciBQ1I18stJQ";//Token::getCurrentOpenid();
+        //$openid = "osEM-5Zxouh-89NF1-TnJWh29rgU";//Token::getCurrentOpenid();
         if (!$openid) {
             throw new TokenException();
         }
