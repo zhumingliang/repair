@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/OrderReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/OrderReport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,13 +33,13 @@
         <counts>
           <entry key="dummy" value="45" />
           <entry key="html" value="4" />
-          <entry key="php" value="72490" />
+          <entry key="php" value="72491" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="PHP" value="72490" />
+          <entry key="PHP" value="72491" />
           <entry key="PLAIN_TEXT" value="45" />
         </counts>
       </usages-collector>
@@ -52,7 +52,7 @@
           <entry key="json" value="1" />
           <entry key="map" value="5" />
           <entry key="pem" value="5" />
-          <entry key="php" value="2361" />
+          <entry key="php" value="2362" />
           <entry key="txt" value="5" />
         </counts>
       </usages-collector>
@@ -62,7 +62,7 @@
           <entry key="HTML" value="3" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="2361" />
+          <entry key="PHP" value="2362" />
           <entry key="PLAIN_TEXT" value="10" />
           <entry key="SourceMap" value="5" />
           <entry key="htaccess" value="1" />
@@ -113,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/OrderReport.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="617">
-              <caret line="106" column="71" selection-start-line="106" selection-start-column="71" selection-end-line="106" selection-end-column="71" />
+            <state relative-caret-position="463">
+              <caret line="106" column="55" selection-start-line="106" selection-start-column="55" selection-end-line="106" selection-end-column="55" />
               <folding>
                 <element signature="e#325#2682#0#PHP" />
                 <element signature="e#2687#2913#0#PHP" />
@@ -129,8 +129,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/service/OrderReportService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+            <state relative-caret-position="680">
+              <caret line="80" column="45" lean-forward="true" selection-start-line="80" selection-start-column="45" selection-end-line="80" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/api/model/ServiceOrderV.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="668" column="44" selection-start-line="668" selection-start-column="35" selection-end-line="668" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -148,7 +157,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getS</find>
       <find>group/user/handel</find>
       <find>confirm_id</find>
       <find>comment_id</find>
@@ -178,6 +186,7 @@
       <find>red</find>
       <find>shop/service/delete</find>
       <find>index</find>
+      <find>order_num</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -225,7 +234,6 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/Red.php" />
         <option value="$PROJECT_DIR$/route/route.php" />
         <option value="$PROJECT_DIR$/application/api/service/UserToken.php" />
-        <option value="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" />
         <option value="$PROJECT_DIR$/application/api/model/ShopListV.php" />
         <option value="$PROJECT_DIR$/application/api/service/ShopService.php" />
         <option value="$PROJECT_DIR$/extend/wxpay/WxPayConfig.php" />
@@ -237,6 +245,7 @@
         <option value="$PROJECT_DIR$/application/api/service/OrderReportService.php" />
         <option value="$PROJECT_DIR$/application/api/service/AuthService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/OrderReport.php" />
+        <option value="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" />
       </list>
     </option>
   </component>
@@ -420,21 +429,7 @@
       <workItem from="1542555412517" duration="28000" />
       <workItem from="1542555473444" duration="1769000" />
       <workItem from="1542849346013" duration="3811000" />
-      <workItem from="1543197706875" duration="1894000" />
-    </task>
-    <task id="LOCAL-00425" summary="项目初始化">
-      <created>1541744184969</created>
-      <option name="number" value="00425" />
-      <option name="presentableId" value="LOCAL-00425" />
-      <option name="project" value="LOCAL" />
-      <updated>1541744184969</updated>
-    </task>
-    <task id="LOCAL-00426" summary="项目初始化">
-      <created>1541744287549</created>
-      <option name="number" value="00426" />
-      <option name="presentableId" value="LOCAL-00426" />
-      <option name="project" value="LOCAL" />
-      <updated>1541744287549</updated>
+      <workItem from="1543197706875" duration="2167000" />
     </task>
     <task id="LOCAL-00427" summary="项目初始化">
       <created>1541744399936</created>
@@ -765,11 +760,25 @@
       <option name="project" value="LOCAL" />
       <updated>1543221164678</updated>
     </task>
-    <option name="localTasksCounter" value="474" />
+    <task id="LOCAL-00474" summary="项目初始化">
+      <created>1543332800781</created>
+      <option name="number" value="00474" />
+      <option name="presentableId" value="LOCAL-00474" />
+      <option name="project" value="LOCAL" />
+      <updated>1543332800781</updated>
+    </task>
+    <task id="LOCAL-00475" summary="项目初始化">
+      <created>1543332963196</created>
+      <option name="number" value="00475" />
+      <option name="presentableId" value="LOCAL-00475" />
+      <option name="project" value="LOCAL" />
+      <updated>1543332963196</updated>
+    </task>
+    <option name="localTasksCounter" value="476" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="830718000" />
+    <option name="totallyTimeSpent" value="830991000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -969,13 +978,6 @@
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Demand.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceOrderV.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="550" column="56" selection-start-line="550" selection-start-column="56" selection-end-line="550" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Index.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1140,13 +1142,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/OrderReportService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/AuthService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="410">
@@ -1156,12 +1151,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/OrderReport.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="617">
-          <caret line="106" column="71" selection-start-line="106" selection-start-column="71" selection-end-line="106" selection-end-column="71" />
+        <state relative-caret-position="463">
+          <caret line="106" column="55" selection-start-line="106" selection-start-column="55" selection-end-line="106" selection-end-column="55" />
           <folding>
             <element signature="e#325#2682#0#PHP" />
             <element signature="e#2687#2913#0#PHP" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/OrderReportService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="80" column="45" lean-forward="true" selection-start-line="80" selection-start-column="45" selection-end-line="80" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceOrderV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="668" column="44" selection-start-line="668" selection-start-column="35" selection-end-line="668" selection-end-column="44" />
         </state>
       </provider>
     </entry>

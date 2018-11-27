@@ -558,7 +558,7 @@ class ServiceOrderV extends Model
         $list = self::whereRaw($sql)
             ->where(function ($query) use ($key) {
                 if ($key) {
-                    $query->where('order_num|user_phone', 'like', '%' . $key . '%');
+                    $query->where('order_number|user_phone', 'like', '%' . $key . '%');
                 }
             })
             ->paginate($size, false, ['page' => $page])->toArray();
@@ -581,7 +581,7 @@ class ServiceOrderV extends Model
             ->where('comment_id', CommonEnum::ORDER_STATE_INIT)
             ->where(function ($query) use ($key) {
                 if ($key) {
-                    $query->where('order_num|user_phone', 'like', '%' . $key . '%');
+                    $query->where('order_number|user_phone', 'like', '%' . $key . '%');
                 }
             })
             ->paginate($size, false, ['page' => $page])->toArray();
@@ -622,7 +622,7 @@ class ServiceOrderV extends Model
         $list = self::whereRaw($sql)
             ->where(function ($query) use ($key) {
                 if ($key) {
-                    $query->where('order_num|user_phone', 'like', '%' . $key . '%');
+                    $query->where('order_number|user_phone', 'like', '%' . $key . '%');
                 }
             })
             ->paginate($size, false, ['page' => $page])->toArray();
@@ -666,7 +666,7 @@ class ServiceOrderV extends Model
             ->whereRaw($sql)
             ->where(function ($query) use ($key) {
                 if ($key) {
-                    $query->where('order_num|user_phone', 'like', '%' . $key . '%');
+                    $query->where('order_number|user_phone', 'like', '%' . $key . '%');
                 }
             })
             ->paginate($size, false, ['page' => $page])->toArray();
