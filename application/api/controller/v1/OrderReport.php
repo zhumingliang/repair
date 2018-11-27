@@ -95,7 +95,7 @@ class OrderReport extends BaseController
      * @apiSuccess (返回参数说明) {String} order_time 下单时间
      * @apiSuccess (返回参数说明) {String}  order_state 状态
      *
-     * @param $key
+     * @param $keyw
      * @param $order_type
      * @param $page
      * @param $size
