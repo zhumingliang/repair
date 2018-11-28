@@ -299,7 +299,7 @@ class ServicesExtend extends BaseController
             TokenService::getCurrentTokenVar('area'));
         $list = ServiceAllV::where('type', $type)
             ->whereRaw($sql_join)
-            ->field('id,service_name')
+            ->field('id,service_name,shop_name')
             ->order('create_time desc')
             ->select();
         return json($list);
