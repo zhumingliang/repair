@@ -118,6 +118,9 @@ class OrderService
         }
         //添加用户消息提示
         OrderMsgService::saveNormal($demand->u_id, $db->id, 1, 2);
+
+        //发送消息通知商家
+       // (new SendMsgService($db->id,$d_id))->sendToNormal();
         return $db->id;
     }
 

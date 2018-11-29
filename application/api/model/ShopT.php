@@ -26,6 +26,12 @@ class ShopT extends BaseModel
             's_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('UserT',
+            'u_id', 'id');
+    }
+
     /*  public function getHeadUrlAttr($value, $data)
       {
           return $this->prefixImgUrl($value, $data);

@@ -39,6 +39,7 @@ class UserToken extends Token
      * @return array
      * @throws TokenException
      * @throws WeChatException
+     * @throws \app\lib\exception\RedException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException

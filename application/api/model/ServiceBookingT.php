@@ -13,6 +13,11 @@ use think\Model;
 
 class ServiceBookingT extends Model
 {
+    public function service()
+    {
+        return $this->belongsTo('ServicesT',
+            's_id', 'id');
+    }
 
 
 }

@@ -47,7 +47,7 @@ class UserRedT extends Model
         }])
             ->where('state', '=', CommonEnum::STATE_IS_OK)
             ->where('u_id', '=', $u_id)
-            ->whereTime('create_time', '>', $time_begin)
+           // ->whereTime('create_time', '>', $time_begin)
             ->field('id,r_id,create_time,money')
             ->order('create_time desc')
             ->select();

@@ -356,8 +356,12 @@ class ShopService
             );
         }
 
+        $shop_id = self::getShopID($params['s_id']);
         //添加服务记录
-        OrderMsgService::saveShop(self::getShopID($params['s_id']), $booking->id, 2, 1);
+        OrderMsgService::saveShop($shop_id, $booking->id, 2, 1);
+
+        //发送消息通知商家
+        //(new SendMsgService($booking->id, $shop_id))->sendToShop();
 
         return [
             'id' => $booking->id,
