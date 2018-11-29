@@ -133,7 +133,7 @@ class Token extends Controller
     {
         $params = [
             'form_id' => $id,
-            'u_id' => \app\api\service\Token::getCurrentUid(),
+            'openId' => \app\api\service\Token::getCurrentOpenid(),
             'state' => CommonEnum::STATE_IS_OK
         ];
         $save_id = FormidT::create($params);

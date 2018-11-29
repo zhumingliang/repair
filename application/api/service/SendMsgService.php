@@ -37,6 +37,7 @@ class SendMsgService
 
     public function sendToNormal()
     {
+        $this->getOpenidForNormal();
         if (self::checkFormID()) {
             //发送模板消息
             (new WxTemplate($this->openid, $this->form_id, $this->params))->sendToNormal();
@@ -53,6 +54,7 @@ class SendMsgService
 
     public function sendToShop()
     {
+        $this->getOpenidForShop();
         if (self::checkFormID()) {
             //发送模板消息
             (new WxTemplate($this->openid, $this->form_id, $this->params))->sendToShop();
@@ -68,7 +70,6 @@ class SendMsgService
     /**
      * 检查用户是否有可以使用的formid
      * @return mixed|null
-     * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -76,8 +77,7 @@ class SendMsgService
      */
     private function checkFormID()
     {
-        $u_id = Token::getCurrentUid();
-        $form = FormidT::where('u_id', $u_id)
+        $form = FormidT::where('openId', $this->openid)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereTime('create_time', 'week')
             ->find();
@@ -104,7 +104,6 @@ class SendMsgService
             ];
             $this->phone = $info->shop_phone;
             $this->params = $params;
-            $this->getOpenidForShop();
 
         } else {
             //需求订单信息
@@ -120,7 +119,6 @@ class SendMsgService
             ];
             $this->phone = $info->user_phone;
             $this->params = $params;
-            $this->getOpenidForNormal();
 
         }
 

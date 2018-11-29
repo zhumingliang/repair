@@ -9,6 +9,8 @@
 namespace app\api\service;
 
 
+use app\api\model\FormidT;
+use app\lib\enum\CommonEnum;
 use zml\tp_tools\Curl;
 
 class WxTemplate
@@ -33,7 +35,7 @@ class WxTemplate
         $access_token = $at->get();
         $params = $this->params;
         $data = [
-            "touser" =>  $this->openid,
+            "touser" => $this->openid,
             "template_id" => $template_id,
             "page" => "index",
             "form_id" => $this->form_id,
@@ -94,6 +96,12 @@ class WxTemplate
         $res_obj = json_decode($res);
         print_r($res_obj);
         //$this->saveRecord($data, $res_obj);
+
+    }
+
+    private function formHandel($form_id)
+    {
+        FormidT::update(['state', CommonEnum::STATE_IS_FAIL], ['form_id', $form_id]);
 
     }
 
