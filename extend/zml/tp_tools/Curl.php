@@ -8,7 +8,6 @@
 
 namespace zml\tp_tools;
 
-
 class Curl
 {
     static public function get($url)
@@ -163,4 +162,24 @@ class Curl
         fclose($fp);
         return $res;
     }
+
+    static function postToData($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 500);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $ret = curl_exec($ch);
+        curl_close($ch);
+        return $ret;
+    }
+
 }

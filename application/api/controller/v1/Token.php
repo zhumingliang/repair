@@ -9,17 +9,17 @@
 namespace app\api\controller\v1;
 
 
+use app\api\model\FormidT;
 use app\api\model\TestT;
 use app\api\model\UserT;
 use app\api\service\AdminToken;
 use app\api\service\UserToken;
 use app\api\validate\TokenGet;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\SuccessMessage;
+use app\lib\exception\TokenException;
 use think\Controller;
 use think\facade\Cache;
-use app\api\validate\UserInfo;
-use  app\api\service\UserInfo as UserInfoService;
-
 
 class Token extends Controller
 {
@@ -110,6 +110,47 @@ class Token extends Controller
     }
 
     /**
+     * @api {POST} /api/v1/token/formID  189-保存formID
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "id": "dsa",
+     *     }
+     * @apiParam (请求参数说明) {String} id  小程序操作formID
+     * @apiSuccessExample {json} 返回样例:
+     *{"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
+     * @apiSuccess (返回参数说明) {String} msg 信息描述
+     *
+     * @param $id
+     * @return \think\response\Json
+     * @throws TokenException
+     * @throws \think\Exception
+     */
+    public function saveFormID($id)
+    {
+        $params = [
+            'form_id' => $id,
+            'u_id' => \app\api\service\Token::getCurrentUid(),
+            'state' => CommonEnum::STATE_IS_OK
+        ];
+        $save_id = FormidT::create($params);
+        if (!$save_id) {
+            throw  new TokenException(
+                [
+                    'msg' => '保存form_id失败',
+                    'errorCode' => '10020'
+                ]
+            );
+        }
+        return json(new SuccessMessage());
+
+
+    }
+
+    /**
      * @api {GET} /api/v1/token/village  68-小程序用户登录小区管理员
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -139,6 +180,5 @@ class Token extends Controller
         $at->getVillage();
         return json(new SuccessMessage());
     }
-
 
 }
