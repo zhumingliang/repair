@@ -20,7 +20,9 @@ Route::get('api/:version/index', 'api/:version.Index/index');
 Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 Route::get('api/:version/token/village', 'api/:version.Token/getVillageToken');
 Route::get('api/:version/token/login/out', 'api/:version.Token/loginOut');
+Route::post('api/:version/token/formid', 'api/:version.Token/saveFormID');
 Route::get('api/:version/token/user', 'api/:version.Token/getUserToken');
+
 Route::post('api/:version/user/info', 'api/:version.User/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 Route::get('api/:version/user/list', 'api/:version.User/getUsers');

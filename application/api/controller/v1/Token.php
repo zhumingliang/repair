@@ -110,7 +110,7 @@ class Token extends Controller
     }
 
     /**
-     * @api {POST} /api/v1/token/formID  189-保存formID
+     * @api {POST} /api/v1/token/formid  189-保存formID
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription
