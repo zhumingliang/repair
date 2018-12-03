@@ -102,9 +102,9 @@ class OrderReport extends BaseController
      * @return \think\response\Json
      * @throws \think\exception\DbException
      */
-    public function getServiceReportForAdmin($order_type, $page, $size, $keyw = '')
+    public function getServiceReportForAdmin($order_type, $page, $size, $keyW = '')
     {
-        $list = (new OrderReportService())->serviceReportForAdmin($keyw, $order_type, $page, $size);
+        $list = (new OrderReportService())->serviceReportForAdmin($keyW, $order_type, $page, $size);
         return json($list);
     }
 
