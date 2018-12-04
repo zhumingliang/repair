@@ -168,8 +168,8 @@ class Pay
     function makeWxPreOrder($totalPrice)
     {
 
-        $openid = Token::getCurrentOpenid();
-        //$openid = "osEM-5Zxouh-89NF1-TnJWh29rgU";//Token::getCurrentOpenid();
+        //$openid = Token::getCurrentOpenid();
+        $openid = "osEM-5eqzFwX5eUXgse0aaAS680Q";//Token::getCurrentOpenid();
         if (!$openid) {
             throw new TokenException();
         }
@@ -241,7 +241,6 @@ class Pay
     function checkOrderValid()
     {
         $order = self::getOrder();
-
         if (!$order) {
             throw new PayException(
                 ['msg' => '订单不存在',
@@ -250,14 +249,14 @@ class Pay
                 ]
             );
         }
-        if (!Token::isValidOperate($order->openid)) {
+      /*  if (!Token::isValidOperate($order->openid)) {
             //if (0) {
             throw new PayException(
                 [
                     'msg' => '订单与用户不匹配',
                     'errorCode' => 150003
                 ]);
-        }
+        }*/
 
         if ($order->state != CommonEnum::STATE_IS_OK) {
             throw new PayException(
