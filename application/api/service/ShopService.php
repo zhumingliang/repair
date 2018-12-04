@@ -361,7 +361,7 @@ class ShopService
         OrderMsgService::saveShop($shop_id, $booking->id, 2, 1);
 
         //发送消息通知商家
-        //(new SendMsgService($booking->id, $shop_id))->sendToShop();
+        (new SendMsgService($booking->id, $shop_id))->sendToShop();
 
         return [
             'id' => $booking->id,

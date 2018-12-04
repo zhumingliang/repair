@@ -9,6 +9,7 @@
 
 namespace zml\tp_aliyun;
 
+use app\api\model\LogT;
 use think\Exception;
 use think\Validate;
 
@@ -17,7 +18,8 @@ class SendSms
     static protected $instance;
     protected $accessKeyId;
     protected $accessSecret;
-    protected $templateCode;
+    protected $templateDemandCode;
+    protected $templateServiceCode;
     protected $signName;
     protected $requestHost = "http://dysmsapi.aliyuncs.com";
     protected $requestUrl;
@@ -31,7 +33,8 @@ class SendSms
         date_default_timezone_set("GMT");
         isset($options["AccessKeyId"]) && $this->accessKeyId = $options["AccessKeyId"];
         isset($options["AccessSecret"]) && $this->accessSecret = $options["AccessSecret"];
-        isset($options["TemplateCode"]) && $this->templateCode = $options["TemplateCode"];
+        isset($options["TemplateDemandCode"]) && $this->templateDemandCode = $options["TemplateDemandCode"];
+        isset($options["TemplateServiceCode"]) && $this->templateServiceCode = $options["TemplateServiceCode"];
         isset($options["SignName"]) && $this->signName = $options["SignName"];
     }
 
@@ -102,19 +105,22 @@ class SendSms
      * 发送
      * @param string $phone
      * @param array $param
+     * @param array $type
      * @return mixed
      */
-    public function send($phone = "", $param = [])
+    public function send($phone = "", $param = [], $type)
     {
         try {
             /*if (!$this->checkParams($phone, $code)) {
 
                 throw  new  Exception($this->error);
             }*/
-            if ($this->createRequestUrl($phone, $param) && $this->signature) {
+            if ($this->createRequestUrl($phone, $param, $type) && $this->signature) {
                 $url = "{$this->requestHost}/?Signature={$this->signature}{$this->requestUrl}";
-                $content = $this->fetchContent($url);
-                return json_decode($content);
+                $res = $this->fetchContent($url);
+                echo $res;
+                LogT::create(['msg' => $res]);
+                //return json_decode($res);
             } else {
                 throw  new  Exception("参数缺失");
             }
@@ -128,13 +134,15 @@ class SendSms
     /**
      * @param string $phone
      * @param $param
+     * @param $type
      * @return bool
      */
-    protected function createRequestUrl($phone, $param)
+    protected function createRequestUrl($phone, $param, $type)
     {
         try {
+            unset($param['id']);
             $requestParams = [
-                'RegionId' => 'cn-hangzhou', // API支持的RegionID，如短信API的值为：cn-hangzhou
+                //'RegionId' => 'cn-hangzhou', // API支持的RegionID，如短信API的值为：cn-hangzhou
                 'AccessKeyId' => $this->accessKeyId, // 访问密钥，在阿里云的密钥管理页面创建
                 "Format" => 'JSON', // 返回值类型，没传默认为JSON，可选填值：XML
                 "SignatureMethod" => 'HMAC-SHA1', // 编码(固定值不用改)
@@ -145,8 +153,8 @@ class SendSms
                 'Version' => '2017-05-25', // API的版本，固定值，如短信API的值为：2017-05-25
                 'PhoneNumbers' => $phone, // 短信接收号码
                 'SignName' => $this->signName, // 短信签名
-                'TemplateCode' => $this->templateCode, // 短信模板ID
-                'TemplateParam' => json_encode($param),
+                'TemplateCode' => $type == "normal" ? $this->templateDemandCode : $this->templateServiceCode, // 短信模板ID
+                'TemplateParam' => json_encode($param, JSON_UNESCAPED_UNICODE),
             ];
             ksort($requestParams);
             $requestUrl = "";

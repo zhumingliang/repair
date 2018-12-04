@@ -2,16 +2,17 @@
 
 namespace app\api\controller\v1;
 
-use app\api\service\WithDrawService;
+use app\api\service\SendMsgService;
 
 class Index
 {
-    public function index($money)
+    public function index()
     {
-       /* $token = "4013e96782dcf82dcf8bc0d5cd51b202";
-        $info = \app\api\service\Token::getCurrentTokenVar();
-        return json(json_decode($info));*/
-       WithDrawService::apply(1,$money);
+        $d_id = 56;
+        $order_id = 251;
+
+        (new SendMsgService($order_id, $d_id))->sendToShop();
+        //WithDrawService::apply(1,$money);
     }
 
     public function hello($name = 'ThinkPHP5')

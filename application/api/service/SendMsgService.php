@@ -14,9 +14,11 @@ use app\api\model\DemandOrderT;
 use app\api\model\DemandOrderV;
 use app\api\model\DemandV;
 use app\api\model\FormidT;
+use app\api\model\LogT;
 use app\api\model\ServiceOrderV;
 use app\api\model\ShopT;
 use app\lib\enum\CommonEnum;
+use think\Exception;
 use zml\tp_aliyun\SendSms;
 
 class SendMsgService
@@ -37,15 +39,23 @@ class SendMsgService
 
     public function sendToNormal()
     {
-        $this->getOpenidForNormal();
-        if (self::checkFormID()) {
-            //发送模板消息
-            (new WxTemplate($this->openid, $this->form_id, $this->params))->sendToNormal();
-
-        } else {
-            //发送短息消息
+        try {
+            $this->getOpenidForNormal();
             $this->getOrderInfo(2);
-            SendSms::instance()->send($this->phone, $this->params);
+            if (self::checkFormID()) {
+                //发送模板消息
+                $wx_res = (new WxTemplate($this->openid, $this->form_id, $this->params))->sendToNormal();
+                if ($wx_res) {
+                    $this->updateFormId();
+                } else {
+                    $this->sendSms('normal');
+                }
+            } else {
+                //发送短息消息
+                $this->sendSms('normal');
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
 
 
@@ -55,15 +65,24 @@ class SendMsgService
     public function sendToShop()
     {
         $this->getOpenidForShop();
+        $this->getOrderInfo(1);
         if (self::checkFormID()) {
             //发送模板消息
-            (new WxTemplate($this->openid, $this->form_id, $this->params))->sendToShop();
-
+            $wx_res = (new WxTemplate($this->openid, $this->form_id, $this->params))->sendToShop();
+            if ($wx_res) {
+                $this->updateFormId();
+            } else {
+                $this->sendSms('shop');
+            }
         } else {
-            //发送短息消息
-            $this->getOrderInfo(1);
-            SendSms::instance()->send($this->phone, $this->params);
+            $this->sendSms('shop');
         }
+
+    }
+
+    private function sendSms($type)
+    {
+        SendSms::instance()->send($this->phone, $this->params, $type);
 
     }
 
@@ -77,9 +96,12 @@ class SendMsgService
      */
     private function checkFormID()
     {
+        $time_end = addDay(1, date('Y-m-d H:i', time()));
+        $time_begin = reduceDay(6, $time_end);
         $form = FormidT::where('openId', $this->openid)
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->whereTime('create_time', 'week')
+            ->whereBetweenTime('create_time', $time_begin, $time_end)
+            ->order('create_time desc')
             ->find();
         if (count($form)) {
             $this->form_id = $form->form_id;
@@ -95,6 +117,7 @@ class SendMsgService
             $info = ServiceOrderV::where('order_id', $this->id)
                 ->find();
             $params = [
+                'id' => $this->id,
                 'time' => $info->order_time,
                 'time_begin' => $info->time_begin,
                 'server' => $info->source_name,
@@ -111,6 +134,7 @@ class SendMsgService
                 ->find();
 
             $params = [
+                'id' => $this->id,
                 'demand' => $info->source_name,
                 'shop_name' => $info->shop_name,
                 'phone' => $info->shop_phone,
@@ -119,7 +143,6 @@ class SendMsgService
             ];
             $this->phone = $info->user_phone;
             $this->params = $params;
-
         }
 
     }
@@ -135,6 +158,12 @@ class SendMsgService
     {
         $demand = DemandV::where('id', $this->source_id)->find();
         $this->openid = $demand->openId;
+    }
+
+    private function updateFormId()
+    {
+
+        FormidT::update(['state' => CommonEnum::STATE_IS_FAIL], ['form_id' => $this->form_id]);
     }
 
 

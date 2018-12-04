@@ -34,10 +34,11 @@ class WxTemplate
         $at = new AccessToken();
         $access_token = $at->get();
         $params = $this->params;
+        $page = '/pages/order-detail/index?id='.$params['id'].'&type=1&state=1';
         $data = [
             "touser" => $this->openid,
             "template_id" => $template_id,
-            "page" => "index",
+            "page" => $page,
             "form_id" => $this->form_id,
             "data" => [
                 "keyword1" => [
@@ -57,12 +58,13 @@ class WxTemplate
                 ]
             ]
         ];
-        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=$access_token";
-        $res = Curl::postToData($url, $data);
-
+        $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=$access_token";
+        $res = Curl::postCurl($url, $data,"json");
         $res_obj = json_decode($res);
-        print_r($res_obj);
-        //$this->saveRecord($data, $res_obj);
+        if ($res_obj->errcode == 0) {
+            return true;
+        }
+        return false;
 
     }
 
@@ -72,36 +74,35 @@ class WxTemplate
         $at = new AccessToken();
         $access_token = $at->get();
         $params = $this->params;
-        $data = [
+        $page = '/pages/order-detail/index?id='.$params['id'].'&type=2&state=2';
+        $data = array(
             "touser" => $this->openid,
             "template_id" => $template_id,
-            "page" => "index",
+            "page" => $page,
             "form_id" => $this->form_id,
-            "keyword1" => [
-                "value" => $params['shop_name'],
-            ],
-            "keyword2" => [
-                "value" => $params['demand'],
-            ],
-            "keyword3" => [
-                "value" => $params['time_begin'],
-            ],
-            "keyword4" => [
-                "value" => $params['phone'],
-            ]
-        ];
-        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=$access_token";
-        $res = Curl::postToData($url, $data);
-
+            "data" => array(
+                "keyword1" => array(
+                    "value" => $params['shop_name']
+                ),
+                "keyword2" => array(
+                    "value" => $params['demand'],
+                ),
+                "keyword3" => array(
+                    "value" => $params['time'],
+                ),
+                "keyword4" => array(
+                    "value" => $params['phone'],
+                )
+            )
+        );
+        $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=$access_token";
+        $res = Curl::postCurl($url, $data, 'json');
         $res_obj = json_decode($res);
-        print_r($res_obj);
+        if ($res_obj->errcode == 0) {
+            return true;
+        }
+        return false;
         //$this->saveRecord($data, $res_obj);
-
-    }
-
-    private function formHandel($form_id)
-    {
-        FormidT::update(['state', CommonEnum::STATE_IS_FAIL], ['form_id', $form_id]);
 
     }
 
