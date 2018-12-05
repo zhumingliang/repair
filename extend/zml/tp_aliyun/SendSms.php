@@ -156,6 +156,7 @@ class SendSms
                 'TemplateCode' => $type == "normal" ? $this->templateDemandCode : $this->templateServiceCode, // 短信模板ID
                 'TemplateParam' => json_encode($param, JSON_UNESCAPED_UNICODE),
             ];
+
             ksort($requestParams);
             $requestUrl = "";
             foreach ($requestParams as $key => $value) {
