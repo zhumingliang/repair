@@ -13,6 +13,7 @@ use app\api\model\BondT;
 use app\api\model\DemandOrderT;
 use app\api\model\DemandT;
 use app\api\model\JoinCommissionT;
+use app\api\model\LogT;
 use app\api\model\ServiceBookingT;
 use app\api\model\ServicesT;
 use app\api\model\ShopT;
@@ -187,6 +188,7 @@ class Pay
         $input->setOpenid($openid);
         $wxOrder = WxPayApi::unifiedOrder($input);
         if ($wxOrder['return_msg'] != 'OK') {
+            LogT::create(['msg'=>json_encode($wxOrder)]);
             throw new PayException(
                 [
                     'code' => 401,
