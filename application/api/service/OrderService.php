@@ -260,7 +260,7 @@ class OrderService
                 $list['count'] = self::getServiceOrderCountForShop();
                 return $list;
             } else {
-                $list = self::getServiceListForShop(999999, $order_type, $page, $size);
+                $list = self::getServiceListForShop(999999, 1, $page, $size);
                 $list['count'] = [
                     'shopConfirm' => 0,
                     'service' => 0,
