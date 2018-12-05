@@ -253,7 +253,7 @@ class OrderService
                 $list['count'] = self::getServiceOrderCountForShop();
                 return $list;
             } else {
-               self::getServiceListForShop(999999, $order_type, $page, $size);
+                return  self::getServiceListForShop(999999, $order_type, $page, $size);
 
             }
         } else {
