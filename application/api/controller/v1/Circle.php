@@ -509,7 +509,7 @@ class Circle extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/circle/cms 63-小程序获取指定圈子文章
+     * @api {GET} /api/v1/circle/mini 63-小程序获取指定圈子文章
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  CMS获取指定圈子文章
