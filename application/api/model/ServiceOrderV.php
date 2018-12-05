@@ -38,7 +38,7 @@ class ServiceOrderV extends Model
             //->whereTime('time_begin', '>', date('Y-m-d H:i'))
            // ->whereTime('order_time', '>', $shop_confirm_limit)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
         return $list;
 
 
@@ -85,7 +85,7 @@ class ServiceOrderV extends Model
             ->where('shop_confirm', CommonEnum::STATE_IS_OK)
             ->where('pay_id', CommonEnum::ORDER_STATE_INIT)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -143,7 +143,7 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -192,7 +192,7 @@ class ServiceOrderV extends Model
             ->where('confirm_id', '=', 1)
             ->where('comment_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -245,7 +245,7 @@ class ServiceOrderV extends Model
             ->where('normal_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -303,7 +303,7 @@ class ServiceOrderV extends Model
             // ->whereTime('time_begin', '>', date('Y-m-d H:i'))
             //->whereTime('order_time', '>', $shop_confirm_limit)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -353,7 +353,7 @@ class ServiceOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -412,7 +412,7 @@ class ServiceOrderV extends Model
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -479,7 +479,7 @@ class ServiceOrderV extends Model
             ->where('shop_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
 
         return $list;
@@ -572,7 +572,7 @@ class ServiceOrderV extends Model
                 }
             })
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -596,7 +596,7 @@ class ServiceOrderV extends Model
                 }
             })
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -638,7 +638,7 @@ class ServiceOrderV extends Model
                 }
             })
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -683,7 +683,7 @@ class ServiceOrderV extends Model
                 }
             })
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 

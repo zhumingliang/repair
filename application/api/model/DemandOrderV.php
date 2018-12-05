@@ -49,7 +49,7 @@ class DemandOrderV extends Model
             ->whereTime('time_begin', '>', date('Y-m-d H:i'))
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
         return $list;
     }
 
@@ -144,7 +144,7 @@ class DemandOrderV extends Model
             // ->whereTime('time_begin', date('Y-m-d H:i'))
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -208,7 +208,7 @@ class DemandOrderV extends Model
             ->where('state', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -256,7 +256,7 @@ class DemandOrderV extends Model
             ->where('confirm_id', '=', 1)
             ->where('comment_id', '=', CommonEnum::ORDER_STATE_INIT)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -309,7 +309,7 @@ class DemandOrderV extends Model
             ->where('normal_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
@@ -381,7 +381,7 @@ class DemandOrderV extends Model
         $list = self::where('shop_id', $s_id)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -447,7 +447,7 @@ class DemandOrderV extends Model
             ->where('service_begin', '=', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -512,7 +512,7 @@ class DemandOrderV extends Model
             ->where('shop_delete', CommonEnum::STATE_IS_OK)
             ->whereRaw($sql)
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -691,7 +691,7 @@ class DemandOrderV extends Model
                 }
             })
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -733,7 +733,7 @@ class DemandOrderV extends Model
                 }
             })
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
     }
@@ -777,7 +777,7 @@ class DemandOrderV extends Model
                 }
             })
             ->order('order_time desc')
-            ->paginate($size, false, ['page' => $page]);
+            ->paginate($size, false, ['page' => $page])->toArray();
 
         return $list;
 
