@@ -304,7 +304,6 @@ class ServiceOrderV extends Model
             //->whereTime('order_time', '>', $shop_confirm_limit)
             ->order('order_time desc')
             ->paginate($size, false, ['page' => $page])->toArray();
-
         return $list;
     }
 
