@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/OrderService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,13 +34,13 @@
         <counts>
           <entry key="dummy" value="52" />
           <entry key="html" value="4" />
-          <entry key="php" value="75421" />
+          <entry key="php" value="75433" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="PHP" value="75421" />
+          <entry key="PHP" value="75433" />
           <entry key="PLAIN_TEXT" value="52" />
         </counts>
       </usages-collector>
@@ -83,7 +82,7 @@
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Order.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="641">
-              <caret line="198" column="38" lean-forward="true" selection-start-line="198" selection-start-column="38" selection-end-line="198" selection-end-column="38" />
+              <caret line="198" column="35" lean-forward="true" selection-start-line="198" selection-start-column="35" selection-end-line="198" selection-end-column="35" />
               <folding>
                 <element signature="e#743#1292#0#PHP" />
                 <element signature="e#1297#1594#0#PHP" />
@@ -96,7 +95,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/service/OrderService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
+            <state relative-caret-position="343">
               <caret line="248" column="19" selection-start-line="248" selection-start-column="19" selection-end-line="248" selection-end-column="19" />
             </state>
           </provider>
@@ -433,21 +432,7 @@
       <workItem from="1543932873605" duration="36000" />
       <workItem from="1543933702673" duration="42000" />
       <workItem from="1543943000839" duration="647000" />
-      <workItem from="1543972898726" duration="4933000" />
-    </task>
-    <task id="LOCAL-00448" summary="项目初始化">
-      <created>1541860223709</created>
-      <option name="number" value="00448" />
-      <option name="presentableId" value="LOCAL-00448" />
-      <option name="project" value="LOCAL" />
-      <updated>1541860223709</updated>
-    </task>
-    <task id="LOCAL-00449" summary="项目初始化">
-      <created>1541903942069</created>
-      <option name="number" value="00449" />
-      <option name="presentableId" value="LOCAL-00449" />
-      <option name="project" value="LOCAL" />
-      <updated>1541903942069</updated>
+      <workItem from="1543972898726" duration="5202000" />
     </task>
     <task id="LOCAL-00450" summary="项目初始化">
       <created>1541919557686</created>
@@ -778,11 +763,25 @@
       <option name="project" value="LOCAL" />
       <updated>1543993818153</updated>
     </task>
-    <option name="localTasksCounter" value="497" />
+    <task id="LOCAL-00497" summary="项目初始化">
+      <created>1543994822256</created>
+      <option name="number" value="00497" />
+      <option name="presentableId" value="LOCAL-00497" />
+      <option name="project" value="LOCAL" />
+      <updated>1543994822256</updated>
+    </task>
+    <task id="LOCAL-00498" summary="项目初始化">
+      <created>1543995146216</created>
+      <option name="number" value="00498" />
+      <option name="presentableId" value="LOCAL-00498" />
+      <option name="project" value="LOCAL" />
+      <updated>1543995146216</updated>
+    </task>
+    <option name="localTasksCounter" value="499" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="873986000" />
+    <option name="totallyTimeSpent" value="874255000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1207,7 +1206,7 @@
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Order.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="641">
-          <caret line="198" column="38" lean-forward="true" selection-start-line="198" selection-start-column="38" selection-end-line="198" selection-end-column="38" />
+          <caret line="198" column="35" lean-forward="true" selection-start-line="198" selection-start-column="35" selection-end-line="198" selection-end-column="35" />
           <folding>
             <element signature="e#743#1292#0#PHP" />
             <element signature="e#1297#1594#0#PHP" />
@@ -1218,7 +1217,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/OrderService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
+        <state relative-caret-position="343">
           <caret line="248" column="19" selection-start-line="248" selection-start-column="19" selection-end-line="248" selection-end-column="19" />
         </state>
       </provider>

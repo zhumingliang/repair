@@ -246,7 +246,7 @@ class OrderService
      */
     public static function getServiceList($order_type, $page, $size, $list_type)
     {
-        $shop_id = 1;//Token::getCurrentTokenVar('shop_id');
+        $shop_id = Token::getCurrentTokenVar('shop_id');
         if ($shop_id) {
             if ($list_type == 2) {
                 $list = self::getServiceListForShop($shop_id, $order_type, $page, $size);
@@ -656,7 +656,7 @@ class OrderService
 
     private static function getServiceOrderCountForShop()
     {
-        $shop_id = 1;//Token::getCurrentTokenVar('shop_id');
+        $shop_id = Token::getCurrentTokenVar('shop_id');
         $count_arr = [
             'shopConfirm' => ServiceOrderV::shopConfirmCount($shop_id),
             'service' => ServiceOrderV::serviceCount($shop_id),
