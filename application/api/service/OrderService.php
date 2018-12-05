@@ -222,7 +222,14 @@ class OrderService
                 $list['count'] = self::getDemandOrderCountForShop();
                 return $list;
             } else {
-                return array();
+                $shop_id = 99999;
+                $list = self::getDemandListForShop($shop_id, $order_type, $page, $size);
+                $list['count'] = [
+                    'service' => 0,
+                    'shopConfirm' => 0,
+                    'shopComplete' => 0
+                ];
+                return $list;
             }
         } else {
             $list = self::getDemandListForNormal($order_type, $page, $size);
@@ -253,8 +260,14 @@ class OrderService
                 $list['count'] = self::getServiceOrderCountForShop();
                 return $list;
             } else {
-                return  self::getServiceListForShop(999999, $order_type, $page, $size);
-
+                $list = self::getServiceListForShop(999999, $order_type, $page, $size);
+                $list['count'] = [
+                    'shopConfirm' => 0,
+                    'service' => 0,
+                    'serviceIng' => 0,
+                    'shopComplete' => 0
+                ];
+                return $list;
             }
         } else {
 
