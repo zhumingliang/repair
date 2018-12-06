@@ -82,6 +82,7 @@ class SendMsgService
 
     private function sendSms($type)
     {
+        LogT::create(['msg'=>$this->phone]);
         SendSms::instance()->send($this->phone, $this->params, $type);
 
     }
