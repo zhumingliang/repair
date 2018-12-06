@@ -63,7 +63,8 @@ class WxTemplate
         $res = Curl::postCurl($url, $data,"json");
         LogT::create(['msg'=>$res]);
         $res_obj = json_decode($res);
-        if ($res_obj['errcode'] == 0) {
+        LogT::create(['msg'=>$res_obj->errcode]);
+        if ($res_obj->errcode == 0) {
             return true;
         }
         return false;
@@ -101,7 +102,8 @@ class WxTemplate
         $res = Curl::postCurl($url, $data, 'json');
         $res_obj = json_decode($res);
         LogT::create(['msg'=>$res]);
-        if ($res_obj['errcode'] == 0) {
+        LogT::create(['msg'=>$res_obj->errcode]);
+        if ($res_obj->errcode == 0) {
             return true;
         }
         return false;
