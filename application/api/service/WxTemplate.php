@@ -35,9 +35,7 @@ class WxTemplate
         $at = new AccessToken();
         $access_token = $at->get();
         $params = $this->params;
-        $page = 'pages/order-detail/index?id='.$params['id'].'&type=1&state=1';
-
-        LogT::create(['msg'=>$page]);
+        $page = 'pages/order-detail/index?id='.$params['id'].'&type=1&state=1&template=1';
         $data = [
             "touser" => $this->openid,
             "template_id" => $template_id,
@@ -65,7 +63,6 @@ class WxTemplate
         $res = Curl::postCurl($url, $data,"json");
         LogT::create(['msg'=>$res]);
         $res_obj = json_decode($res);
-        LogT::create(['msg'=>$res_obj->errcode]);
         if ($res_obj->errcode == 0) {
             return true;
         }
@@ -79,9 +76,7 @@ class WxTemplate
         $at = new AccessToken();
         $access_token = $at->get();
         $params = $this->params;
-        $page = '/pages/order-detail/index?id='.$params['id'].'&type=2&state=2';
-
-        LogT::create(['msg'=>$page]);
+        $page = 'pages/order-detail/index?id='.$params['id'].'&type=2&state=2&template=1';
         $data = array(
             "touser" => $this->openid,
             "template_id" => $template_id,
@@ -106,7 +101,6 @@ class WxTemplate
         $res = Curl::postCurl($url, $data, 'json');
         $res_obj = json_decode($res);
         LogT::create(['msg'=>$res]);
-        LogT::create(['msg'=>$res_obj->errcode]);
         if ($res_obj->errcode == 0) {
             return true;
         }

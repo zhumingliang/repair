@@ -102,6 +102,7 @@ class Order extends BaseController
     public function getOrderInfo()
     {
         (new OrderValidate())->scene('phone')->goCheck();
+        TokenService::getCurrentUid();
         $id = $this->request->param('id');
         $type = $this->request->param('type');
         $info = OrderService::getOrderInfo($id, $type);
