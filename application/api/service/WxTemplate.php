@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\FormidT;
+use app\api\model\LogT;
 use app\lib\enum\CommonEnum;
 use zml\tp_tools\Curl;
 
@@ -60,6 +61,7 @@ class WxTemplate
         ];
         $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=$access_token";
         $res = Curl::postCurl($url, $data,"json");
+        LogT::create(['msg'=>$res]);
         $res_obj = json_decode($res);
         if ($res_obj->errcode == 0) {
             return true;
@@ -98,6 +100,7 @@ class WxTemplate
         $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=$access_token";
         $res = Curl::postCurl($url, $data, 'json');
         $res_obj = json_decode($res);
+        LogT::create(['msg'=>$res]);
         if ($res_obj->errcode == 0) {
             return true;
         }
