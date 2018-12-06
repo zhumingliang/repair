@@ -36,6 +36,8 @@ class WxTemplate
         $access_token = $at->get();
         $params = $this->params;
         $page = '/pages/order-detail/index?id='.$params['id'].'&type=1&state=1';
+
+        LogT::create(['msg'=>$page]);
         $data = [
             "touser" => $this->openid,
             "template_id" => $template_id,
@@ -78,6 +80,8 @@ class WxTemplate
         $access_token = $at->get();
         $params = $this->params;
         $page = '/pages/order-detail/index?id='.$params['id'].'&type=2&state=2';
+
+        LogT::create(['msg'=>$page]);
         $data = array(
             "touser" => $this->openid,
             "template_id" => $template_id,
