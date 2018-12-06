@@ -35,7 +35,7 @@ class WxTemplate
         $at = new AccessToken();
         $access_token = $at->get();
         $params = $this->params;
-        $page = '/pages/order-detail/index?id='.$params['id'].'&type=1&state=1';
+        $page = 'pages/order-detail/index?id='.$params['id'].'&type=1&state=1';
 
         LogT::create(['msg'=>$page]);
         $data = [

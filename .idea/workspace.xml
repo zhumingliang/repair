@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/SendMsgService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/SendMsgService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/WxTemplate.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/WxTemplate.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,13 +35,13 @@
         <counts>
           <entry key="dummy" value="52" />
           <entry key="html" value="4" />
-          <entry key="php" value="75515" />
+          <entry key="php" value="75516" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="PHP" value="75515" />
+          <entry key="PHP" value="75516" />
           <entry key="PLAIN_TEXT" value="52" />
         </counts>
       </usages-collector>
@@ -53,7 +54,7 @@
           <entry key="json" value="1" />
           <entry key="map" value="5" />
           <entry key="pem" value="6" />
-          <entry key="php" value="2518" />
+          <entry key="php" value="2519" />
           <entry key="txt" value="5" />
         </counts>
       </usages-collector>
@@ -63,7 +64,7 @@
           <entry key="HTML" value="3" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="2518" />
+          <entry key="PHP" value="2519" />
           <entry key="PLAIN_TEXT" value="11" />
           <entry key="SourceMap" value="5" />
           <entry key="htaccess" value="1" />
@@ -82,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
-              <caret line="236" column="32" lean-forward="true" selection-start-line="236" selection-start-column="32" selection-end-line="236" selection-end-column="32" />
+              <caret line="236" column="31" lean-forward="true" selection-start-line="236" selection-start-column="31" selection-end-line="236" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -90,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="363" column="58" lean-forward="true" selection-start-line="363" selection-start-column="58" selection-end-line="363" selection-end-column="58" />
+            <state relative-caret-position="530">
+              <caret line="363" column="58" selection-start-line="363" selection-start-column="58" selection-end-line="363" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -99,8 +100,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/service/SendMsgService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="70" column="91" selection-start-line="70" selection-start-column="91" selection-end-line="70" selection-end-column="91" />
+            <state relative-caret-position="346">
+              <caret line="70" column="89" lean-forward="true" selection-start-line="70" selection-start-column="89" selection-end-line="70" selection-end-column="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1618">
+              <caret line="139" column="23" selection-start-line="139" selection-start-column="23" selection-end-line="139" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -108,8 +118,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/service/WxTemplate.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
-              <caret line="83" column="37" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
+            <state relative-caret-position="441">
+              <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -203,7 +213,6 @@
         <option value="$PROJECT_DIR$/application/api/model/UserRedT.php" />
         <option value="$PROJECT_DIR$/config/wx.php" />
         <option value="$PROJECT_DIR$/extend/zml/tp_tools/Curl.php" />
-        <option value="$PROJECT_DIR$/application/api/service/SendMsgService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Index.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Pay.php" />
         <option value="$PROJECT_DIR$/config/alisms.php" />
@@ -215,6 +224,7 @@
         <option value="$PROJECT_DIR$/application/api/model/ServiceOrderV.php" />
         <option value="$PROJECT_DIR$/application/api/service/OrderService.php" />
         <option value="$PROJECT_DIR$/application/api/service/Pay.php" />
+        <option value="$PROJECT_DIR$/application/api/service/SendMsgService.php" />
         <option value="$PROJECT_DIR$/application/api/service/WxTemplate.php" />
       </list>
     </option>
@@ -405,21 +415,7 @@
       <workItem from="1543932873605" duration="36000" />
       <workItem from="1543933702673" duration="42000" />
       <workItem from="1543943000839" duration="647000" />
-      <workItem from="1543972898726" duration="9126000" />
-    </task>
-    <task id="LOCAL-00460" summary="项目初始化">
-      <created>1542071853789</created>
-      <option name="number" value="00460" />
-      <option name="presentableId" value="LOCAL-00460" />
-      <option name="project" value="LOCAL" />
-      <updated>1542071853789</updated>
-    </task>
-    <task id="LOCAL-00461" summary="项目初始化">
-      <created>1542076081957</created>
-      <option name="number" value="00461" />
-      <option name="presentableId" value="LOCAL-00461" />
-      <option name="project" value="LOCAL" />
-      <updated>1542076081957</updated>
+      <workItem from="1543972898726" duration="9976000" />
     </task>
     <task id="LOCAL-00462" summary="项目初始化">
       <created>1542077504926</created>
@@ -750,11 +746,25 @@
       <option name="project" value="LOCAL" />
       <updated>1544083327752</updated>
     </task>
-    <option name="localTasksCounter" value="509" />
+    <task id="LOCAL-00509" summary="项目初始化">
+      <created>1544083401394</created>
+      <option name="number" value="00509" />
+      <option name="presentableId" value="LOCAL-00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1544083401394</updated>
+    </task>
+    <task id="LOCAL-00510" summary="项目初始化">
+      <created>1544083789633</created>
+      <option name="number" value="00510" />
+      <option name="presentableId" value="LOCAL-00510" />
+      <option name="project" value="LOCAL" />
+      <updated>1544083789633</updated>
+    </task>
+    <option name="localTasksCounter" value="511" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="878179000" />
+    <option name="totallyTimeSpent" value="879029000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -994,13 +1004,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="153" column="33" selection-start-line="153" selection-start-column="33" selection-end-line="153" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/Index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1160,27 +1163,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="236" column="32" lean-forward="true" selection-start-line="236" selection-start-column="32" selection-end-line="236" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="363" column="58" lean-forward="true" selection-start-line="363" selection-start-column="58" selection-end-line="363" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/SendMsgService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="70" column="91" selection-start-line="70" selection-start-column="91" selection-end-line="70" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/extend/zml/tp_tools/Curl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="843">
@@ -1188,10 +1170,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1618">
+          <caret line="139" column="23" selection-start-line="139" selection-start-column="23" selection-end-line="139" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="236" column="31" lean-forward="true" selection-start-line="236" selection-start-column="31" selection-end-line="236" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="363" column="58" selection-start-line="363" selection-start-column="58" selection-end-line="363" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/SendMsgService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="70" column="89" lean-forward="true" selection-start-line="70" selection-start-column="89" selection-end-line="70" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/WxTemplate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="83" column="37" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
+        <state relative-caret-position="441">
+          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
         </state>
       </provider>
     </entry>
