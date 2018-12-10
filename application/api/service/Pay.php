@@ -187,7 +187,7 @@ class Pay
         $input->setTradeType("JSAPI");
         $input->setOpenid($openid);
         $wxOrder = WxPayApi::unifiedOrder($input);
-        if ($wxOrder['result_code'] != 'OK'||$wxOrder['return_code'] != 'OK') {
+        if ($wxOrder['result_code'] != 'SUCCESS'||$wxOrder['return_code'] != 'SUCCESS') {
             LogT::create(['msg'=>json_encode($wxOrder)]);
             throw new PayException(
                 [
