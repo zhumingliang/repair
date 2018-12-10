@@ -384,8 +384,7 @@ class Pay
         if (!$this->r_id) {
             return 0;
         }
-        //$red = UserRedT::where('u_id', '=', Token::getCurrentUid())
-        $red = UserRedT::where('id', '=', $this->r_id)
+        $red = UserRedT::where('u_id', '=', Token::getCurrentUid())
             ->where('id', '=', $this->r_id)
             ->find();
         if ($red->state == RedEnum::USED) {
