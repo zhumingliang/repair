@@ -381,7 +381,7 @@ class Pay
     function checkRed()
     {
 
-        if (!$this->r_id) {
+        if (!$this->r_id ) {
             return 0;
         }
         $red = UserRedT::where('u_id', '=', Token::getCurrentUid())
