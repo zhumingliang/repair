@@ -170,7 +170,7 @@ class Pay
     {
 
         $openid = Token::getCurrentOpenid();
-        //$openid = "osEM-5eqzFwX5eUXgse0aaAS680Q";//Token::getCurrentOpenid();
+        //$openid = "osEM-5f_3BRyME5M5N0z8sQCftUY";//"osEM-5eqzFwX5eUXgse0aaAS680Q";//Token::getCurrentOpenid();
         if (!$openid) {
             throw new TokenException();
         }
@@ -187,7 +187,7 @@ class Pay
         $input->setTradeType("JSAPI");
         $input->setOpenid($openid);
         $wxOrder = WxPayApi::unifiedOrder($input);
-        if ($wxOrder['return_msg'] != 'OK') {
+        if ($wxOrder['result_code'] != 'OK'||$wxOrder['return_code'] != 'OK') {
             LogT::create(['msg'=>json_encode($wxOrder)]);
             throw new PayException(
                 [
@@ -268,7 +268,7 @@ class Pay
         }
 
 
-        if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
+       if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
             //if (0) {
             throw new PayException(
                 [
@@ -384,7 +384,8 @@ class Pay
         if (!$this->r_id) {
             return 0;
         }
-        $red = UserRedT::where('u_id', '=', Token::getCurrentUid())
+        //$red = UserRedT::where('u_id', '=', Token::getCurrentUid())
+        $red = UserRedT::where('id', '=', $this->r_id)
             ->where('id', '=', $this->r_id)
             ->find();
         if ($red->state == RedEnum::USED) {
