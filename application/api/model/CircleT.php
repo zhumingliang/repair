@@ -144,7 +144,7 @@ class CircleT extends BaseModel
     public static function getCircleForMINI($id)
     {
         $circle = self::where('id', $id)
-            ->hidden(['title', 'city', 'c_id', 'head_img', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
+            ->hidden([ 'city', 'c_id', 'update_time', 'u_id', 'state', 'parent_id', 'top', 'province', 'area'])
             ->find();
 
         return $circle;
