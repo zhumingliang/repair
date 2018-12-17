@@ -187,8 +187,8 @@ class Pay
         $input->setTradeType("JSAPI");
         $input->setOpenid($openid);
         $wxOrder = WxPayApi::unifiedOrder($input);
-        if ($wxOrder['result_code'] != 'SUCCESS'||$wxOrder['return_code'] != 'SUCCESS') {
-            LogT::create(['msg'=>json_encode($wxOrder)]);
+        if ($wxOrder['result_code'] != 'SUCCESS' || $wxOrder['return_code'] != 'SUCCESS') {
+            LogT::create(['msg' => json_encode($wxOrder)]);
             throw new PayException(
                 [
                     'code' => 401,
@@ -267,8 +267,17 @@ class Pay
                 ]);
         }
 
+        if ($order->shop_confirm != CommonEnum::STATE_IS_OK) {
+            throw new PayException(
+                [
+                    'msg' => '订单商家未确认',
+                    'errorCode' => 150040,
+                    'code' => 401
+                ]);
+        }
 
-       if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
+
+        if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
             //if (0) {
             throw new PayException(
                 [
@@ -307,7 +316,7 @@ class Pay
             $order['openid'] = $this->getOpenidForDemand($order->d_id);
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
             $order = BondT::where('id', '=', $this->orderID)
-                ->field('id,u_id,1 as state,money as update_money,pay_id,openid,order_number')
+                ->field('id,u_id,1 as state,money as update_money,pay_id,openid,order_number,1 as shop_confirm')
                 ->find();
         } else {
             throw new PayException();
@@ -381,7 +390,7 @@ class Pay
     function checkRed()
     {
 
-        if (!$this->r_id ) {
+        if (!$this->r_id) {
             return 0;
         }
         $red = UserRedT::where('u_id', '=', Token::getCurrentUid())
