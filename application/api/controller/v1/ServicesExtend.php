@@ -195,7 +195,7 @@ class ServicesExtend extends BaseController
     {
         (new PagingParameter())->goCheck();
         $params = $this->request->param();
-        $list = ExtendService::getRepairList($params['area'], $params['page'], $params['size'], $params['c_id'],$params['type']);
+        $list = ExtendService::getRepairList($params['area'], $params['page'], $params['size'], $params['c_id'], $params['type']);
         return json($list);
 
 
@@ -209,7 +209,7 @@ class ServicesExtend extends BaseController
      * http://mengant.cn/api/v1/extend/mini/service?id=1
      * @apiParam (请求参数说明) {int} id  推广记录id
      * @apiSuccessExample {json} 返回样例:
-     * {"id":4,"shop_id":1,"name":"修五金","area":"台儿庄区","des":"五金大神","price":1000,"unit":"ci","collection":1,"imgs":[{"img_id":1,"img_url":{"url":"http:\/\/repair.com\/1212"}},{"img_id":2,"img_url":{"url":"http:\/\/repair.com\/121"}}],"shop":{"id":1,"address":"","phone":"1895622530"}}
+     * {"id":4,"shop_id":1,"name":"修五金","area":"台儿庄区","des":"五金大神","price":1000,"unit":"ci","collection":1,"phone_check":1,"imgs":[{"img_id":1,"img_url":{"url":"http:\/\/repair.com\/1212"}},{"img_id":2,"img_url":{"url":"http:\/\/repair.com\/121"}}],"shop":{"id":1,"address":"","phone":"1895622530"}}
      * @apiSuccess (返回参数说明) {int} id 服务id
      * @apiSuccess (返回参数说明) {int} shop_id 店铺id
      * @apiSuccess (返回参数说明) {String} name 服务名称
@@ -217,6 +217,7 @@ class ServicesExtend extends BaseController
      * @apiSuccess (返回参数说明) {String} area 区
      * @apiSuccess (返回参数说明) {int} price 价格
      * @apiSuccess (返回参数说明) {int} collection 用户是否收藏该服务：>0 | 收藏；0 | 未收藏
+     * @apiSuccess (返回参数说明) {int} phone_check 用户是否 可以拨打电话；·1 | 是；2 | 否
      * @apiSuccess (返回参数说明) {String} unit 单位
      * @apiSuccess (返回参数说明) {String} imgs 轮播图
      * @apiSuccess (返回参数说明) {int} img_id 图片id
@@ -232,7 +233,7 @@ class ServicesExtend extends BaseController
      */
     public function getServiceForMini($id)
     {
-        $info=ExtendService::getServiceForMini($id);
+        $info = ExtendService::getServiceForMini($id);
         return json($info);
     }
 
@@ -435,8 +436,6 @@ class ServicesExtend extends BaseController
 
 
     }
-
-
 
 
 }

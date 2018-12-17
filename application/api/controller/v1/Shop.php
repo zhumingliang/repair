@@ -323,6 +323,8 @@ class Shop extends BaseController
      * "area": "天河区",
      * "des": "提供最好的服务",
      * "staffs": "1,2,3",
+     * "head_url": 1,
+     * "imgs": "商家图片",
      * }
      * @apiParam (请求参数说明) {int} id 店铺id
      * @apiParam (请求参数说明) {String} name 店铺名称
@@ -332,6 +334,8 @@ class Shop extends BaseController
      * @apiParam (请求参数说明) {String} area 区
      * @apiParam (请求参数说明) {String} des 商家介绍
      * @apiParam (请求参数说明) {String} staffs 商家员工头像列表：只有首次添加或者修改时才传入此参数，并且只传入修改值
+     * @apiParam (请求参数说明) {String}  head_url 商家头像id
+     * @apiParam (请求参数说明) {String} imgs 商家资料图片id，多个用逗号隔开
      * @apiSuccessExample {json} 返回样例:
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -417,20 +421,22 @@ class Shop extends BaseController
      * @apiExample {get}  请求样例:
      * https://mengant.cn/api/v1/shop/info/edit
      * @apiSuccessExample {json} 返回样例:
-     * {"id":1,"name":"修之家","province":"安徽省","city":"铜陵市","area":"铜官区","phone":"1895622530","address":"","des":null,"staffs":[{"id":1,"img_id":1,"state":1,"face_token":null,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"id":2,"img_id":2,"state":2,"face_token":"sasadasdas","img_url":{"url":"https:\/\/mengant.cn\/121"}}]}
+     * {"id":56,"name":"维修小家","province":"安徽省","city":"铜陵市","area":"郊区","phone":"18956225230","address":"高速","des":"哈哈","head_url":"https:\/\/mengant.cn\/static\/imgs\/20181113\/919c9eb7528c6928164e726e164d1c54.jpg","staffs":[{"id":91,"img_id":2300,"state":1,"face_token":null,"img_url":{"url":"https:\/\/mengant.cn\/static\/imgs\/20181210\/b8ff2df8d5c5381dccfe7ab6a5695612.jpg"}}],"imgs":[{"img_id":1099,"img_url":{"url":"https:\/\/mengant.cn\/static\/imgs\/20181113\/df4cb228042118490c33cdd75ff99168.jpg"}},{"img_id":1098,"img_url":{"url":"https:\/\/mengant.cn\/static\/imgs\/20181113\/f4560b9d43879a013762227988edaf57.jpg"}}]}
      * @apiSuccess (返回参数说明) {int} id 店铺id
      * @apiSuccess (返回参数说明) {String} name 店铺名称
      * @apiSuccess (返回参数说明) {String} phone 商家手机号
      * @apiSuccess (返回参数说明) {String} province 省
      * @apiSuccess (返回参数说明) {String} city 市
      * @apiSuccess (返回参数说明) {String} area 区
+     * @apiSuccess (返回参数说明) {String} head_url 店铺头像
      * @apiSuccess (返回参数说明) {String} address 详细地址
      * @apiSuccess (返回参数说明) {int} des 店铺简介
      * @apiSuccess (返回参数说明) {String} staffs 商家员工头像图片
      * @apiSuccess (返回参数说明) {int} staffs->id 店铺与员工头像关联id
      * @apiSuccess (返回参数说明) {int} staffs->state  员工头像状态：1 | 审核中；2 | 审核通过
      * @apiSuccess (返回参数说明) {String} staffs->img_url->url  员工头像地址
-     *
+     * @apiSuccess (返回参数说明) {String} imgs  店铺资料图片
+     * @apiSuccess (返回参数说明) {String} imgs->img_url->url  图片地址
      * @return \think\response\Json
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -563,7 +569,7 @@ class Shop extends BaseController
      * https://mengant.cn/api/v1/shop/info/normal?id=1
      * @apiParam (请求参数说明) {int} id  店铺id
      * @apiSuccessExample {json} 返回样例:
-     * {"info":{"id":1,"name":"修之家","area":"铜官区","address":"","imgs":[{"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}}]},"comment_count":1,"score":5,"collection":1}
+     * {"info":{"id":1,"name":"修之家","area":"铜官区","address":"","imgs":[{"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}}]},"comment_count":1,"score":5,"collection":1:"phone_check":1}
      * @apiSuccess (返回参数说明) {int} id 店铺id
      * @apiSuccess (返回参数说明) {String} name 店铺名称
      * @apiSuccess (返回参数说明) {String} phone 商家手机号
@@ -574,7 +580,8 @@ class Shop extends BaseController
      * @apiSuccess (返回参数说明) {String} head_url 头像
      * @apiSuccess (返回参数说明) {int} comment_count 评论数
      * @apiSuccess (返回参数说明) {int} score 店铺分数
-     * @apiSuccess (返回参数说明) {int} collection 是否收藏：1 是；0 | 否
+     * @apiSuccess (返回参数说明) { int} collection 是否收藏：1 是；0 | 否
+     * @apiSuccess (返回参数说明) { int} phone 用户是否可以拨打电话：1 是；2 | 否
      * @return \think\response\Json
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -800,8 +807,6 @@ class Shop extends BaseController
         return json(new SuccessMessage());
 
     }
-
-
 
 
 }

@@ -131,6 +131,27 @@ class ShopService
                 }
 
             }
+            if (isset($params['imgs'])) {
+                $imgs = $params['imgs'];
+                unset($params['imgs']);
+                $relation = [
+                    'name' => 's_id',
+                    'value' => $params['id']
+                ];
+                $imgs_res = self::saveImageRelation($imgs, $relation);
+                if (!$imgs_res) {
+                    Db::rollback();
+                    throw new ShopException(
+                        ['code' => 401,
+                            'msg' => '创建商铺申请图片关联失败',
+                            'errorCode' => 60002
+                        ]
+                    );
+                }
+
+            }
+
+
             $res = ShopT::update($params, ['id' => $params['id']]);
             if (!$res) {
                 Db::rollback();
@@ -576,7 +597,8 @@ class ShopService
             'info' => $info,
             'comment_count' => $comment_count,
             'score' => self::getShopScore($id),
-            'collection' => $collection_id
+            'collection' => $collection_id,
+            'phone_check' => OrderService::checkPhoneAccess($id)
         ];
     }
 

@@ -783,4 +783,43 @@ class DemandOrderV extends Model
 
     }
 
+
+    public static function checkNoComplete($shop_id, $u_id)
+    {
+        $orderTime = SystemTimeT::getSystemOrderTime();
+        $shop_confirm = $orderTime['shop_confirm'];
+        $pay = $orderTime['pay'];
+        $shop_confirm_limit = date('Y-m-d H:i', strtotime('-' . $shop_confirm . ' minute',
+            time()));
+        $pay_limit = date('Y-m-d H:i', strtotime('-' . $pay . ' minute',
+            time()));
+        $user_confirm = $orderTime['user_confirm'];
+        $consult = $orderTime['consult'];
+        $user_confirm_limit = date('Y-m-d H:i', strtotime('-' . $user_confirm . ' minute',
+            time()));
+        $consult_limit = date('Y-m-d H:i', strtotime('-' . $consult . ' minute',
+            time()));
+        $pay_limit = 'date_format("' . $pay_limit . '","%Y-%m-%d %H:%i")';
+        $user_confirm_limit = 'date_format("' . $user_confirm_limit . '","%Y-%m-%d %H:%i")';
+        $consult_limit = 'date_format("' . $consult_limit . '","%Y-%m-%d %H:%i")';
+        $shop_confirm_limit = 'date_format("' . $shop_confirm_limit . '","%Y-%m-%d %H:%i")';
+
+
+        $sql = '( shop_confirm =2  AND  order_time > ' . $shop_confirm_limit . ') ';
+        $sql .= ' OR ';
+        $sql .= ' ( shop_confirm = 1 AND pay_id = 99999 AND order_time > ' . $pay_limit . ')';
+        $sql .= ' OR ';
+        $sql .= ' ( pay_id <> 99999 AND confirm_id = 99999 AND order_time > ' . $user_confirm_limit . ')';
+        $sql .= ' OR ';
+        $sql .= ' ( confirm_id = 2 AND consult_time > ' . $consult_limit . ')';
+
+        $count = self::where('state', CommonEnum::STATE_IS_OK)
+            ->whereRaw($sql)
+            ->where('shop_id', $shop_id)
+            ->where('u_id', $u_id)
+            ->count();
+        return $count;
+    }
+
+
 }

@@ -273,6 +273,9 @@ class Order extends BaseController
      * @return \think\response\Json
      * @throws OrderException
      * @throws \app\lib\exception\ParameterException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function updatePrice()
     {
@@ -377,7 +380,7 @@ class Order extends BaseController
         $id = $this->request->param('id');
         $type = $this->request->param('type');
         //检测订单是否已经支付
-
+        $this->checkOrderPay($id, $type);
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
             $res = DemandOrderT::update(['service_begin' => CommonEnum::STATE_IS_OK], ['id' => $id]);
         } else {
@@ -708,6 +711,56 @@ class Order extends BaseController
 
         } else {
             $res = ServiceBookingT::update([$field => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        }
+        if (!$res) {
+            throw new DemandException(['code' => 401,
+                'msg' => '删除订单失败',
+                'errorCode' => 120003
+            ]);
+        }
+
+        return json(new SuccessMessage());
+
+    }
+
+
+    /**
+     * @api {POST} /api/v1/order/nopay/delete 190-删除未支付订单（需求订单/服务订单）
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序删除订单
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * "type": 2,
+     * }
+     * @apiParam (请求参数说明) {int} id 订单id
+     * @apiParam (请求参数说明) {int} type 订单类别：1 | 服务订单；2 | 需求订单
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $id
+     * @param $type
+     * @return \think\response\Json
+     * @throws DemandException
+     * @throws \think\Exception
+     */
+    public function deleteNoPayOrder($id, $type)
+    {
+        if (OrderService::checkOrderPay($id, $type) == 1) {
+            throw new DemandException(['code' => 401,
+                'msg' => '订单已支付并且未完成，不能删除',
+                'errorCode' => 120004
+            ]);
+        }
+
+        if ($type == CommonEnum::ORDER_IS_DEMAND) {
+            $res = DemandOrderT::update(['state' => 3], ['id' => $id]);
+
+        } else {
+            $res = ServiceBookingT::update(['state' => 3], ['id' => $id]);
         }
         if (!$res) {
             throw new DemandException(['code' => 401,

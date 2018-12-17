@@ -98,7 +98,11 @@ class ShopT extends BaseModel
                     $query->with(['imgUrl'])
                         ->where('state', '<', CommonEnum::DELETE);
                 }
-            ])
+                ,
+                'imgs' => function ($query) {
+                    $query->with(['imgUrl'])
+                        ->where('state', '=', 1);
+                }])
             ->field('id,name,province,city,area,phone,address,des,head_url')
             ->find();
         return $info;

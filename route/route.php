@@ -175,6 +175,7 @@ Route::post('api/:version/order/pay/check', 'api/:version.Order/checkPay');
 Route::post('api/:version/order/phone/check', 'api/:version.Order/checkPhone');
 Route::post('api/:version/order/service/handel', 'api/:version.Order/serviceHandel');
 Route::post('api/:version/order/delete', 'api/:version.Order/deleteCompleteOrder');
+Route::post('api/:version/order/nopay/delete', 'api/:version.Order/deleteNoPayOrder');
 
 
 Route::get('api/:version/pay/getPreOrder', 'api/:version.Pay/getPreOrder');

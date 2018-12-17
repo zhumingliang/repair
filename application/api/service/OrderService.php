@@ -533,19 +533,40 @@ class OrderService
     {
         $shop_id = Token::getCurrentTokenVar('shop_id');
         $phone = 1;
-        if (!$shop_id) {
-            //普通用户
-            if ($type == CommonEnum::ORDER_IS_DEMAND) {
-                $phone = DemandOrderT::where('id', $id)
-                    ->field('phone_user')
-                    ->find()->toArray();
-            } else {
-                $phone = ServiceBookingT::where('id', $id)
-                    ->field('phone_user')
-                    ->find()->toArray();
-            }
-        }
+        /* if (!$shop_id) {
+             //普通用户
+             if ($type == CommonEnum::ORDER_IS_DEMAND) {
+                 $phone = DemandOrderT::where('id', $id)
+                     ->field('phone_user')
+                     ->find()->toArray();
+             } else {
+                 $phone = ServiceBookingT::where('id', $id)
+                     ->field('phone_user')
+                     ->find()->toArray();
+             }
+         }*/
         return $phone;
+
+    }
+
+    /**
+     * 检测用户是否有未完成的订单
+     * @param $shop_id
+     * @return int
+     * @throws Exception
+     * @throws \app\lib\exception\TokenException
+     */
+    public static function checkPhoneAccess($shop_id)
+    {
+        $u_id = Token::getCurrentUid();
+        //检测用户是否有未完成的订单
+        if (DemandOrderV::checkNoComplete($shop_id, $u_id)) {
+            return 2;
+        }
+        if (ServiceOrderV::checkNoComplete($shop_id, $u_id)) {
+            return 2;
+        }
+        return 1;
 
     }
 
@@ -680,5 +701,6 @@ class OrderService
         return $count_arr;
 
     }
+
 
 }

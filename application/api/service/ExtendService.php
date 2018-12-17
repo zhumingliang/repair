@@ -320,12 +320,13 @@ class ExtendService
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getServiceForMini($id)
+    public static function getServiceForMini( $id)
     {
         $service = ServicesT::getService($id);
         $extend = ExtendService::getExtendPrice($id);
         $service['extend'] = $extend;
         $service['collection'] = self::checkCollection($id);
+        $service['phone_check'] = OrderService::checkPhoneAccess($service->shop_id);
         return $service;
 
 
