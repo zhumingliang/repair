@@ -380,7 +380,15 @@ class Order extends BaseController
         $id = $this->request->param('id');
         $type = $this->request->param('type');
         //检测订单是否已经支付
-        $this->checkOrderPay($id, $type);
+        $pay = OrderService::checkOrderPay($id, $type);
+        if ($pay == 2) {
+            throw  new OrderException(
+                ['code' => 401,
+                    'msg' => '订单还未支付，请联系用户支付。',
+                    'errorCode' => 150009
+                ]
+            );
+        }
         if ($type == CommonEnum::ORDER_IS_DEMAND) {
             $res = DemandOrderT::update(['service_begin' => CommonEnum::STATE_IS_OK], ['id' => $id]);
         } else {
