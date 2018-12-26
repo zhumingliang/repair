@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\ServiceListV;
 use app\api\model\ServicesT;
+use app\api\model\ShopImgT;
 use app\api\model\ShopStaffImgT;
 use app\api\model\ShopT;
 use app\api\model\StaffV;
@@ -828,7 +829,7 @@ class Shop extends BaseController
      */
     public function ShopImageHandel($id)
     {
-        $res = ShopStaffImgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        $res = ShopImgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         if (!$res) {
             throw new  ShopException(
                 ['code' => 401,
