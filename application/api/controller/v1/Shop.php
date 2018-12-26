@@ -808,5 +808,38 @@ class Shop extends BaseController
 
     }
 
+    /**
+     * @api {POST} /api/v1/shop/image/handel  200-商家删除图片
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  商家删除图片
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * }
+     * @apiParam (请求参数说明) {int} id 图片商家关联id
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $id
+     * @return \think\response\Json
+     * @throws ShopException
+     */
+    public function ShopImageHandel($id)
+    {
+        $res = ShopStaffImgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$res) {
+            throw new  ShopException(
+                ['code' => 401,
+                    'msg' => '商家图片删除操作失败',
+                    'errorCode' => 600023
+                ]
+            );
+        }
+        return json(new SuccessMessage());
+
+    }
+
 
 }
