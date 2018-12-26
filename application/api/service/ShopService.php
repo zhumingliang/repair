@@ -350,7 +350,7 @@ class ShopService
     {
 
         $init_state = CommonEnum::ORDER_STATE_INIT;
-        $openid = Token::getCurrentOpenid();
+        $openid = '1111';//Token::getCurrentOpenid();
         $money = self::getServiceMoney($params['s_id']);
         $params['openid'] = $openid;
         $params['order_number'] = makeOrderNo();

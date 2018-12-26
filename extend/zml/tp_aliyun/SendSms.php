@@ -108,7 +108,7 @@ class SendSms
      * @param array $type
      * @return mixed
      */
-    public function send($type, $phone = "", $param = [])
+    public function send( $phone = "", $param = [],$type)
     {
         try {
             /*if (!$this->checkParams($phone, $code)) {
