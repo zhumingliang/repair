@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php" beforeDir="false" afterPath="$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Auth.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,13 +36,13 @@
         <counts>
           <entry key="dummy" value="52" />
           <entry key="html" value="4" />
-          <entry key="php" value="76672" />
+          <entry key="php" value="76716" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="PHP" value="76672" />
+          <entry key="PHP" value="76716" />
           <entry key="PLAIN_TEXT" value="52" />
         </counts>
       </usages-collector>
@@ -55,7 +55,7 @@
           <entry key="json" value="1" />
           <entry key="map" value="5" />
           <entry key="pem" value="6" />
-          <entry key="php" value="2627" />
+          <entry key="php" value="2631" />
           <entry key="txt" value="5" />
         </counts>
       </usages-collector>
@@ -65,7 +65,7 @@
           <entry key="HTML" value="3" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="2627" />
+          <entry key="PHP" value="2631" />
           <entry key="PLAIN_TEXT" value="11" />
           <entry key="SourceMap" value="5" />
           <entry key="htaccess" value="1" />
@@ -83,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="236" column="33" selection-start-line="236" selection-start-column="33" selection-end-line="236" selection-end-column="33" />
+            <state relative-caret-position="2483">
+              <caret line="831" column="23" selection-start-line="831" selection-start-column="23" selection-end-line="831" selection-end-column="23" />
               <folding>
                 <element signature="e#682#2013#0#PHP" />
                 <element signature="e#2018#2370#0#PHP" />
@@ -94,6 +94,7 @@
                 <element signature="e#4764#5132#0#PHP" />
                 <element signature="e#5138#5690#0#PHP" />
                 <element signature="e#5695#5948#0#PHP" />
+                <element signature="e#5954#7204#0#PHP" />
                 <element signature="e#7436#9233#0#PHP" />
                 <element signature="e#9238#9555#0#PHP" />
                 <element signature="e#9561#10922#0#PHP" />
@@ -104,7 +105,6 @@
                 <element signature="e#12926#13160#0#PHP" />
                 <element signature="e#13166#13989#0#PHP" />
                 <element signature="e#13994#14265#0#PHP" />
-                <element signature="e#14271#16057#0#PHP" />
                 <element signature="e#16189#17813#0#PHP" />
                 <element signature="e#17818#18258#0#PHP" />
                 <element signature="e#18264#18844#0#PHP" />
@@ -125,6 +125,32 @@
                 <element signature="e#30084#30227#0#PHP" />
                 <element signature="e#30233#30870#0#PHP" />
                 <element signature="e#30875#31264#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1849">
+              <caret line="29" column="45" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Auth.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="350" column="43" selection-start-line="350" selection-start-column="43" selection-end-line="350" selection-end-column="43" />
+              <folding>
+                <element signature="e#565#1221#0#PHP" />
+                <element signature="e#1226#1522#0#PHP" />
+                <element signature="e#1528#2648#0#PHP" />
+                <element signature="e#2653#2797#0#PHP" />
+                <element signature="e#2803#3442#0#PHP" />
+                <element signature="e#3447#3808#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -165,11 +191,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="110" column="42" selection-start-line="110" selection-start-column="42" selection-end-line="110" selection-end-column="42" />
+            <state relative-caret-position="545">
+              <caret line="119" column="45" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/model/ShopT.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1377">
+              <caret line="56" lean-forward="true" selection-start-line="40" selection-start-column="3" selection-end-line="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/model/ShopImgT.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="21" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -178,7 +222,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>payRed</find>
       <find>checkCommentRed</find>
       <find>red</find>
       <find>shop/service/delete</find>
@@ -206,8 +249,9 @@
       <find>getOrder</find>
       <find>getOpenidForDemand</find>
       <find>service</find>
-      <find>boo</find>
       <find>getOrderInfo</find>
+      <find>boo</find>
+      <find>save</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -216,7 +260,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/file/index.html" />
         <option value="$PROJECT_DIR$/application/api/validate/ServiceValidate.php" />
         <option value="$PROJECT_DIR$/application/api/service/BannerService.php" />
         <option value="$PROJECT_DIR$/application/api/model/OrderCommentV.php" />
@@ -262,11 +305,12 @@
         <option value="$PROJECT_DIR$/application/api/service/Pay.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Order.php" />
         <option value="$PROJECT_DIR$/route/route.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
         <option value="$PROJECT_DIR$/application/api/service/CenterService.php" />
         <option value="$PROJECT_DIR$/application/api/service/SendMsgService.php" />
         <option value="$PROJECT_DIR$/application/api/service/ShopService.php" />
         <option value="$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Shop.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Auth.php" />
       </list>
     </option>
   </component>
@@ -290,9 +334,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
     <option name="width" value="1680" />
-    <option name="height" value="947" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -341,7 +384,7 @@
               <item name="repair" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="repair" type="b2602c69:ProjectViewProjectNode" />
@@ -506,21 +549,7 @@
       <workItem from="1545295488124" duration="1748000" />
       <workItem from="1545532225197" duration="435000" />
       <workItem from="1545738382214" duration="2096000" />
-      <workItem from="1545793969911" duration="5818000" />
-    </task>
-    <task id="LOCAL-00476" summary="项目初始化">
-      <created>1543333101565</created>
-      <option name="number" value="00476" />
-      <option name="presentableId" value="LOCAL-00476" />
-      <option name="project" value="LOCAL" />
-      <updated>1543333101565</updated>
-    </task>
-    <task id="LOCAL-00477" summary="项目初始化">
-      <created>1543414030387</created>
-      <option name="number" value="00477" />
-      <option name="presentableId" value="LOCAL-00477" />
-      <option name="project" value="LOCAL" />
-      <updated>1543414030388</updated>
+      <workItem from="1545793969911" duration="7200000" />
     </task>
     <task id="LOCAL-00478" summary="项目初始化">
       <created>1543514572014</created>
@@ -851,11 +880,25 @@
       <option name="project" value="LOCAL" />
       <updated>1545813374603</updated>
     </task>
-    <option name="localTasksCounter" value="525" />
+    <task id="LOCAL-00525" summary="项目初始化">
+      <created>1545813422649</created>
+      <option name="number" value="00525" />
+      <option name="presentableId" value="LOCAL-00525" />
+      <option name="project" value="LOCAL" />
+      <updated>1545813422649</updated>
+    </task>
+    <task id="LOCAL-00526" summary="项目初始化">
+      <created>1545834085453</created>
+      <option name="number" value="00526" />
+      <option name="presentableId" value="LOCAL-00526" />
+      <option name="project" value="LOCAL" />
+      <updated>1545834085453</updated>
+    </task>
+    <option name="localTasksCounter" value="527" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="913134000" />
+    <option name="totallyTimeSpent" value="914516000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -913,16 +956,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Circle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="535" column="37" selection-start-line="535" selection-start-column="37" selection-end-line="535" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extend/zml/tp_tools/Redis.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/extend/wxpay/NativePay.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -1087,9 +1120,6 @@
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Category.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/ShopImgT.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/extend/PHPExcel/PHPExcel/Cell/DataType.php" />
     <entry file="file://$PROJECT_DIR$/application/common.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1140,13 +1170,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/ShopT.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1097">
-          <caret line="90" column="27" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/UserT.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-105">
@@ -1189,54 +1212,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="236" column="33" selection-start-line="236" selection-start-column="33" selection-end-line="236" selection-end-column="33" />
-          <folding>
-            <element signature="e#682#2013#0#PHP" />
-            <element signature="e#2018#2370#0#PHP" />
-            <element signature="e#2376#3152#0#PHP" />
-            <element signature="e#3157#3587#0#PHP" />
-            <element signature="e#3593#4759#0#PHP" />
-            <element signature="e#4764#5132#0#PHP" />
-            <element signature="e#5138#5690#0#PHP" />
-            <element signature="e#5695#5948#0#PHP" />
-            <element signature="e#7436#9233#0#PHP" />
-            <element signature="e#9238#9555#0#PHP" />
-            <element signature="e#9561#10922#0#PHP" />
-            <element signature="e#10927#11038#0#PHP" />
-            <element signature="e#11044#12220#0#PHP" />
-            <element signature="e#12225#12395#0#PHP" />
-            <element signature="e#12401#12921#0#PHP" />
-            <element signature="e#12926#13160#0#PHP" />
-            <element signature="e#13166#13989#0#PHP" />
-            <element signature="e#13994#14265#0#PHP" />
-            <element signature="e#14271#16057#0#PHP" />
-            <element signature="e#16189#17813#0#PHP" />
-            <element signature="e#17818#18258#0#PHP" />
-            <element signature="e#18264#18844#0#PHP" />
-            <element signature="e#18849#19338#0#PHP" />
-            <element signature="e#19344#20535#0#PHP" />
-            <element signature="e#20540#20938#0#PHP" />
-            <element signature="e#20944#22232#0#PHP" />
-            <element signature="e#22237#22411#0#PHP" />
-            <element signature="e#22417#23909#0#PHP" />
-            <element signature="e#23914#24105#0#PHP" />
-            <element signature="e#24111#25742#0#PHP" />
-            <element signature="e#25747#25876#0#PHP" />
-            <element signature="e#25882#26519#0#PHP" />
-            <element signature="e#26524#26901#0#PHP" />
-            <element signature="e#26907#28402#0#PHP" />
-            <element signature="e#28407#28532#0#PHP" />
-            <element signature="e#28538#30079#0#PHP" />
-            <element signature="e#30084#30227#0#PHP" />
-            <element signature="e#30233#30870#0#PHP" />
-            <element signature="e#30875#31264#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/ShopService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="637">
@@ -1261,8 +1236,92 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/extend/zml/tp_aliyun/SendSms.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="110" column="42" selection-start-line="110" selection-start-column="42" selection-end-line="110" selection-end-column="42" />
+        <state relative-caret-position="545">
+          <caret line="119" column="45" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ShopImgT.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ShopT.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1377">
+          <caret line="56" lean-forward="true" selection-start-line="40" selection-start-column="3" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2483">
+          <caret line="831" column="23" selection-start-line="831" selection-start-column="23" selection-end-line="831" selection-end-column="23" />
+          <folding>
+            <element signature="e#682#2013#0#PHP" />
+            <element signature="e#2018#2370#0#PHP" />
+            <element signature="e#2376#3152#0#PHP" />
+            <element signature="e#3157#3587#0#PHP" />
+            <element signature="e#3593#4759#0#PHP" />
+            <element signature="e#4764#5132#0#PHP" />
+            <element signature="e#5138#5690#0#PHP" />
+            <element signature="e#5695#5948#0#PHP" />
+            <element signature="e#5954#7204#0#PHP" />
+            <element signature="e#7436#9233#0#PHP" />
+            <element signature="e#9238#9555#0#PHP" />
+            <element signature="e#9561#10922#0#PHP" />
+            <element signature="e#10927#11038#0#PHP" />
+            <element signature="e#11044#12220#0#PHP" />
+            <element signature="e#12225#12395#0#PHP" />
+            <element signature="e#12401#12921#0#PHP" />
+            <element signature="e#12926#13160#0#PHP" />
+            <element signature="e#13166#13989#0#PHP" />
+            <element signature="e#13994#14265#0#PHP" />
+            <element signature="e#16189#17813#0#PHP" />
+            <element signature="e#17818#18258#0#PHP" />
+            <element signature="e#18264#18844#0#PHP" />
+            <element signature="e#18849#19338#0#PHP" />
+            <element signature="e#19344#20535#0#PHP" />
+            <element signature="e#20540#20938#0#PHP" />
+            <element signature="e#20944#22232#0#PHP" />
+            <element signature="e#22237#22411#0#PHP" />
+            <element signature="e#22417#23909#0#PHP" />
+            <element signature="e#23914#24105#0#PHP" />
+            <element signature="e#24111#25742#0#PHP" />
+            <element signature="e#25747#25876#0#PHP" />
+            <element signature="e#25882#26519#0#PHP" />
+            <element signature="e#26524#26901#0#PHP" />
+            <element signature="e#26907#28402#0#PHP" />
+            <element signature="e#28407#28532#0#PHP" />
+            <element signature="e#28538#30079#0#PHP" />
+            <element signature="e#30084#30227#0#PHP" />
+            <element signature="e#30233#30870#0#PHP" />
+            <element signature="e#30875#31264#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1849">
+          <caret line="29" column="45" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="350" column="43" selection-start-line="350" selection-start-column="43" selection-end-line="350" selection-end-column="43" />
+          <folding>
+            <element signature="e#565#1221#0#PHP" />
+            <element signature="e#1226#1522#0#PHP" />
+            <element signature="e#1528#2648#0#PHP" />
+            <element signature="e#2653#2797#0#PHP" />
+            <element signature="e#2803#3442#0#PHP" />
+            <element signature="e#3447#3808#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -343,11 +343,13 @@ class Auth extends BaseController
      * @apiDescription  管理员/加盟商-新增小区账号
      * @apiExample {post}  请求样例:
      * {
+     * "username": "zml",
      * "phone": "1311111111",
      * "pwd": "a111111",
      * "email": "a111111",
      * }
-     * @apiParam (请求参数说明) {String} phone 用户名
+     * @apiParam (请求参数说明) {String} username 用户名
+     * @apiParam (请求参数说明) {String} phone 手机号
      * @apiParam (请求参数说明) {String} pwd 密码
      * @apiParam (请求参数说明) {String} email 邮箱
      * @apiSuccessExample {json} 返回样例:
@@ -362,7 +364,7 @@ class Auth extends BaseController
     function addAdmin()
     {
         $params = $this->request->param();
-        $params['username'] = $params['phone'];
+       // $params['username'] = $params['phone'];
         $params['pwd'] = sha1($params['pwd']);
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['grade'] = UserEnum::USER_GRADE_ADMIN;
