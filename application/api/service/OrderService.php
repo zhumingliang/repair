@@ -107,10 +107,10 @@ class OrderService
             'comment_id' => CommonEnum::ORDER_STATE_INIT,
             'r_id' => CommonEnum::ORDER_STATE_INIT,
             'state' => CommonEnum::STATE_IS_OK,
-            'phone_user' => CommonEnum::STATE_IS_FAIL,
+            'phone_user' => CommonEnum::STATE_IS_OK,
             'shop_confirm' => CommonEnum::STATE_IS_FAIL,
             'service_begin' => CommonEnum::STATE_IS_FAIL,
-            'phone_shop' => CommonEnum::STATE_IS_FAIL
+            'phone_shop' => CommonEnum::STATE_IS_OK
 
         ]);
         if (!$db) {
