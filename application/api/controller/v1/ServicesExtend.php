@@ -217,7 +217,7 @@ class ServicesExtend extends BaseController
      * @apiSuccess (返回参数说明) {String} area 区
      * @apiSuccess (返回参数说明) {int} price 价格
      * @apiSuccess (返回参数说明) {int} collection 用户是否收藏该服务：>0 | 收藏；0 | 未收藏
-     * @apiSuccess (返回参数说明) {int} phone_check 用户是否 可以拨打电话；·1 | 是；2 | 否
+     * @apiSuccess (返回参数说明) {int} phone_check 用户是否 可以拨打电话；·2 | 是；1 | 否
      * @apiSuccess (返回参数说明) {String} unit 单位
      * @apiSuccess (返回参数说明) {String} imgs 轮播图
      * @apiSuccess (返回参数说明) {int} img_id 图片id

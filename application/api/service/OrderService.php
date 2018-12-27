@@ -561,12 +561,12 @@ class OrderService
         $u_id = Token::getCurrentUid();
         //检测用户是否有未完成的订单
         if (DemandOrderV::checkNoComplete($shop_id, $u_id)) {
-            return 2;
+            return 1;
         }
         if (ServiceOrderV::checkNoComplete($shop_id, $u_id)) {
-            return 2;
+            return 1;
         }
-        return 1;
+        return 2;
 
     }
 
