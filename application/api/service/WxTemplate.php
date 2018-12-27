@@ -35,7 +35,7 @@ class WxTemplate
         $at = new AccessToken();
         $access_token = $at->get();
         $params = $this->params;
-        $page = 'pages/order-detail/index?id='.$params['id'].'&type=1&state=1&template=1';
+        $page = 'pages/order-detail/index?id=' . $params['id'] . '&type=1&state=1&template=1';
         $data = [
             "touser" => $this->openid,
             "template_id" => $template_id,
@@ -60,8 +60,9 @@ class WxTemplate
             ]
         ];
         $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=$access_token";
-        $res = Curl::postCurl($url, $data,"json");
-        LogT::create(['msg'=>$res]);
+        $res = Curl::postCurl($url, $data, "json");
+        LogT::create(['msg' => json_encode($data)]);
+        LogT::create(['msg' => $res]);
         $res_obj = json_decode($res);
         if ($res_obj->errcode == 0) {
             return true;
@@ -76,7 +77,7 @@ class WxTemplate
         $at = new AccessToken();
         $access_token = $at->get();
         $params = $this->params;
-        $page = 'pages/order-detail/index?id='.$params['id'].'&type=2&state=2&template=1';
+        $page = 'pages/order-detail/index?id=' . $params['id'] . '&type=2&state=2&template=1';
         $data = array(
             "touser" => $this->openid,
             "template_id" => $template_id,
@@ -100,7 +101,7 @@ class WxTemplate
         $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=$access_token";
         $res = Curl::postCurl($url, $data, 'json');
         $res_obj = json_decode($res);
-        LogT::create(['msg'=>$res]);
+        LogT::create(['msg' => $res]);
         if ($res_obj->errcode == 0) {
             return true;
         }
