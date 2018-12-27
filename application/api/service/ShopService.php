@@ -112,26 +112,26 @@ class ShopService
         Db::startTrans();
         try {
             $params['id'] = Token::getCurrentTokenVar('shop_id');
-            if (isset($params['staffs'])) {
+            if (isset($params['staffs']) && strlen($params['staffs'])){
                 $staffs = $params['staffs'];
-                unset($params['staffs']);
-                $relation = [
-                    'name' => 's_id',
-                    'value' => $params['id']
-                ];
-                $staff_res = self::saveStaffRelation($staffs, $relation);
-                if (!$staff_res) {
-                    Db::rollback();
-                    throw new ShopException(
-                        ['code' => 401,
-                            'msg' => '创建商铺员工头像关联失败',
-                            'errorCode' => 600011
-                        ]
-                    );
-                }
-
+            unset($params['staffs']);
+            $relation = [
+                'name' => 's_id',
+                'value' => $params['id']
+            ];
+            $staff_res = self::saveStaffRelation($staffs, $relation);
+            if (!$staff_res) {
+                Db::rollback();
+                throw new ShopException(
+                    ['code' => 401,
+                        'msg' => '创建商铺员工头像关联失败',
+                        'errorCode' => 600011
+                    ]
+                );
             }
-            if (isset($params['imgs'])) {
+
+        }
+            if (isset($params['imgs']) && strlen($params['imgs'])) {
                 $imgs = $params['imgs'];
                 unset($params['imgs']);
                 $relation = [
