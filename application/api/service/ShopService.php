@@ -112,7 +112,11 @@ class ShopService
         Db::startTrans();
         try {
             $params['id'] = Token::getCurrentTokenVar('shop_id');
-            $params['head_url'] = ImageService::getImageUrl($params['head_url']);
+            if (isset($params['head_url'])) {
+                $params['head_url'] = ImageService::getImageUrl($params['head_url']);
+
+            }
+
             if (isset($params['staffs']) && strlen($params['staffs'])) {
                 $staffs = $params['staffs'];
                 unset($params['staffs']);
