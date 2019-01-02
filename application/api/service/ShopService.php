@@ -216,6 +216,7 @@ class ShopService
     {
         Db::startTrans();
         try {
+
             $params['cover'] = ImageService::getImageUrl($params['cover']);
             $params['state'] = CommonEnum::STATE_IS_OK;
             $extend = $params['extend'];
@@ -267,6 +268,71 @@ class ShopService
         }
 
     }
+
+    /**
+     *  修改商铺服务
+     * @param $params
+     * @throws Exception
+     */
+    public static function updateService($params)
+    {
+        Db::startTrans();
+        try {
+            $s_id = $params['id'];
+            if (isset($params['cover'])) {
+                $params['cover'] = ImageService::getImageUrl($params['cover']);
+            }
+            if (isset($params['price'])) {
+                $params['price'] = $params['price'] * 100;
+            }
+
+            $res = ServicesT::update($params, ['id' => $s_id]);
+            if (!$res) {
+                Db::rollback();
+                throw new ShopException([
+                    ['code' => 401,
+                        'msg' => '修改商铺服务失败',
+                        'errorCode' => 60004
+                    ]
+                ]);
+            }
+            //处理服务图片
+            if (isset($params['imgs']) && $params['imgs'] > 0) {
+
+                if (!self::addServiceImage($params['imgs'], $s_id)) {
+
+                    Db::rollback();
+                    throw new ShopException([
+                        ['code' => 401,
+                            'msg' => '新增服务图片关联',
+                            'errorCode' => 60006
+                        ]
+                    ]);
+                }
+
+            }
+            //商品需要推广
+            if (isset($params['extend']) && $params['extend'] == self::SERVICE_EXTEND) {
+                $obj_extend = self::addExtend($s_id);
+                if (!$obj_extend) {
+                    Db::rollback();
+                    throw new ShopException([
+                        ['code' => 401,
+                            'msg' => '新增推广申请失败',
+                            'errorCode' => 60005
+                        ]
+                    ]);
+                }
+
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+    }
+
 
     /**
      * 新增服务推广记录

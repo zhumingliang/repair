@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\ServiceListV;
+use app\api\model\ServicesImgT;
 use app\api\model\ServicesT;
 use app\api\model\ShopImgT;
 use app\api\model\ShopStaffImgT;
@@ -162,7 +163,6 @@ class Shop extends BaseController
         $params['price'] = $params['price'] * 100;
         ShopService::addService($params);
         return json(new SuccessMessage());
-
 
     }
 
@@ -827,7 +827,7 @@ class Shop extends BaseController
      * @return \think\response\Json
      * @throws ShopException
      */
-    public function ShopImageHandel($id)
+    public function shopImageHandel($id)
     {
         $res = ShopImgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         if (!$res) {
@@ -841,6 +841,92 @@ class Shop extends BaseController
         return json(new SuccessMessage());
 
     }
+
+    /**
+     * @api {POST} /api/v1/service/image/handel  201-商家删除服务图片
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  商家删除图片
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * }
+     * @apiParam (请求参数说明) {int} id 图片服务关联id
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $id
+     * @return \think\response\Json
+     * @throws ShopException
+     */
+    public function serviceImageHandel($id)
+    {
+        $res = ServicesImgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$res) {
+            throw new  ShopException(
+                ['code' => 401,
+                    'msg' => '服务图片删除操作失败',
+                    'errorCode' => 600024
+                ]
+            );
+        }
+        return json(new SuccessMessage());
+
+    }
+
+
+
+    /**
+     * @api {POST} /api/v1/shop/service/update  202-商家修改服务
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序商家新增服务
+     * @apiExample {post}  请求样例:
+     * {
+     * "id": 1,
+     * "c_id": 1,
+     * "name": "修电脑",
+     * "area": "天河区",
+     * "price": 500,
+     * "unit": "次",
+     * "cover": 1,
+     * "des": "什么电脑都会修",
+     * "extend": 1,
+     * "imgs": "1,2,3",
+     * }
+     * @apiParam (请求参数说明) {int} id 服务id
+     * @apiParam (请求参数说明) {int} c_id 类别id
+     * @apiParam (请求参数说明) {String} name 服务名称
+     * @apiParam (请求参数说明) {String} des 服务描述
+     * @apiParam (请求参数说明) {String} area 区
+     * @apiParam (请求参数说明) {int} price 价格
+     * @apiParam (请求参数说明) {String} unit 单位
+     * @apiParam (请求参数说明) {String} cover 封面图id
+     * @apiParam (请求参数说明) {int} extend 是否推广：1 | 推广；2 | 不推广
+     * @apiParam (请求参数说明) {String} imgs 图片id/新增时传入，多个用逗号隔开
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function updateService()
+    {
+        (new ServiceValidate())->goCheck();
+        $params = $this->request->param();
+        $shop_id = TokenService::getCurrentTokenVar('shop_id');
+        $params['shop_id'] = $shop_id;
+        ShopService::updateService($params);
+        return json(new SuccessMessage());
+
+    }
+
+
 
 
 }

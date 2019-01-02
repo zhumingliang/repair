@@ -61,7 +61,8 @@ Route::get('api/:version/shop/frozen', 'api/:version.Shop/shopFrozen');
 Route::get('api/:version/shop/service', 'api/:version.Shop/getTheService');
 Route::get('api/:version/shop/staff/ready', 'api/:version.Shop/getStaffsForJoin');
 Route::post('api/:version/shop/staff/handel', 'api/:version.Shop/staffHandel');
-Route::post('api/:version/shop/image/handel', 'api/:version.Shop/ShopImageHandel');
+Route::post('api/:version/shop/image/handel', 'api/:version.Shop/shopImageHandel');
+Route::post('api/:version/service/image/handel', 'api/:version.Shop/serviceImageHandel');
 
 
 Route::post('api/:version/message/save', 'api/:version.Message/save');
