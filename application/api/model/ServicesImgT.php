@@ -13,7 +13,7 @@ use think\Model;
 
 class ServicesImgT extends Model
 {
-    protected $hidden=['id','create_time','update_time','state','s_id'];
+    protected $hidden=['create_time','update_time','state'];
 
 
     public function imgUrl()

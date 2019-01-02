@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/ServicesT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/ServicesT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/ServicesImgT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/ServicesImgT.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +42,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="PHP" value="77001" />
+          <entry key="PHP" value="77007" />
           <entry key="PLAIN_TEXT" value="52" />
         </counts>
       </usages-collector>
@@ -65,7 +65,7 @@
           <entry key="HTML" value="3" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="2667" />
+          <entry key="PHP" value="2669" />
           <entry key="PLAIN_TEXT" value="11" />
           <entry key="SourceMap" value="5" />
           <entry key="htaccess" value="1" />
@@ -81,6 +81,15 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="904" column="40" selection-start-line="904" selection-start-column="35" selection-end-line="904" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/ServicesExtend.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="464">
@@ -93,16 +102,25 @@
         <entry file="file://$PROJECT_DIR$/application/api/service/ExtendService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="485">
-              <caret line="324" column="34" selection-start-line="324" selection-start-column="34" selection-end-line="324" selection-end-column="34" />
+              <caret line="324" column="35" lean-forward="true" selection-start-line="324" selection-start-column="35" selection-end-line="324" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/model/ServicesT.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="24" column="43" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/api/model/ServicesT.php">
+        <entry file="file://$PROJECT_DIR$/application/api/model/ServicesImgT.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="773">
-              <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+            <state relative-caret-position="270">
+              <caret line="15" column="58" selection-start-line="15" selection-start-column="58" selection-end-line="15" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -149,7 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/api/model/OrderCommentV.php" />
         <option value="$PROJECT_DIR$/application/api/validate/TokenGet.php" />
         <option value="$PROJECT_DIR$/application/api/model/PaymentsV.php" />
         <option value="$PROJECT_DIR$/application/api/service/WithDrawService.php" />
@@ -200,6 +217,7 @@
         <option value="$PROJECT_DIR$/application/api/service/ShopService.php" />
         <option value="$PROJECT_DIR$/route/route.php" />
         <option value="$PROJECT_DIR$/application/api/model/ServicesT.php" />
+        <option value="$PROJECT_DIR$/application/api/model/ServicesImgT.php" />
       </list>
     </option>
   </component>
@@ -266,6 +284,13 @@
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
               <item name="v1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="repair" type="b2602c69:ProjectViewProjectNode" />
@@ -421,21 +446,7 @@
       <workItem from="1545793969911" duration="7343000" />
       <workItem from="1545894834448" duration="5273000" />
       <workItem from="1546391105209" duration="3094000" />
-      <workItem from="1546413573494" duration="625000" />
-    </task>
-    <task id="LOCAL-00489" summary="项目初始化">
-      <created>1543989692056</created>
-      <option name="number" value="00489" />
-      <option name="presentableId" value="LOCAL-00489" />
-      <option name="project" value="LOCAL" />
-      <updated>1543989692057</updated>
-    </task>
-    <task id="LOCAL-00490" summary="项目初始化">
-      <created>1543990197732</created>
-      <option name="number" value="00490" />
-      <option name="presentableId" value="LOCAL-00490" />
-      <option name="project" value="LOCAL" />
-      <updated>1543990197732</updated>
+      <workItem from="1546413573494" duration="950000" />
     </task>
     <task id="LOCAL-00491" summary="项目初始化">
       <created>1543990306629</created>
@@ -766,11 +777,25 @@
       <option name="project" value="LOCAL" />
       <updated>1546398808296</updated>
     </task>
-    <option name="localTasksCounter" value="538" />
+    <task id="LOCAL-00538" summary="项目初始化">
+      <created>1546442470980</created>
+      <option name="number" value="00538" />
+      <option name="presentableId" value="LOCAL-00538" />
+      <option name="project" value="LOCAL" />
+      <updated>1546442470981</updated>
+    </task>
+    <task id="LOCAL-00539" summary="项目初始化">
+      <created>1546442670038</created>
+      <option name="number" value="00539" />
+      <option name="presentableId" value="LOCAL-00539" />
+      <option name="project" value="LOCAL" />
+      <updated>1546442670038</updated>
+    </task>
+    <option name="localTasksCounter" value="540" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="923651000" />
+    <option name="totallyTimeSpent" value="923976000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -817,13 +842,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="项目初始化" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/extend/wxpay/PayNotifyCallBack.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/extend/wxpay/WxPayApi.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
@@ -1059,13 +1077,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23841">
-          <caret line="904" column="40" selection-start-line="904" selection-start-column="35" selection-end-line="904" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/route/route.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1107">
@@ -1104,17 +1115,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Shop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="904" column="40" selection-start-line="904" selection-start-column="35" selection-end-line="904" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/ExtendService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="485">
-          <caret line="324" column="34" selection-start-line="324" selection-start-column="34" selection-end-line="324" selection-end-column="34" />
+          <caret line="324" column="35" lean-forward="true" selection-start-line="324" selection-start-column="35" selection-end-line="324" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/ServicesT.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="55" column="29" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+        <state relative-caret-position="513">
+          <caret line="24" column="43" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServicesImgT.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="58" selection-start-line="15" selection-start-column="58" selection-end-line="15" selection-end-column="58" />
         </state>
       </provider>
     </entry>
