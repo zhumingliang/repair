@@ -53,7 +53,7 @@ class ServicesT extends BaseModel
                     $query->field('id,address,phone');
                 }
             ])
-            ->field('id,cover,shop_id,name,area,des,price/100 as price,unit,des')
+            ->field('id,cover,c_id,shop_id,name,area,des,price/100 as price,unit,des')
             ->find();
         return $service;
 
