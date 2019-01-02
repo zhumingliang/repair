@@ -911,13 +911,12 @@ class Shop extends BaseController
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
      * @return \think\response\Json
-     * @throws \app\lib\exception\ParameterException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
     public function updateService()
     {
-        (new ServiceValidate())->goCheck();
+        //(new ServiceValidate())->goCheck();
         $params = $this->request->param();
         $shop_id = TokenService::getCurrentTokenVar('shop_id');
         $params['shop_id'] = $shop_id;
