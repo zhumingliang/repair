@@ -42,6 +42,7 @@ class AdminToken extends Token
         try {
 
             $admin = AdminT::where('phone', '=', $this->phone)
+                ->where('state', CommonEnum::STATE_IS_OK)
                 ->with('adminJoin')
                 ->find();
 
@@ -61,7 +62,7 @@ class AdminToken extends Token
                 ]);
             }
 
-            if (($admin->state)> 1) {
+            if (($admin->state) > 1) {
 
                 throw new TokenException([
                     'code' => 401,
