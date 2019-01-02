@@ -47,6 +47,7 @@ Route::get('api/:version/shop/info/cms', 'api/:version.Shop/shopInfoForCMS');
 Route::get('api/:version/shop/info/normal', 'api/:version.Shop/getShopInfoForNormal');
 Route::get('api/:version/shop/info/edit', 'api/:version.Shop/shopInfoForEdit');
 Route::post('api/:version/shop/service/save', 'api/:version.Shop/addService');
+Route::post('api/:version/shop/service/update', 'api/:version.Shop/updateService');
 Route::post('api/:version/service/booking', 'api/:version.Shop/bookingService');
 Route::get('api/:version/service/mini/list', 'api/:version.Shop/getServiceListForMini');
 Route::get('api/:version/shop/staff', 'api/:version.Shop/shopStaff');
