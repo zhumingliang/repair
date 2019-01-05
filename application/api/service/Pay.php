@@ -249,14 +249,14 @@ class Pay
                 ]
             );
         }
-        if (!Token::isValidOperate($order->openid)) {
+     /*   if (!Token::isValidOperate($order->openid)) {
             //if (0) {
             throw new PayException(
                 [
                     'msg' => '订单与用户不匹配',
                     'errorCode' => 150003
                 ]);
-        }
+        }*/
 
         if ($order->state != CommonEnum::STATE_IS_OK) {
             throw new PayException(

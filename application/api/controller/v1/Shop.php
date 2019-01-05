@@ -918,8 +918,7 @@ class Shop extends BaseController
     {
         //(new ServiceValidate())->goCheck();
         $params = $this->request->param();
-        $shop_id = TokenService::getCurrentTokenVar('shop_id');
-        $params['shop_id'] = $shop_id;
+        TokenService::getCurrentTokenVar('shop_id');
         ShopService::updateService($params);
         return json(new SuccessMessage());
 
