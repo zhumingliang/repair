@@ -346,6 +346,7 @@ class ExtendService
     {
         $col = CollectionServicesT::where('u_id', '=', Token::getCurrentUid())
             ->where('s_id', '=', $id)
+            ->order('create_time desc')
             ->find();
 
         if (!$col) {
