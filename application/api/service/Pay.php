@@ -14,6 +14,7 @@ use app\api\model\DemandOrderT;
 use app\api\model\DemandT;
 use app\api\model\JoinCommissionT;
 use app\api\model\LogT;
+use app\api\model\ScoreBuyT;
 use app\api\model\ServiceBookingT;
 use app\api\model\ServicesT;
 use app\api\model\ShopT;
@@ -249,14 +250,14 @@ class Pay
                 ]
             );
         }
-     /*   if (!Token::isValidOperate($order->openid)) {
-            //if (0) {
-            throw new PayException(
-                [
-                    'msg' => '订单与用户不匹配',
-                    'errorCode' => 150003
-                ]);
-        }*/
+        /*   if (!Token::isValidOperate($order->openid)) {
+               //if (0) {
+               throw new PayException(
+                   [
+                       'msg' => '订单与用户不匹配',
+                       'errorCode' => 150003
+                   ]);
+           }*/
 
         if ($order->state != CommonEnum::STATE_IS_OK) {
             throw new PayException(
@@ -317,6 +318,11 @@ class Pay
         } elseif ($this->type == CommonEnum::ORDER_IS_BOND) {
             $order = BondT::where('id', '=', $this->orderID)
                 ->field('id,u_id,1 as state,money as update_money,pay_id,openid,order_number,1 as shop_confirm')
+                ->find();
+        } else if ($this->type == CommonEnum::ORDER_IS_SCORE) {
+
+            $order = ScoreBuyT::where('id', '=', $this->orderID)
+                ->field('id,u_id,1 as state,money as update_money ,pay_id,openid,order_number,1 as shop_confirm')
                 ->find();
         } else {
             throw new PayException();

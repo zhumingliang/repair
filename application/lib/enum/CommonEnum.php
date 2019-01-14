@@ -33,6 +33,8 @@ class CommonEnum
 
     const ORDER_IS_BOND = 3;
 
+    const ORDER_IS_SCORE = 4;
+
     const EXTEND_HOUSE = 1;
 
     const EXTEND_REPAIR = 2;

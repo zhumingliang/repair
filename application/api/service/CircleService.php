@@ -118,8 +118,8 @@ class CircleService
         $params['top'] = self::CIRCLE_NOT_TOP;
         $params['read_num'] = 0;
         $params['province'] = Token::getCurrentTokenVar('province');
-        $params['city'] =Token::getCurrentTokenVar('city');
-        $params['area'] =Token::getCurrentTokenVar('area');
+        $params['city'] = Token::getCurrentTokenVar('city');
+        $params['area'] = Token::getCurrentTokenVar('area');
         $params['parent_id'] = Token::getCurrentUid();
 
         if (isset($params['head_img']) && (!empty($params['head_img']))) {
@@ -299,10 +299,12 @@ class CircleService
         if (!self::checkZan($id)) {
             $zan_id = CommentZanT::create(['u_id' => Token::getCurrentUid(), 'c_id' => $id]);
             if (!$zan_id) {
-                throw new CircleException(['code' => 401,
-                    'msg' => '添加用户点赞记录失败',
-                    'errorCode' => 160009
-                ]);
+                throw new CircleException(
+                    [
+                        'code' => 401,
+                        'msg' => '添加用户点赞记录失败',
+                        'errorCode' => 160009
+                    ]);
 
             }
             $up_id = CircleCommentT::where('id', $id)

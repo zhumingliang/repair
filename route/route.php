@@ -271,3 +271,15 @@ Route::get('api/:version/auth/group/rules', 'api/:version.Auth/groupRules');
 Route::get('api/:version/auth/group/users', 'api/:version.Auth/groupUsers');
 Route::post('api/:version/auth/group/user/save', 'api/:version.Auth/userGroup');
 Route::post('api/:version/auth/user/save', 'api/:version.Auth/addAdmin');
+
+Route::post('api/:version/recharge/save', 'api/:version.Recharge/save');
+Route::post('api/:version/recharge/exchange', 'api/:version.Recharge/exchange');
+
+Route::post('api/:version/score/recharge', 'api/:version.Score/recharge');
+Route::post('api/:version/score/buy', 'api/:version.Score/buy');
+
+Route::post('api/:version/score/rule/save', 'api/:version.ScoreBuyRole/save');
+Route::post('api/:version/score/rule/handel', 'api/:version.ScoreBuyRole/handel');
+Route::post('api/:version/score/rule/update', 'api/:version.ScoreBuyRole/update');
+Route::get('api/:version/score/rule/list', 'api/:version.ScoreBuyRole/getList');
+

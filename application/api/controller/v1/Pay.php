@@ -27,7 +27,7 @@ class Pay extends BaseController
  * @apiExample {get}  请求样例:
  * http://mengant.cn/api/v1/pay/getPreOrder?id=1&type=1&r_id=1
  * @apiParam (请求参数说明) {int} id 订单id
- * @apiParam (请求参数说明) {int} type 订单类别：1 | 预约服务支付；2 | 需求支付；3 | 保证金支付
+ * @apiParam (请求参数说明) {int} type 订单类别：1 | 预约服务支付；2 | 需求支付；3 | 保证金支付； 4 | 购买积分支付
  * @apiParam (请求参数说明) {int} r_id  支付选取红包id
  * @apiSuccessExample {json} 返回样例:
  * {
