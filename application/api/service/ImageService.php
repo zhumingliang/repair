@@ -55,6 +55,8 @@ class ImageService
         return $arr;
     }
 
+
+
     public static function getImageUrl($id)
     {
         $img = ImgT::where('id', $id)

@@ -283,3 +283,7 @@ Route::post('api/:version/score/rule/handel', 'api/:version.ScoreBuyRole/handel'
 Route::post('api/:version/score/rule/update', 'api/:version.ScoreBuyRole/update');
 Route::get('api/:version/score/rule/list', 'api/:version.ScoreBuyRole/getList');
 
+Route::post('api/:version/goods/category/save', 'api/:version.GoodsCategory/save');
+Route::post('api/:version/goods/category/handel', 'api/:version.GoodsCategory/handel');
+Route::get('api/:version/goods/category/list', 'api/:version.GoodsCategory/list');
+Route::post('api/:version/goods/category/update', 'api/:version.GoodsCategory/update');
