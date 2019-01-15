@@ -20,7 +20,8 @@ class GoodsValidate extends BaseValidate
     ];
 
     protected $scene = [
-        'save' => ['name', 'c_id', 'score', 'address', 'money']
+        'save' => ['name', 'c_id', 'score', 'address', 'money'],
+        'update' => ['id']
     ];
 
 }

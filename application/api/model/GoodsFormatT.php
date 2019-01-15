@@ -13,5 +13,6 @@ use think\Model;
 
 class GoodsFormatT extends Model
 {
+    protected $hidden=['create_time','update_time','state','g_id'];
 
 }

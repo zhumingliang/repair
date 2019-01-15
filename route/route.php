@@ -287,3 +287,12 @@ Route::post('api/:version/goods/category/save', 'api/:version.GoodsCategory/save
 Route::post('api/:version/goods/category/handel', 'api/:version.GoodsCategory/handel');
 Route::get('api/:version/goods/category/list', 'api/:version.GoodsCategory/list');
 Route::post('api/:version/goods/category/update', 'api/:version.GoodsCategory/update');
+
+
+Route::post('api/:version/goods/save', 'api/:version.Goods/save');
+Route::post('api/:version/goods/update', 'api/:version.Goods/update');
+Route::post('api/:version/goods/handel', 'api/:version.Goods/handel');
+Route::get('api/:version/goods', 'api/:version.Goods/getGoods');
+Route::post('api/:version/goods/format/update', 'api/:version.Goods/updateFormat');
+Route::post('api/:version/goods/format/delete', 'api/:version.Goods/formatDelete');
+Route::post('api/:version/goods/image/delete', 'api/:version.Goods/GoodsImageDelete');
