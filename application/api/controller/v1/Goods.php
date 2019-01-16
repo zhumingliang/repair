@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\model\GoodsFormatT;
 use app\api\model\GoodsImgT;
 use app\api\model\GoodsT;
+use app\api\model\GoodsV;
 use app\api\service\GoodsService;
 use app\api\validate\GoodsValidate;
 use app\lib\enum\CommonEnum;
@@ -35,6 +36,7 @@ class Goods extends BaseController
      *       "address": "安徽铜陵",
      *       "banner": "1,2",
      *       "show": "3,4,5",
+     *       "cover": 2,
      *       "format": "尺寸,149x69x24mm;颜色,灰色",
      *     }
      * @apiParam (请求参数说明) {int} c_id   充值金额：单位分
@@ -42,6 +44,7 @@ class Goods extends BaseController
      * @apiParam (请求参数说明) {int} money   原价
      * @apiParam (请求参数说明) {int} score   所需积分
      * @apiParam (请求参数说明) {String} address   发货地
+     * @apiParam (请求参数说明) {int} cover   商品封面图id
      * @apiParam (请求参数说明) {String} banner   商品轮播图：id,id,id
      * @apiParam (请求参数说明) {String} show   商品展示图：id,id,id
      * @apiParam (请求参数说明) {String} format   商品规格参数，数据格式：参数名称,详情;参数名称,详情
@@ -258,6 +261,72 @@ class Goods extends BaseController
     {
         $info = (new GoodsService())->getGoods($id);
         return json($info);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/goods/list/cms 188-CMS获取积分商品列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/goods/list/cms?page=1&size=20&key=
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {String} key 关键字查询
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":1,"name":"笔记本","cover":"","money":"20.0000","score":200000,"state":1,"update_time":"2019-01-15 16:01:39","category":"数码","sell_num":"0"}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 商品id
+     * @apiSuccess (返回参数说明) {String} name 商品名称
+     * @apiSuccess (返回参数说明) {String} cover 商品封面图
+     * @apiSuccess (返回参数说明) {float} money 原价
+     * @apiSuccess (返回参数说明) {int} score 所需积分
+     * @apiSuccess (返回参数说明) {String} category 类别
+     * @apiSuccess (返回参数说明) {String} update_time 上架时间
+     * @apiSuccess (返回参数说明) {int} sell_num  月销售量
+     * @apiSuccess (返回参数说明) {int} state 商品状态状态：1 | 下架； 2 | 上架
+     *
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getListForCMS($page = 1, $size = 20, $key = '')
+    {
+        $list = GoodsV::getListForCMS($page, $size, $key);
+        return json($list);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/goods/list/mini 189-小程序获取积分商品列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/goods/list/mini?page=1&size=20
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":1,"name":"笔记本","cover":"","money":"20.00","score":200000}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 商品id
+     * @apiSuccess (返回参数说明) {String} name 商品名称
+     * @apiSuccess (返回参数说明) {String} cover 商品封面图
+     * @apiSuccess (返回参数说明) {float} money 原价
+     * @apiSuccess (返回参数说明) {int} score 所需积分
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getListForMINI($page = 1, $size = 20)
+    {
+        $list = GoodsT::getListForMINI($page, $size);
+        return json($list);
 
     }
 

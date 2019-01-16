@@ -285,7 +285,7 @@ Route::get('api/:version/score/rule/list', 'api/:version.ScoreBuyRole/getList');
 
 Route::post('api/:version/goods/category/save', 'api/:version.GoodsCategory/save');
 Route::post('api/:version/goods/category/handel', 'api/:version.GoodsCategory/handel');
-Route::get('api/:version/goods/category/list', 'api/:version.GoodsCategory/list');
+Route::get('api/:version/goods/category/list', 'api/:version.GoodsCategory/getList');
 Route::post('api/:version/goods/category/update', 'api/:version.GoodsCategory/update');
 
 
@@ -293,6 +293,14 @@ Route::post('api/:version/goods/save', 'api/:version.Goods/save');
 Route::post('api/:version/goods/update', 'api/:version.Goods/update');
 Route::post('api/:version/goods/handel', 'api/:version.Goods/handel');
 Route::get('api/:version/goods', 'api/:version.Goods/getGoods');
+Route::get('api/:version/goods/list/cms', 'api/:version.Goods/getListForCMS');
+Route::get('api/:version/goods/list/mini', 'api/:version.Goods/getListForMINI');
 Route::post('api/:version/goods/format/update', 'api/:version.Goods/updateFormat');
 Route::post('api/:version/goods/format/delete', 'api/:version.Goods/formatDelete');
 Route::post('api/:version/goods/image/delete', 'api/:version.Goods/GoodsImageDelete');
+
+
+Route::post('api/:version/address/save', 'api/:version.Address/save');
+Route::post('api/:version/address/handel', 'api/:version.Address/handel');
+Route::get('api/:version/address/list', 'api/:version.Address/getList');
+Route::post('api/:version/address/update', 'api/:version.Address/update');

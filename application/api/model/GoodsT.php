@@ -55,4 +55,13 @@ class GoodsT extends Model
 
     }
 
+    public static function getListForMINI($page, $size)
+    {
+        $list = self::where('state', '=', CommonEnum::PASS)
+            ->field('id,name,cover,round(money/100,2) as money,score')
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page]);
+        return $list;
+
+    }
 }

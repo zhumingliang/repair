@@ -38,6 +38,9 @@ class GoodsService
                 ]);
             }
             $params['state'] = CommonEnum::STATE_IS_OK;
+            if (key_exists('cover', $params) && strlen($params['cover'])) {
+                $params['cover'] = ImageService::getImageUrl($params['cover']);
+            }
             $g_res = GoodsT::create($params);
             if (!$g_res) {
                 Db::rollback();
@@ -98,6 +101,9 @@ class GoodsService
         Db::startTrans();
         try {
             $id = $params['id'];
+            if (key_exists('cover', $params) && strlen($params['cover'])) {
+                $params['cover'] = ImageService::getImageUrl($params['cover']);
+            }
             $g_res = GoodsT::update($params, ['id' => $id]);
             if (!$g_res) {
                 Db::rollback();
@@ -218,7 +224,7 @@ class GoodsService
 
     public function getGoods($id)
     {
-        $info=GoodsT::getInfo($id);
+        $info = GoodsT::getInfo($id);
         return $info;
     }
 
