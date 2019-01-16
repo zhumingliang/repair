@@ -46,9 +46,25 @@ class UserT extends Model
     public static function getByOpenID($openId)
     {
         $user = self::where('openId', '=', $openId)
-            ->where('state','<',3)
+            ->where('state', '<', 3)
             ->find();
         return $user;
+    }
+
+
+    /**
+     * 根据openid获取用户id
+     * @param $openId
+     * @return array|null|\PDOStatement|string|Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getUIDByOpenID($openId)
+    {
+        $user = self::where('openId', '=', $openId)
+            ->find();
+        return $user->id;
     }
 
 

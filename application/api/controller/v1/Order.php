@@ -72,7 +72,7 @@ class Order extends BaseController
      * @apiParam (请求参数说明) {int} id  订单id
      * @apiParam (请求参数说明) {int} type  订单类别 ：1 | 服务订单；2 需求订单
      * @apiSuccessExample {json} 返回样例:
-     * {"order_id":1,"source_id":1,"shop_id":1,"source_name":"修马桶","update_money":800,"phone_shop":2,"phone_user":2,"user_name":"朱明良","pay_money":800,"shop_name":"修之家","time_begin":"2018-10-17 08:00:00","time_end":"2018-10-01 12:00:00","order_number":"BA16602025038574","order_time":"2018-10-16 11:23:22","area":"铜官山区","address":"高速","origin_money":800,"comment_id":99999,"confirm_id":99999,"pay_id":99999,"refund_id":99999,"u_id":1}
+     * {"order_id":1,"source_id":1,"shop_id":1,"source_name":"修马桶","update_money":800,"phone_shop":2,"phone_user":2,"user_name":"朱明良","pay_money":800,"shop_name":"修之家","time_begin":"2018-10-17 08:00:00","time_end":"2018-10-01 12:00:00","order_number":"BA16602025038574","order_time":"2018-10-16 11:23:22","area":"铜官山区","address":"高速","origin_money":800,"comment_id":99999,"confirm_id":99999,"pay_id":99999,"refund_id":99999,"u_id":1,"score":10000}
      * @apiSuccess (返回参数说明) {int} order_id 订单id
      * @apiSuccess (返回参数说明) {int} source_id 订单关联服务/需求id
      * @apiSuccess (返回参数说明) {int} shop_id 店铺id
@@ -96,6 +96,7 @@ class Order extends BaseController
      * @apiSuccess (返回参数说明) {int} shop_confirm  商家是否 确认订单
      * @apiSuccess (返回参数说明) {int} pay_id 支付id：99999 | 未支付 ；除此之外表示已经支付
      * @apiSuccess (返回参数说明) {int} refund_id 退款id：99999 | 未退款 ；除此之外表示已经退款
+     * @apiSuccess (返回参数说明) {int} score 订单获得积分
      *
      * $order_id
      */

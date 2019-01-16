@@ -15,6 +15,8 @@ use app\api\model\DemandT;
 use app\api\model\JoinCommissionT;
 use app\api\model\LogT;
 use app\api\model\ScoreBuyT;
+use app\api\model\ScoreOrderRoleT;
+use app\api\model\ScoreOrderT;
 use app\api\model\ServiceBookingT;
 use app\api\model\ServicesT;
 use app\api\model\ShopT;
@@ -107,8 +109,9 @@ class Pay
             $discount = $this->getDiscount();
             $order->join_money = ($order->update_money) * $discount;
 
-            $this->preScore();
-
+            //处理订单积分信息
+            $score = $this->preScore($order->update_money, $order->openid, $this->type, $this->orderID);
+            $order->score = $score;
             if (isset($order->r_id)) {
                 UserRedT::update(['state' => 2], ['id' => $order->r_id]);
             }
@@ -334,9 +337,61 @@ class Pay
 
     }
 
-    private function preScore()
+    /**
+     * 处理订单积分
+     * @param $money
+     * @param $openid
+     * @param $order_type
+     * @param $order_id
+     * @return float|int
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function preScore($money, $openid, $order_type, $order_id)
     {
         //获取订单积分设置
+        $info = ScoreOrderRoleT::field('self,parent as parent_score,parent_other')->find();
+        if ($info) {
+            $self = $info->self;
+            $parent = $info->parent_score;
+            $parent_other = $info->parent_other;
+            $user = UserT::getByOpenID($openid);
+            $u_id = $user->id;
+            $parent_id = $user->parent_id;
+
+            $self_score = $money * $self / 100;
+            $parent_score = ($parent + $parent_other) * $money / 100;
+            $save_data = array();
+            $self_data = [
+                'u_id' => $u_id,
+                'score' => $self_score,
+                'order_type' => $order_type,
+                'source_id' => $order_id,
+                'self' => CommonEnum::STATE_IS_OK
+            ];
+            array_push($save_data, $self_data);
+            if ($parent_id) {
+                $parent_data = [
+                    'u_id' => $parent_id,
+                    'score' => $parent_score,
+                    'order_type' => $order_type,
+                    'source_id' => $order_id,
+                    'self' => CommonEnum::STATE_IS_FAIL
+                ];
+                array_push($save_data, $parent_data);
+
+            }
+
+            $res = (new ScoreOrderT())->saveAll($save_data);
+            if (!$res) {
+                LogT::create(['msg' => '处理积分失败：' . json_encode($save_data)]);
+            }
+
+            return $self_score;
+        }
+
+        return 0;
 
     }
 
