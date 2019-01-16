@@ -20,7 +20,7 @@ use app\lib\exception\SuccessMessage;
 class Address extends BaseController
 {
     /**
-     * @api {POST} /api/v1/address/save  190-新增用户地址
+     * @api {POST} /api/v1/address/save  300-新增用户地址
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 新增积分充值规则
@@ -59,7 +59,7 @@ class Address extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/address/save  191-修改用户地址
+     * @api {POST} /api/v1/address/save  301-修改用户地址
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 新增积分充值规则
@@ -100,7 +100,7 @@ class Address extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/address/handel  192-删除用户地址
+     * @api {POST} /api/v1/address/handel  302-删除用户地址
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  删除用户地址
@@ -132,7 +132,7 @@ class Address extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/address/list 193-获取用户地址列表
+     * @api {GET} /api/v1/address/list 303-获取用户地址列表
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription

@@ -14,11 +14,16 @@ class ScoreValidate extends BaseValidate
     protected $rule = [
         'id' => 'require',
         'money' => 'require',
-        'score' => 'require'
+        'score' => 'require',
+        'self' => 'require',
+        'parent' => 'require',
+        'parent_other' => 'require',
     ];
 
     protected $scene = [
         'buy' => ['money', 'score'],
+        'id' => ['id'],
+        'order_rule' => ['self', 'parent', 'parent_other'],
     ];
 
 }

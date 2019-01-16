@@ -23,7 +23,7 @@ use app\lib\exception\SuccessMessage;
 class Goods extends BaseController
 {
     /**
-     * @api {POST} /api/v1/goods/save  181-新增积分商城商品
+     * @api {POST} /api/v1/goods/save  315-新增积分商城商品
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 新增积分充值规则
@@ -65,7 +65,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/goods/update  182-修改积分商城商品
+     * @api {POST} /api/v1/goods/update  316-修改积分商城商品
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 修改积分商城商品
@@ -106,7 +106,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/goods/format/update  183-修改商品参数规格
+     * @api {POST} /api/v1/goods/format/update  317-修改商品参数规格
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  修改商品参数规格
@@ -138,7 +138,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/goods/format/delete  184-删除商品参数规格
+     * @api {POST} /api/v1/goods/format/delete  318-删除商品参数规格
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  修改商品参数规格
@@ -170,7 +170,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/goods/image/delete  185-删除商品图片
+     * @api {POST} /api/v1/goods/image/delete  319-删除商品图片
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  删除商品图片
@@ -202,7 +202,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/goods/handel  186-商品状态操作
+     * @api {POST} /api/v1/goods/handel  320-商品状态操作
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  删除/上架/下架商品
@@ -236,7 +236,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/banner  187-获取指定积分商品信息
+     * @api {GET} /api/v1/banner  321-获取指定积分商品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  获取指定积分商品信息
@@ -265,7 +265,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/goods/list/cms 188-CMS获取积分商品列表
+     * @api {GET} /api/v1/goods/list/cms 322-CMS获取积分商品列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription
@@ -301,7 +301,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/goods/list/mini 189-小程序获取积分商品列表
+     * @api {GET} /api/v1/goods/list/mini 323-小程序获取积分商品列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription

@@ -278,6 +278,11 @@ Route::post('api/:version/recharge/exchange', 'api/:version.Recharge/exchange');
 Route::post('api/:version/score/recharge', 'api/:version.Score/recharge');
 Route::post('api/:version/score/buy', 'api/:version.Score/buy');
 
+Route::post('api/:version/score/order/rule/save', 'api/:version.Score/scoreOrderRuleSave');
+Route::post('api/:version/score/order/rule/update', 'api/:version.Score/scoreOrderRuleUpdate');
+Route::get('api/:version/score/order/rule', 'api/:version.Score/getScoreOrderRule');
+
+
 Route::post('api/:version/score/rule/save', 'api/:version.ScoreBuyRole/save');
 Route::post('api/:version/score/rule/handel', 'api/:version.ScoreBuyRole/handel');
 Route::post('api/:version/score/rule/update', 'api/:version.ScoreBuyRole/update');

@@ -19,7 +19,7 @@ class ScoreBuyRole extends BaseController
 {
 
     /**
-     * @api {POST} /api/v1/score/role/save  172-新增积分充值规则
+     * @api {POST} /api/v1/score/role/save  311-新增积分充值规则
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 新增积分充值规则
@@ -49,7 +49,7 @@ class ScoreBuyRole extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/score/role/list 173-获取积分充值规则列表
+     * @api {GET} /api/v1/score/role/list 312-获取积分充值规则列表
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小获取积分充值规则列表
@@ -75,7 +75,7 @@ class ScoreBuyRole extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/score/rule/handel  174-删除积分充值规则
+     * @api {POST} /api/v1/score/rule/handel  313-删除积分充值规则
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  删除积分充值规则
@@ -108,7 +108,7 @@ class ScoreBuyRole extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/score/role/update  175-修改积分充值规则
+     * @api {POST} /api/v1/score/role/update  314-修改积分充值规则
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 新增积分充值规则

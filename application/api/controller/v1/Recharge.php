@@ -17,7 +17,7 @@ class Recharge extends BaseController
 {
 
     /**
-     * @api {POST} /api/v1/recharge/save  169-批量生成积分兑换码
+     * @api {POST} /api/v1/recharge/save  304-批量生成积分兑换码
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 批量生成积分兑换码
@@ -46,7 +46,7 @@ class Recharge extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/recharge/exchange  170-用户兑换积分码
+     * @api {POST} /api/v1/recharge/exchange  305-用户兑换积分码
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 批量生成积分兑换码

@@ -92,6 +92,7 @@ class Pay
         //检查订单是否已经完成支付处理
         //修改订单状态
         //存储支付信息
+        //处理积分信息
         $order = $this->getOrder();
         if ($order->pay_id != CommonEnum::ORDER_STATE_INIT) {
             return true;
@@ -105,6 +106,8 @@ class Pay
         if ($this->type == 1 || $this->type == 2) {
             $discount = $this->getDiscount();
             $order->join_money = ($order->update_money) * $discount;
+
+            $this->preScore();
 
             if (isset($order->r_id)) {
                 UserRedT::update(['state' => 2], ['id' => $order->r_id]);
@@ -328,6 +331,12 @@ class Pay
             throw new PayException();
         }
         return $order;
+
+    }
+
+    private function preScore()
+    {
+        //获取订单积分设置
 
     }
 

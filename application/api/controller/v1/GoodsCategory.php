@@ -18,7 +18,7 @@ use app\lib\exception\SuccessMessage;
 class GoodsCategory extends BaseController
 {
     /**
-     * @api {POST} /api/v1/goods/category/save  177-新增商品分类
+     * @api {POST} /api/v1/goods/category/save  324-新增商品分类
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  新增商品分类
@@ -50,7 +50,7 @@ class GoodsCategory extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/goods/category/handel  178-商品分类状态操作
+     * @api {POST} /api/v1/goods/category/handel  325-商品分类状态操作
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  删除分类
@@ -84,7 +84,7 @@ class GoodsCategory extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/goods/category/update  179-修改商品分类
+     * @api {POST} /api/v1/goods/category/update  326-修改商品分类
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  修改分类信息
@@ -122,7 +122,7 @@ class GoodsCategory extends BaseController
 
 
     /**
-     * @api {GET} /api/v1/goods/category/list 180-获取商品分类列表
+     * @api {GET} /api/v1/goods/category/list 327-获取商品分类列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  获取商品分类列表
