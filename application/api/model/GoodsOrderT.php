@@ -14,4 +14,14 @@ use think\Model;
 class GoodsOrderT extends Model
 {
 
+
+    public static function getListForNOComplete($u_id)
+    {
+        $list = self::where('express_status', '<', 3)
+            ->select();
+        return $list;
+
+    }
+
+
 }

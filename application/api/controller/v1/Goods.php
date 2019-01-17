@@ -236,7 +236,7 @@ class Goods extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/banner  321-获取指定积分商品信息
+     * @api {GET} /api/v1/goods/info  321-获取指定积分商品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  获取指定积分商品信息

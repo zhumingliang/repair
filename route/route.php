@@ -297,12 +297,18 @@ Route::post('api/:version/goods/category/update', 'api/:version.GoodsCategory/up
 Route::post('api/:version/goods/save', 'api/:version.Goods/save');
 Route::post('api/:version/goods/update', 'api/:version.Goods/update');
 Route::post('api/:version/goods/handel', 'api/:version.Goods/handel');
-Route::get('api/:version/goods', 'api/:version.Goods/getGoods');
+Route::get('api/:version/goods/info', 'api/:version.Goods/getGoods');
 Route::get('api/:version/goods/list/cms', 'api/:version.Goods/getListForCMS');
 Route::get('api/:version/goods/list/mini', 'api/:version.Goods/getListForMINI');
 Route::post('api/:version/goods/format/update', 'api/:version.Goods/updateFormat');
 Route::post('api/:version/goods/format/delete', 'api/:version.Goods/formatDelete');
 Route::post('api/:version/goods/image/delete', 'api/:version.Goods/GoodsImageDelete');
+
+
+Route::post('api/:version/goods/order/save', 'api/:version.GoodsOrder/saveOrder');
+Route::post('api/:version/goods/order/express/update', 'api/:version.GoodsOrder/saveOrder');
+Route::get('api/:version/goods/order/list/cms', 'api/:version.GoodsOrder/getListForCMS');
+Route::get('api/:version/goods/order/list/mini', 'api/:version.GoodsOrder/getListForMINI');
 
 
 Route::post('api/:version/address/save', 'api/:version.Address/save');
