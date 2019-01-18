@@ -332,7 +332,7 @@ class GoodsOrder extends BaseController
      * @api {GET} /api/v1/goods/express/info 336-查看指定订单物流信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription小程序获取积分兑换订单信息
+     * @apiDescription 小程序获取积分兑换订单信息
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/goods/express/info?express_no=ht&express_code=71519121793117
      * @apiParam (请求参数说明) {String}  express_no 快递类别

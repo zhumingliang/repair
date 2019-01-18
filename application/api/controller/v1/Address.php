@@ -59,7 +59,7 @@ class Address extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/address/save  301-修改用户地址
+     * @api {POST} /api/v1/address/update  301-修改用户地址
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription 新增积分充值规则

@@ -129,7 +129,7 @@ class Score extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/score/order/rule/save  309-修改用户订单积分规则
+     * @api {POST} /api/v1/score/order/rule/update  309-修改用户订单积分规则
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 新增用户订单积分规则
