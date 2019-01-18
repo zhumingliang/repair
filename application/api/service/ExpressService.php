@@ -9,24 +9,39 @@
 namespace app\api\service;
 
 
+use zml\tp_tools\Curl;
+
 class ExpressService
 {
+
+    private $app_id = '102089';
+    private $method = 'express.info.get';
+    private $api_key = '1e3586d845f32d77ebb3e657ff56d7b7bc1153cc';
+    private $sign = '';
+    private $ts = '';
+    private $post_data = '';
+    private $waybill_no = '';
+    private $exp_company_code = '';
+
+    public function __construct($waybill_no, $exp_company_code)
+    {
+        $this->waybill_no = $waybill_no;
+        $this->exp_company_code = $exp_company_code;
+        $this->ts = time();
+        $this->sign = md5($this->app_id . $this->method . $this->ts . $this->api_key);
+        $this->post_data = $this->prePostData();
+    }
+
     public function getInfo()
     {
+
         $host = "https://kop.kuaidihelp.com/api";
         $method = "POST";
         $headers = array();
-       //根据API的要求，定义相对应的Content-Type
+        //根据API的要求，定义相对应的Content-Type
         array_push($headers, "Content-Type" . ":" . "application/x-www-form-urlencoded; charset=UTF-8");
-        $querys = "";
-        $bodys = [
-            "app_id" => '50001',
-            "method" => 'express.info.get',
-            "sign" => "bdf3b5f50865ac813cbdfd6c9b572b79",
-            "ts" => '1524209949',
-            "data" => '{ "waybill_no":"3832883261957", "exp_company_code":"韵达","result_sort":"0"}'
-        ];
-        $bodys = http_build_query($bodys);
+
+        $bodys = http_build_query($this->post_data);
         $url = $host;
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
@@ -40,7 +55,28 @@ class ExpressService
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         }
         curl_setopt($curl, CURLOPT_POSTFIELDS, $bodys);
-        var_dump(curl_exec($curl));
+        $res = curl_exec($curl);
+        if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == '200') {
+            list($header, $body) = explode("\r\n\r\n", $res, 2);
+            return json_decode($body);
+        }
+
     }
+
+    private function prePostData()
+    {
+        $data = '{ "waybill_no":"%s", "exp_company_code":"%s","result_sort":"0"}';
+        $data = sprintf($data, $this->waybill_no, $this->exp_company_code);
+        $bodys = [
+            "app_id" => $this->app_id,
+            "method" => $this->method,
+            "sign" => $this->sign,
+            "ts" => $this->ts,
+            "data" => $data
+        ];
+        return $bodys;
+
+    }
+
 
 }

@@ -306,9 +306,15 @@ Route::post('api/:version/goods/image/delete', 'api/:version.Goods/GoodsImageDel
 
 
 Route::post('api/:version/goods/order/save', 'api/:version.GoodsOrder/saveOrder');
+Route::post('api/:version/goods/order/comment', 'api/:version.GoodsOrder/comment');
+Route::post('api/:version/goods/order/comment/handel', 'api/:version.GoodsOrder/commentHandel');
 Route::post('api/:version/goods/order/express/update', 'api/:version.GoodsOrder/saveOrder');
 Route::get('api/:version/goods/order/list/cms', 'api/:version.GoodsOrder/getListForCMS');
 Route::get('api/:version/goods/order/list/mini', 'api/:version.GoodsOrder/getListForMINI');
+Route::get('api/:version/goods/order/info/cms', 'api/:version.GoodsOrder/getTheOrderForCMS');
+Route::get('api/:version/goods/order/info/mini', 'api/:version.GoodsOrder/getTheOrderForMINI');
+Route::get('api/:version/goods/express/info', 'api/:version.GoodsOrder/getExpressInfo');
+Route::get('api/:version/goods/order/receive/confirm', 'api/:version.GoodsOrder/receiveConfirm');
 
 
 Route::post('api/:version/address/save', 'api/:version.Address/save');

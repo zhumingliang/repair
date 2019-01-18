@@ -9,11 +9,15 @@
 namespace app\api\service;
 
 
+use app\api\model\GoodsCommentImgT;
+use app\api\model\GoodsOrderCommentT;
 use app\api\model\GoodsOrderT;
 use app\api\model\GoodsOrderV;
 use app\api\model\UserScoreV;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
+use think\Db;
+use think\Exception;
 
 class GoodsOrderService
 {
@@ -133,6 +137,129 @@ class GoodsOrderService
         return $user_score - $score;
 
 
+    }
+
+
+    public function getTheOrderForCMS($id)
+    {
+        $info = GoodsOrderT::getInfoForCMS($id);
+        $info['comment'] = $this->getOrderComment($id);
+        return $info;
+    }
+
+    private function getOrderComment($id)
+    {
+        $comment = GoodsOrderCommentT::getComment($id);
+        return $comment;
+
+    }
+
+    public function getTheOrderForMINI($id)
+    {
+        $info = GoodsOrderT::getInfoForMINI($id);
+        $info['comment'] = $this->getOrderComment($id);
+        $info['express_info'] = $this->getExpressInfo($info['express_no'],$info['express_code']);
+        return $info;
+
+
+    }
+
+    /**
+     * 保存评论
+     * @param $params
+     * @throws Exception
+     */
+    public function saveComment($params)
+    {
+
+        Db::startTrans();
+        try {
+
+            $params['u_id'] = Token::getCurrentUid();
+            $params['state'] = CommonEnum::STATE_IS_OK;
+            $obj = GoodsOrderCommentT::create($params);
+            if (!$obj) {
+                throw new OperationException(
+                    ['code' => 401,
+                        'msg' => '新增评论失败',
+                        'errorCode' => 150010
+                    ]
+                );
+            }
+            if (key_exists('imgs', $params) && strlen($params['imgs'])) {
+                $imgs = $params['imgs'];
+                $relation = [
+                    'name' => 'c_id',
+                    'value' => $obj->id
+                ];
+                $res = $this->saveImageRelation($imgs, $relation);
+                if (!$res) {
+                    Db::rollback();
+                    throw new OperationException(
+                        [
+                            'code' => 401,
+                            'msg' => '创建评论图片关联失败',
+                            'errorCode' => 150011
+                        ]
+                    );
+                }
+            }
+
+            //修改评论状态
+            $com_id = GoodsOrderT::update(['comment_id' => $obj->id], ['id' => $params['o_id']]);
+            if (!$com_id) {
+                Db::rollback();
+                throw new OperationException(
+                    [
+                        'code' => 401,
+                        'msg' => '修改评论状态失败',
+                        'errorCode' => 150011
+                    ]
+                );
+            }
+
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+
+    }
+
+    /**
+     * @param $imgs
+     * @param $relation
+     * @return bool
+     * @throws \Exception
+     */
+    private function saveImageRelation($imgs, $relation)
+    {
+        $data = ImageService::ImageHandel($imgs, $relation);
+        $OCI = new GoodsCommentImgT();
+        $res = $OCI->saveAll($data);
+        if (!$res) {
+            return false;
+        }
+        return true;
+
+    }
+
+
+    public function getExpressInfo($express_no, $express_code)
+    {
+        if (!strlen($express_no)){
+            return array();
+        }
+        $info = (new ExpressService($express_code, $express_no))->getInfo();
+        if ($info->code == 0) {
+           return $data = $info->data;
+           // return $data[0]->data;
+            // return ($data[0]->data)[0];
+
+        } else {
+            return array();
+        }
     }
 
 

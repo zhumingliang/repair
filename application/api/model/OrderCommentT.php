@@ -43,7 +43,6 @@ class OrderCommentT extends Model
 
         return $comment;
 
-
     }
 
 }

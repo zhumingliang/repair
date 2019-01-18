@@ -18,13 +18,16 @@ class GoodsOrderValidate extends BaseValidate
         'express' => 'require',
         'express_code' => 'require',
         'id' => 'require|isPositiveInteger',
-        'type' => 'require|in:1,2,3,4',
+        'o_id' => 'require|isPositiveInteger',
+        'type' => 'require|in:1,2,3,4,5',
+        'content' => 'require',
 
     ];
     protected $scene = [
         'save' => ['g_id', 'count', 'score'],
         'express_update' => ['express', 'express_code', 'id'],
         'list' => ['type'],
+        'comment' => ['type','o_id','content','score'],
     ];
 
 }

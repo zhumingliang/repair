@@ -56,7 +56,7 @@ class ScoreBuyRole extends BaseController
      * @apiExample {get}  请求样例:
      * http://mengant.cn/api/v1/score/rule/list
      * @apiSuccessExample {json} 返回样例:
-     * [{"id":1,"score":1000,"money":100},{"id":2,"score":10000,"money":900}]     * @apiSuccess (返回参数说明) {int} id 轮播图id
+     * [{"id":1,"score":1000,"money":100},{"id":2,"score":10000,"money":900}]
      * @apiSuccess (返回参数说明) {int} id 规则id
      * @apiSuccess (返回参数说明) {int} score 积分
      * @apiSuccess (返回参数说明) {int} money 金额
