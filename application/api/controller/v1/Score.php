@@ -168,7 +168,6 @@ class Score extends BaseController
         return json(new SuccessMessage());
     }
 
-
     /**
      * @api {GET} /api/v1/score/order/rule 310-获取用户订单积分规则
      * @apiGroup  MINI
@@ -192,6 +191,8 @@ class Score extends BaseController
 
 
     }
+
+
 
 
 }

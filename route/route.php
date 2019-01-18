@@ -236,6 +236,9 @@ Route::post('api/:version/system/shop/grade/update', 'api/:version.System/update
 Route::post('api/:version/system/shop/grade/save', 'api/:version.System/saveShopGrade');
 Route::get('api/:version/check/join', 'api/:version.System/checkJoin');
 Route::get('api/:version/file/time', 'api/:version.System/fileUpdateTime');
+Route::post('api/:version/system/sign/in/save', 'api/:version.SignIn/save');
+Route::post('api/:version/system/sign/in/update', 'api/:version.SignIn/update');
+Route::get('api/:version/system/sign/in', 'api/:version.SignIn/getSignInRole');
 
 
 Route::get('api/:version/report/export/city', 'api/:version.OrderReport/exportWithCity');
