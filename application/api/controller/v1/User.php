@@ -12,6 +12,7 @@ use app\api\model\ImgT;
 use app\api\model\UserT;
 use app\api\model\UserV;
 use app\api\service\ImageService;
+use app\api\service\UserService;
 use app\api\validate\UserInfo;
 
 use app\api\controller\BaseController;
@@ -161,6 +162,33 @@ class User extends BaseController
             })
             ->paginate($size, false, ['page' => $page]);
         return json($list);
+
+    }
+
+    /**
+     * @api {POST} /api/v1/user/bind  342-小程序用户绑定邀请码
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  小程序用户绑定邀请码
+     * @apiExample {POST}  请求样例:
+     * {
+     * "code": "dadkfa",
+     * }
+     * @apiParam (请求参数说明) {String} code  邀请码
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $code
+     * @return \think\response\Json
+     * @throws UserInfoException
+     */
+    public function bind($code)
+    {
+        (new UserService())->bindCode($code);
+        return json(new SuccessMessage());
+
 
     }
 

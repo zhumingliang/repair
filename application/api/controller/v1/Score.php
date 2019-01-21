@@ -95,19 +95,23 @@ class Score extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/score/order/rule/save  308-新增用户订单积分规则
+     * @api {POST} /api/v1/score/order/rule/save  308-新增用户注册/订单积分规则
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription 新增用户订单积分规则
+     * @apiDescription 新增用户注册/订单积分规则
      * @apiExample {post}  请求样例:
      *    {
-     *       "self": 10000
-     *       "parent": 1000
-     *       "parent_other": 1000
+     *       "self": 10000,
+     *       "parent": 1000,
+     *       "parent_other": 1000,
+     *       "self_register": 1000,
+     *       "parent_register": 1000
      *     }
      * @apiParam (请求参数说明) {int} self   用户自己获取积分比例
      * @apiParam (请求参数说明) {int} parent   用户上级获取积分比例
      * @apiParam (请求参数说明) {int} parent_other   用户上级获取附加积分比例
+     * @apiParam (请求参数说明) {int} self_register   用户绑定邀请码自己获取的积分
+     * @apiParam (请求参数说明) {int} parent_register   用户绑定邀请码邀请人获取的积分
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -135,15 +139,18 @@ class Score extends BaseController
      * @apiDescription 新增用户订单积分规则
      * @apiExample {post}  请求样例:
      *    {
-     *       "id": 10000
-     *       "self": 10000
-     *       "parent": 1000
-     *       "parent_other": 1000
+     *       "id": 1,
+     *       "self": 10000,
+     *       "parent": 1000,
+     *       "parent_other": 1000,
+     *       "self_register": 1000,
+     *       "parent_register": 1000
      *     }
-     * @apiParam (请求参数说明) {int} id   规则id
      * @apiParam (请求参数说明) {int} self   用户自己获取积分比例
      * @apiParam (请求参数说明) {int} parent   用户上级获取积分比例
      * @apiParam (请求参数说明) {int} parent_other   用户上级获取附加积分比例
+     * @apiParam (请求参数说明) {int} self_register   用户绑定邀请码自己获取的积分
+     * @apiParam (请求参数说明) {int} parent_register   用户绑定邀请码邀请人获取的积分
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -176,11 +183,13 @@ class Score extends BaseController
      * @apiExample {get}  请求样例:
      * https://mengant.cn/api/v1/score/order/rule
      * @apiSuccessExample {json} 返回样例:
-     * {"id":1,"self":10000,"parent":1000,"parent_other":100,"create_time":"2019-01-16 14:58:57","update_time":"2019-01-16 14:58:57"}
+     * {"id":1,"self":10000,"parent":1000,"parent_other":100,"self_register":100,"parent_register":100,"create_time":"2019-01-16 14:58:57","update_time":"2019-01-16 14:58:57"}
      * @apiSuccess (返回参数说明) {int} id   规则id
      * @apiSuccess (返回参数说明) {int} self   用户自己获取积分比例
      * @apiSuccess (返回参数说明) {int} parent   用户上级获取积分比例
      * @apiSuccess (返回参数说明) {int} parent_other   用户上级获取附加积分比例
+     * @apiSuccess (返回参数说明) {int} self_register   用户绑定邀请码自己获取的积分
+     * @apiSuccess (返回参数说明) {int} parent_register   用户绑定邀请码邀请人获取的积分
      * @return \think\response\Json
      * @throws \think\Exception\DbException
      */

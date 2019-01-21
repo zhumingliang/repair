@@ -81,7 +81,7 @@ class UserToken extends Token
         $red_money = 0;
         if (!$user) {
             $u_id = $this->newUser($openid);
-            $red_money= RedService::addRed(RedEnum::FIRST_LOGIN, $u_id);
+            $red_money = RedService::addRed(RedEnum::FIRST_LOGIN, $u_id);
         } else {
             $u_id = $user['id'];
             if ($user && $user->state == 2) {
@@ -102,9 +102,11 @@ class UserToken extends Token
         $token = $this->saveToCache($cachedValue);
 
         if (empty($cachedValue['nickName']) && empty($cachedValue['province'])) {
-            return ['token' => $token,
-                'type' => $this->USER_MSG_IS_NULL
-                , 'shop_id' => $cachedValue['shop_id'],
+            return [
+                'token' => $token,
+                'code' => $cachedValue['code'],
+                'type' => $this->USER_MSG_IS_NULL,
+                'shop_id' => $cachedValue['shop_id'],
                 'city' => $cachedValue['city'],
                 'province' => $cachedValue['province'],
                 'area' => $cachedValue['area'],
@@ -117,6 +119,7 @@ class UserToken extends Token
         return [
             'token' => $token,
             'type' => $this->USER_MSG_IS_OK,
+            'code' => $cachedValue['code'],
             'shop_id' => $cachedValue['shop_id'],
             'city' => $cachedValue['city'],
             'province' => $cachedValue['province'],
@@ -201,6 +204,7 @@ class UserToken extends Token
         $cachedValue['nickName'] = $user['nickName'];
         $cachedValue['name_sub'] = $user['name_sub'];
         $cachedValue['avatarUrl'] = $user['avatarUrl'];
+        $cachedValue['code'] = $user['code'];
         return $cachedValue;
     }
 
@@ -210,7 +214,11 @@ class UserToken extends Token
      */
     private function newUser($openid)
     {
-        $user = UserT::create(['openId' => $openid]);
+        $data = [
+            'openId' => $openid,
+            'code' => generateCode(1)[0]
+        ];
+        $user = UserT::create($data);
         return $user->id;
     }
 

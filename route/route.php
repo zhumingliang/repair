@@ -26,6 +26,7 @@ Route::get('api/:version/token/user', 'api/:version.Token/getUserToken');
 Route::post('api/:version/user/info', 'api/:version.User/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 Route::get('api/:version/user/list', 'api/:version.User/getUsers');
+Route::get('api/:version/user/bind', 'api/:version.User/bind');
 
 Route::get('api/:version/behaviors', 'api/:version.Behavior/getList');
 Route::post('api/:version/behavior/handel', 'api/:version.Behavior/handel');
@@ -324,3 +325,5 @@ Route::post('api/:version/address/save', 'api/:version.Address/save');
 Route::post('api/:version/address/handel', 'api/:version.Address/handel');
 Route::get('api/:version/address/list', 'api/:version.Address/getList');
 Route::post('api/:version/address/update', 'api/:version.Address/update');
+
+Route::post('api/:version/sign/in', 'api/:version.SignIn/signIn');

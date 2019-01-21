@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\SystemSignInT;
+use app\api\service\ScoreService;
 use app\api\validate\SignInValidate;
 use app\lib\exception\OperationException;
 use app\lib\exception\SuccessMessage;
@@ -31,7 +32,7 @@ class SignIn extends BaseController
      *       "add": 10
      *     }
      * @apiParam (请求参数说明) {int} cycle   循环周期
-     * @apiParam (请求参数说明) {int} begin   固定起始日:1-7 :星期一～星期天
+     * @apiParam (请求参数说明) {int} begin   固定起始日:1-2-3-4-5-6-0 :星期一～星期天
      * @apiParam (请求参数说明) {int} begin_score   起始积分
      * @apiParam (请求参数说明) {int} add   每日增加积分
      * @apiSuccessExample {json} 返回样例:
@@ -69,7 +70,7 @@ class SignIn extends BaseController
      *     }
      * @apiParam (请求参数说明) {int} id   规则id
      * @apiParam (请求参数说明) {int} cycle   循环周期
-     * @apiParam (请求参数说明) {int} begin   固定起始日:1-7 :星期一～星期天
+     * @apiParam (请求参数说明) {int} begin   固定起始日:1-2-3-4-5-6-0 :星期一～星期天
      * @apiParam (请求参数说明) {int} begin_score   起始积分
      * @apiParam (请求参数说明) {int} add   每日增加积分
      * @apiSuccessExample {json} 返回样例:
@@ -104,10 +105,10 @@ class SignIn extends BaseController
      * @apiExample {get}  请求样例:
      * https://mengant.cn/api/v1/system/sign/in
      * @apiSuccessExample {json} 返回样例:
-     * {"id":1,"cycle":7,"begin":1,"begin_score":1000,"add":10}     * @apiSuccess (返回参数说明) {int} id   规则id
+     * {"id":1,"cycle":7,"begin":1,"begin_score":1000,"add":10}
      * @apiSuccess (返回参数说明) {int} id   规则id
      * @apiSuccess (返回参数说明) {int} cycle   循环周期
-     * @apiSuccess (返回参数说明) {int} begin   固定起始日:1-7 :星期一～星期天
+     * @apiSuccess (返回参数说明) {int} begin   固定起始日:1-2-3-4-5-6-0 :星期一～星期天
      * @apiSuccess (返回参数说明) {int} begin_score   起始积分
      * @apiSuccess (返回参数说明) {int} add   每日增加积分
      * @return \think\response\Json
@@ -121,8 +122,24 @@ class SignIn extends BaseController
         return json($info);
     }
 
+
+    /**
+     * @api {POST} /api/v1/sign/in  341-用户签到
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 用户签到
+     * @apiSuccessExample {json} 返回样例:
+     * {"score":100}
+     * @apiSuccess (返回参数说明) {int} score 此次签到获得积分
+     * @return \think\response\Json
+     * @throws OperationException
+     */
     public function signIn()
     {
+        $score = (new ScoreService())->signIn();
+        return json([
+            'score' => $score
+        ]);
 
     }
 
