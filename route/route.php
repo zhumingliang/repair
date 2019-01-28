@@ -302,6 +302,7 @@ Route::post('api/:version/goods/save', 'api/:version.Goods/save');
 Route::post('api/:version/goods/update', 'api/:version.Goods/update');
 Route::post('api/:version/goods/handel', 'api/:version.Goods/handel');
 Route::get('api/:version/goods/info', 'api/:version.Goods/getGoods');
+Route::get('api/:version/goods/comment', 'api/:version.Goods/getGoodsComment');
 Route::get('api/:version/goods/list/cms', 'api/:version.Goods/getListForCMS');
 Route::get('api/:version/goods/list/mini', 'api/:version.Goods/getListForMINI');
 Route::post('api/:version/goods/format/update', 'api/:version.Goods/updateFormat');

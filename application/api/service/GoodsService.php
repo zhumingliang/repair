@@ -12,6 +12,7 @@ namespace app\api\service;
 use app\api\model\GoodsFormatT;
 use app\api\model\GoodsImgT;
 use app\api\model\GoodsT;
+use app\api\model\GoodsV;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 use think\Db;
@@ -225,6 +226,7 @@ class GoodsService
     public function getGoods($id)
     {
         $info = GoodsT::getInfo($id);
+        $info['sell_num'] = GoodsV::getGoodsSell($id);
         return $info;
     }
 

@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\GoodsFormatT;
 use app\api\model\GoodsImgT;
+use app\api\model\GoodsOrderCommentV;
 use app\api\model\GoodsT;
 use app\api\model\GoodsV;
 use app\api\service\GoodsService;
@@ -249,6 +250,7 @@ class Goods extends BaseController
      * @apiSuccess (返回参数说明) {int} money   原价
      * @apiSuccess (返回参数说明) {int} score   所需积分
      * @apiSuccess (返回参数说明) {String} address   发货地
+     * @apiSuccess (返回参数说明) {String} sell_num   月销量
      * @apiSuccess (返回参数说明) {String} imgs->type  商品图片类别：1 | 轮播图；2 | 详情图
      * @apiSuccess (返回参数说明) {String} imgs->img_url->url  商品图片地址
      * @apiSuccess (返回参数说明) {String} catetory->name  类别名称
@@ -326,6 +328,42 @@ class Goods extends BaseController
     public function getListForMINI($page = 1, $size = 20)
     {
         $list = GoodsT::getListForMINI($page, $size);
+        return json($list);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/goods/comment 343-小程序获取积分商品评论列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/goods/comment?id=1&page=1&size=20
+     * @apiParam (请求参数说明) {int} id 商品id
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":1,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":1,"o_id":1,"content":"很好","type":2,"state":1,"create_time":"2019-01-18 09:55:06","update_time":"2019-01-18 09:55:06","u_id":1,"score":3,"g_id":1,"nickName":"盟蚁","avatarUrl":"","imgs":[{"c_id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"c_id":1,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"c_id":1,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]}]}     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 商品id
+     * @apiSuccess (返回参数说明) {String} nickName 评论者昵称
+     * @apiSuccess (返回参数说明) {String} avatarUrl 评论者头像
+     * @apiSuccess (返回参数说明) {String} score 评价星级
+     * @apiSuccess (返回参数说明) {String} content 评价内容
+     * @apiSuccess (返回参数说明) {String} type 评价类别：1 好评；2 | 中评；3 | 差评
+     * @apiSuccess (返回参数说明) {String} imgs 图片
+     * @apiSuccess (返回参数说明) {String} imgs->img_url->url 评论图片地址
+
+     *
+     * @param $id
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getGoodsComment($id, $page = 1, $size = 10)
+    {
+        $list = GoodsOrderCommentV::getComment($id, $page, $size);
         return json($list);
 
     }

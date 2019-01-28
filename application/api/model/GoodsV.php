@@ -29,4 +29,13 @@ class GoodsV extends Model
 
     }
 
+    public static function getGoodsSell($id)
+    {
+        $info = self::where('id', $id)
+            ->field('sell_num')
+            ->find();
+        return $info ? $info->sell_num : 0;
+
+    }
+
 }
