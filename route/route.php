@@ -328,3 +328,4 @@ Route::get('api/:version/address/list', 'api/:version.Address/getList');
 Route::post('api/:version/address/update', 'api/:version.Address/update');
 
 Route::post('api/:version/sign/in', 'api/:version.SignIn/signIn');
+Route::get('api/:version/sign/in/check', 'api/:version.SignIn/checkSignInToday');

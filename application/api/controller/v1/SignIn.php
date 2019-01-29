@@ -143,4 +143,23 @@ class SignIn extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/sign/in/check  344-检测用户签到状态
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 检测用户签到状态
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/sign/in/check
+     * @apiSuccessExample {json} 返回样例:
+     * {"sign_in":1,"score":100}
+     * @apiSuccess (返回参数说明) {int} sign_in 是否签到：1 | 今天已经签到；0 | 没有签到
+     * @apiSuccess (返回参数说明) {int} score 用户积分余额
+     * @return \think\response\Json
+     */
+    public function checkSignInToday()
+    {
+        $info = (new ScoreService())->checkSignInToday();
+        return json($info);
+    }
+
 }

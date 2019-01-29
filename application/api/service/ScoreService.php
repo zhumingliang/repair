@@ -13,6 +13,7 @@ use app\api\model\ScoreBuyT;
 use app\api\model\SignDayT;
 use app\api\model\SignInT;
 use app\api\model\SystemSignInT;
+use app\api\model\UserScoreV;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 
@@ -119,6 +120,24 @@ class ScoreService
         }
         return ($info->count) * ($rule->add) + $rule->begin_score;
 
+    }
+
+    public function checkSignInToday()
+    {
+        $u_id =Token::getCurrentUid();
+        $count = SignInT::where('u_id', $u_id)
+            ->whereTime('create_time', 'today')
+            ->count();
+        if (!$count) {
+            return [
+                'sign_in' => 0
+            ];
+        }
+
+        return [
+            'sign_in' => 1,
+            'score' => UserScoreV::getUserScore($u_id),
+        ];
     }
 
 }
