@@ -143,7 +143,7 @@ class ScoreService
 
     public function getScoreList($type, $page, $size)
     {
-        $u_id = 1;//Token::getCurrentUid();
+        $u_id = Token::getCurrentUid();
         $list = UserScoreV::getList($u_id, $type, $page, $size);
         $list['balance'] = UserScoreV::getUserScore($u_id);
         return $list;
