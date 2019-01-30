@@ -13,7 +13,7 @@ class PayValidate extends BaseValidate
 {
     protected $rule = [
         'id' => 'require|isPositiveInteger',
-        'type' => 'require|isPositiveInteger|in:1,2,3',
+        'type' => 'require|isPositiveInteger|in:1,2,3,4',
         'r_id' => 'require|isPositiveInteger',
     ];
 
