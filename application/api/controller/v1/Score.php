@@ -68,11 +68,9 @@ class Score extends BaseController
      * @apiDescription 新增购买积分订单
      * @apiExample {post}  请求样例:
      *    {
-     *       "score": 1000
-     *       "money": 100
+     *       "id": 1
      *     }
-     * @apiParam (请求参数说明) {int} score   充值积分
-     * @apiParam (请求参数说明) {int} money   购买金额:单位：分
+     * @apiParam (请求参数说明) {int} id   积分id
      * @apiSuccessExample {json} 返回样例:
      * {"o_id":1}
      * @apiSuccess (返回参数说明) {int} o_id 订单id
