@@ -326,7 +326,6 @@ class Pay
                 ->field('id,u_id,1 as state,money as update_money,pay_id,openid,order_number,1 as shop_confirm')
                 ->find();
         } else if ($this->type == CommonEnum::ORDER_IS_SCORE) {
-
             $order = ScoreBuyT::where('id', '=', $this->orderID)
                 ->field('id,u_id,1 as state,money as update_money ,pay_id,openid,order_number,1 as shop_confirm')
                 ->find();
