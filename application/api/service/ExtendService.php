@@ -123,7 +123,8 @@ class ExtendService
             if (!$record_res) {
                 Db::rollback();
                 throw new ExtendException(
-                    ['code' => 401,
+                    [
+                        'code' => 401,
                         'msg' => '添加操作记录失败',
                         'errorCode' => 130002
                     ]
@@ -320,9 +321,15 @@ class ExtendService
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public static function getServiceForMini( $id)
+    public static function getServiceForMini($id)
     {
         $service = ServicesT::getService($id);
+        if (!$service) {
+            throw  new ExtendException([
+                'msg' => "服务不存在",
+                'errorCode' => 130012
+            ]);
+        }
         $extend = ExtendService::getExtendPrice($id);
         $service['extend'] = $extend;
         $service['collection'] = self::checkCollection($id);

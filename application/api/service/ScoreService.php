@@ -124,7 +124,7 @@ class ScoreService
 
     public function checkSignInToday()
     {
-        $u_id =Token::getCurrentUid();
+        $u_id = Token::getCurrentUid();
         $count = SignInT::where('u_id', $u_id)
             ->whereTime('create_time', 'today')
             ->count();
@@ -138,6 +138,16 @@ class ScoreService
             'sign_in' => 1,
             'score' => UserScoreV::getUserScore($u_id),
         ];
+    }
+
+
+    public function getScoreList($type, $page, $size)
+    {
+        $u_id = 1;//Token::getCurrentUid();
+        $list = UserScoreV::getList($u_id, $type, $page, $size);
+        $list['balance'] = UserScoreV::getUserScore($u_id);
+        return $list;
+
     }
 
 }

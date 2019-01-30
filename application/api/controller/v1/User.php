@@ -101,7 +101,7 @@ class User extends BaseController
         $u_id = TokenService::getCurrentUid();
         $params = $this->request->param();
         if (key_exists('avatarUrl', $params)) {
-            $avatarUrl = config('setting.img_prefix') . ImageService::getImageUrl($params['avatarUrl']);
+            $avatarUrl = ImageService::getImageUrl($params['avatarUrl']);
             $params['avatarUrl'] = $avatarUrl;
         }
         $res = UserT::update($params, ['id' => $u_id]);

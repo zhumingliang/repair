@@ -52,7 +52,8 @@ class CenterService
     private function userInfo()
     {
         return UserT::where('id', Token::getCurrentUid())
-            ->field('nickName,province,city,country,phone,avatarUrl,address')->find()->toArray();
+            ->field('nickName,province,city,country,phone,avatarUrl,address')
+            ->find()->toArray();
     }
 
     private function balance()

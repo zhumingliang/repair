@@ -56,17 +56,18 @@ class Recharge extends BaseController
      *     }
      * @apiParam (请求参数说明) {String} code  积分码
      * @apiSuccessExample {json} 返回样例:
-     * {"msg":"ok","errorCode":0}
-     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
-     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * {"score":1000}
+     * @apiSuccess (返回参数说明) {int} score 兑换积分
      * @param $code
      * @return \think\response\Json
      * @throws \think\Exception
      */
     public function exchange($code)
     {
-        (new RechargeService())->exchange($code);
-        return json(new SuccessMessage());
+        $score = (new RechargeService())->exchange($code);
+        return json([
+            'score' => $score
+        ]);
 
     }
 

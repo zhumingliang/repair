@@ -201,7 +201,37 @@ class Score extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/score/user/list 345-获取用户积分明细列表
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription  获取用户积分明细列表
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/score/user/list?type=1&page=1&size=10
+     * @apiParam (请求参数说明) {int} type 类别：1 | 收入；2 支出
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":2,"per_page":20,"current_page":1,"last_page":1,"data":[{"u_id":1,"score":-2000,"nickName":"盟蚁","avatarUrl":"","name_sub":null,"update_time":"2018-11-12 10:34:23","info":"积分兑换:笔记本"},{"u_id":1,"score":-10,"nickName":"盟蚁","avatarUrl":"","name_sub":null,"update_time":"2018-11-12 10:34:23","info":"积分兑换:笔记本"}],"balance":10000000}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} balance 积分余额
+     * @apiSuccess (返回参数说明) {int} score 积分
+     * @apiSuccess (返回参数说明) {String} update_time 时间
+     * @apiSuccess (返回参数说明) {String} info 积分说明
+     * @param int $type
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getScoreList($type = 1, $page = 1, $size = 20)
+    {
+        $list = (new ScoreService())->getScoreList($type, $page, $size);
+        return json($list);
 
+
+    }
 
 
 }

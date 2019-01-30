@@ -42,6 +42,7 @@ class RechargeService
     /**
      * 积分兑换
      * @param $code
+     * @return mixed
      * @throws Exception
      */
     public function exchange($code)
@@ -76,6 +77,7 @@ class RechargeService
             }
 
             Db::commit();
+            return $recharge->score;
         } catch (Exception $e) {
             Db::rollback();
             throw $e;
