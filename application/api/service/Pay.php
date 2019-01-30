@@ -231,7 +231,12 @@ class Pay
             BondT::update(['prepay_id' => $prepay_id],
                 ['id' => $this->orderID]);
 
-        } else {
+        } elseif ($this->type == CommonEnum::ORDER_IS_SCORE) {
+            ScoreBuyT::update(['prepay_id' => $prepay_id],
+                ['id' => $this->orderID]);
+
+        }else
+            {
             throw new PayException();
         }
     }
