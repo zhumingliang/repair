@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\ScoreBuyRuleT;
 use app\api\model\ScoreBuyT;
 use app\api\model\SignDayT;
 use app\api\model\SignInT;
@@ -29,6 +30,14 @@ class ScoreService
      */
     public function buy($params)
     {
+        $rule = ScoreBuyRuleT::where('id', $params['id'])->find();
+        if (!$rule) {
+            throw  new OperationException([
+                'msg' => 'id不存在'
+            ]);
+        }
+        $params['money'] = $rule->money;
+        $params['score'] = $rule->score;
         $params['pay_id'] = CommonEnum::ORDER_STATE_INIT;
         $params['u_id'] = Token::getCurrentUid();
         $params['openid'] = Token::getCurrentOpenid();

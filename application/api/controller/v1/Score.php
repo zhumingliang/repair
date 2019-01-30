@@ -84,7 +84,7 @@ class Score extends BaseController
      */
     public function buy()
     {
-        (new ScoreValidate())->scene('buy')->goCheck();
+        (new ScoreValidate())->scene('id')->goCheck();
         $params = $this->request->param();
         $id = (new ScoreService())->buy($params);
         return json(
