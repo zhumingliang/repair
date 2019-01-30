@@ -80,14 +80,13 @@ class Score extends BaseController
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
-    public function buy()
+    public function buy($id)
     {
         (new ScoreValidate())->scene('id')->goCheck();
-        $params = $this->request->param();
-        $id = (new ScoreService())->buy($params);
+        $o_id = (new ScoreService())->buy($id);
         return json(
             [
-                'o_id' => $id
+                'o_id' => $o_id
             ]
         );
     }

@@ -22,15 +22,15 @@ class ScoreService
 {
     /**
      * 新增购买积分记录
-     * @param $params
+     * @param $id
      * @return mixed
      * @throws OperationException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
-    public function buy($params)
+    public function buy($id)
     {
-        $rule = ScoreBuyRuleT::where('id', $params['id'])->find();
+        $rule = ScoreBuyRuleT::where('id',$id)->find();
         if (!$rule) {
             throw  new OperationException([
                 'msg' => 'id不存在'
