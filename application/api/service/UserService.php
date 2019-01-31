@@ -66,4 +66,12 @@ class UserService
     }
 
 
+    public function checkBind()
+    {
+        $info = UserT::where('id', Token::getCurrentUid())->find();
+        return [
+            'bind' => $info->parent_id ? 1 : 0];
+    }
+
+
 }

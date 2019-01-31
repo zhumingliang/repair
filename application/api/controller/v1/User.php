@@ -188,8 +188,25 @@ class User extends BaseController
     {
         (new UserService())->bindCode($code);
         return json(new SuccessMessage());
-
-
     }
+
+    /**
+     * @api {GET} /api/v1/user/bind/check  346-检测用户是否绑定邀请码
+     * @apiGroup  MINI
+     * @apiVersion 1.0.1
+     * @apiDescription 检测用户是否绑定邀请码
+     * @apiExample {get}  请求样例:
+     * http://test.mengant.cn/api/v1/user/bind/check
+     * @apiSuccessExample {json} 返回样例:
+     *{"bind":1}
+     * @apiSuccess (返回参数说明) {int} bind 是否绑定： 0表示为绑定；1 | 表示绑定
+     * @return \think\response\Json
+     */
+    public function checkBind()
+    {
+        $bind = (new UserService())->checkBind();
+        return json($bind);
+    }
+
 
 }
