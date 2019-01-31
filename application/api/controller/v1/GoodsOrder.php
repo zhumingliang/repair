@@ -29,12 +29,10 @@ class GoodsOrder extends BaseController
      * @apiExample {post}  请求样例:
      *    {
      *       "g_id": 1
-     *       "score": 1000
      *       "count": 1
      *       "a_id": 1
      *     }
      * @apiParam (请求参数说明) {int} g_id   商品id
-     * @apiParam (请求参数说明) {int} score   总积分
      * @apiParam (请求参数说明) {int} count   数量
      * @apiParam (请求参数说明) {int} a_id   地址id
      * @apiSuccessExample {json} 返回样例:

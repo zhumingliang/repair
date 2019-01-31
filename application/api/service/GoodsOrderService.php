@@ -9,10 +9,12 @@
 namespace app\api\service;
 
 
+use app\api\controller\v1\Goods;
 use app\api\model\GoodsCommentImgT;
 use app\api\model\GoodsOrderCommentT;
 use app\api\model\GoodsOrderT;
 use app\api\model\GoodsOrderV;
+use app\api\model\GoodsT;
 use app\api\model\UserScoreV;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
@@ -24,9 +26,12 @@ class GoodsOrderService
     public function save($params)
     {
         $u_id = Token::getCurrentUid();
-        if (!$this->checkScore($u_id, $params['score'])) {
+        if ($this->checkScore($u_id, $params['score']) < 0) {
             return 0;
         }
+        $g_id = $params['g_id'];
+        $goods = GoodsT::where('g_id', $g_id)->find();
+        $params['score'] = $goods->score * $params['count'];
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['u_id'] = $u_id;
         $params['code_number'] = makeOrderNo();
@@ -158,7 +163,7 @@ class GoodsOrderService
     {
         $info = GoodsOrderT::getInfoForMINI($id);
         $info['comment'] = $this->getOrderComment($id);
-        $info['express_info'] = $this->getExpressInfo($info['express_no'],$info['express_code']);
+        $info['express_info'] = $this->getExpressInfo($info['express_no'], $info['express_code']);
         return $info;
 
 
@@ -248,13 +253,13 @@ class GoodsOrderService
 
     public function getExpressInfo($express_no, $express_code)
     {
-        if (!strlen($express_no)){
+        if (!strlen($express_no)) {
             return array();
         }
         $info = (new ExpressService($express_code, $express_no))->getInfo();
         if ($info->code == 0) {
-           return $data = $info->data;
-           // return $data[0]->data;
+            return $data = $info->data;
+            // return $data[0]->data;
             // return ($data[0]->data)[0];
 
         } else {
