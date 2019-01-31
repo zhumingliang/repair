@@ -373,7 +373,9 @@ class GoodsOrder extends BaseController
      */
     public function receiveConfirm($id)
     {
-        $res = GoodsOrderT::update(['status' => 3], ['id' => $id]);
+        $params['send_time'] = date('Y-m-d H:i:s');
+        $params['status'] = 3;
+        $res = GoodsOrderT::update($params, ['id' => $id]);
         if (!$res) {
             throw  new OperationException([
                 'code' => 401,
