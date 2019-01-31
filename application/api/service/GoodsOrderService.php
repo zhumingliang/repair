@@ -30,7 +30,7 @@ class GoodsOrderService
             return 0;
         }
         $g_id = $params['g_id'];
-        $goods = GoodsT::where('g_id', $g_id)->find();
+        $goods = GoodsT::where('id', $g_id)->find();
         $params['score'] = $goods->score * $params['count'];
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['u_id'] = $u_id;
