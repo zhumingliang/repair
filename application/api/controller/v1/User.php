@@ -176,9 +176,8 @@ class User extends BaseController
      * }
      * @apiParam (请求参数说明) {String} code  邀请码
      * @apiSuccessExample {json} 返回样例:
-     * {"msg": "ok","error_code": 0}
-     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
-     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * {"score": 100}
+     * @apiSuccess (返回参数说明) {int} score 绑定获取的邀请码
      *
      * @param $code
      * @return \think\response\Json
@@ -186,8 +185,8 @@ class User extends BaseController
      */
     public function bind($code)
     {
-        (new UserService())->bindCode($code);
-        return json(new SuccessMessage());
+        $score = (new UserService())->bindCode($code);
+        return json($score);
     }
 
     /**
@@ -198,8 +197,8 @@ class User extends BaseController
      * @apiExample {get}  请求样例:
      * http://test.mengant.cn/api/v1/user/bind/check
      * @apiSuccessExample {json} 返回样例:
-     *{"bind":1}
-     * @apiSuccess (返回参数说明) {int} bind 是否绑定： 0表示为绑定；1 | 表示绑定
+     *{"code":1123}
+     * @apiSuccess (返回参数说明) {int} code 用户绑定的邀请码： 0表示为未绑定
      * @return \think\response\Json
      */
     public function checkBind()

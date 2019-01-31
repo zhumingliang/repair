@@ -36,7 +36,7 @@ class UserService
                 'errorCode' => 30004
             ]);
         }
-        $this->saveScore(Token::getCurrentUid(), $info->id);
+        return $this->saveScore(Token::getCurrentUid(), $info->id);
 
 
     }
@@ -44,6 +44,7 @@ class UserService
     private function saveScore($id, $parent_id)
     {
         $info = ScoreOrderRoleT::find();
+        $score = 0;
         if ($info) {
             $data = [
                 [
@@ -59,8 +60,11 @@ class UserService
             ];
 
             (new InviteScoreT())->saveAll($data);
-
+            $score = $info->self_register;
         }
+        return [
+            'score' => $score
+        ];
 
 
     }
@@ -69,8 +73,23 @@ class UserService
     public function checkBind()
     {
         $info = UserT::where('id', Token::getCurrentUid())->find();
+        if (!$info->parent_id) {
+            return [
+                'code' => 0,
+            ];
+        }
+
+        $parent = UserT::where('id', $info->parent_id)->find();
+        if (!$parent) {
+            return [
+                'code' => 0,
+            ];
+        }
+
         return [
-            'bind' => $info->parent_id ? 1 : 0];
+            'code' => $parent->code ? $parent->code : 0,
+        ];
+
     }
 
 
