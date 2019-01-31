@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
+      <change afterPath="$PROJECT_DIR$/application/api/service/RechargeS.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/RechargeService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/RechargeService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Recharge.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Recharge.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +20,38 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Recharge.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1782">
-              <caret line="73" column="1" lean-forward="true" selection-start-line="73" selection-start-column="1" selection-end-line="73" selection-end-column="1" />
+            <state relative-caret-position="552">
+              <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/service/RechargeService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="826">
+              <caret line="132" column="1" selection-start-line="132" selection-start-column="1" selection-end-line="132" selection-end-column="1" />
+              <folding>
+                <element signature="e#124#152#0#PHP" expanded="true" />
+                <element signature="e#430#719#0#PHP" />
+                <element signature="e#819#1986#0#PHP" />
+                <element signature="e#1993#2295#0#PHP" />
+                <element signature="e#2300#2714#0#PHP" />
+                <element signature="e#2720#3100#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/service/RechargeS.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="351">
+              <caret line="18" column="15" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="15" />
+              <folding>
+                <element signature="e#124#152#0#PHP" expanded="true" />
+                <element signature="e#430#719#0#PHP" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,7 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/api/model/AddressT.php" />
         <option value="$PROJECT_DIR$/application/api/model/ScoreOrderRoleT.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/GoodsCategory.php" />
         <option value="$PROJECT_DIR$/application/api/model/ScoreOrderT.php" />
@@ -116,8 +146,9 @@
         <option value="$PROJECT_DIR$/application/api/model/GoodsOrderV.php" />
         <option value="$PROJECT_DIR$/application/api/service/GoodsOrderService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/ScoreBuyRole.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Recharge.php" />
         <option value="$PROJECT_DIR$/application/api/service/RechargeService.php" />
+        <option value="$PROJECT_DIR$/application/api/service/RechargeS.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Recharge.php" />
       </list>
     </option>
   </component>
@@ -344,21 +375,7 @@
       <workItem from="1547614333555" duration="42728000" />
       <workItem from="1548083584013" duration="436000" />
       <workItem from="1548085406367" duration="1529000" />
-      <workItem from="1548644327983" duration="17835000" />
-    </task>
-    <task id="LOCAL-00524" summary="项目初始化">
-      <created>1545813374603</created>
-      <option name="number" value="00524" />
-      <option name="presentableId" value="LOCAL-00524" />
-      <option name="project" value="LOCAL" />
-      <updated>1545813374603</updated>
-    </task>
-    <task id="LOCAL-00525" summary="项目初始化">
-      <created>1545813422649</created>
-      <option name="number" value="00525" />
-      <option name="presentableId" value="LOCAL-00525" />
-      <option name="project" value="LOCAL" />
-      <updated>1545813422649</updated>
+      <workItem from="1548644327983" duration="18020000" />
     </task>
     <task id="LOCAL-00526" summary="项目初始化">
       <created>1545834085453</created>
@@ -689,11 +706,25 @@
       <option name="project" value="LOCAL" />
       <updated>1548902825549</updated>
     </task>
-    <option name="localTasksCounter" value="573" />
+    <task id="LOCAL-00573" summary="项目初始化">
+      <created>1548903072065</created>
+      <option name="number" value="00573" />
+      <option name="presentableId" value="LOCAL-00573" />
+      <option name="project" value="LOCAL" />
+      <updated>1548903072065</updated>
+    </task>
+    <task id="LOCAL-00574" summary="项目初始化">
+      <created>1548903124496</created>
+      <option name="number" value="00574" />
+      <option name="presentableId" value="LOCAL-00574" />
+      <option name="project" value="LOCAL" />
+      <updated>1548903124496</updated>
+    </task>
+    <option name="localTasksCounter" value="575" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1032337000" />
+    <option name="totallyTimeSpent" value="1032522000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -706,6 +737,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22297297" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -747,13 +779,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/api/model/GoodsOrderCommentT.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="40" selection-start-line="16" selection-start-column="3" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/GoodsOrderCommentV.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="777">
@@ -1106,15 +1131,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Recharge.php">
+    <entry file="file://$PROJECT_DIR$/application/api/service/RechargeService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1782">
-          <caret line="73" column="1" lean-forward="true" selection-start-line="73" selection-start-column="1" selection-end-line="73" selection-end-column="1" />
+        <state relative-caret-position="826">
+          <caret line="132" column="1" selection-start-line="132" selection-start-column="1" selection-end-line="132" selection-end-column="1" />
+          <folding>
+            <element signature="e#124#152#0#PHP" expanded="true" />
+            <element signature="e#430#719#0#PHP" />
+            <element signature="e#819#1986#0#PHP" />
+            <element signature="e#1993#2295#0#PHP" />
+            <element signature="e#2300#2714#0#PHP" />
+            <element signature="e#2720#3100#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/RechargeService.php">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/application/api/service/RechargeS.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="18" column="15" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="15" />
+          <folding>
+            <element signature="e#124#152#0#PHP" expanded="true" />
+            <element signature="e#430#719#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Recharge.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

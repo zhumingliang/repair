@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\service\RechargeS;
 use app\api\Service\RechargeService;
 use app\lib\exception\SuccessMessage;
 
@@ -39,7 +40,7 @@ class Recharge extends BaseController
      */
     public function save($count, $score)
     {
-        (new RechargeService())->save($count, $score);
+        (new RechargeS())->save($count, $score);
         return json(new SuccessMessage());
 
     }
@@ -64,7 +65,7 @@ class Recharge extends BaseController
      */
     public function exchange($code)
     {
-        $recharge = new RechargeService();
+        $recharge = new RechargeS();
         return json([
             'score' => $score = $recharge->exchange($code)
         ]);
