@@ -19,6 +19,11 @@ class GoodsOrderT extends Model
         return $this->belongsTo('GoodsT',
             'g_id', 'id');
     }
+    public function user()
+    {
+        return $this->belongsTo('UserT',
+            'u_id', 'id');
+    }
 
     public function address()
     {
@@ -62,7 +67,10 @@ class GoodsOrderT extends Model
                 },
                 'goods' => function ($query) {
                     $query->field('id,name,cover,money');
-                }
+                },
+                'user' => function ($query) {
+                    $query->field('id,nickName,avatarUrl');
+                },
 
             ])
             ->hidden(['a_id', 'u_id', 'g_id', 'state', 'update_time'])
