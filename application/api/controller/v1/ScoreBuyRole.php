@@ -69,7 +69,7 @@ class ScoreBuyRole extends BaseController
     public function getList()
     {
         $list = ScoreBuyRuleT::where('state', CommonEnum::STATE_IS_OK)
-            ->field('id,score,money/100 as money')
+            ->field('id,score,FORMAT(money/100,2) as money')
             ->select();
         return json($list);
     }
