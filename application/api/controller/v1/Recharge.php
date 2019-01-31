@@ -64,9 +64,9 @@ class Recharge extends BaseController
      */
     public function exchange($code)
     {
-        $score = (new RechargeService())->exchange($code);
+        $recharge = new RechargeService();
         return json([
-            'score' => $score
+            'score' => $score = $recharge->exchange($code)
         ]);
 
     }
