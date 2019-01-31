@@ -117,6 +117,7 @@ class UserToken extends Token
                 'province' => $cachedValue['province'],
                 'area' => $cachedValue['area'],
                 'red_money' => $red_money,
+                'bind' => $cachedValue['parent_id'] ? 1 : 0,
             ];
 
         }
@@ -130,7 +131,8 @@ class UserToken extends Token
             'city' => $cachedValue['city'],
             'province' => $cachedValue['province'],
             'area' => $cachedValue['area'],
-            'red_money' => $red_money
+            'red_money' => $red_money,
+            'bind' => $cachedValue['parent_id'] ? 1 : 0,
         ];
     }
 
@@ -211,6 +213,7 @@ class UserToken extends Token
         $cachedValue['name_sub'] = $user['name_sub'];
         $cachedValue['avatarUrl'] = $user['avatarUrl'];
         $cachedValue['code'] = $user['code'];
+        $cachedValue['parent_id'] = $user['parent_id'];
         return $cachedValue;
     }
 
@@ -222,7 +225,8 @@ class UserToken extends Token
     {
         $data = [
             'openId' => $openid,
-            'code' => generateCode(1)[0]
+            'code' => generateCode(1)[0],
+            'parent_id' => 0
         ];
         $user = UserT::create($data);
         return $user->id;
