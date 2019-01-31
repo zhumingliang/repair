@@ -93,7 +93,8 @@ class UserToken extends Token
 
             //检测用户是否生成邀请码
             if (!strlen($user->code)) {
-                UserT::update(['code' => generateCode(1)[0]], ['id' => $user->id]);
+                $user->code = generateCode(1)[0];
+                $user->save();
             }
         }
 
