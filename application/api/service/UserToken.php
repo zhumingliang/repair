@@ -83,12 +83,17 @@ class UserToken extends Token
             $u_id = $this->newUser($openid);
             $red_money = RedService::addRed(RedEnum::FIRST_LOGIN, $u_id);
         } else {
-            $u_id = $user['id'];
+            $u_id = $user->id;
             if ($user && $user->state == 2) {
                 throw new TokenException([
                     'msg' => '小程序用户被禁用，请联系平台',
                     'errorCode' => 20010
                 ]);
+            }
+
+            //检测用户是否生成邀请码
+            if (!strlen($user->code)) {
+                UserT::update(['code' => generateCode(1)[0]], ['id' => $user->id]);
             }
         }
 
