@@ -26,7 +26,7 @@ Route::get('api/:version/token/user', 'api/:version.Token/getUserToken');
 Route::post('api/:version/user/info', 'api/:version.User/userInfo');
 Route::post('api/:version/user/update', 'api/:version.User/infoUpdate');
 Route::get('api/:version/user/list', 'api/:version.User/getUsers');
-Route::get('api/:version/user/bind', 'api/:version.User/bind');
+Route::post('api/:version/user/bind', 'api/:version.User/bind');
 Route::get('api/:version/user/bind/check', 'api/:version.User/checkBind');
 
 Route::get('api/:version/behaviors', 'api/:version.Behavior/getList');
