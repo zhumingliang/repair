@@ -331,3 +331,14 @@ Route::post('api/:version/address/update', 'api/:version.Address/update');
 
 Route::post('api/:version/sign/in', 'api/:version.SignIn/signIn');
 Route::get('api/:version/sign/in/check', 'api/:version.SignIn/checkSignInToday');
+
+
+Route::post('api/:version/forum/save', 'api/:version.Forum/save');
+Route::post('api/:version/forum/update', 'api/:version.Forum/update');
+Route::post('api/:version/forum/handel', 'api/:version.Forum/handel');
+Route::post('api/:version/forum/image/delete', 'api/:version.Forum/forumImageDelete');
+Route::get('api/:version/forum/cms/list', 'api/:version.Forum/getForumListForCMS');
+Route::get('api/:version/forum/cms', 'api/:version.Forum/getForumForCMS');
+Route::get('api/:version/forum/mini/list', 'api/:version.Forum/getForumListForMINI');
+Route::get('api/:version/forum/mini', 'api/:version.Forum/getForumForMINI');
+Route::get('api/:version/forum/comments/mini', 'api/:version.Forum/getCommentsForMINI');

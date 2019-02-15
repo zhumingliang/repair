@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2019-01-30
- * Time: 11:11
+ * Date: 2019-02-16
+ * Time: 00:16
  */
 
 namespace app\api\model;
@@ -11,16 +11,16 @@ namespace app\api\model;
 
 use think\Model;
 
-class ForumCommentT extends Model
+class ForumCommentV extends Model
 {
     public static function getComment($f_id, $page, $size)
     {
-
-        $comments = self::where('f_id', $f_id)
-            ->where('state', '=', 2)
+        $pagingData = self::where('f_id', '=', $f_id)
+            ->hidden(['openid', 'c_id'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])->toArray();
-        return $comments;
+        return $pagingData;
     }
+
 
 }
