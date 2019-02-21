@@ -346,3 +346,4 @@ Route::get('api/:version/forum/mini/list', 'api/:version.Forum/getForumListForMI
 Route::get('api/:version/forum/mini', 'api/:version.Forum/getForumForMINI');
 Route::get('api/:version/forum/comments/mini', 'api/:version.Forum/getCommentsForMINI');
 Route::get('api/:version/forum/comments/cms', 'api/:version.Forum/getCommentListForCMS');
+Route::get('api/:version/forum/comment', 'api/:version.Forum/getComment');

@@ -451,4 +451,28 @@ class Forum extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/forum/comment 361-CMS获取指定评论
+     * @apiVersion 1.0.1
+     * @apiDescription CMS获取指定评论
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/forum/comment?id=4
+     * @apiParam (请求参数说明) {int} id  帖子id
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":1,"title":"你的睡眠真的好吗？","content":"每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？","create_time":"2019-02-13 23:26:29","user":{"id":1,"nickName":"盟蚁","avatarUrl":"","name_sub":null,"phone":null},"imgs":[{"id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"id":2,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"id":3,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]}
+     * @apiSuccess (返回参数说明) {int} id 帖子id
+     * @apiSuccess (返回参数说明) {String} content 内容
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getComment($id)
+    {
+        $info = ForumCommentT::where('id', $id)->field('id,content')->find();
+        return json($info);
+
+    }
+
 }
