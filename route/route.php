@@ -287,6 +287,7 @@ Route::post('api/:version/score/order/rule/save', 'api/:version.Score/scoreOrder
 Route::post('api/:version/score/order/rule/update', 'api/:version.Score/scoreOrderRuleUpdate');
 Route::get('api/:version/score/order/rule', 'api/:version.Score/getScoreOrderRule');
 Route::get('api/:version/score/user/list', 'api/:version.Score/getScoreList');
+Route::get('api/:version/score/user/list/cms', 'api/:version.Score/getUserScoreList');
 
 
 Route::post('api/:version/score/rule/save', 'api/:version.ScoreBuyRole/save');

@@ -159,4 +159,19 @@ class ScoreService
 
     }
 
+    /**
+     * @param $page
+     * @param $size
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getUserScoreList( $page, $size)
+    {
+        $list = UserScoreV::getUserScoreList( $page, $size);
+        return $list;
+
+    }
+
+
+
 }
