@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\ForumCommentListV;
 use app\api\model\ForumCommentT;
 use app\api\model\ForumCommentV;
 use app\api\model\ForumImgT;
@@ -217,6 +218,13 @@ class ForumService
         $info = ForumT::getForumForCMS($id);
         $info['comment'] = $this->getCommentsForMINI($id);
         return $info;
+    }
+
+    public function getCommentListForCMS($day, $type, $page, $size, $key)
+    {
+        $list = ForumCommentListV::getList($day, $type, $page, $size, $key);
+        return $list;
+
     }
 
 

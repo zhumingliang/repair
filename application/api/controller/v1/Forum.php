@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\ForumCommentT;
 use app\api\model\ForumImgT;
 use app\api\model\ForumT;
 use app\api\service\ForumService;
@@ -381,5 +382,73 @@ class Forum extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/forum/comments/cms 359-CMS获取论坛帖子评论列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 小程序获取论坛帖子列表
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/forum/comments/cms?page=1&size=20&type=1
+     * @apiParam (请求参数说明) {int} page  页数
+     * @apiParam (请求参数说明) {int} size   每页数据条数
+     * @apiParam (请求参数说明) {int} type   评论类别：1 | 正常；2 | 全部
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":2,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":2,"nickName":"盟蚁2","avatarUrl":"","title":"你的睡眠真的好吗？","content":"hhh","create_time":"2019-02-15 23:42:35","state":1},{"id":1,"nickName":"盟蚁","avatarUrl":"","title":"你的睡眠真的好吗？","content":"hh","create_time":"2019-02-15 23:41:55","state":1}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 评论id
+     * @apiSuccess (返回参数说明) {String} content  评论内容
+     * @apiSuccess (返回参数说明) {String} nickName  评论者昵称
+     * @apiSuccess (返回参数说明) {String} avatarUrl  评论者头像
+     * @apiSuccess (返回参数说明) {String} title  标题
+     * @apiSuccess (返回参数说明) {String} create_time  评论时间
+     * @apiSuccess (返回参数说明) {int} state  评论状态：1 | 正常；2| 删除
+     * @param $day
+     * @param int $type
+     * @param int $page
+     * @param int $size
+     * @param string $key
+     * @return \think\response\Json
+     */
+    public function getCommentListForCMS($day, $type = 1, $page = 1, $size = 10, $key = '')
+    {
+        $forum = (new ForumService())->getCommentListForCMS($day, $type, $page, $size, $key);
+        return json($forum);
+    }
+
+    /**
+     * @api {POST} /api/v1/forum/comment/handel  360-帖子评论状态操作-删除
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  删除指定评论
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1
+     * }
+     * @apiParam (请求参数说明) {int} id 评论id
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $id
+     * @return \think\response\Json
+     * @throws OperationException
+     */
+    public function commentHandel($id)
+    {
+        $id = ForumCommentT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$id) {
+            throw new OperationException(
+                [
+                    'code' => 401,
+                    'msg' => '评论状态修改失败',
+                    'errorCode' => 160009
+                ]);
+        }
+        return json(new SuccessMessage());
+
+    }
 
 }

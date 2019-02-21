@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
+      <change afterPath="$PROJECT_DIR$/application/api/model/ForumCommentListV.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Score.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Score.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/UserScoreV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/UserScoreV.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Forum.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Forum.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/ForumService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/ForumService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/route/route.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,24 +20,35 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Goods.php">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Forum.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7047">
-              <caret line="279" column="136" selection-start-line="279" selection-start-column="136" selection-end-line="279" selection-end-column="136" />
+            <state relative-caret-position="687">
+              <caret line="438" column="33" selection-start-line="438" selection-start-column="20" selection-end-line="438" selection-end-column="33" />
               <folding>
-                <element signature="e#129#167#0#PHP" expanded="true" />
+                <element signature="e#128#166#0#PHP" expanded="true" />
+                <element signature="e#7285#8585#0#PHP" />
+                <element signature="e#8590#8783#0#PHP" />
+                <element signature="e#8790#11584#0#PHP" />
+                <element signature="e#11589#11779#0#PHP" />
+                <element signature="e#11786#13226#0#PHP" />
+                <element signature="e#13231#13414#0#PHP" />
+                <element signature="e#13420#15679#0#PHP" />
+                <element signature="e#15684#15919#0#PHP" />
+                <element signature="e#16001#17489#0#PHP" />
+                <element signature="e#16170#16394#0#PHP" />
+                <element signature="e#18248#18663#0#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Forum.php">
+        <entry file="file://$PROJECT_DIR$/application/api/service/ForumService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="240" column="75" selection-start-line="240" selection-start-column="75" selection-end-line="240" selection-end-column="75" />
+            <state relative-caret-position="579">
+              <caret line="224" column="39" lean-forward="true" selection-start-line="224" selection-start-column="39" selection-end-line="224" selection-end-column="39" />
               <folding>
-                <element signature="e#128#166#0#PHP" expanded="true" />
+                <element signature="e#122#158#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,111 +57,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/GoodsOrder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+            <state relative-caret-position="541">
+              <caret line="253" column="5" lean-forward="true" selection-start-line="222" selection-start-column="4" selection-end-line="253" selection-end-column="5" />
               <folding>
                 <element signature="e#509#1186#0#PHP" />
                 <element signature="e#1191#1453#0#PHP" />
-                <element signature="e#2314#2864#0#PHP" />
-                <element signature="e#2870#4892#0#PHP" />
-                <element signature="e#4897#5141#0#PHP" />
-                <element signature="e#5145#6975#0#PHP" />
-                <element signature="e#6980#7224#0#PHP" />
-                <element signature="e#7231#8141#0#PHP" />
-                <element signature="e#8146#8392#0#PHP" />
-                <element signature="e#8398#8938#0#PHP" />
-                <element signature="e#8943#9358#0#PHP" />
-                <element signature="e#9364#11205#0#PHP" />
-                <element signature="e#11362#13986#0#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Score.php">
+        <entry file="file://$PROJECT_DIR$/application/api/validate/GoodsOrderValidate.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="259" column="43" lean-forward="true" selection-start-line="259" selection-start-column="43" selection-end-line="259" selection-end-column="43" />
-              <folding>
-                <element signature="e#430#1255#0#PHP" />
-                <element signature="e#1260#1656#0#PHP" />
-                <element signature="e#1662#2229#0#PHP" />
-                <element signature="e#2234#2465#0#PHP" />
-                <element signature="e#2471#3451#0#PHP" />
-                <element signature="e#3456#3778#0#PHP" />
-                <element signature="e#3784#4782#0#PHP" />
-                <element signature="e#4787#5245#0#PHP" />
-                <element signature="e#5251#6125#0#PHP" />
-                <element signature="e#6130#6248#0#PHP" />
-                <element signature="e#6254#7473#0#PHP" />
-                <element signature="e#7478#7655#0#PHP" />
-              </folding>
+            <state relative-caret-position="162">
+              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/route/route.php">
+        <entry file="file://$PROJECT_DIR$/application/api/model/ForumCommentListV.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="289" column="44" selection-start-line="289" selection-start-column="25" selection-end-line="289" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/service/ScoreService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="169" column="36" lean-forward="true" selection-start-line="169" selection-start-column="36" selection-end-line="169" selection-end-column="36" />
-              <folding>
-                <element signature="e#587#1333#0#PHP" />
-              </folding>
+            <state relative-caret-position="675">
+              <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/api/model/UserScoreV.php">
+        <entry file="file://$PROJECT_DIR$/route/route.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="56" column="67" selection-start-line="56" selection-start-column="67" selection-end-line="56" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="179" column="48" selection-start-line="179" selection-start-column="48" selection-end-line="179" selection-end-column="48" />
-              <folding>
-                <element signature="e#553#1408#0#PHP" />
-                <element signature="e#1413#2551#0#PHP" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/service/GoodsOrderService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-              <folding>
-                <element signature="e#123#155#0#PHP" expanded="true" />
-                <element signature="e#4466#6203#0#PHP" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/model/GoodsOrderV.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="84" column="71" selection-start-line="84" selection-start-column="71" selection-end-line="84" selection-end-column="71" />
+            <state relative-caret-position="543">
+              <caret line="339" column="82" selection-start-line="339" selection-start-column="82" selection-end-line="339" selection-end-column="82" />
             </state>
           </provider>
         </entry>
@@ -182,11 +123,11 @@
       <find>checkScore</find>
       <find>commen</find>
       <find>preImage</find>
-      <find>han</find>
       <find>delete</find>
       <find>del</find>
       <find>comm</find>
       <find>list</find>
+      <find>han</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,7 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/api/validate/GoodsOrderValidate.php" />
         <option value="$PROJECT_DIR$/application/api/model/GoodsOrderCommentT.php" />
         <option value="$PROJECT_DIR$/application/api/service/ExpressService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Address.php" />
@@ -217,7 +157,6 @@
         <option value="$PROJECT_DIR$/application/api/validate/PayValidate.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Pay.php" />
         <option value="$PROJECT_DIR$/application/api/service/Pay.php" />
-        <option value="$PROJECT_DIR$/application/api/model/UserT.php" />
         <option value="$PROJECT_DIR$/application/api/service/UserToken.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/ScoreBuyRole.php" />
         <option value="$PROJECT_DIR$/application/api/service/RechargeService.php" />
@@ -232,20 +171,22 @@
         <option value="$PROJECT_DIR$/application/api/model/ForumCommentT.php" />
         <option value="$PROJECT_DIR$/application/api/model/ForumCommentV.php" />
         <option value="$PROJECT_DIR$/application/api/model/ForumListV.php" />
-        <option value="$PROJECT_DIR$/application/api/service/ForumService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Auth.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Index.php" />
         <option value="$PROJECT_DIR$/application/api/controller/Index.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Goods.php" />
         <option value="$PROJECT_DIR$/application/api/model/ForumT.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Forum.php" />
         <option value="$PROJECT_DIR$/application/api/service/GoodsOrderService.php" />
         <option value="$PROJECT_DIR$/application/api/model/GoodsOrderV.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/GoodsOrder.php" />
-        <option value="$PROJECT_DIR$/application/api/service/ScoreService.php" />
-        <option value="$PROJECT_DIR$/route/route.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Score.php" />
         <option value="$PROJECT_DIR$/application/api/model/UserScoreV.php" />
+        <option value="$PROJECT_DIR$/application/api/service/ScoreService.php" />
+        <option value="$PROJECT_DIR$/application/api/model/UserT.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Score.php" />
+        <option value="$PROJECT_DIR$/application/api/service/ForumService.php" />
+        <option value="$PROJECT_DIR$/application/api/model/ForumCommentListV.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Forum.php" />
+        <option value="$PROJECT_DIR$/route/route.php" />
       </list>
     </option>
   </component>
@@ -315,6 +256,13 @@
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
+              <item name="repair" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="repair" type="b2602c69:ProjectViewProjectNode" />
@@ -478,21 +426,7 @@
       <workItem from="1548644327983" duration="22924000" />
       <workItem from="1549896040020" duration="1513000" />
       <workItem from="1549986613181" duration="11576000" />
-      <workItem from="1550588622467" duration="5067000" />
-    </task>
-    <task id="LOCAL-00537" summary="项目初始化">
-      <created>1546398808295</created>
-      <option name="number" value="00537" />
-      <option name="presentableId" value="LOCAL-00537" />
-      <option name="project" value="LOCAL" />
-      <updated>1546398808296</updated>
-    </task>
-    <task id="LOCAL-00538" summary="项目初始化">
-      <created>1546442470980</created>
-      <option name="number" value="00538" />
-      <option name="presentableId" value="LOCAL-00538" />
-      <option name="project" value="LOCAL" />
-      <updated>1546442470981</updated>
+      <workItem from="1550588622467" duration="8358000" />
     </task>
     <task id="LOCAL-00539" summary="项目初始化">
       <created>1546442670038</created>
@@ -823,11 +757,25 @@
       <option name="project" value="LOCAL" />
       <updated>1550754650902</updated>
     </task>
-    <option name="localTasksCounter" value="586" />
+    <task id="LOCAL-00586" summary="项目初始化">
+      <created>1550755431517</created>
+      <option name="number" value="00586" />
+      <option name="presentableId" value="LOCAL-00586" />
+      <option name="project" value="LOCAL" />
+      <updated>1550755431517</updated>
+    </task>
+    <task id="LOCAL-00587" summary="项目初始化">
+      <created>1550756749242</created>
+      <option name="number" value="00587" />
+      <option name="presentableId" value="LOCAL-00587" />
+      <option name="project" value="LOCAL" />
+      <updated>1550756749242</updated>
+    </task>
+    <option name="localTasksCounter" value="588" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1055582000" />
+    <option name="totallyTimeSpent" value="1058873000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -882,58 +830,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Recharge.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Order.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/GoodsOrderT.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/validate/ExtendValidate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="28" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23652">
-          <caret line="885" column="27" selection-start-line="885" selection-start-column="27" selection-end-line="885" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/validate/CircleValidate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/GoodsService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2106">
-          <caret line="90" column="9" selection-start-line="86" selection-start-column="7" selection-end-line="90" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Banner.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="94" column="5" lean-forward="true" selection-start-line="61" selection-start-column="3" selection-end-line="94" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/ServicesExtend.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1001,13 +897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/ShopListV.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="44" column="67" selection-start-line="43" selection-start-column="11" selection-end-line="44" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -1152,16 +1041,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/ForumService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="156" column="31" selection-start-line="156" selection-start-column="31" selection-end-line="156" selection-end-column="31" />
-          <folding>
-            <element signature="e#122#154#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/ForumV.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
@@ -1179,16 +1058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Forum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="240" column="75" selection-start-line="240" selection-start-column="75" selection-end-line="240" selection-end-column="75" />
-          <folding>
-            <element signature="e#128#166#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/DemandOrderV.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2990" />
@@ -1201,16 +1070,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7047">
-          <caret line="279" column="136" selection-start-line="279" selection-start-column="136" selection-end-line="279" selection-end-column="136" />
-          <folding>
-            <element signature="e#129#167#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/GoodsOrderService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1218,28 +1077,6 @@
           <folding>
             <element signature="e#123#155#0#PHP" expanded="true" />
             <element signature="e#4466#6203#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/GoodsOrder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
-          <folding>
-            <element signature="e#509#1186#0#PHP" />
-            <element signature="e#1191#1453#0#PHP" />
-            <element signature="e#2314#2864#0#PHP" />
-            <element signature="e#2870#4892#0#PHP" />
-            <element signature="e#4897#5141#0#PHP" />
-            <element signature="e#5145#6975#0#PHP" />
-            <element signature="e#6980#7224#0#PHP" />
-            <element signature="e#7231#8141#0#PHP" />
-            <element signature="e#8146#8392#0#PHP" />
-            <element signature="e#8398#8938#0#PHP" />
-            <element signature="e#8943#9358#0#PHP" />
-            <element signature="e#9364#11205#0#PHP" />
-            <element signature="e#11362#13986#0#PHP" />
           </folding>
         </state>
       </provider>
@@ -1255,18 +1092,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/route/route.php">
+    <entry file="file://$PROJECT_DIR$/application/api/model/UserScoreV.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="289" column="44" selection-start-line="289" selection-start-column="25" selection-end-line="289" selection-end-column="44" />
+        <state relative-caret-position="411">
+          <caret line="49" column="43" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="225" column="23" lean-forward="true" selection-start-line="225" selection-start-column="23" selection-end-line="225" selection-end-column="23" />
+          <folding>
+            <element signature="e#129#167#0#PHP" expanded="true" />
+            <element signature="e#9319#10626#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/validate/GoodsValidate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceBookingV.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceCommentV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-123" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServiceListV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-193" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ServicesExtendV.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ShopListV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="746">
+          <caret line="44" column="67" lean-forward="true" selection-start-line="30" selection-start-column="8" selection-end-line="44" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/ForumService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="224" column="39" lean-forward="true" selection-start-line="224" selection-start-column="39" selection-end-line="224" selection-end-column="39" />
+          <folding>
+            <element signature="e#122#158#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/ForumCommentListV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Score.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="259" column="43" lean-forward="true" selection-start-line="259" selection-start-column="43" selection-end-line="259" selection-end-column="43" />
+        <state relative-caret-position="811">
+          <caret line="284" column="48" selection-start-line="284" selection-start-column="48" selection-end-line="284" selection-end-column="48" />
           <folding>
+            <element signature="e#130#168#0#PHP" expanded="true" />
             <element signature="e#430#1255#0#PHP" />
             <element signature="e#1260#1656#0#PHP" />
             <element signature="e#1662#2229#0#PHP" />
@@ -1283,20 +1179,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/validate/GoodsOrderValidate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/ScoreService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="169" column="36" lean-forward="true" selection-start-line="169" selection-start-column="36" selection-end-line="169" selection-end-column="36" />
+        <state relative-caret-position="606">
+          <caret line="180" column="28" selection-start-line="180" selection-start-column="28" selection-end-line="180" selection-end-column="28" />
           <folding>
             <element signature="e#587#1333#0#PHP" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/UserScoreV.php">
+    <entry file="file://$PROJECT_DIR$/application/api/model/UserT.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="56" column="67" selection-start-line="56" selection-start-column="67" selection-end-line="56" selection-end-column="67" />
+        <state relative-caret-position="498">
+          <caret line="69" column="18" selection-start-line="69" selection-start-column="18" selection-end-line="69" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/GoodsOrder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="253" column="5" lean-forward="true" selection-start-line="222" selection-start-column="4" selection-end-line="253" selection-end-column="5" />
+          <folding>
+            <element signature="e#509#1186#0#PHP" />
+            <element signature="e#1191#1453#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Forum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="687">
+          <caret line="438" column="33" selection-start-line="438" selection-start-column="20" selection-end-line="438" selection-end-column="33" />
+          <folding>
+            <element signature="e#128#166#0#PHP" expanded="true" />
+            <element signature="e#7285#8585#0#PHP" />
+            <element signature="e#8590#8783#0#PHP" />
+            <element signature="e#8790#11584#0#PHP" />
+            <element signature="e#11589#11779#0#PHP" />
+            <element signature="e#11786#13226#0#PHP" />
+            <element signature="e#13231#13414#0#PHP" />
+            <element signature="e#13420#15679#0#PHP" />
+            <element signature="e#15684#15919#0#PHP" />
+            <element signature="e#16001#17489#0#PHP" />
+            <element signature="e#16170#16394#0#PHP" />
+            <element signature="e#18248#18663#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/route/route.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="339" column="82" selection-start-line="339" selection-start-column="82" selection-end-line="339" selection-end-column="82" />
         </state>
       </provider>
     </entry>

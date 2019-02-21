@@ -317,7 +317,7 @@ Route::post('api/:version/goods/image/delete', 'api/:version.Goods/GoodsImageDel
 Route::post('api/:version/goods/order/save', 'api/:version.GoodsOrder/saveOrder');
 Route::post('api/:version/goods/order/comment', 'api/:version.GoodsOrder/comment');
 Route::post('api/:version/goods/order/comment/handel', 'api/:version.GoodsOrder/commentHandel');
-Route::post('api/:version/goods/order/express/update', 'api/:version.GoodsOrder/saveOrder');
+Route::post('api/:version/goods/order/express/update', 'api/:version.GoodsOrder/updateExpress');
 Route::get('api/:version/goods/order/list/cms', 'api/:version.GoodsOrder/getListForCMS');
 Route::get('api/:version/goods/order/list/mini', 'api/:version.GoodsOrder/getListForMINI');
 Route::get('api/:version/goods/order/info/cms', 'api/:version.GoodsOrder/getTheOrderForCMS');
@@ -337,6 +337,7 @@ Route::get('api/:version/sign/in/check', 'api/:version.SignIn/checkSignInToday')
 
 Route::post('api/:version/forum/save', 'api/:version.Forum/save');
 Route::post('api/:version/forum/update', 'api/:version.Forum/update');
+Route::post('api/:version/forum/comment/handel', 'api/:version.Forum/commentHandel');
 Route::post('api/:version/forum/handel', 'api/:version.Forum/handel');
 Route::post('api/:version/forum/image/delete', 'api/:version.Forum/forumImageDelete');
 Route::get('api/:version/forum/cms/list', 'api/:version.Forum/getForumListForCMS');
@@ -344,3 +345,4 @@ Route::get('api/:version/forum/cms', 'api/:version.Forum/getForumForCMS');
 Route::get('api/:version/forum/mini/list', 'api/:version.Forum/getForumListForMINI');
 Route::get('api/:version/forum/mini', 'api/:version.Forum/getForumForMINI');
 Route::get('api/:version/forum/comments/mini', 'api/:version.Forum/getCommentsForMINI');
+Route::get('api/:version/forum/comments/cms', 'api/:version.Forum/getCommentListForCMS');
