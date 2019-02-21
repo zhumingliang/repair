@@ -15,6 +15,7 @@ use app\api\model\SignDayT;
 use app\api\model\SignInT;
 use app\api\model\SystemSignInT;
 use app\api\model\UserScoreV;
+use app\api\model\UserT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 
@@ -30,7 +31,7 @@ class ScoreService
      */
     public function buy($id)
     {
-        $rule = ScoreBuyRuleT::where('id',$id)->find();
+        $rule = ScoreBuyRuleT::where('id', $id)->find();
         if (!$rule) {
             throw  new OperationException([
                 'msg' => 'id不存在'
@@ -165,13 +166,21 @@ class ScoreService
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getUserScoreList( $page, $size)
+    public function getUserScoreList($page, $size)
     {
-        $list = UserScoreV::getUserScoreList( $page, $size);
+        $list = UserScoreV::getUserScoreList($page, $size);
         return $list;
 
     }
 
+    public function getUserScoreInfo($page, $size)
+    {
+        $u_id = Token::getCurrentUid();
+        $list = UserScoreV::getUserScoreInfo($u_id, $page, $size);
+        $list['balance'] = UserScoreV::getUserScore($u_id);
+        $list['user'] = UserT::getUserInfo($u_id);
+        return $list;
 
+    }
 
 }

@@ -67,5 +67,13 @@ class UserT extends Model
         return $user->id;
     }
 
+    public static function getUserInfo($u_id)
+    {
+        $user = self::where('id', '=', $u_id)
+            ->field('id as u_id,nickName,avatarUrl,name_sub,phone')
+            ->find();
+        return $user;
+    }
+
 
 }

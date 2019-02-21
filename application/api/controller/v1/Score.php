@@ -261,5 +261,37 @@ class Score extends BaseController
         return json($list);
     }
 
+    /**
+     * @api {GET} /api/v1/score/user/info 358-用户充值积分时-获取用户积分信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  用户充值积分时-获取用户积分信息
+     * @apiExample {get}  请求样例:
+     * https://mengant.cn/api/v1/score/user/info?page=1&size=10
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":8,"per_page":20,"current_page":1,"last_page":1,"data":[{"score":0,"info":"初始化","update_time":"2018-11-12 10:34:23"},{"score":10000,"info":"积分购买","update_time":"2018-11-12 10:34:23"},{"score":10000000,"info":"积分兑换","update_time":"2018-11-12 10:34:23"},{"score":100,"info":"积分兑换","update_time":"2018-11-12 10:34:23"},{"score":-2000,"info":"积分兑换:笔记本","update_time":"2018-11-12 10:34:23"},{"score":-10,"info":"积分兑换:笔记本","update_time":"2018-11-12 10:34:23"},{"score":1000,"info":"签到积分","update_time":"2018-11-12 10:34:23"},{"score":1010,"info":"签到积分","update_time":"2018-11-12 10:34:23"}],"balance":10010100,"user":{"u_id":1,"nickName":"盟蚁","avatarUrl":"","name_sub":null,"phone":null}}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} score 积分数量
+     * @apiSuccess (返回参数说明) {int} info 积分说明
+     * @apiSuccess (返回参数说明) {String} update_time 积分时间
+     * @apiSuccess (返回参数说明) {String} user->nickName 昵称
+     * @apiSuccess (返回参数说明) {String} user->avatarUrl 头像
+     * @apiSuccess (返回参数说明) {String} user->name_sub 真实姓名
+     * @apiSuccess (返回参数说明) {String} user->phone 手机号
+     * @apiSuccess (返回参数说明) {int} balance 用户积分余额
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getUserScoreInfo($page = 1, $size = 20)
+    {
+        $list = (new ScoreService())->getUserScoreInfo($page, $size);
+        return json($list);
+    }
+
 
 }

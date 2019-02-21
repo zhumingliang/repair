@@ -44,6 +44,14 @@ class UserScoreV extends Model
 
         return $list;
     }
+    public static function getUserScoreInfo($u_id, $page, $size)
+    {
+        $list = self::where('u_id', $u_id)
+            ->field('score,info,update_time')
+            ->paginate($size, false, ['page' => $page])->toArray();
+
+        return $list;
+    }
 
 
     /**
