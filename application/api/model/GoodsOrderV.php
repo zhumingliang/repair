@@ -55,26 +55,41 @@ class GoodsOrderV extends Model
         return $list;
     }
 
-    public static function getListForCMSWithALL($page, $size)
+    public static function getListForCMSWithALL($page, $size, $key)
     {
         $list = self::order('create_time desc')
+            ->where(function ($query) use ($key) {
+                if ($key && strlen($key)) {
+                    $query->where('name|goods_name|express|code_number', 'like', '%' . $key . '%');
+                }
+            })
             ->paginate($size, false, ['page' => $page]);
         return $list;
 
     }
 
-    public static function getListForCMSWithNoSend($page, $size)
+    public static function getListForCMSWithNoSend($page, $size, $key)
     {
 
         $list = self::where('status', 1)
+            ->where(function ($query) use ($key) {
+                if ($key && strlen($key)) {
+                    $query->where('name|goods_name|express|code_number', 'like', '%' . $key . '%');
+                }
+            })
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
         return $list;
     }
 
-    public static function getListForCMSWithComplete($page, $size)
+    public static function getListForCMSWithComplete($page, $size, $key)
     {
         $list = self::where('status', 3)
+            ->where(function ($query) use ($key) {
+                if ($key && strlen($key)) {
+                    $query->where('name|goods_name|express|code_number', 'like', '%' . $key . '%');
+                }
+            })
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page]);
         return $list;

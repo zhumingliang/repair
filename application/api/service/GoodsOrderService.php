@@ -83,17 +83,17 @@ class GoodsOrderService
      * @param $size
      * @return array|\think\Paginator
      */
-    public function getListForCMS($type, $page, $size)
+    public function getListForCMS($type, $page, $size,$key)
     {
         $list = array();
         if ($type == 1) {
             //获取全部
-            $list = GoodsOrderV::getListForCMSWithALL($page, $size);
+            $list = GoodsOrderV::getListForCMSWithALL($page, $size,$key);
         } else if ($type == 2) {
             //获取未发货
-            $list = GoodsOrderV::getListForCMSWithNoSend($page, $size);
+            $list = GoodsOrderV::getListForCMSWithNoSend($page, $size,$key);
         } else if ($type == 3) {
-            $list = GoodsOrderV::getListForCMSWithComplete($page, $size);
+            $list = GoodsOrderV::getListForCMSWithComplete($page, $size,$key);
         }
         return $list;
 

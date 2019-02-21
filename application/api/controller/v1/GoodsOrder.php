@@ -102,10 +102,11 @@ class GoodsOrder extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription 获取积分兑换订单列表
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/goods/order/list/cms?type=1&page=1&size=20
+     * http://mengant.cn/api/v1/goods/order/list/cms?type=1&page=1&size=20&key=
      * @apiParam (请求参数说明) {int}  type 订单类别：1 | 全部；2 | 未发货；3 | 已完成
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {int} key 关键字
      * @apiSuccessExample {json} 返回样例:
      * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":1,"u_id":1,"code_number":"1111","express":"百世快递","express_code":"71519121793117","express_no":"ht","score":2000,"count":1,"phone":"18956225230","name":"朱明良","create_time":"2019-02-28 22:48:00","status":1,"comment_id":1,"goods_name":"笔记本","cover":""},{"id":2,"u_id":1,"code_number":"C116495803663369","express":"","express_code":"","express_no":"","score":10,"count":1,"phone":"18956225230","name":"朱明良","create_time":"2019-01-16 22:39:40","status":1,"comment_id":0,"goods_name":"笔记本","cover":""}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
@@ -127,13 +128,14 @@ class GoodsOrder extends BaseController
      * @param $type
      * @param int $page
      * @param int $size
+     * @param string $key
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      */
-    public function getListForCMS($type, $page = 1, $size = 10)
+    public function getListForCMS($type, $page = 1, $size = 10,$key='')
     {
         (new GoodsOrderValidate())->scene('list')->goCheck();
-        $list = (new GoodsOrderService())->getListForCMS($type, $page, $size);
+        $list = (new GoodsOrderService())->getListForCMS($type, $page, $size,$key);
         return json($list);
 
 
