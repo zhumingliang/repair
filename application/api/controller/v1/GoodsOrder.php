@@ -55,10 +55,10 @@ class GoodsOrder extends BaseController
     }
 
     /**
-     * @api {POST} /api/v1/goods/order/express/update  329-修改用户订单积分规则
+     * @api {POST} /api/v1/goods/order/express/update  329-修改订单物流
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription 新增用户订单积分规则
+     * @apiDescription 修改订单物流
      * @apiExample {post}  请求样例:
      *    {
      *       "id": 1,
