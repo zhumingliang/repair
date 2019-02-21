@@ -54,7 +54,7 @@ class UserScoreV extends Model
      */
     public static function getUserScoreList($page, $size)
     {
-        $list = self::field('u_id,nickName,avatarUrl,name_sub,SUM(score) as score')
+        $list = self::field('u_id,nickName,avatarUrl,name_sub,phone,SUM(score) as score')
             ->group('u_id')
             ->order('u_id')
             ->paginate($size, false, ['page' => $page])->toArray();

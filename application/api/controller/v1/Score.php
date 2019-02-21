@@ -248,6 +248,7 @@ class Score extends BaseController
      * @apiSuccess (返回参数说明) {String} nickName 昵称
      * @apiSuccess (返回参数说明) {String} avatarUrl 头像
      * @apiSuccess (返回参数说明) {String} name_sub 真实姓名
+     * @apiSuccess (返回参数说明) {String} phone 手机号
      * @apiSuccess (返回参数说明) {int} score 用户积分
      * @param int $page
      * @param int $size
