@@ -277,13 +277,14 @@ class Goods extends BaseController
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiParam (请求参数说明) {String} key 关键字查询
      * @apiSuccessExample {json} 返回样例:
-     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":1,"name":"笔记本","cover":"","money":"20.0000","score":200000,"state":1,"update_time":"2019-01-15 16:01:39","category":"数码","sell_num":"0"}]}
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":1,"name":"笔记本","cover":"","money":"20.0000","address":"铜陵","score":200000,"state":1,"update_time":"2019-01-15 16:01:39","category":"数码","sell_num":"0"}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} id 商品id
      * @apiSuccess (返回参数说明) {String} name 商品名称
      * @apiSuccess (返回参数说明) {String} cover 商品封面图
+     * @apiSuccess (返回参数说明) {String} address 发货地
      * @apiSuccess (返回参数说明) {float} money 原价
      * @apiSuccess (返回参数说明) {int} score 所需积分
      * @apiSuccess (返回参数说明) {String} category 类别

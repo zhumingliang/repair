@@ -238,6 +238,7 @@ class Forum extends BaseController
      * @apiSuccessExample {json} 返回样例:
      * {"id":1,"title":"你的睡眠真的好吗？","content":"每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？","create_time":"2019-02-13 23:26:29","user":{"id":1,"nickName":"盟蚁","avatarUrl":"","name_sub":null,"phone":null},"imgs":[{"id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"id":2,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"id":3,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]}
      * @apiSuccess (返回参数说明) {int} id 帖子id
+     * @apiSuccess (返回参数说明) {int} state 帖子状态：状态：1 |  待审核；2 | 审核通过；3 | 审核不通过
      * @apiSuccess (返回参数说明) {String} title  标题
      * @apiSuccess (返回参数说明) {String} create_time 发布时间
      * @apiSuccess (返回参数说明) {String} content 内容

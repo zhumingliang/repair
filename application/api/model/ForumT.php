@@ -39,7 +39,7 @@ class ForumT extends Model
                             ->where('state', '=', CommonEnum::STATE_IS_OK);
                     }
                 ])
-            ->hidden(['f_id', 'update_time', 'u_id', 'state'])
+            ->hidden(['f_id', 'update_time', 'u_id'])
             ->find();
 
         return $forum;

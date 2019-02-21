@@ -236,7 +236,6 @@ class Auth extends BaseController
         $list[] = array();
         $error = '';
         for ($i = 0; $i < count($u_id_arr); $i++) {
-
             $check = AuthService::checkUser($u_id_arr[$i]);
             if ($check['res']) {
                 $list[] = [

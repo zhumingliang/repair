@@ -302,7 +302,7 @@ Route::post('api/:version/goods/category/update', 'api/:version.GoodsCategory/up
 
 Route::post('api/:version/goods/save', 'api/:version.Goods/save');
 Route::post('api/:version/goods/update', 'api/:version.Goods/update');
-Route::post('api/:version/goods/handel', 'api/:version.Goods/handel');
+Route::post('api/:version/goods/handel', 'api/:version.Goods/goodsHandel');
 Route::get('api/:version/goods/info', 'api/:version.Goods/getGoods');
 Route::get('api/:version/goods/comment', 'api/:version.Goods/getGoodsComment');
 Route::get('api/:version/goods/list/cms', 'api/:version.Goods/getListForCMS');
