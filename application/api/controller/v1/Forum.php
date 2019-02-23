@@ -273,9 +273,9 @@ class Forum extends BaseController
      * @apiParam (请求参数说明) {int} size   每页数据条数
      * @apiParam (请求参数说明) {int} type   列表类别：2 | 全部帖子；1 | 我的帖子
      * @apiSuccessExample {json} 全部帖子返回样例:
-     * {"total":2,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":2,"u_id":1,"title":"哈哈","content":"哈哈","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-16 00:29:30","c_count":0,"comment":[]},{"id":1,"u_id":1,"title":"你的睡眠真的好吗？","content":"每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-13 23:26:29","c_count":2,"comment":{"total":2,"per_page":5,"current_page":1,"last_page":1,"data":[{"f_id":1,"id":2,"parent_id":1,"nickName":"蚂蚁二号","avatarUrl":"dasda","content":"hhh","create_time":"2019-02-15 23:42:35","parent_name":"蚂蚁一号","parent_url":"rrr","parent_content":"hh"},{"f_id":1,"id":1,"parent_id":0,"nickName":"蚂蚁一号","avatarUrl":"rrr","content":"hh","create_time":"2019-02-15 23:41:55","parent_name":null,"parent_url":null,"parent_content":null}]}}]}     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":2,"u_id":1,"title":"哈哈","content":"哈哈","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-16 00:29:30","c_count":0,"imgs":[],"comment":[]},{"id":1,"u_id":1,"title":"你的睡眠真的好吗？","content":"每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-13 23:26:29","c_count":2,"imgs":[{"id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"id":2,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"id":3,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}],"comment":{"total":2,"per_page":5,"current_page":1,"last_page":1,"data":[{"f_id":1,"id":2,"parent_id":1,"nickName":"蚂蚁二号","avatarUrl":"dasda","content":"hhh","create_time":"2019-02-15 23:42:35","parent_name":"蚂蚁一号","parent_url":"rrr","parent_content":"hh"},{"f_id":1,"id":1,"parent_id":0,"nickName":"蚂蚁一号","avatarUrl":"rrr","content":"hh","create_time":"2019-02-15 23:41:55","parent_name":null,"parent_url":null,"parent_content":null}]}}]}
      * @apiSuccessExample {json} 我的帖子返回样例:
-     * {"total":2,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":2,"u_id":1,"title":"哈哈","content":"哈哈","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-16 00:29:30","c_count":0},{"id":1,"u_id":1,"title":"你的睡眠真的好吗？","content":"每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-13 23:26:29","c_count":2}]}
+     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":2,"u_id":1,"title":"哈哈","content":"哈哈","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-16 00:29:30","c_count":0,"imgs":[]},{"id":1,"u_id":1,"title":"你的睡眠真的好吗？","content":"每天睡觉，你的睡眠真的健康吗？你的睡眠时间是科学的吗？","state":2,"nickName":"盟蚁","avatarUrl":"","create_time":"2019-02-13 23:26:29","c_count":2,"imgs":[{"id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"id":2,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"id":3,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
@@ -294,6 +294,7 @@ class Forum extends BaseController
      * @apiSuccess (返回参数说明) {obj} comment->avatarUrl  评论者头像
      * @apiSuccess (返回参数说明) {obj} comment->parent_name  被评论者昵称
      * @apiSuccess (返回参数说明) {obj} comment->parent_url  被评论者头像
+     * @apiSuccess (返回参数说明) {obj} imgs->img_url->url  图片地址
      * @param int $type
      * @param int $page
      * @param int $size
