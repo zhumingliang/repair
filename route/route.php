@@ -338,6 +338,7 @@ Route::get('api/:version/sign/in/check', 'api/:version.SignIn/checkSignInToday')
 Route::post('api/:version/forum/save', 'api/:version.Forum/save');
 Route::post('api/:version/forum/update', 'api/:version.Forum/update');
 Route::post('api/:version/forum/comment/handel', 'api/:version.Forum/commentHandel');
+Route::post('api/:version/forum/comment/save', 'api/:version.Forum/saveComment');
 Route::post('api/:version/forum/handel', 'api/:version.Forum/handel');
 Route::post('api/:version/forum/image/delete', 'api/:version.Forum/forumImageDelete');
 Route::get('api/:version/forum/cms/list', 'api/:version.Forum/getForumListForCMS');
