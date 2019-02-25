@@ -269,9 +269,10 @@ class Score extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  用户充值积分时-获取用户积分信息
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/score/user/info?page=1&size=10
+     * https://mengant.cn/api/v1/score/user/info?page=1&size=10&u_id=1
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {int} u_id 用户id
      * @apiSuccessExample {json} 返回样例:
      * {"total":8,"per_page":20,"current_page":1,"last_page":1,"data":[{"score":0,"info":"初始化","update_time":"2018-11-12 10:34:23"},{"score":10000,"info":"积分购买","update_time":"2018-11-12 10:34:23"},{"score":10000000,"info":"积分兑换","update_time":"2018-11-12 10:34:23"},{"score":100,"info":"积分兑换","update_time":"2018-11-12 10:34:23"},{"score":-2000,"info":"积分兑换:笔记本","update_time":"2018-11-12 10:34:23"},{"score":-10,"info":"积分兑换:笔记本","update_time":"2018-11-12 10:34:23"},{"score":1000,"info":"签到积分","update_time":"2018-11-12 10:34:23"},{"score":1010,"info":"签到积分","update_time":"2018-11-12 10:34:23"}],"balance":10010100,"user":{"u_id":1,"nickName":"盟蚁","avatarUrl":"","name_sub":null,"phone":null}}
      * @apiSuccess (返回参数说明) {int} total 数据总数
@@ -287,11 +288,12 @@ class Score extends BaseController
      * @apiSuccess (返回参数说明) {int} balance 用户积分余额
      * @param int $page
      * @param int $size
+     * @param int $u_id
      * @return \think\response\Json
      */
-    public function getUserScoreInfo($page = 1, $size = 20)
+    public function getUserScoreInfo($u_id,$page = 1, $size = 20)
     {
-        $list = (new ScoreService())->getUserScoreInfo($page, $size);
+        $list = (new ScoreService())->getUserScoreInfo($u_id,$page, $size);
         return json($list);
     }
 

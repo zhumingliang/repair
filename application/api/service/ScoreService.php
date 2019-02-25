@@ -166,16 +166,15 @@ class ScoreService
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getUserScoreList($page, $size,$key)
+    public function getUserScoreList($page, $size, $key)
     {
-        $list = UserScoreV::getUserScoreList($page, $size,$key);
+        $list = UserScoreV::getUserScoreList($page, $size, $key);
         return $list;
 
     }
 
-    public function getUserScoreInfo($page, $size)
+    public function getUserScoreInfo($u_id, $page, $size)
     {
-        $u_id = Token::getCurrentUid();
         $list = UserScoreV::getUserScoreInfo($u_id, $page, $size);
         $list['balance'] = UserScoreV::getUserScore($u_id);
         $list['user'] = UserT::getUserInfo($u_id);
