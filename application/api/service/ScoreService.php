@@ -166,9 +166,9 @@ class ScoreService
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public function getUserScoreList($page, $size)
+    public function getUserScoreList($page, $size,$key)
     {
-        $list = UserScoreV::getUserScoreList($page, $size);
+        $list = UserScoreV::getUserScoreList($page, $size,$key);
         return $list;
 
     }

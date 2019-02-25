@@ -44,6 +44,7 @@ class UserScoreV extends Model
 
         return $list;
     }
+
     public static function getUserScoreInfo($u_id, $page, $size)
     {
         $list = self::where('u_id', $u_id)
@@ -57,12 +58,18 @@ class UserScoreV extends Model
     /**
      * @param $page
      * @param $size
+     * @param $key
      * @return \think\Paginator
      * @throws \think\exception\DbException
      */
-    public static function getUserScoreList($page, $size)
+    public static function getUserScoreList($page, $size, $key)
     {
         $list = self::field('u_id,nickName,avatarUrl,name_sub,phone,SUM(score) as score')
+            ->where(function ($query) use ($key) {
+                if ($key && strlen($key)) {
+                    $query->where('nickName|name_sub|phone', 'like', '%' . $key . '%');
+                }
+            })
             ->group('u_id')
             ->order('u_id')
             ->paginate($size, false, ['page' => $page])->toArray();

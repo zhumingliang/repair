@@ -236,9 +236,10 @@ class Score extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  获取用户积分列表
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/score/user/list/cms?page=1&size=10
+     * https://mengant.cn/api/v1/score/user/list/cms?page=1&size=10&key=
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiParam (请求参数说明) {string} key 关键字
      * @apiSuccessExample {json} 返回样例:
      * {"total":903,"per_page":20,"current_page":1,"last_page":46,"data":[{"u_id":1,"nickName":"盟蚁","avatarUrl":"","name_sub":null,"score":"10010100"},{"u_id":2,"nickName":"盟蚁2","avatarUrl":"","name_sub":null,"score":"0"},{"u_id":5,"nickName":"","avatarUrl":"","name_sub":null,"score":"0"},{"u_id":8,"nickName":"linzx89757","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTK1mYicZGp9FiaXHojN7QwqMs6D6ibLjjoacicWR3eNj6EgaGH8AFyNwXs6xKAdU6Yx8PjssJEfUGYwng\/132","name_sub":null,"score":"0"},{"u_id":9,"nickName":"231331","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTIEFK83ABLQqkYVYPkUlCSLrupFAySrBHN45nsCpHTxBXhA1b2Zdf9CliadibffUsBlUZlx39Tf3e7w\/132","name_sub":null,"score":"0"},{"u_id":11,"nickName":"盟蚁网络科技","avatarUrl":"","name_sub":null,"score":"0"},{"u_id":12,"nickName":"盟蚁网络科技～朱明良","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/QoIDJGaY2AmV6icEDibVHlZyOrOjdPTXsTCJUkV2Frfj2ibPuNIMYpdiaibkrz4Y364hpcbeuAGVw9wdInLKjWwKI2w\/132","name_sub":null,"score":"0"},{"u_id":14,"nickName":"Anmg","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/VVgwHQBkDricnn75F1DVVr6XKxVETAwIfTRyria7TWUtvIEaMp9Go58NLm3dng3yHXeLRMNfgC0wr2qeGvMoytHQ\/132","name_sub":null,"score":"0"},{"u_id":15,"nickName":"Hey","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/dX9dQnzy8ywYV35IKgnhJwfkXIjMItzJGoFAjibRInyMXqENPKRqibsHapPye3eficJjUf91Z1jAQRA1ZOyIbDyjQ\/132","name_sub":null,"score":"0"},{"u_id":16,"nickName":"@敬超","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/dskj6x233asSkeHmz3Ff2SaFialZtbLqheuicIJAGZ8ibbMaQRQ05u8pgXUYicB2cV8vhTz4JIichLyOoloeYTPLcQA\/132","name_sub":null,"score":"0"},{"u_id":17,"nickName":"柠萌","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/FuFHHW8MywyibDlH7TDu4mttgnEQEr7Fm82NoKkpQxLBDE6MROXibAKEYAia0ymIoyoxe1sxsGn85V3g7zPM7mXMQ\/132","name_sub":null,"score":"0"},{"u_id":18,"nickName":"颖儿","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/jmPSt8PLJxPNmSaxIAGrFiapDqNtibmZZUt7hr9nTQ9TamDuakNNJBLSLtpB92Y6GraCxY21CGicO9JicS5k4188WQ\/132","name_sub":null,"score":"0"},{"u_id":19,"nickName":"A虫子-兄弟庆典","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DYAIOgq83erTh1InrYcibnPIjvPQicDQaRkJxSYHBcuZYGyA0dBDQ4wOc7VhQiayWWo1cnoFvFXlSlpNUmDqx3CIw\/132","name_sub":null,"score":"0"},{"u_id":20,"nickName":"小仙女","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/icRHzcY0ibTcmlG3YictT8rycFro6UNyE7UH2vpZfU3mQGElfuPpDicdIiaEMO0fKWOIAhYztUvGWDySuSFGdllLLaA\/132","name_sub":null,"score":"0"},{"u_id":21,"nickName":"李福招","avatarUrl":"","name_sub":null,"score":"0"},{"u_id":22,"nickName":"李福招","avatarUrl":"","name_sub":null,"score":"0"},{"u_id":23,"nickName":"简单也极端17863215189","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/0X9VfPgqNpuuo2ETrtHIoPSvKjZkgdlCJYsnhEVpIJ0uibxnsJzib8jq0vIeoogvLrGZicxXphysAumVkTjOklaLw\/132","name_sub":null,"score":"0"},{"u_id":24,"nickName":"小兵","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DYAIOgq83eqA7xibeAoBQ70hZg5nXSJgviayzRKMsiagYcODHxtW0WyH9icjYyhGicDnz7zGUxDice5KpsibwMHNibBeTA\/132","name_sub":null,"score":"0"},{"u_id":25,"nickName":"hello 李福招","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTK52OzaYsSpPP0uu58ia9wNKoOzaT3MicicWM0ryQMVpKKanWFHy0QCn1dSGTQOZkwxJgWIgSZkCDd5A\/132","name_sub":null,"score":"0"},{"u_id":26,"nickName":"盟蚁网络科技～朱明良","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/dIHbLYYuep66gLb9NKgwIPN1L9pz2jJclKusib3V6icAoCT6muwfeVExS9zeJj5l8IriaEaa2v4X3DP9yHXtDExEw\/132","name_sub":null,"score":"0"}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
@@ -252,12 +253,13 @@ class Score extends BaseController
      * @apiSuccess (返回参数说明) {int} score 用户积分
      * @param int $page
      * @param int $size
+     * @param int $key
      * @return \think\response\Json
      * @throws \think\exception\DbException
      */
-    public function getUserScoreList($page = 1, $size = 20)
+    public function getUserScoreList($page = 1, $size = 20,$key='')
     {
-        $list = (new ScoreService())->getUserScoreList($page, $size);
+        $list = (new ScoreService())->getUserScoreList($page, $size,$key);
         return json($list);
     }
 
