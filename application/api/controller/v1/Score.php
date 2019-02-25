@@ -236,7 +236,7 @@ class Score extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  获取用户积分列表
      * @apiExample {get}  请求样例:
-     * https://mengant.cn/api/v1/score/user/list/cms?type=1&page=1&size=10
+     * https://mengant.cn/api/v1/score/user/list/cms?page=1&size=10
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json} 返回样例:

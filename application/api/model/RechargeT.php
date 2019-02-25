@@ -13,5 +13,13 @@ use think\Model;
 
 class RechargeT extends Model
 {
+    public static function getList($page, $size)
+    {
+        $pagingData = self::field('id,code,state,score,create_time')
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page])->toArray();
+        return $pagingData;
+    }
+
 
 }

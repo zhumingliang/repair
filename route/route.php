@@ -279,6 +279,7 @@ Route::post('api/:version/auth/user/save', 'api/:version.Auth/addAdmin');
 
 Route::post('api/:version/recharge/save', 'api/:version.Recharge/save');
 Route::post('api/:version/recharge/exchange', 'api/:version.Recharge/exchange');
+Route::get('api/:version/recharges', 'api/:version.Recharge/getList');
 
 Route::post('api/:version/score/recharge', 'api/:version.Score/recharge');
 Route::post('api/:version/score/buy', 'api/:version.Score/buy');

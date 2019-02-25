@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\RechargeT;
 use app\api\service\RechargeS;
 use app\api\Service\RechargeService;
 use app\lib\exception\SuccessMessage;
@@ -69,6 +70,36 @@ class Recharge extends BaseController
         return json([
             'score' => $score = $recharge->exchange($code)
         ]);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/recharges 362-获取兑换积分码列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取兑换积分码列表
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/recharges?size=20&page=1
+     * @apiParam (请求参数说明) {int} page  页数
+     * @apiParam (请求参数说明) {int} size  每页条数
+     * @apiSuccessExample {json} 返回样例:
+     * {"total":20,"per_page":"2","current_page":1,"last_page":10,"data":[{"id":12,"code":"PFkGJGz0mn","state":1,"score":20,"create_time":"2019-02-25 06:31:26"},{"id":20,"code":"t3exHKwtkF","state":1,"score":20,"create_time":"2019-02-25 06:31:26"}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} id 积分码id
+     * @apiSuccess (返回参数说明) {int} score 积分
+     * @apiSuccess (返回参数说明) {int} state 状态：1 | 未使用；2| 已兑换
+     * @apiSuccess (返回参数说明) {string} code 兑换码
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getList($page = 1, $size = 20)
+    {
+        $list = RechargeT::getList($page, $size);
+        return json($list);
+
 
     }
 

@@ -389,17 +389,20 @@ class Forum extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription 小程序获取论坛帖子列表
      * @apiExample {get}  请求样例:
-     * http://mengant.cn/api/v1/forum/comments/cms?page=1&size=20&type=1
+     * http://mengant.cn/api/v1/forum/comments/cms?page=1&size=20&type=1&day=2019-2-26&key=
      * @apiParam (请求参数说明) {int} page  页数
      * @apiParam (请求参数说明) {int} size   每页数据条数
      * @apiParam (请求参数说明) {int} type   评论类别：1 | 正常；2 | 全部
+     * @apiParam (请求参数说明) {string} day   时间
+     * @apiParam (请求参数说明) {string} key  关键字
      * @apiSuccessExample {json} 返回样例:
-     * {"total":2,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":2,"nickName":"盟蚁2","avatarUrl":"","title":"你的睡眠真的好吗？","content":"hhh","create_time":"2019-02-15 23:42:35","state":1},{"id":1,"nickName":"盟蚁","avatarUrl":"","title":"你的睡眠真的好吗？","content":"hh","create_time":"2019-02-15 23:41:55","state":1}]}
+     * {"total":35,"per_page":"2","current_page":1,"last_page":18,"data":[{"id":37,"f_id":2,"nickName":"hello 李福招","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTK52OzaYsSpPP0uu58ia9wNKoOzaT3MicicWM0ryQMVpKKanWFHy0QCn1dSGTQOZkwxJgWIgSZkCDd5A\/132","title":"哈哈","content":"12345","create_time":"2019-02-24 16:39:17","state":1},{"id":36,"f_id":1,"nickName":"hello 李福招","avatarUrl":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTK52OzaYsSpPP0uu58ia9wNKoOzaT3MicicWM0ryQMVpKKanWFHy0QCn1dSGTQOZkwxJgWIgSZkCDd5A\/132","title":"你的睡眠真的好吗？","content":"aaa","create_time":"2019-02-24 16:38:54","state":1}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {int} id 评论id
+     * @apiSuccess (返回参数说明) {int} f_id 帖子id
      * @apiSuccess (返回参数说明) {String} content  评论内容
      * @apiSuccess (返回参数说明) {String} nickName  评论者昵称
      * @apiSuccess (返回参数说明) {String} avatarUrl  评论者头像

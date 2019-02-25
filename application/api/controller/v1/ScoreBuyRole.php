@@ -49,7 +49,7 @@ class ScoreBuyRole extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/score/role/list 312-获取积分充值规则列表
+     * @api {GET} /api/v1/score/rule/list 312-获取积分充值规则列表
      * @apiGroup  MINI
      * @apiVersion 1.0.1
      * @apiDescription  小获取积分充值规则列表
