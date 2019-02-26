@@ -140,7 +140,8 @@ class ScoreService
             ->count();
         if (!$count) {
             return [
-                'sign_in' => 0
+                'sign_in' => 0,
+                'score' => UserScoreV::getUserScore($u_id),
             ];
         }
 
