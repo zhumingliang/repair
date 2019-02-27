@@ -22,7 +22,7 @@ class AddressService
     {
         $params['u_id'] = Token::getCurrentUid();
         $params['state'] = CommonEnum::STATE_IS_OK;
-        $this->checkDefaultAddress($params['type'], $params['u_id']);
+        $this->checkDefaultAddress(key_exists('type',$params) ? $params['type'] : 2, $params['u_id']);
         $res = AddressT::create($params);
         if (!$res) {
             throw  new OperationException();
