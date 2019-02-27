@@ -132,10 +132,10 @@ class GoodsOrder extends BaseController
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      */
-    public function getListForCMS($type, $page = 1, $size = 10,$key='')
+    public function getListForCMS($type, $page = 1, $size = 10, $key = '')
     {
         (new GoodsOrderValidate())->scene('list')->goCheck();
-        $list = (new GoodsOrderService())->getListForCMS($type, $page, $size,$key);
+        $list = (new GoodsOrderService())->getListForCMS($type, $page, $size, $key);
         return json($list);
 
 
@@ -297,7 +297,7 @@ class GoodsOrder extends BaseController
      * http://mengant.cn/api/v1/goods/order/info/mini?id=1
      * @apiParam (请求参数说明) {int}  id 订单id
      * @apiSuccessExample {json} 返回样例:
-     * {"id":1,"code_number":"1111","count":1,"score":2000,"create_time":"2019-02-28 22:48:00","express":"ht","express_code":"71519121793117","status":1,"comment_id":1,"send_time":null,"express_no":"","comment":{"id":1,"o_id":1,"content":"很好","type":2,"state":1,"create_time":"2019-01-18 09:55:06","update_time":"2019-01-18 09:55:06","u_id":1,"score":3,"imgs":[{"c_id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"c_id":1,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"c_id":1,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]},"express_info":[{"no":"71519121793117","brand":"ht","data":[{"time":"2019-01-18 00:38:09","context":"汕头市汕头市【汕头转运中心】，正发往【芜湖转运中心】"},{"time":"2019-01-18 00:36:00","context":"汕头市到汕头市【汕头转运中心】"},{"time":"2019-01-17 22:19:30","context":"汕头市汕头市【汕头】，【乐亿多\/18923931705】已揽收"},{"time":"2019-01-17 21:37:36","context":"汕头市到汕头市【汕头】"}],"order":"desc","status":"sending","res":0}],"address":{"id":1,"name":"朱明良","phone":"18956225230","province":"安徽省","city":"铜陵市","area":"铜官区","detail":"高速地产2"},"goods":{"id":1,"name":"笔记本","cover":"","money":2000}}
+     * {"id":1,"code_number":"1111","count":1,"score":2000,"create_time":"2019-02-28 22:48:00","express":"百世快递","express_code":"71519121793117","status":3,"comment_id":2,"send_time":null,"express_no":"ht","receive_time":null,"comment":{"id":1,"o_id":1,"content":"很好","type":2,"state":1,"create_time":"2019-01-18 09:55:06","update_time":"2019-01-18 09:55:06","u_id":1,"score":3,"imgs":[{"c_id":1,"img_id":1,"img_url":{"url":"https:\/\/mengant.cn\/1212"}},{"c_id":1,"img_id":2,"img_url":{"url":"https:\/\/mengant.cn\/121"}},{"c_id":1,"img_id":3,"img_url":{"url":"https:\/\/mengant.cn\/12"}}]},"express_info":[{"no":"71519121793117","brand":"ht","data":[{"time":"2019-01-19 19:07:20","context":"铜陵市铜陵市【铜陵】，相逢是缘。快递已到达代理点（高速5栋7号网点），不能找到，可以联系专属VIP电话：150562036 已签收"},{"time":"2019-01-19 12:09:21","context":"铜陵市铜陵市【铜陵】，【高速地产驿站\/15056203641】正在派件"},{"time":"2019-01-19 09:15:16","context":"铜陵市到铜陵市【铜陵】"},{"time":"2019-01-19 01:11:05","context":"芜湖市芜湖市【芜湖转运中心】，正发往【铜陵】"},{"time":"2019-01-18 21:11:33","context":"芜湖市到芜湖市【芜湖转运中心】"},{"time":"2019-01-18 00:38:09","context":"汕头市汕头市【汕头转运中心】，正发往【芜湖转运中心】"},{"time":"2019-01-18 00:36:00","context":"汕头市到汕头市【汕头转运中心】"},{"time":"2019-01-17 22:19:30","context":"汕头市汕头市【汕头】，【乐亿多\/18923931705】已揽收"},{"time":"2019-01-17 21:37:36","context":"汕头市到汕头市【汕头】"}],"order":"desc","status":"signed","res":0}],"address":{"id":1,"name":"朱明良","phone":"18956225230","province":"安徽省","city":"铜陵市","area":"铜官区","detail":"高速地产2"},"goods":{"id":1,"name":"笔记本","cover":"","money":2000},"user":{"id":1,"nickName":"盟蚁","avatarUrl":""}}
      * ls* @apiSuccess (返回参数说明) {int} id 订单id
      * @apiSuccess (返回参数说明) {String} code_number 订单号
      * @apiSuccess (返回参数说明) {int} count 商品数量
@@ -307,6 +307,7 @@ class GoodsOrder extends BaseController
      * @apiSuccess (返回参数说明) {String} goods->name 商品名称
      * @apiSuccess (返回参数说明) {String} create_time 交易时间
      * @apiSuccess (返回参数说明) {String} send_time 发货时间
+     * @apiSuccess (返回参数说明) {String} receive_time 成交时间
      * @apiSuccess (返回参数说明) {int} status 订单状态： 1 | 待发货 2 | 待收货；3 | 确认收货
      * @apiSuccess (返回参数说明) {int} comment_id 评论id：0 未评论；>0 已经评论
      * @apiSuccess (返回参数说明) {String} comment->content 评价内容
@@ -317,7 +318,7 @@ class GoodsOrder extends BaseController
      * @apiSuccess (返回参数说明) {String} no 订单号
      * @apiSuccess (返回参数说明) {String} brand 快递类别
      * @apiSuccess (返回参数说明) {String} data 物流信息
-     * @apiSuccess (返回参数说明) {String} time 所需积分
+     * @apiSuccess (返回参数说明) {String} score 所需积分
      * @apiSuccess (返回参数说明) {String}context 下单人姓名
      * @param $id
      * @return \think\response\Json
@@ -375,7 +376,7 @@ class GoodsOrder extends BaseController
      */
     public function receiveConfirm($id)
     {
-        $params['send_time'] = date('Y-m-d H:i:s');
+        $params['receive_time'] = date('Y-m-d H:i:s');
         $params['status'] = 3;
         $res = GoodsOrderT::update($params, ['id' => $id]);
         if (!$res) {

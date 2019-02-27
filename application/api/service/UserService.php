@@ -28,6 +28,14 @@ class UserService
             ]);
 
         }
+        //检测是否已经绑定
+        $check = $this->checkBind();
+        if ($check['code']) {
+            throw  new UserInfoException([
+                'msg' => '您已经绑定邀请码，不能重复绑定。',
+                'errorCode' => 30005
+            ]);
+        }
         //进行绑定
         $bind = UserT::update(['parent_id' => $info->id], ['id' => Token::getCurrentUid()]);
         if (!$bind) {
