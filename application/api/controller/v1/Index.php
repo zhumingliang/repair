@@ -2,21 +2,28 @@
 
 namespace app\api\controller\v1;
 
+use app\api\model\LogT;
+use app\api\model\ScoreOrderRoleT;
+use app\api\model\ScoreOrderT;
+use app\api\model\UserT;
 use app\api\service\SendMsgService;
+use app\lib\enum\CommonEnum;
 use think\Env;
 
 class Index
 {
     public function index()
     {
-    /*    $d_id = 56;
-        $order_id = 251;
-
-        (new SendMsgService($order_id, $d_id))->sendToShop();*/
-        //WithDrawService::apply(1,$money);
-        echo \think\facade\Env::get('app_path');
+        $this->preScore();
 
     }
+
+    private function preScore($money = 1000, $openid = "osEM-5TP__6QYVhf95dyZUBHDdxo", $order_type = 1, $order_id = 647)
+    {
+
+
+    }
+
 
     public function hello($name = 'ThinkPHP5')
     {

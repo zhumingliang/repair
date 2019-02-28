@@ -364,8 +364,8 @@ class Pay
             $u_id = $user->id;
             $parent_id = $user->parent_id;
 
-            $self_score = $money * $self / 100;
-            $parent_score = ($parent + $parent_other) * $money / 100;
+            $self_score = ($self + $parent_other) * $money / 10000;
+            $parent_score = $parent * $money / 10000;
             $save_data = array();
             $self_data = [
                 'u_id' => $u_id,
