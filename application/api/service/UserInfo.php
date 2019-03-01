@@ -99,7 +99,8 @@ class UserInfo
             throw new TokenException(
                 ['code' => 401,
                     'msg' => 'session_key过期',
-                    'errorCode' => 20003]
+                    'errorCode' => 20003
+                ]
             );
 
         }
