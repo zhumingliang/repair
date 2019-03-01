@@ -65,7 +65,7 @@ class UserInfo
         if ($errCode == 0) {
             return json_decode($data);
         } else {
-          /*  print_r([
+            print_r([
                 'app_id' => $this->wxAppID,
                 'session_key' => $session_key,
                 'encryptedData' => $this->encryptedData,
@@ -73,7 +73,7 @@ class UserInfo
                 'data' => $data,
                 'errCode'=>$errCode
 
-            ]);*/
+            ]);
             throw new WeChatException(
                 ['code' => 401,
                 'msg' => '小程序信息解码失败',
