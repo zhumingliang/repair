@@ -25,7 +25,7 @@ class UserInfo
 
     function __construct($iv, $encryptedData)
     {
-        $this->iv = $iv;
+        $this->iv = urldecode($iv);
         $this->encryptedData = $encryptedData;
         $this->wxAppID = config('wx.app_id');
         $this->user_id = Token::getCurrentUid();
@@ -65,7 +65,7 @@ class UserInfo
         if ($errCode == 0) {
             return json_decode($data);
         } else {
-            print_r([
+          /*  print_r([
                 'app_id' => $this->wxAppID,
                 'session_key' => $session_key,
                 'encryptedData' => $this->encryptedData,
@@ -73,8 +73,9 @@ class UserInfo
                 'data' => $data,
                 'errCode'=>$errCode
 
-            ]);
-            throw new WeChatException(['code' => 401,
+            ]);*/
+            throw new WeChatException(
+                ['code' => 401,
                 'msg' => '小程序信息解码失败',
                 'errorCode' => 40001
             ]);
