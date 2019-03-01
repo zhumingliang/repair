@@ -107,7 +107,7 @@ class UserToken extends Token
         $cachedValue = $this->prepareCachedValue($wxResult, $u_id);
         $token = $this->saveToCache($cachedValue);
 
-        if (strlen($cachedValue['nickName']) && strlen($cachedValue['province'])) {
+        if (!strlen($cachedValue['nickName']) && !strlen($cachedValue['province'])) {
             return [
                 'token' => $token,
                 'code' => $cachedValue['code'],
