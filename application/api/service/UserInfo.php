@@ -59,7 +59,6 @@ class UserInfo
     private function encodeUserInfo($session_key)
     {
 
-        echo $this->iv;
         $pc = new WXBizDataCryptService($this->wxAppID, $session_key);
         $errCode = $pc->decryptData($this->encryptedData, $this->iv, $data);
 
