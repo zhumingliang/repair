@@ -25,7 +25,7 @@ class UserInfo
 
     function __construct($iv, $encryptedData)
     {
-        $this->iv = urldecode($iv);
+        $this->iv = $iv;
         $this->encryptedData = $encryptedData;
         $this->wxAppID = config('wx.app_id');
         $this->user_id = Token::getCurrentUid();

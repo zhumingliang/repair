@@ -51,6 +51,7 @@ class User extends BaseController
      */
     public function userInfo($iv, $encryptedData)
     {
+        $iv=input('iv');
         (new UserInfo())->scene('encrypted')->goCheck();
         $user_info = new UserInfoService($iv, $encryptedData);
         $user_info->saveUserInfo();
