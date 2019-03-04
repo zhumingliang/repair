@@ -64,7 +64,7 @@ class UserScoreV extends Model
      */
     public static function getUserScoreList($page, $size, $key)
     {
-        $list = self::field('u_id,nickName,avatarUrl,name_sub,phone,SUM(score) as score')
+        $list = self::field('u_id,nickName,avatarUrl,name_sub,phone,SUM(score) as score,update_time')
             ->where(function ($query) use ($key) {
                 if ($key && strlen($key)) {
                     $query->where('nickName|name_sub|phone', 'like', '%' . $key . '%');
