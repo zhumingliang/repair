@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Red.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Red.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/TransferService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/TransferService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/validate/PagingParameter.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/validate/PagingParameter.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,11 +16,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Comment.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Bond.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -43,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Withdraw.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="398">
-              <caret line="352" column="33" selection-start-line="352" selection-start-column="33" selection-end-line="352" selection-end-column="33" />
+              <caret line="352" column="31" lean-forward="true" selection-start-line="352" selection-start-column="31" selection-end-line="352" selection-end-column="31" />
               <folding>
                 <element signature="e#635#1377#0#PHP" />
                 <element signature="e#1382#1632#0#PHP" />
@@ -93,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/application/api/service/WithDrawService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="652">
-              <caret line="259" column="45" selection-start-line="259" selection-start-column="45" selection-end-line="259" selection-end-column="45" />
+              <caret line="259" column="48" selection-start-line="259" selection-start-column="48" selection-end-line="259" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -101,8 +94,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/service/TransferService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="53" column="26" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+            <state relative-caret-position="543">
+              <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extend/wxpay/WxTransferApi.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extend/wxpay/database/WxPayTransfer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2403">
+              <caret line="94" column="20" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -158,7 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/api/model/InviteScoreT.php" />
         <option value="$PROJECT_DIR$/application/api/model/OrderT.php" />
         <option value="$PROJECT_DIR$/application/api/model/GoodsOrderCommentV.php" />
         <option value="$PROJECT_DIR$/application/api/model/GoodsV.php" />
@@ -208,6 +218,7 @@
         <option value="$PROJECT_DIR$/application/api/model/UserScoreV.php" />
         <option value="$PROJECT_DIR$/application/api/validate/PagingParameter.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Red.php" />
+        <option value="$PROJECT_DIR$/extend/wxpay/WxTransferApi.php" />
         <option value="$PROJECT_DIR$/application/api/service/TransferService.php" />
       </list>
     </option>
@@ -238,7 +249,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -276,6 +286,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -432,21 +443,8 @@
       <workItem from="1551451672760" duration="10590000" />
       <workItem from="1551952726452" duration="1254000" />
       <workItem from="1552265378579" duration="1050000" />
-      <workItem from="1552272332872" duration="506000" />
-    </task>
-    <task id="LOCAL-00563" summary="项目初始化">
-      <created>1548862759104</created>
-      <option name="number" value="00563" />
-      <option name="presentableId" value="LOCAL-00563" />
-      <option name="project" value="LOCAL" />
-      <updated>1548862759105</updated>
-    </task>
-    <task id="LOCAL-00564" summary="项目初始化">
-      <created>1548863711509</created>
-      <option name="number" value="00564" />
-      <option name="presentableId" value="LOCAL-00564" />
-      <option name="project" value="LOCAL" />
-      <updated>1548863711509</updated>
+      <workItem from="1552272332872" duration="1739000" />
+      <workItem from="1552287306035" duration="375000" />
     </task>
     <task id="LOCAL-00565" summary="项目初始化">
       <created>1548899578078</created>
@@ -777,11 +775,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551943975824</updated>
     </task>
-    <option name="localTasksCounter" value="612" />
+    <task id="LOCAL-00612" summary="项目初始化">
+      <created>1552272861786</created>
+      <option name="number" value="00612" />
+      <option name="presentableId" value="LOCAL-00612" />
+      <option name="project" value="LOCAL" />
+      <updated>1552272861786</updated>
+    </task>
+    <task id="LOCAL-00613" summary="项目初始化">
+      <created>1552274713197</created>
+      <option name="number" value="00613" />
+      <option name="presentableId" value="LOCAL-00613" />
+      <option name="project" value="LOCAL" />
+      <updated>1552274713197</updated>
+    </task>
+    <option name="localTasksCounter" value="614" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1095257000" />
+    <option name="totallyTimeSpent" value="1096865000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -796,7 +808,7 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22358723" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22665848" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -836,16 +848,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/route/route.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="849">
-          <caret line="351" lean-forward="true" selection-start-line="19" selection-end-line="351" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Auth.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Address.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -1169,6 +1171,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/validate/PagingParameter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="21" column="6" selection-start-line="13" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Red.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4050">
@@ -1193,6 +1202,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/extend/wxpay/database/WxPayTransfer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2403">
+          <caret line="94" column="20" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/PaymentsV.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -1200,17 +1216,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/validate/PagingParameter.php">
+    <entry file="file://$PROJECT_DIR$/extend/wxpay/WxTransferApi.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="21" column="6" selection-start-line="13" selection-end-line="21" selection-end-column="6" />
+        <state relative-caret-position="154">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Withdraw.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
-          <caret line="352" column="33" selection-start-line="352" selection-start-column="33" selection-end-line="352" selection-end-column="33" />
+          <caret line="352" column="31" lean-forward="true" selection-start-line="352" selection-start-column="31" selection-end-line="352" selection-end-column="31" />
           <folding>
             <element signature="e#635#1377#0#PHP" />
             <element signature="e#1382#1632#0#PHP" />
@@ -1221,14 +1237,14 @@
     <entry file="file://$PROJECT_DIR$/application/api/service/WithDrawService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="652">
-          <caret line="259" column="45" selection-start-line="259" selection-start-column="45" selection-end-line="259" selection-end-column="45" />
+          <caret line="259" column="48" selection-start-line="259" selection-start-column="48" selection-end-line="259" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/TransferService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="53" column="26" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+        <state relative-caret-position="543">
+          <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
         </state>
       </provider>
     </entry>

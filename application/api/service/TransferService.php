@@ -50,7 +50,7 @@ class TransferService
         }*/
 
         $transfer = $this->makeWxPreOrder();
-        $result = WxTransferApi::unifiedOrder($transfer);
+        /*$result = WxTransferApi::unifiedOrder($transfer);
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             //更新状态
           $up_id=  WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
@@ -73,7 +73,7 @@ class TransferService
                     'errorCode' => 150011
                 ]
             );
-        }
+        }*/
     }
 
     /**
@@ -95,6 +95,7 @@ class TransferService
             ]);
 
         }
+        print_r($order);
         $money = floatval($order->money)*100;
         $payTransfer = new WxPayTransfer();
         $payTransfer->setAmount($money);
