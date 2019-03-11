@@ -51,8 +51,6 @@ class TransferService
 
         $transfer = $this->makeWxPreOrder();
         $result = WxTransferApi::unifiedOrder($transfer);
-        var_dump($result);
-
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             //更新状态
           $up_id=  WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
