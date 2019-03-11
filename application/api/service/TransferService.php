@@ -84,7 +84,6 @@ class TransferService
             ]);
 
         }
-        print_r($order);
         $money = floatval($order->money) * 100;
         $payTransfer = new WxPayTransfer();
         $payTransfer->setAmount($money);
