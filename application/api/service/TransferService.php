@@ -38,7 +38,7 @@ class TransferService
     public function transferToUser()
     {
 
-        $up_id=  WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
+/*        $up_id=  WithdrawMiniT::update(['state' => 2], ['id' => $this->orderID]);
         if (!$up_id){
             throw new PayException(
                 [
@@ -47,10 +47,11 @@ class TransferService
                     'errorCode' => 150012
                 ]
             );
-        }
+        }*/
 
-       // $transfer = $this->makeWxPreOrder();
-       /* $result = WxTransferApi::unifiedOrder($transfer);
+        $transfer = $this->makeWxPreOrder();
+        $result = WxTransferApi::unifiedOrder($transfer);
+        var_dump($result);
 
         if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
             //更新状态
@@ -74,7 +75,7 @@ class TransferService
                     'errorCode' => 150011
                 ]
             );
-        }*/
+        }
     }
 
     /**

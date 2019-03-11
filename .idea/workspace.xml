@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bb8621aa-a58f-49cc-8995-0e2afffdfd0b" name="Default" comment="项目初始化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Red.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Red.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/TransferService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/TransferService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/validate/PagingParameter.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/validate/PagingParameter.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,14 +20,100 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Comment.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Bond.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3093" />
+            <state relative-caret-position="459">
+              <caret line="119" selection-start-line="119" selection-end-line="119" />
+              <folding>
+                <element signature="e#474#1125#0#PHP" />
+                <element signature="e#1130#1731#0#PHP" />
+                <element signature="e#1737#2595#0#PHP" />
+                <element signature="e#2600#3271#0#PHP" />
+                <element signature="e#3277#3421#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Withdraw.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="352" column="33" selection-start-line="352" selection-start-column="33" selection-end-line="352" selection-end-column="33" />
+              <folding>
+                <element signature="e#635#1377#0#PHP" />
+                <element signature="e#1382#1632#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/validate/PagingParameter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="21" column="6" selection-start-line="13" selection-end-line="21" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Red.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4050">
+              <caret line="332" selection-start-line="332" selection-end-line="332" />
+              <folding>
+                <element signature="e#451#2336#0#PHP" />
+                <element signature="e#2341#2445#0#PHP" />
+                <element signature="e#2451#3050#0#PHP" />
+                <element signature="e#3055#3175#0#PHP" />
+                <element signature="e#3181#3745#0#PHP" />
+                <element signature="e#3750#4147#0#PHP" />
+                <element signature="e#4153#4805#0#PHP" />
+                <element signature="e#4810#5182#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/validate/BaseValidate.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/service/WithDrawService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="652">
+              <caret line="259" column="45" selection-start-line="259" selection-start-column="45" selection-end-line="259" selection-end-column="45" />
+            </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/2_mengant.cn.key">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/application/api/service/TransferService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="53" column="26" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/model/PaymentsV.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -69,9 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/api/model/SignInT.php" />
-        <option value="$PROJECT_DIR$/application/api/model/SignDayT.php" />
-        <option value="$PROJECT_DIR$/application/common.php" />
         <option value="$PROJECT_DIR$/application/api/model/InviteScoreT.php" />
         <option value="$PROJECT_DIR$/application/api/model/OrderT.php" />
         <option value="$PROJECT_DIR$/application/api/model/GoodsOrderCommentV.php" />
@@ -120,6 +206,9 @@
         <option value="$PROJECT_DIR$/application/api/service/UserToken.php" />
         <option value="$PROJECT_DIR$/application/api/service/UserInfo.php" />
         <option value="$PROJECT_DIR$/application/api/model/UserScoreV.php" />
+        <option value="$PROJECT_DIR$/application/api/validate/PagingParameter.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Red.php" />
+        <option value="$PROJECT_DIR$/application/api/service/TransferService.php" />
       </list>
     </option>
   </component>
@@ -173,22 +262,15 @@
               <item name="repair" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="behavior" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="repair" type="b2602c69:ProjectViewProjectNode" />
               <item name="repair" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
-              <item name="repair" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="repair" type="b2602c69:ProjectViewProjectNode" />
-              <item name="repair" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="v1" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -211,16 +293,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/application/lib/exception" />
-      <recent name="$PROJECT_DIR$/application/api/service" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/application/lib/exception" />
       <recent name="$PROJECT_DIR$/application/lib/enum" />
       <recent name="$PROJECT_DIR$/extend" />
       <recent name="$PROJECT_DIR$/extend/wxpay/cert" />
-      <recent name="$PROJECT_DIR$/public/file" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/application/lib/exception" />
+      <recent name="$PROJECT_DIR$/application/api/service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -347,14 +429,10 @@
       <workItem from="1550973200233" duration="2442000" />
       <workItem from="1551029150366" duration="6521000" />
       <workItem from="1551198325196" duration="11347000" />
-      <workItem from="1551451672760" duration="10303000" />
-    </task>
-    <task id="LOCAL-00562" summary="项目初始化">
-      <created>1548862241969</created>
-      <option name="number" value="00562" />
-      <option name="presentableId" value="LOCAL-00562" />
-      <option name="project" value="LOCAL" />
-      <updated>1548862241969</updated>
+      <workItem from="1551451672760" duration="10590000" />
+      <workItem from="1551952726452" duration="1254000" />
+      <workItem from="1552265378579" duration="1050000" />
+      <workItem from="1552272332872" duration="506000" />
     </task>
     <task id="LOCAL-00563" summary="项目初始化">
       <created>1548862759104</created>
@@ -692,11 +770,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551668592022</updated>
     </task>
-    <option name="localTasksCounter" value="611" />
+    <task id="LOCAL-00611" summary="项目初始化">
+      <created>1551943975824</created>
+      <option name="number" value="00611" />
+      <option name="presentableId" value="LOCAL-00611" />
+      <option name="project" value="LOCAL" />
+      <updated>1551943975824</updated>
+    </task>
+    <option name="localTasksCounter" value="612" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1092160000" />
+    <option name="totallyTimeSpent" value="1095257000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -709,8 +794,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25061426" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22358723" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -750,70 +836,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/api/service/AddressService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-          <folding>
-            <element signature="e#319#665#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/ScoreBuyRole.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-761">
-          <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
-          <folding>
-            <element signature="e#361#963#0#PHP" />
-            <element signature="e#968#1262#0#PHP" />
-            <element signature="e#1268#1947#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/SignIn.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="160" column="46" selection-start-line="160" selection-start-column="46" selection-end-line="160" selection-end-column="46" />
-          <folding>
-            <element signature="e#397#1240#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/validate/TokenGet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/cache.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/face.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/middleware.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/secure.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/setting.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="47" column="34" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/BaseController.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/route/route.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="849">
@@ -1116,27 +1138,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/Nginx/2_mengant.cn.key">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Nginx/1_mengant.cn_bundle.crt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="54" column="31" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Comment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3093" />
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Desktop/Nginx/2_mengant.cn.key" />
+    <entry file="file://$USER_HOME$/Desktop/Nginx/1_mengant.cn_bundle.crt" />
     <entry file="file://$PROJECT_DIR$/public/2_mengant.cn.key">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/PersonalCenter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-61" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/middleware.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/validate/Red.php" />
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Comment.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Bond.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="119" selection-start-line="119" selection-end-line="119" />
+          <folding>
+            <element signature="e#474#1125#0#PHP" />
+            <element signature="e#1130#1731#0#PHP" />
+            <element signature="e#1737#2595#0#PHP" />
+            <element signature="e#2600#3271#0#PHP" />
+            <element signature="e#3277#3421#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Red.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4050">
+          <caret line="332" selection-start-line="332" selection-end-line="332" />
+          <folding>
+            <element signature="e#451#2336#0#PHP" />
+            <element signature="e#2341#2445#0#PHP" />
+            <element signature="e#2451#3050#0#PHP" />
+            <element signature="e#3055#3175#0#PHP" />
+            <element signature="e#3181#3745#0#PHP" />
+            <element signature="e#3750#4147#0#PHP" />
+            <element signature="e#4153#4805#0#PHP" />
+            <element signature="e#4810#5182#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/validate/BaseValidate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/PaymentsV.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/validate/PagingParameter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="21" column="6" selection-start-line="13" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Withdraw.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="352" column="33" selection-start-line="352" selection-start-column="33" selection-end-line="352" selection-end-column="33" />
+          <folding>
+            <element signature="e#635#1377#0#PHP" />
+            <element signature="e#1382#1632#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/WithDrawService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="652">
+          <caret line="259" column="45" selection-start-line="259" selection-start-column="45" selection-end-line="259" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/TransferService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="53" column="26" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

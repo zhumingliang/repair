@@ -9,7 +9,7 @@
 namespace app\api\validate;
 
 
-class PagingParameter extends BaseValidate
+class  PagingParameter extends BaseValidate
 {
     protected $rule = [
         'page' => 'isPositiveInteger',

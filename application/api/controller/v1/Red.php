@@ -202,7 +202,6 @@ class Red extends BaseController
 
     }
 
-
     /**
      * @api {POST} /api/v1/strategy/delete  22-后台删除红包攻略
      * @apiGroup  CMS
@@ -236,7 +235,6 @@ class Red extends BaseController
         return json(new SuccessMessage());
 
     }
-
 
     /**
      * @api {GET} /api/v1/red/rule 161-CMS获取红包规则列表
