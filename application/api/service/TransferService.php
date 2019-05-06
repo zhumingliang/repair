@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\LogT;
 use app\api\model\WithdrawMiniT;
 use app\api\model\WithdrawMiniV;
 use app\lib\enum\CommonEnum;
@@ -54,7 +55,7 @@ class TransferService
             }
 
         } else {
-
+            LogT::create(['msg' => json_encode($result)]);
             throw new PayException(
                 [
                     'code' => 401,
